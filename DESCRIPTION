@@ -1,0 +1,17 @@
+Package: restoptr
+Type: Package
+Title: R Interface to the 'Restopt' ecological restoration planning software
+Version: 0.1.0
+Author: Dimitri Justeau-Allaire, Jeffrey Hanson, Ghislain Vieilledent, Nicolas Rinck, Philippe Vismara, Xavier Lorca, Philippe Birnbaum
+Maintainer: Dimitri Justeau-Allaire <dimitri.justeau@gmail.com>
+Description:  Interface to the `restopt` ecological restoration planning software,
+  which is specifically designed to identify connected, accessible, and compact 
+  areas for ecological restoration, with an emphasis on reducing habitat 
+  fragmentation and increasing habitat connectivity.
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+Depends: rJava,
+Imports: raster, rgdal, checkmate, utils
+URL: https://github.com/dimitri-justeau/restoptr
+BugReports: https://github.com/dimitri-justeau/restoptr/issues
