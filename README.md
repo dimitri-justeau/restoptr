@@ -4,12 +4,12 @@
 ## restopr: Interface to the ‘Restopt’ Ecological Restoration Planning Software
 
 [![lifecycle](https://img.shields.io/badge/Lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html)
-[![R-CMD-check-Ubuntu](https://img.shields.io/github/workflow/status/prioritizr/aoh/Ubuntu/master.svg?label=Ubuntu)](https://github.com/prioritizr/aoh/actions)
-[![R-CMD-check-Windows](https://img.shields.io/github/workflow/status/prioritizr/aoh/Windows/master.svg?label=Windows)](https://github.com/prioritizr/aoh/actions)
-[![R-CMD-check-MacOS](https://img.shields.io/github/workflow/status/prioritizr/aoh/Mac%20OSX/master.svg?label=MacOS)](https://github.com/prioritizr/aoh/actions)
+[![R-CMD-check-Ubuntu](https://img.shields.io/github/workflow/status/dimitri-justeau/restoptr/Ubuntu/master.svg?label=Ubuntu)](https://github.com/dimitri-justeau/restoptr/actions)
+[![R-CMD-check-Windows](https://img.shields.io/github/workflow/status/dimitri-justeau/restoptr/Windows/master.svg?label=Windows)](https://github.com/dimitri-justeau/restoptr/actions)
+[![R-CMD-check-MacOS](https://img.shields.io/github/workflow/status/dimitri-justeau/restoptr/Mac%20OSX/master.svg?label=MacOS)](https://github.com/dimitri-justeau/restoptr/actions)
 [![Coverage
-Status](https://codecov.io/github/prioritizr/aoh/coverage.svg?branch=master)](https://codecov.io/github/prioritizr/aoh?branch=master)
-[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/aoh)](https://CRAN.R-project.org/package=aoh)
+Status](https://codecov.io/github/dimitri-justeau/restoptr/coverage.svg?branch=master)](https://codecov.io/github/dimitri-justeau/restoptr?branch=master)
+[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/restoptr)](https://CRAN.R-project.org/package=restoptr)
 
 ## Overview
 
@@ -34,7 +34,7 @@ remotes::install_github("dimitri-justeau/restoptr")
 
 The packages requires [Java (version 8 or
 higher)](https://www.java.com/). Below we provide platform-specific
-instructions to install them.
+instructions to install it.
 
 #### *Windows*
 
@@ -43,7 +43,7 @@ Please install the latest Java Development Kit from
 [downloads section of the
 website](https://www.oracle.com/java/technologies/javase-downloads.html),
 select the tab for the Windows operating system, and then download the
-x64 installer file. After downloading the file, please run installer to
+x64 Installer file. After downloading the file, please run installer to
 install Java on your system. You will also need to ensure that the
 `PATH` environmental variable if configured so that *R* can access Java.
 
