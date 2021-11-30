@@ -1,15 +1,28 @@
+---
+output:
+  rmarkdown::github_document:
+    html_preview: no
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(fig.path = "man/figures/README-", fig.align = "center",
+                      fig.height = 4.5, fig.width = 4.5)
+```
 
 <!--- README.md is generated from README.Rmd. Please edit that file -->
 
-## restopr: Interface to the ‘Restopt’ Ecological Restoration Planning Software
+## restopr: Interface to the 'Restopt' Ecological Restoration Planning Software
 
 [![lifecycle](https://img.shields.io/badge/Lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html)
 [![R-CMD-check-Ubuntu](https://img.shields.io/github/workflow/status/prioritizr/aoh/Ubuntu/master.svg?label=Ubuntu)](https://github.com/prioritizr/aoh/actions)
 [![R-CMD-check-Windows](https://img.shields.io/github/workflow/status/prioritizr/aoh/Windows/master.svg?label=Windows)](https://github.com/prioritizr/aoh/actions)
 [![R-CMD-check-MacOS](https://img.shields.io/github/workflow/status/prioritizr/aoh/Mac%20OSX/master.svg?label=MacOS)](https://github.com/prioritizr/aoh/actions)
-[![Coverage
-Status](https://codecov.io/github/prioritizr/aoh/coverage.svg?branch=master)](https://codecov.io/github/prioritizr/aoh?branch=master)
-[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/aoh)](https://CRAN.R-project.org/package=aoh)
+[![Coverage Status](https://codecov.io/github/prioritizr/aoh/coverage.svg?branch=master)](https://codecov.io/github/prioritizr/aoh?branch=master)
+[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/aoh)](https://CRAN.R-project.org/package=aoh)
+
+```{r, include = FALSE}
+devtools::load_all()
+```
 
 ## Overview
 
@@ -22,57 +35,42 @@ habitat fragmentation and increasing habitat connectivity.
 
 ### Package installation
 
-The latest developmental version of the *restoptr R* package can be
-installed using the following *R* code.
+The latest developmental version of the _restoptr R_ package can be installed using the following _R_ code.
 
-``` r
+```{r, eval = FALSE}
 if (!require(remotes)) install.packages("remotes")
 remotes::install_github("dimitri-justeau/restoptr")
 ```
 
 ### System dependencies
 
-The packages requires [Java (version 8 or
-higher)](https://www.java.com/). Below we provide platform-specific
-instructions to install them.
+The packages requires [Java (version 8 or higher)](https://www.java.com/). Below we provide platform-specific instructions to install them.
 
-#### *Windows*
+#### _Windows_
 
-Please install the latest Java Development Kit from
-[Oracle](www.oracle.com) website. To achieve this, navigate to the
-[downloads section of the
-website](https://www.oracle.com/java/technologies/javase-downloads.html),
-select the tab for the Windows operating system, and then download the
-x64 installer file. After downloading the file, please run installer to
-install Java on your system. You will also need to ensure that the
-`PATH` environmental variable if configured so that *R* can access Java.
+Please install the latest Java Development Kit from [Oracle](www.oracle.com) website. To achieve this, navigate to the [downloads section of the website](https://www.oracle.com/java/technologies/javase-downloads.html), select the tab for the Windows operating system, and then download the x64 installer file. After downloading the file, please run installer to install Java on your system. You will also need to ensure that the `PATH` environmental variable if configured so that _R_ can access Java.
 
-#### *Ubuntu*
+#### _Ubuntu_
 
-For recent versions of Ubuntu (18.04 and later), the Java libraries are
-available through official repositories. They can be installed using the
-following system commands.
+For recent versions of Ubuntu (18.04 and later), the Java libraries are available through official repositories. They can be installed using the following system commands.
 
-``` bash
+```{bash, eval = FALSE}
 sudo apt-get install default-jdk
 ```
 
-#### *Linux*
+#### _Linux_
 
-For Unix-alikes, `javac` (&gt;= 8) is required.
+For Unix-alikes, `javac` (>= 8) is required.
 
-#### *MacOS*
+#### _MacOS_
 
-The easiest way to install the Java libraries is using
-[HomeBrew](https://brew.sh/). After installing HomeBrew, the Java
-libraries can be installed using the following system commands.
+The easiest way to install the Java libraries is using [HomeBrew](https://brew.sh/). After installing HomeBrew, the Java libraries can be installed using the following system commands.
 
-``` bash
+```{bash, eval = FALSE}
 brew install openjdk
 ```
 
-Please note that you might also need to ensure that the `PATH`
-environmental variable if configured so that *R* can access Java.
+Please note that you might also need to ensure that the `PATH` environmental variable if configured so that _R_ can access Java.
 
 ## Citation
 
@@ -80,12 +78,11 @@ TODO.
 
 ## Usage
 
-To reproduce the example from
-<https://github.com/dimitri-justeau/restopt>
+To reproduce the example from https://github.com/dimitri-justeau/restopt
 
 ### Example : maximize MESH
 
-``` r
+```{r, eval = FALSE}
 library(restoptr)
 habitat <- raster("./example_data/habitat.tif")
 restorable <- raster("./example_data/restorable.tif")
@@ -99,7 +96,7 @@ result <- maximizeMESH(problem, 3)
 
 ### Example : maximize IIC
 
-``` r
+```{r, eval = FALSE}
 library(restoptr)
 habitat <- raster("./example_data/habitat.tif")
 restorable <- raster("./example_data/restorable.tif")
