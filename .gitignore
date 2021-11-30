@@ -43,3 +43,17 @@ docs/
 
 # translation temp files
 po/*~
+
+# temporary files
+Rplots.pdf
+
+# log files
+test.log
+check.log
+spell.log
+gp.log
+examples.log
+
+# system files
+.directory
+.build.timestamp
