@@ -27,8 +27,7 @@ Authors@R:
         'Nicolas', 'Rinck', role = c('aut'),
       ),
       person(
-        'Philippe', 'Vismara', role = c('aut'),
-        comment = c(ORCID = '0000-0002-4716-6134')
+        'Philippe', 'Vismara', role = c('aut')
       ),
       person(
         'Xavier', 'Lorca', role = c('aut')
