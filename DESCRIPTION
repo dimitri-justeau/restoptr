@@ -1,6 +1,6 @@
 Package: restoptr
 Type: Package
-Title: Interface to the 'Restopt' ecological restoration planning software
+Title: Interface to the 'Restopt' Ecological Restoration Planning Software
 Version: 0.0.0.99999
 Description:
     Interface to the `restopt` ecological restoration planning software,
