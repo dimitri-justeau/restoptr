@@ -1,4 +1,5 @@
 .onLoad <- function(libname, pkgname) {
+  options(java.parameters = "-Xmx4g")
   # Check that Java version is at least 8
   .jinit()
   jv <- .jcall("java/lang/System", "S", "getProperty", "java.runtime.version")

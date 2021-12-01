@@ -9,5 +9,5 @@ test_that("maximize_iic", {
   problem <- postRestorableConstraint(problem, 90, 110, 23, 0.7)
   problem <- postCompactnessConstraint(problem, 6)
   result <- maximizeIIC(problem, 3)
-  testthat::expect_is(result[[1]], "SpatRaster")
+  testthat::expect_is(result, "SpatRaster")
 })

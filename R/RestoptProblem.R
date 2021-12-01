@@ -254,8 +254,11 @@ setMethod(
       .jcall(jProblem, "V", "postRestorableConstraint", problem@min_restore, problem@max_restore, problem@cell_area, problem@min_proportion)
     }
     output <- tempfile(fileext = "")
-    .jcall(jProblem, "V", "maximizeMESH", as.integer(precision), output, as.integer(time_limit), FALSE)
-    return(c(terra::rast(paste(output, ".tif", sep = "")), read.csv(paste(output, ".csv", sep = ""))))
+    if (.jcall(jProblem, "Z", "maximizeMESH", as.integer(precision), output, as.integer(time_limit))) {
+      r <- terra::rast(paste(output, ".tif", sep = ""))
+      attributes(r)$metadata <- read.csv(paste(output, ".csv", sep = ""))
+      return(r)
+    }
   }
 )
 
@@ -284,8 +287,11 @@ setMethod(
       .jcall(jProblem, "V", "postRestorableConstraint", problem@min_restore, problem@max_restore, problem@cell_area, problem@min_proportion)
     }
     output <- tempfile(fileext = "")
-    .jcall(jProblem, "V", "maximizeIIC", as.integer(precision), output, as.integer(time_limit), FALSE)
-    return(c(terra::rast(paste(output, ".tif", sep = "")), read.csv(paste(output, ".csv", sep = ""))))
+    if (.jcall(jProblem, "Z", "maximizeIIC", as.integer(precision), output, as.integer(time_limit))) {
+      r <- terra::rast(paste(output, ".tif", sep = ""))
+      attributes(r)$metadata <- read.csv(paste(output, ".csv", sep = ""))
+      return(r)
+    }
   }
 )
 
