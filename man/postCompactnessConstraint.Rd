@@ -11,6 +11,9 @@ postCompactnessConstraint(problem, max_diameter)
 
 \item{max_diameter}{maxmimum allowed diameter for the smallest enclosing circle of the solution}
 }
+\value{
+the updated problem
+}
 \description{
 Post a maximum diameter constraint to the problem
 }

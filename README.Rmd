@@ -81,13 +81,13 @@ To reproduce the example from https://github.com/dimitri-justeau/restopt
 
 ```{r, eval = FALSE}
 library(restoptr)
-habitat <- raster("./example_data/habitat.tif")
-restorable <- raster("./example_data/restorable.tif")
-accessible <- raster("./example_data/accessible.tif")
+habitat <- terra::rast("./inst/extdata/habitat.tif")
+restorable <- terra::rast("./inst/extdata/restorable.tif")
+accessible <- terra::rast("./inst/extdata/accessible.tif")
 problem <- RestoptProblem(habitat=habitat, restorable=restorable, accessible=accessible)
-postNbComponentsConstraint(problem, 1, 1)
-postRestorableConstraint(problem, 90, 110, 23, 0.7)
-postCompactnessConstraint(problem, 6)
+problem <- postNbComponentsConstraint(problem, 1, 1)
+problem <- postRestorableConstraint(problem, 90, 110, 23, 0.7)
+problem <- postCompactnessConstraint(problem, 6)
 result <- maximizeMESH(problem, 3)
 ```
 
@@ -95,13 +95,13 @@ result <- maximizeMESH(problem, 3)
 
 ```{r, eval = FALSE}
 library(restoptr)
-habitat <- raster("./example_data/habitat.tif")
-restorable <- raster("./example_data/restorable.tif")
-accessible <- raster("./example_data/accessible.tif")
+habitat <- terra::rast("./inst/extdata/habitat.tif")
+restorable <- terra::rast("./inst/extdata/restorable.tif")
+accessible <- terra::rast("./inst/extdata/accessible.tif")
 problem <- RestoptProblem(habitat=habitat, restorable=restorable, accessible=accessible)
-postNbComponentsConstraint(problem, 1, 1)
-postRestorableConstraint(problem, 90, 110, 23, 0.7)
-postCompactnessConstraint(problem, 6)
+problem <- postNbComponentsConstraint(problem, 1, 1)
+problem <- postRestorableConstraint(problem, 90, 110, 23, 0.7)
+problem <- postCompactnessConstraint(problem, 6)
 result <- maximizeIIC(problem, 3)
 ```
 

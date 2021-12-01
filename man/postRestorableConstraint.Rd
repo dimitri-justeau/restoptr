@@ -23,6 +23,9 @@ postRestorableConstraint(
 
 \item{min_proportion}{minimum habitat proportion to consider a cell as restored}
 }
+\value{
+the updated problem
+}
 \description{
 Post a restorable area constraint to the problem
 }

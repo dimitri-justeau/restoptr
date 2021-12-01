@@ -4,14 +4,17 @@
 \alias{postNbComponentsConstraint}
 \title{Post a number of connected components constraint to the problem}
 \usage{
-postNbComponentsConstraint(problem, min_nbCC, max_nbCC)
+postNbComponentsConstraint(problem, min_nb_components, max_nb_components)
 }
 \arguments{
 \item{problem}{A RestoptProblem instance}
 
-\item{min_nbCC}{minimum number of connected components allowed in the solution}
+\item{min_nb_components}{minimum number of connected components allowed in the solution}
 
-\item{max_nbCC}{maximum number of connected components allowed in the solution}
+\item{max_nb_components}{maximum number of connected components allowed in the solution}
+}
+\value{
+the updated problem
 }
 \description{
 Post a number of connected components constraint to the problem

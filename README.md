@@ -87,9 +87,9 @@ To reproduce the example from
 
 ``` r
 library(restoptr)
-habitat <- raster("./example_data/habitat.tif")
-restorable <- raster("./example_data/restorable.tif")
-accessible <- raster("./example_data/accessible.tif")
+habitat <- raster("./inst/extdata/habitat.tif")
+restorable <- raster("./inst/extdata/restorable.tif")
+accessible <- raster("./inst/extdata/accessible.tif")
 problem <- RestoptProblem(habitat=habitat, restorable=restorable, accessible=accessible)
 postNbComponentsConstraint(problem, 1, 1)
 postRestorableConstraint(problem, 90, 110, 23, 0.7)
@@ -101,9 +101,9 @@ result <- maximizeMESH(problem, 3)
 
 ``` r
 library(restoptr)
-habitat <- raster("./example_data/habitat.tif")
-restorable <- raster("./example_data/restorable.tif")
-accessible <- raster("./example_data/accessible.tif")
+habitat <- raster("./inst/extdata/habitat.tif")
+restorable <- raster("./inst/extdata/restorable.tif")
+accessible <- raster("./inst/extdata/accessible.tif")
 problem <- RestoptProblem(habitat=habitat, restorable=restorable, accessible=accessible)
 postNbComponentsConstraint(problem, 1, 1)
 postRestorableConstraint(problem, 90, 110, 23, 0.7)
