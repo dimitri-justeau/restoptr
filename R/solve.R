@@ -1,4 +1,4 @@
-#' @include internal
+#' @include internal.R
 NULL
 
 #' Solve a restoration optimization problem
