@@ -1,4 +1,4 @@
-#' @include internal>R
+#' @include internal.R
 NULL
 
 # Copyright (c) 2021, Dimitri Justeau-Allaire
@@ -31,7 +31,7 @@ NULL
 #' values that indicate if each planning unit contains habitat or not.
 #'
 #' @param restorable_habitat [terra::rast()] Raster object containing
-#' continuous values that indicate the amount of habitat that can
+#' integer values that indicate the amount of habitat that can
 #' be restored within each planning unit.
 #'
 #' @return A new restoration problem (`RestoptProblem`) object.
@@ -52,8 +52,8 @@ restopt_problem <- function(existing_habitat, restorable_habitat) {
   )
   ## further checks
   assertthat::assert_that(
-    terra::has_values(existing_habitat),
-    terra::has_values(restorable_habitat),
+    terra::hasValues(existing_habitat),
+    terra::hasValues(restorable_habitat),
     terra::compareGeom(
       existing_habitat, restorable_habitat, stopiffalse = FALSE
     )
@@ -77,7 +77,7 @@ restopt_problem <- function(existing_habitat, restorable_habitat) {
 
 #' Print a restoration optimization problem
 #'
-#' Display information about a restoration 
+#' Display information about a restoration
 #' @inheritParams add_max_mesh_objective
 #'
 #' @examples
