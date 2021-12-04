@@ -47,7 +47,7 @@ VignetteBuilder: knitr
 RoxygenNote: 7.1.2
 Imports:
     utils,
-    checkmate (>= 2.0.0)
+    assertthat (>= 0.2.1)
 Depends:
     R (>= 4.1.0),
     terra (>= 1.4-22),
@@ -58,7 +58,7 @@ Suggests:
     roxygen2 (>= 6.1.1),
     rmarkdown (>= 1.10)
 Roxygen: list(markdown = TRUE)
-Collate: 
+Collate:
     'internal.R'
     'add_compactness_constraint.R'
     'add_components_constraint.R'
@@ -67,8 +67,8 @@ Collate:
     'add_max_mesh_objective.R'
     'add_restorable_constraint.R'
     'package.R'
-    'restopt_compile.R'
     'restopt_component.R'
     'restopt_problem.R'
     'solve.R'
+    'terra_io.R'
     'zzz.R'
