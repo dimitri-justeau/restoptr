@@ -68,20 +68,95 @@ restopt_problem <- function(existing_habitat, restorable_habitat) {
       ),
       constraints = list(),
       objective = NULL,
-      settings = list()
+      settings = list(precision = 1e-5, time_limit = 0)
     ),
     class = "RestoptProblem"
   )
 }
 
-
 #' Print a restoration optimization problem
 #'
-#' Display information about a restoration
+#' Display information about a restoration optimization problem.
+#'
 #' @inheritParams add_max_mesh_objective
+#'
+#' @param ... Arguments not used.
 #'
 #' @examples
 #' TODO.
-print.restopt_problem <- function(x, ...) {
-  # TODO
+#'
+#' @export
+print.RestoptProblem <- function(x, ...) {
+  print(x)
+}
+
+#' Add a constraint to a restoration optimization problem
+#'
+#' Display information about a restoration
+#'
+#' @inheritParams add_max_mesh_objective
+#'
+#' @param y `RestoptConstraint` Constraint object.
+#'
+#' @examples
+#' TODO.
+#'
+#' @noRd
+add_restopt_constraint <- function(x, y) {
+  # assert arguments are valid
+  assertthat::assert_that(
+    inherits(x, "RestoptProblem"),
+    inherits(y, "RestoptConstraint")
+  )
+
+  # throw warning if constraint specified
+  i <- which(vapply(x$constraints, inherits, logical(1), class(y)[[1]]))
+  if (length(i) > 0) {
+    warning(
+      "overwriting previously defined constraint.",
+      call. = FALSE, immediate. = TRUE
+    )
+  } else {
+    i <- length(x$constraints) + 1
+  }
+
+  # add constraint
+  x$constraint[[i]] <- y
+
+  # return updated problem
+  x
+}
+
+#' Add an objective to a restoration optimization problem
+#'
+#' Display information about a restoration
+#'
+#' @inheritParams add_max_mesh_objective
+#'
+#' @param y `RestoptObjective` Objective object.
+#'
+#' @examples
+#' TODO.
+#'
+#' @noRd
+add_restopt_objective <- function(x, y) {
+  # assert arguments are valid
+  assertthat::assert_that(
+    inherits(x, "RestoptProblem"),
+    inherits(y, "RestoptObjectve")
+  )
+
+  # throw warning if objective specified
+  if (!is.null(x$objective)) {
+    warning(
+      "overwriting previously defined objective.",
+      call. = FALSE, immediate. = TRUE
+    )
+  }
+
+  # add objective
+  x$objective <- y
+
+  # return updated problem
+  x
 }
