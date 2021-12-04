@@ -16,7 +16,7 @@ NULL
 #'
 #' @param args `character` Vector used to map the names of the elements in
 #'  `data` to the Java method.
-#'  Defaults to an empty chracter vector.
+#'  Defaults to an empty character vector.
 #'
 #' @return An object.
 #'
@@ -24,7 +24,13 @@ NULL
 #' # TODO
 #'
 #' @export
-restopt_component <- function(name, java, class,
-                              data = list(), args = character(0)) {
-  # TODO
+restopt_component <- function(name, class, data = list(), post) {
+  structure(
+    list(
+      name = name,
+      data = data,
+      post = post
+    ),
+    class = class
+  )
 }

@@ -58,3 +58,17 @@ Suggests:
     roxygen2 (>= 6.1.1),
     rmarkdown (>= 1.10)
 Roxygen: list(markdown = TRUE)
+Collate: 
+    'internal.R'
+    'add_compactness_constraint.R'
+    'add_components_constraint.R'
+    'add_locked_out_constraint.R'
+    'add_max_iic_objective.R'
+    'add_max_mesh_objective.R'
+    'add_restorable_constraint.R'
+    'package.R'
+    'restopt_compile.R'
+    'restopt_component.R'
+    'restopt_problem.R'
+    'solve.R'
+    'zzz.R'
