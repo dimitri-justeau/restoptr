@@ -24,27 +24,15 @@ add_compactness_constraint <- function(x, max_diameter) {
     assertthat::noNA(max_diameter)
   )
 
-  # throw warning if constraint specified
-  i <- which(vapply(x$constraints, inherits, logical(1), "CompactnessConstraint"))
-  if (length(i) > 0) {
-    warning(
-      "overwriting previously defined constraint.",
-      call. = FALSE, immediate. = TRUE
+  # add constraint
+  add_restopt_constraint(
+    x = x,
+    objective = restopt_component(
+      name = "Compactness constraint",
+      class = "CompactnessConstraint",
+      post = function(jproblem, ...) {
+        rJava::.jcall(jproblem, "V", "postCompactnessConstraint", max_diameter)
+      }
     )
-  } else {
-    i <- length(x$constraints) + 1
-  }
-
-  # add constraints
-  x$constraints[[i]] <- restopt_component(
-    name = "Compactness constraint",
-    data = list(max_diameter = max_diameter),
-    post = function(jProblem) {
-      .jcall(jProblem, "V", "postCompactnessConstraint", max_diameter)
-    },
-    class = c("RestoptObjective", "CompactnessConstraint")
   )
-
-  # return object
-  x
 }

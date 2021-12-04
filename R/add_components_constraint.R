@@ -29,29 +29,18 @@ add_components_constraint <- function(x, min_nb_components, max_nb_components) {
     assertthat::noNA(max_nb_components)
   )
 
-  # throw warning if constraint specified
-  i <- which(
-    vapply(x$constraints, inherits, logical(1), "ComponentConstraint")
-  )
-  if (length(i) > 0) {
-    warning(
-      "overwriting previously defined constraints.",
-      call. = FALSE, immediate. = TRUE
+  # add constraint
+  add_restopt_constraint(
+    x = x,
+    objective = restopt_component(
+      name = "Components constraint",
+      class = "ComponentConstraint",
+      post = function(jproblem, ...) {
+        rJava::.jcall(
+          jproblem, "V", "postNbComponentsConstraint",
+          min_nb_components, max_nb_components
+        )
+      }
     )
-  } else {
-    i <- length(x$constraints) + 1
-  }
-
-  # add constraints
-  x$constraints[[i]] <- restopt_component(
-    name = "Components constraint",
-    data = list(min_nb_components = min_nb_components, max_nb_components = max_nb_components),
-    post = function(jProblem) {
-      .jcall(jProblem, "V", "postNbComponentsConstraint", min_nb_components, max_nb_components)
-    },
-    class = c("RestoptObjective", "ComponentConstraint")
   )
-
-  # return object
-  x
 }
