@@ -24,21 +24,17 @@ add_max_mesh_objective <- function(x) {
   # assert argument is valid
   assertthat::assert_that(inherits(x, "RestoptProblem"))
 
-  # throw warning if objective specified
-  if (!is.null(x$objective)) {
-    warning(
-      "overwriting previously defined objective.",
-      call. = FALSE, immediate. = TRUE
-    )
-  }
-
   # add objective
-  x$objective <- restopt_component(
-    name = "Maximize effective mesh size",
-    java = "maximizeMESH",
-    class = c("RestoptObjective", "MaxMeshObjective")
+  add_restopt_objective(
+    x = x,
+    objective = restopt_component(
+      name = "Maximize effective mesh size",
+      class = "MaxMeshObjective",
+      post = function(jproblem, precision, time_limit, output_path) {
+        rJava::.jcall(
+          jproblem, "Z", "maximizeMESH", precision, output_path, time_limit
+        )
+      }
+    )
   )
-
-  # return object
-  x
 }

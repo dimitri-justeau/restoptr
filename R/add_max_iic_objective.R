@@ -21,21 +21,17 @@ add_max_mesh_iic <- function(x) {
   # assert argument is valid
   assertthat::assert_that(inherits(x, "RestoptProblem"))
 
-  # throw warning if objective specified
-  if (!is.null(x$objective)) {
-    warning(
-      "overwriting previously defined objective.",
-      call. = FALSE, immediate. = TRUE
-    )
-  }
-
   # add objective
-  x$objective <- restopt_component(
-    name = "Maximize integral index of connectivity",
-    java = "maximizeIIC",
-    class = c("RestoptObjective", "MaxIicObjective")
+  add_restopt_objective(
+    x = x,
+    objective = restopt_component(
+      name = "Maximize integral index of connectivity",
+      class = "MaxIicObjective",
+      post = function(jproblem, precision, time_limit, output_path) {
+        rJava::.jcall(
+          jproblem, "Z", "maximizeIIC", precision, output_path, time_limit
+        )
+      }
+    )
   )
-
-  # return object
-  x
 }
