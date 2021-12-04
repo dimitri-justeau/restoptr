@@ -68,7 +68,7 @@ restopt_problem <- function(existing_habitat, restorable_habitat) {
       ),
       constraints = list(),
       objective = NULL,
-      settings = list(precision = 1e-5, time_limit = 0)
+      settings = list(precision = 4L, time_limit = 0L)
     ),
     class = "RestoptProblem"
   )
