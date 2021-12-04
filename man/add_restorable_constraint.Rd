@@ -19,7 +19,8 @@ add_restorable_constraint(
 
 \item{cell_area}{\code{integer} Total area of a cell.}
 
-\item{min_proportion}{\code{float} Minimum habitat proportion to consider a cell as restored.}
+\item{min_proportion}{\code{float} Minimum habitat proportion to consider a cell
+as restored.}
 }
 \description{
 Add constraint to a restoration problem (\code{\link[=restore_problem]{restore_problem()}} object
