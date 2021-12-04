@@ -30,7 +30,7 @@ add_compactness_constraint <- function(x, max_diameter) {
     objective = restopt_component(
       name = "Compactness constraint",
       class = "CompactnessConstraint",
-      post = function(jproblem, ...) {
+      post = function(jproblem) {
         rJava::.jcall(jproblem, "V", "postCompactnessConstraint", max_diameter)
       }
     )

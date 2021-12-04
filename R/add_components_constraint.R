@@ -35,7 +35,7 @@ add_components_constraint <- function(x, min_nb_components, max_nb_components) {
     objective = restopt_component(
       name = "Components constraint",
       class = "ComponentConstraint",
-      post = function(jproblem, ...) {
+      post = function(jproblem) {
         rJava::.jcall(
           jproblem, "V", "postNbComponentsConstraint",
           min_nb_components, max_nb_components
