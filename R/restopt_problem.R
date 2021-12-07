@@ -104,8 +104,6 @@ print.RestoptProblem <- function(problem, ...) {
 
 #' Add a constraint to a restoration optimization problem
 #'
-#' Display information about a restoration
-#'
 #' @inheritParams add_max_mesh_objective
 #'
 #' @param constraint `RestoptConstraint` Constraint object.
