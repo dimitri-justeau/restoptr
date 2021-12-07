@@ -30,7 +30,7 @@ restopt_component <- function(name, class, post) {
   assertthat::assert_that(
     assertthat::is.string(name),
     assertthat::noNA(name),
-    assertthat::is.string(class),
+    assertthat::validate_that(all(sapply(class, assertthat::is.string))),
     assertthat::noNA(class),
     is.function(post)
   )
@@ -39,7 +39,7 @@ restopt_component <- function(name, class, post) {
   structure(
     list(
       name = name,
-      data = data,
+      # data = data,
       post = post
     ),
     class = c(class, "RestoptComponent")

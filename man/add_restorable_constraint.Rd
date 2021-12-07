@@ -5,7 +5,7 @@
 \title{Add constraint to specify the available amount of surface for restoration}
 \usage{
 add_restorable_constraint(
-  x,
+  problem,
   min_restore,
   max_restore,
   cell_area,

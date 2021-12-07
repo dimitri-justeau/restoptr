@@ -24,7 +24,7 @@ NULL
 #' # TODO
 #'
 #' @export
-add_locked_out_constraint <- function(x, data, raster_value = 1, lock_out = FALSE) {
+add_locked_out_constraint <- function(problem, data, raster_value = 1, lock_out = FALSE) {
   # assert argument is valid
   ## Check locked_out_raster_value and available_raster_value
   assertthat::is.flag(lock_out)
@@ -32,7 +32,7 @@ add_locked_out_constraint <- function(x, data, raster_value = 1, lock_out = FALS
   assertthat::is.count(raster_value)
   ##
   assertthat::assert_that(
-    inherits(x, "RestoptProblem"),
+    inherits(problem, "RestoptProblem"),
     inherits(data, "SpatRaster")
   )
   ## further checks
@@ -40,7 +40,7 @@ add_locked_out_constraint <- function(x, data, raster_value = 1, lock_out = FALS
     terra::hasValues(data)
   )
   assertthat::assert_that(
-    terra::compareGeom(x$data$existing_habitat, data, stopiffalse = FALSE),
+    terra::compareGeom(problem$data$existing_habitat, data, stopiffalse = FALSE),
     msg = paste(
       "argument to \"data\" has different spatial properties to",
       "the \"existing_habitat\" and \"restorable_habitat\" data in",
@@ -48,28 +48,18 @@ add_locked_out_constraint <- function(x, data, raster_value = 1, lock_out = FALS
     )
   )
 
-  # throw warning if constraint specified
-  i <- which(
-    vapply(x$constraints, inherits, logical(1), "LockedOutConstraint")
+  problem$data$locked_out <- list(
+    data = data,
+    raster_value = raster_value,
+    lock_out = lock_out
   )
-  if (length(i) > 0) {
-    warning(
-      "overwriting previously defined constraint.",
-      call. = FALSE, immediate. = TRUE
+
+  add_restopt_constraint(
+    problem = problem,
+    constraint = restopt_component(
+      name = "Locked out constraint",
+      class = c("LockedOutConstraint", "RestoptConstraint"),
+      post = function(jproblem) {} # Nothing to do here
     )
-  } else {
-    i <- length(x$constraints) + 1
-  }
-
-  x$constraints[[i]] <- restopt_component(
-    name = "Locked out constraint",
-    data = list(data = data, raster_value = raster_value, lock_out = lock_out),
-    post = function() {}, # Nothing to do here
-    class = c("RestoptConstraint", "LockedOutConstraint")
   )
-
-  x$data$locked_out <- data
-
-  # return object
-  x
 }

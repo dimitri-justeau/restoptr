@@ -4,10 +4,10 @@
 \alias{add_max_mesh_objective}
 \title{Add an objective to maximize effective mesh size}
 \usage{
-add_max_mesh_objective(x)
+add_max_mesh_objective(problem)
 }
 \arguments{
-\item{x}{\code{\link[=restore_problem]{restore_problem()}} Restoration problem object.}
+\item{problem}{\code{\link[=restore_problem]{restore_problem()}} Restoration problem object.}
 }
 \value{
 An updated restoration problem (\code{\link[=restore_problem]{restore_problem()}} object.

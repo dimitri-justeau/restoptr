@@ -19,10 +19,10 @@ NULL
 #' # TODO
 #'
 #' @export
-add_components_constraint <- function(x, min_nb_components, max_nb_components) {
+add_components_constraint <- function(problem, min_nb_components, max_nb_components) {
   # assert argument is valid
   assertthat::assert_that(
-    inherits(x, "RestoptProblem"),
+    inherits(problem, "RestoptProblem"),
     assertthat::is.count(min_nb_components),
     assertthat::noNA(min_nb_components),
     assertthat::is.count(max_nb_components),
@@ -31,10 +31,10 @@ add_components_constraint <- function(x, min_nb_components, max_nb_components) {
 
   # add constraint
   add_restopt_constraint(
-    x = x,
-    objective = restopt_component(
+    problem = problem,
+    constraint = restopt_component(
       name = "Components constraint",
-      class = "ComponentConstraint",
+      class = c("ComponentConstraint", "RestoptConstraint"),
       post = function(jproblem) {
         rJava::.jcall(
           jproblem, "V", "postNbComponentsConstraint",

@@ -4,7 +4,7 @@
 \alias{add_settings}
 \title{Add settings}
 \usage{
-add_settings(x, precision = 4, time_limit = 0)
+add_settings(problem, precision = 4, time_limit = 0)
 }
 \arguments{
 \item{precision}{\code{numeric} Precision for calculations.
