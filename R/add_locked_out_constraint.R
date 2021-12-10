@@ -50,7 +50,7 @@ add_locked_out_constraint <- function(problem, data, raster_value = 1, lock_out 
 
   problem$data$locked_out <- list(
     data = data,
-    raster_value = raster_value,
+    raster_value = as.integer(raster_value),
     lock_out = lock_out
   )
 

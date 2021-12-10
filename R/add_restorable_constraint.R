@@ -51,7 +51,7 @@ add_restorable_constraint <- function(problem, min_restore, max_restore, cell_ar
       post = function(jproblem) {
         rJava::.jcall(
           jproblem, "V", "postRestorableConstraint",
-          min_restore, max_restore, cell_area, min_proportion
+          as.integer(min_restore), as.integer(max_restore), as.integer(cell_area), min_proportion
         )
       }
     )

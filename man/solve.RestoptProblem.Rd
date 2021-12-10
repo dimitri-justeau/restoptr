@@ -4,7 +4,7 @@
 \alias{solve.RestoptProblem}
 \title{Solve a restoration optimization problem}
 \usage{
-\method{solve}{RestoptProblem}(a, b, ...)
+\method{solve}{RestoptProblem}(problem, ...)
 }
 \value{
 A \code{\link[terra:rast]{terra::rast()}} object.

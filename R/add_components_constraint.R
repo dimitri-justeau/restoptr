@@ -38,7 +38,7 @@ add_components_constraint <- function(problem, min_nb_components, max_nb_compone
       post = function(jproblem) {
         rJava::.jcall(
           jproblem, "V", "postNbComponentsConstraint",
-          min_nb_components, max_nb_components
+          as.integer(min_nb_components), as.integer(max_nb_components)
         )
       }
     )

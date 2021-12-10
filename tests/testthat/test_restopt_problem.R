@@ -13,7 +13,10 @@ test_that("create_problem", {
     add_restorable_constraint(min_restore = 90, max_restore = 110, cell_area = 23, min_proportion = 0.7) %>%
     add_max_mesh_objective()
 
+  problem <- add_settings(problem, time_limit = 30)
+
   testthat::expect_equal(class(problem), "RestoptProblem")
   testthat::expect_equal(length(problem$constraints), 4)
   testthat::expect_true(inherits(problem$objective, "MaxMeshObjective"))
+  testthat::expect_equal(problem$settings$time_limit, 30)
 })
