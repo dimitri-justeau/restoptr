@@ -6,11 +6,14 @@
 \usage{
 add_max_iic_objective(problem)
 }
+\arguments{
+\item{problem}{\code{\link[=restopt_problem]{restopt_problem()}} Restoration problem object.}
+}
 \value{
-An updated restoration problem (\code{\link[=restore_problem]{restore_problem()}} object.
+An updated restoration problem (\code{\link[=restopt_problem]{restopt_problem()}} object.
 }
 \description{
-Specify that a restoration problem (\code{\link[=restore_problem]{restore_problem()}} should
+Specify that a restoration problem (\code{\link[=restopt_problem]{restopt_problem()}} should
 the integral index of connectivity (IIC).
 }
 \details{

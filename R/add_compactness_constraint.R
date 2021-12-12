@@ -3,8 +3,10 @@ NULL
 
 #' Add constraint to limit compactness
 #'
-#' Add constraint to a restoration problem ([restore_problem()] object
+#' Add constraint to a restoration problem ([restopt_problem()] object
 #' to specify the compactness of a solution.
+#'
+#' @inheritParams add_max_mesh_objective
 #'
 #' @param max_diameter `numeric` Maximum diameter value.
 #'

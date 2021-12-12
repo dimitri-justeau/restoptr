@@ -7,6 +7,8 @@ NULL
 #'
 # @inheritParams add_max_mesh_objective
 #'
+#' @param ... Unused arguments.
+#'
 #' @return A [terra::rast()] object.
 #'
 #' @examples
@@ -34,9 +36,11 @@ solve.RestoptProblem <- function(problem, ...) {
     terra::sources(ac_data)[[1]],
     terra::sources(rh_data)[[1]]
   )
+
   # initialize problem
   jproblem <-rJava::.jnew(
-    "org.restopt.BaseProblem", jdata, as.integer(problem$data$locked_out$raster_value)
+    "org.restopt.BaseProblem", jdata,
+    as.integer(problem$data$locked_out$raster_value)
   )
 
   # add constraints
@@ -48,7 +52,10 @@ solve.RestoptProblem <- function(problem, ...) {
   output_path <- tempfile()
   result <- try(
     problem$objective$post(
-      jproblem, problem$settings$precision, problem$settings$time_limit, output_path
+      jproblem,
+      problem$settings$precision,
+      problem$settings$time_limit,
+      output_path
     ),
     silent = TRUE
   )

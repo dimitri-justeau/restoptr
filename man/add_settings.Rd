@@ -7,6 +7,8 @@
 add_settings(problem, precision = 4, time_limit = 0)
 }
 \arguments{
+\item{problem}{\code{\link[=restopt_problem]{restopt_problem()}} Restoration problem object.}
+
 \item{precision}{\code{numeric} Precision for calculations.
 Defaults to 4.}
 
@@ -15,7 +17,7 @@ Defaults to 4.}
 Defaults to 0.}
 }
 \description{
-Add settings to a restoration problem (\code{\link[=restore_problem]{restore_problem()}} object
+Add settings to a restoration problem (\code{\link[=restopt_problem]{restopt_problem()}} object
 to customize the optimization procedure.
 }
 \examples{

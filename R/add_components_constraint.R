@@ -3,9 +3,11 @@ NULL
 
 #' Add constraint to limit the number of connected components
 #'
-#' Add constraint to a restoration problem ([restore_problem()] object
+#' Add constraint to a restoration problem ([restopt_problem()] object
 #' to specify the number of connected components that can be
 #' present within a solution.
+#'
+#' @inheritParams add_max_mesh_objective
 #'
 #' @param min_nb_components `integer` Minimum number of connected components.
 #'

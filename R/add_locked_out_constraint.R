@@ -3,9 +3,11 @@ NULL
 
 #' Add locked out constraint
 #'
-#' Add constraint to a restoration problem ([restore_problem()] object
+#' Add constraint to a restoration problem ([restopt_problem()] object
 #' to specify that certain planning units cannot be selected
 #' for any restoration activities.
+#'
+#' @inheritParams add_max_mesh_objective
 #'
 #' @param data [terra::rast()] Raster object containing binary values
 #'  that indicate which planning units cannot be selected for any restoration.

@@ -3,8 +3,10 @@ NULL
 
 #' Add settings
 #'
-#' Add settings to a restoration problem ([restore_problem()] object
+#' Add settings to a restoration problem ([restopt_problem()] object
 #' to customize the optimization procedure.
+#'
+#' @inheritParams add_max_mesh_objective
 #'
 #' @param precision `numeric` Precision for calculations.
 #' Defaults to 4.

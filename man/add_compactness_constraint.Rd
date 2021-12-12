@@ -7,10 +7,12 @@
 add_compactness_constraint(problem, max_diameter)
 }
 \arguments{
+\item{problem}{\code{\link[=restopt_problem]{restopt_problem()}} Restoration problem object.}
+
 \item{max_diameter}{\code{numeric} Maximum diameter value.}
 }
 \description{
-Add constraint to a restoration problem (\code{\link[=restore_problem]{restore_problem()}} object
+Add constraint to a restoration problem (\code{\link[=restopt_problem]{restopt_problem()}} object
 to specify the compactness of a solution.
 }
 \details{

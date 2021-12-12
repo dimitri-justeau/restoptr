@@ -3,15 +3,15 @@ NULL
 
 #' Add an objective to maximize the integral index of connectivity
 #'
-#' Specify that a restoration problem ([restore_problem()] should
+#' Specify that a restoration problem ([restopt_problem()] should
 #' the integral index of connectivity (IIC).
 #'
-# @inheritParams add_max_mesh_objective
+#' @inheritParams add_max_mesh_objective
 #'
 #' @details
 #' TODO. Provide details on what IIC is.
 #'
-#' @return An updated restoration problem ([restore_problem()] object.
+#' @return An updated restoration problem ([restopt_problem()] object.
 #'
 #' @examples
 #' # TODO

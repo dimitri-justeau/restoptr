@@ -13,6 +13,8 @@ add_restorable_constraint(
 )
 }
 \arguments{
+\item{problem}{\code{\link[=restopt_problem]{restopt_problem()}} Restoration problem object.}
+
 \item{min_restore}{\code{integer} Minimum allowed area to restore in the solution.}
 
 \item{max_restore}{\code{integer} Maximum allowed area to restore in the solution}
@@ -23,7 +25,7 @@ add_restorable_constraint(
 as restored.}
 }
 \description{
-Add constraint to a restoration problem (\code{\link[=restore_problem]{restore_problem()}} object
+Add constraint to a restoration problem (\code{\link[=restopt_problem]{restopt_problem()}} object
 to specify specify the available amount of surface for restoration
 }
 \details{

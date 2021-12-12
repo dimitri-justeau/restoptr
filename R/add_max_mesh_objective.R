@@ -3,15 +3,15 @@ NULL
 
 #' Add an objective to maximize effective mesh size
 #'
-#' Specify that a restoration problem ([restore_problem()] should
+#' Specify that a restoration problem ([restopt_problem()] should
 #' maximize effective mesh size.
 #'
-#' @param problem [restore_problem()] Restoration problem object.
+#' @param problem [restopt_problem()] Restoration problem object.
 #'
 #' @details
 #' TODO. Provide details on what effective mesh size is.
 #'
-#' @return An updated restoration problem ([restore_problem()] object.
+#' @return An updated restoration problem ([restopt_problem()] object.
 #'
 #' @references
 #' TODO. Citation for effective mesh size.

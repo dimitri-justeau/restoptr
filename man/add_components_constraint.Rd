@@ -7,12 +7,14 @@
 add_components_constraint(problem, min_nb_components, max_nb_components)
 }
 \arguments{
+\item{problem}{\code{\link[=restopt_problem]{restopt_problem()}} Restoration problem object.}
+
 \item{min_nb_components}{\code{integer} Minimum number of connected components.}
 
 \item{max_nb_components}{\code{integer} Maximum number of connected components.}
 }
 \description{
-Add constraint to a restoration problem (\code{\link[=restore_problem]{restore_problem()}} object
+Add constraint to a restoration problem (\code{\link[=restopt_problem]{restopt_problem()}} object
 to specify the number of connected components that can be
 present within a solution.
 }

@@ -7,7 +7,7 @@
 \method{print}{RestoptProblem}(problem, ...)
 }
 \arguments{
-\item{problem}{\code{\link[=restore_problem]{restore_problem()}} Restoration problem object.}
+\item{problem}{\code{\link[=restopt_problem]{restopt_problem()}} Restoration problem object.}
 
 \item{...}{Arguments not used.}
 }

@@ -6,6 +6,9 @@
 \usage{
 \method{solve}{RestoptProblem}(problem, ...)
 }
+\arguments{
+\item{...}{Unused arguments.}
+}
 \value{
 A \code{\link[terra:rast]{terra::rast()}} object.
 }
