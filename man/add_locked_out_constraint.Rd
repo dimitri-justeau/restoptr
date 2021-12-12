@@ -4,7 +4,7 @@
 \alias{add_locked_out_constraint}
 \title{Add locked out constraint}
 \usage{
-add_locked_out_constraint(x, data, raster_value = 1, lock_out = FALSE)
+add_locked_out_constraint(problem, data, raster_value = 1, lock_out = FALSE)
 }
 \arguments{
 \item{data}{\code{\link[terra:rast]{terra::rast()}} Raster object containing binary values

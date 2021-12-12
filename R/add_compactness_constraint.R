@@ -16,20 +16,20 @@ NULL
 #' # TODO
 #'
 #' @export
-add_compactness_constraint <- function(x, max_diameter) {
+add_compactness_constraint <- function(problem, max_diameter) {
   # assert argument is valid
   assertthat::assert_that(
-    inherits(x, "RestoptProblem"),
+    inherits(problem, "RestoptProblem"),
     assertthat::is.number(max_diameter),
     assertthat::noNA(max_diameter)
   )
 
   # add constraint
   add_restopt_constraint(
-    x = x,
-    objective = restopt_component(
+    problem = problem,
+    constraint = restopt_component(
       name = "Compactness constraint",
-      class = "CompactnessConstraint",
+      class = c("CompactnessConstraint", "RestoptConstraint"),
       post = function(jproblem) {
         rJava::.jcall(jproblem, "V", "postCompactnessConstraint", max_diameter)
       }

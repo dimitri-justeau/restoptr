@@ -4,7 +4,7 @@
 \alias{add_compactness_constraint}
 \title{Add constraint to limit compactness}
 \usage{
-add_compactness_constraint(x, max_diameter)
+add_compactness_constraint(problem, max_diameter)
 }
 \arguments{
 \item{max_diameter}{\code{numeric} Maximum diameter value.}

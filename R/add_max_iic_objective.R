@@ -17,16 +17,16 @@ NULL
 #' # TODO
 #'
 #' @export
-add_max_mesh_iic <- function(x) {
+add_max_iic_objective <- function(problem) {
   # assert argument is valid
-  assertthat::assert_that(inherits(x, "RestoptProblem"))
+  assertthat::assert_that(inherits(problem, "RestoptProblem"))
 
   # add objective
   add_restopt_objective(
-    x = x,
+    problem = problem,
     objective = restopt_component(
       name = "Maximize integral index of connectivity",
-      class = "MaxIicObjective",
+      class = c("MaxIicObjective", "RestoptObjectve"),
       post = function(jproblem, precision, time_limit, output_path) {
         rJava::.jcall(
           jproblem, "Z", "maximizeIIC", precision, output_path, time_limit

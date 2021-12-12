@@ -6,7 +6,7 @@ NULL
 #' Specify that a restoration problem ([restore_problem()] should
 #' maximize effective mesh size.
 #'
-#' @param x [restore_problem()] Restoration problem object.
+#' @param problem [restore_problem()] Restoration problem object.
 #'
 #' @details
 #' TODO. Provide details on what effective mesh size is.
@@ -20,16 +20,16 @@ NULL
 #' # TODO
 #'
 #' @export
-add_max_mesh_objective <- function(x) {
+add_max_mesh_objective <- function(problem) {
   # assert argument is valid
-  assertthat::assert_that(inherits(x, "RestoptProblem"))
+  assertthat::assert_that(inherits(problem, "RestoptProblem"))
 
   # add objective
   add_restopt_objective(
-    x = x,
+    problem = problem,
     objective = restopt_component(
       name = "Maximize effective mesh size",
-      class = "MaxMeshObjective",
+      class = c("MaxMeshObjective", "RestoptObjectve"),
       post = function(jproblem, precision, time_limit, output_path) {
         rJava::.jcall(
           jproblem, "Z", "maximizeMESH", precision, output_path, time_limit

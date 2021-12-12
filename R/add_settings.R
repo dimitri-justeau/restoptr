@@ -17,10 +17,10 @@ NULL
 #' # TODO
 #'
 #' @export
-add_settings <- function(x, precision = 4, time_limit = 0) {
+add_settings <- function(problem, precision = 4, time_limit = 0) {
   # assert argument is valid
   assertthat::assert_that(
-    inherits(x, "RestoptProblem"),
+    inherits(problem, "RestoptProblem"),
     assertthat::is.number(precision),
     assertthat::noNA(precision),
     assertthat::is.count(time_limit + 1),
@@ -28,11 +28,11 @@ add_settings <- function(x, precision = 4, time_limit = 0) {
   )
 
   # add settings
-  x$settings <- list(
+  problem$settings <- list(
     precision = as.integer(precision),
     time_limit = as.integer(time_limit)
   )
 
   # return updated problem
-  x
+  problem
 }

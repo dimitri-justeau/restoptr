@@ -4,7 +4,7 @@
 \alias{add_components_constraint}
 \title{Add constraint to limit the number of connected components}
 \usage{
-add_components_constraint(x, min_nb_components, max_nb_components)
+add_components_constraint(problem, min_nb_components, max_nb_components)
 }
 \arguments{
 \item{min_nb_components}{\code{integer} Minimum number of connected components.}

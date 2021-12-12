@@ -86,45 +86,55 @@ restopt_problem <- function(existing_habitat, restorable_habitat) {
 #' TODO.
 #'
 #' @export
-print.RestoptProblem <- function(x, ...) {
-  print(x)
+print.RestoptProblem <- function(problem, ...) {
+  cat(paste0("Restopt problem",
+             "\n  Existing habitat: \n    - ",
+               terra::sources(problem$data$existing_habitat)$source,
+             "\n  Restorable habitat: \n    - ",
+               terra::sources(problem$data$restorable_habitat)$source,
+             "\n  Constraints: \n    - ",
+               ifelse(length(problem$constraints) == 0,
+                      "no constraints posted",
+                      paste(sapply(problem$constraints, function(y) {y$name}), collapse = "\n    - ")),
+             "\n  Objective: \n    - ",
+               ifelse(is.null(problem$objective),
+                      "no objective defined",
+                      problem$objective$name)))
 }
 
 #' Add a constraint to a restoration optimization problem
 #'
-#' Display information about a restoration
-#'
 #' @inheritParams add_max_mesh_objective
 #'
-#' @param y `RestoptConstraint` Constraint object.
+#' @param constraint `RestoptConstraint` Constraint object.
 #'
 #' @examples
 #' TODO.
 #'
 #' @noRd
-add_restopt_constraint <- function(x, y) {
+add_restopt_constraint <- function(problem, constraint) {
   # assert arguments are valid
   assertthat::assert_that(
-    inherits(x, "RestoptProblem"),
-    inherits(y, "RestoptConstraint")
+    inherits(problem, "RestoptProblem"),
+    inherits(constraint, "RestoptConstraint")
   )
 
   # throw warning if constraint specified
-  i <- which(vapply(x$constraints, inherits, logical(1), class(y)[[1]]))
+  i <- which(vapply(problem$constraints, inherits, logical(1), class(constraint)[[1]]))
   if (length(i) > 0) {
     warning(
       "overwriting previously defined constraint.",
       call. = FALSE, immediate. = TRUE
     )
   } else {
-    i <- length(x$constraints) + 1
+    i <- length(problem$constraints) + 1
   }
 
   # add constraint
-  x$constraint[[i]] <- y
+  problem$constraints[[i]] <- constraint
 
   # return updated problem
-  x
+  problem
 }
 
 #' Add an objective to a restoration optimization problem
@@ -133,21 +143,21 @@ add_restopt_constraint <- function(x, y) {
 #'
 #' @inheritParams add_max_mesh_objective
 #'
-#' @param y `RestoptObjective` Objective object.
+#' @param objective `RestoptObjective` Objective object.
 #'
 #' @examples
 #' TODO.
 #'
 #' @noRd
-add_restopt_objective <- function(x, y) {
+add_restopt_objective <- function(problem, objective) {
   # assert arguments are valid
   assertthat::assert_that(
-    inherits(x, "RestoptProblem"),
-    inherits(y, "RestoptObjectve")
+    inherits(problem, "RestoptProblem"),
+    inherits(objective, "RestoptObjectve")
   )
 
   # throw warning if objective specified
-  if (!is.null(x$objective)) {
+  if (!is.null(problem$objective)) {
     warning(
       "overwriting previously defined objective.",
       call. = FALSE, immediate. = TRUE
@@ -155,8 +165,8 @@ add_restopt_objective <- function(x, y) {
   }
 
   # add objective
-  x$objective <- y
+  problem$objective <- objective
 
   # return updated problem
-  x
+  problem
 }
