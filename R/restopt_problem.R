@@ -92,19 +92,36 @@ restopt_problem <- function(existing_habitat, restorable_habitat) {
 #'
 #' @export
 print.RestoptProblem <- function(x, ...) {
-  cat(paste0("Restopt problem",
-             "\n  Existing habitat: \n    - ",
-               terra::sources(x$data$existing_habitat)$source,
-             "\n  Restorable habitat: \n    - ",
-               terra::sources(x$data$restorable_habitat)$source,
-             "\n  Constraints: \n    - ",
-               ifelse(length(x$constraints) == 0,
-                      "no constraints posted",
-                      paste(sapply(x$constraints, function(y) {y$name}), collapse = "\n    - ")),
-             "\n  Objective: \n    - ",
-               ifelse(is.null(x$objective),
-                      "no objective defined",
-                      x$objective$name)))
+  message("Restopt problem")
+  message(
+    "existing habitat:   ",
+    basename(terra::sources(x$data$existing_habitat)$source[[1]])
+  )
+  message(
+    "restorable habitat: ",
+    basename(terra::sources(x$data$restorable_habitat)$source[[1]])
+  )
+  message(
+    "objective:          ",
+    ifelse(is.null(x$objective), "none defined", x$objective$name)
+  )
+  message(
+    "constraints:        ",
+    ifelse(length(x$constraints) == 0, "none defined", "")
+  )
+  for (i in seq_along(x$constraints)) {
+    message(
+      "  - ",
+      x$constraints[[i]]$name
+    )
+  }
+  message(
+    "settings:           ",
+    paste(
+      paste(names(x$settings), "=", unlist(x$settings, use.names = FALSE)),
+      collapse = ", "
+    )
+  )
 }
 
 #' Add a constraint to a restoration optimization problem

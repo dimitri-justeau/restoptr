@@ -44,7 +44,9 @@ add_locked_out_constraint <- function(problem, data,
     terra::hasValues(data)
   )
   assertthat::assert_that(
-    terra::compareGeom(x$data$existing_habitat, data, stopiffalse = FALSE),
+    terra::compareGeom(
+      problem$data$existing_habitat, data, stopiffalse = FALSE
+    ),
     msg = paste(
       "argument to \"data\" has different spatial properties to",
       "the \"existing_habitat\" and \"restorable_habitat\" data in",
@@ -61,9 +63,14 @@ add_locked_out_constraint <- function(problem, data,
   add_restopt_constraint(
     problem = problem,
     constraint = restopt_component(
-      name = "Locked out constraint",
+      name = paste0(
+        "locked out (",
+        "data = ", basename(terra::sources(data)$source[[1]]),
+        ", raster_value = ", raster_value,
+        ", lock_out = ", lock_out, ")"
+      ),
       class = c("LockedOutConstraint", "RestoptConstraint"),
-      post = function(jproblem) {} # Nothing to do here
+      post = function(jproblem) {} # nothing to do here
     )
   )
 }

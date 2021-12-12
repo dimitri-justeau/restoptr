@@ -33,16 +33,24 @@ add_components_constraint <- function(problem,
     assertthat::noNA(max_nb_components)
   )
 
+  # coerce arguments to integer
+  min_nb_components <- as.integer(min_nb_components)
+  max_nb_components <- as.integer(max_nb_components)
+
   # add constraint
   add_restopt_constraint(
     problem = problem,
     constraint = restopt_component(
-      name = "Components constraint",
+      name = paste0(
+        "components (",
+        "min_nb_components = ", min_nb_components,
+        ", max_nb_components = ", max_nb_components, ")"
+      ),
       class = c("ComponentConstraint", "RestoptConstraint"),
       post = function(jproblem) {
         rJava::.jcall(
           jproblem, "V", "postNbComponentsConstraint",
-          as.integer(min_nb_components), as.integer(max_nb_components)
+          min_nb_components, max_nb_components
         )
       }
     )
