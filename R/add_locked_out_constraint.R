@@ -40,7 +40,7 @@ add_locked_out_constraint <- function(problem, data, raster_value = 1, lock_out 
     terra::hasValues(data)
   )
   assertthat::assert_that(
-    terra::compareGeom(problem$data$existing_habitat, data, stopiffalse = FALSE),
+    terra::compareGeom(x$data$existing_habitat, data, stopiffalse = FALSE),
     msg = paste(
       "argument to \"data\" has different spatial properties to",
       "the \"existing_habitat\" and \"restorable_habitat\" data in",

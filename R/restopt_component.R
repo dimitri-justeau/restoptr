@@ -39,7 +39,6 @@ restopt_component <- function(name, class, post) {
   structure(
     list(
       name = name,
-      # data = data,
       post = post
     ),
     class = c(class, "RestoptComponent")

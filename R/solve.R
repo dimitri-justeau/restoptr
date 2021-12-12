@@ -77,4 +77,5 @@ solve.RestoptProblem <- function(problem, ...) {
   }
 
   return(r)
+
 }

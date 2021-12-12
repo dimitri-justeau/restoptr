@@ -5,7 +5,6 @@ test_that("create_problem", {
   habitat <- terra::rast(system.file("extdata", "habitat.tif", package = "restoptr"))
   restorable <- terra::rast(system.file("extdata", "restorable.tif", package = "restoptr"))
   accessible <- terra::rast(system.file("extdata", "accessible.tif", package = "restoptr"))
-
   problem <- restopt_problem(habitat, restorable) %>%
     add_locked_out_constraint(accessible) %>%
     add_components_constraint(min_nb_components = 1, max_nb_components = 1) %>%
