@@ -19,10 +19,7 @@
   }
 
   # specify file path for restopt jar file
-  jar_path <- file.path(
-    tools::R_user_dir("restoptr", which = "cache"),
-    basename(restopt_url)
-  )
+  jar_path <- file.path(libname, pkgname, "java", basename(restopt_url))
 
   # download restopt jar file if needed
   # see https://github.com/dimitri-justeau/restopt
