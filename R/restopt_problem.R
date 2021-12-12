@@ -54,8 +54,22 @@ restopt_problem <- function(existing_habitat, restorable_habitat) {
   assertthat::assert_that(
     terra::hasValues(existing_habitat),
     terra::hasValues(restorable_habitat),
+    terra::nlyr(existing_habitat) == 1,
+    terra::nlyr(restorable_habitat) == 1,
     terra::compareGeom(
       existing_habitat, restorable_habitat, stopiffalse = FALSE
+    )
+  )
+  ## assert valid values
+  assertthat::assert_that(
+    is_binary_raster(existing_habitat),
+    msg = "argument to \"existing_habitat\" must have binary values"
+  )
+  assertthat::assert_that(
+    terra::global(restorable_habitat, "min", na.rm = TRUE)[[]] >= 0,
+    msg = paste(
+      "argument to \"restorable_habitat\" must have integer values greater",
+      "than 0"
     )
   )
 
