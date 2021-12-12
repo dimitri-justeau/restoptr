@@ -47,7 +47,8 @@ VignetteBuilder: knitr
 RoxygenNote: 7.1.2
 Imports:
     utils,
-    assertthat (>= 0.2.1)
+    assertthat (>= 0.2.1),
+    magrittr
 Depends:
     R (>= 4.1.0),
     terra (>= 1.4-22),
