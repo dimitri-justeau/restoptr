@@ -2,6 +2,7 @@
 
 S3method(print,RestoptProblem)
 S3method(solve,RestoptProblem)
+export("%>%")
 export(add_compactness_constraint)
 export(add_components_constraint)
 export(add_locked_out_constraint)
@@ -12,3 +13,4 @@ export(add_settings)
 export(restopt_problem)
 import(rJava)
 import(terra)
+importFrom(magrittr,"%>%")

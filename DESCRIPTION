@@ -73,4 +73,5 @@ Collate:
     'restopt_problem.R'
     'solve.R'
     'terra_io.R'
+    'utils-pipe.R'
     'zzz.R'
