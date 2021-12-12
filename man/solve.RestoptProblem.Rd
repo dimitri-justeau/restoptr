@@ -4,9 +4,13 @@
 \alias{solve.RestoptProblem}
 \title{Solve a restoration optimization problem}
 \usage{
-\method{solve}{RestoptProblem}(problem, ...)
+\method{solve}{RestoptProblem}(a, b, ...)
 }
 \arguments{
+\item{a}{\code{\link[=restopt_problem]{restopt_problem()}} Restoration problem object.}
+
+\item{b}{Argument not used.}
+
 \item{...}{Unused arguments.}
 }
 \value{

@@ -5,7 +5,9 @@ NULL
 #'
 #' Solve a restoration optimization problem to generate a solution.
 #'
-# @inheritParams add_max_mesh_objective
+#' @param a [restopt_problem()] Restoration problem object.
+#'
+#' @param b Argument not used.
 #'
 #' @param ... Unused arguments.
 #'
@@ -15,19 +17,19 @@ NULL
 #' # TODO
 #'
 #' @export
-solve.RestoptProblem <- function(problem, ...) {
+solve.RestoptProblem <- function(a, b, ...) {
   # assert argument is valid
-  assertthat::assert_that(inherits(problem, "RestoptProblem"))
+  assertthat::assert_that(inherits(a, "RestoptProblem"))
 
   # prepare data
   ## check if data already saved to disk
-  eh_on_disk <- terra_on_disk(problem$data$existing_habitat)
-  rh_on_disk <- terra_on_disk(problem$data$restorable_habitat)
-  ac_on_disk <- terra_on_disk(problem$data$locked_out$data)
+  eh_on_disk <- terra_on_disk(a$data$existing_habitat)
+  rh_on_disk <- terra_on_disk(a$data$restorable_habitat)
+  ac_on_disk <- terra_on_disk(a$data$locked_out$data)
   ## save rasters to disk if needed
-  eh_data <- terra_force_disk(problem$data$existing_habitat)
-  rh_data <- terra_force_disk(problem$data$restorable_habitat)
-  ac_data <- terra_force_disk(problem$data$locked_out$data)
+  eh_data <- terra_force_disk(a$data$existing_habitat)
+  rh_data <- terra_force_disk(a$data$restorable_habitat)
+  ac_data <- terra_force_disk(a$data$locked_out$data)
 
   # import data
   jdata <- rJava::.jnew(
@@ -40,12 +42,12 @@ solve.RestoptProblem <- function(problem, ...) {
   # initialize problem
   jproblem <-rJava::.jnew(
     "org.restopt.BaseProblem", jdata,
-    as.integer(problem$data$locked_out$raster_value)
+    as.integer(a$data$locked_out$raster_value)
   )
 
   # add constraints
-  for (i in seq_along(problem$constraints)) {
-    problem$constraints[[i]]$post(jproblem)
+  for (i in seq_along(a$constraints)) {
+    a$constraints[[i]]$post(jproblem)
   }
 
   # add objective and solve the problem
@@ -53,8 +55,8 @@ solve.RestoptProblem <- function(problem, ...) {
   result <- try(
     problem$objective$post(
       jproblem,
-      problem$settings$precision,
-      problem$settings$time_limit,
+      a$settings$precision,
+      a$settings$time_limit,
       output_path
     ),
     silent = TRUE

@@ -78,7 +78,7 @@ restopt_problem <- function(existing_habitat, restorable_habitat) {
 #'
 #' Display information about a restoration optimization problem.
 #'
-#' @inheritParams add_max_mesh_objective
+#' @param x [restopt_problem()] Restoration problem object.
 #'
 #' @param ... Arguments not used.
 #'
@@ -86,20 +86,20 @@ restopt_problem <- function(existing_habitat, restorable_habitat) {
 #' TODO.
 #'
 #' @export
-print.RestoptProblem <- function(problem, ...) {
+print.RestoptProblem <- function(x, ...) {
   cat(paste0("Restopt problem",
              "\n  Existing habitat: \n    - ",
-               terra::sources(problem$data$existing_habitat)$source,
+               terra::sources(x$data$existing_habitat)$source,
              "\n  Restorable habitat: \n    - ",
-               terra::sources(problem$data$restorable_habitat)$source,
+               terra::sources(x$data$restorable_habitat)$source,
              "\n  Constraints: \n    - ",
-               ifelse(length(problem$constraints) == 0,
+               ifelse(length(x$constraints) == 0,
                       "no constraints posted",
-                      paste(sapply(problem$constraints, function(y) {y$name}), collapse = "\n    - ")),
+                      paste(sapply(x$constraints, function(y) {y$name}), collapse = "\n    - ")),
              "\n  Objective: \n    - ",
-               ifelse(is.null(problem$objective),
+               ifelse(is.null(x$objective),
                       "no objective defined",
-                      problem$objective$name)))
+                      x$objective$name)))
 }
 
 #' Add a constraint to a restoration optimization problem

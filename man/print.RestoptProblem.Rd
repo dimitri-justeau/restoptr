@@ -4,10 +4,10 @@
 \alias{print.RestoptProblem}
 \title{Print a restoration optimization problem}
 \usage{
-\method{print}{RestoptProblem}(problem, ...)
+\method{print}{RestoptProblem}(x, ...)
 }
 \arguments{
-\item{problem}{\code{\link[=restopt_problem]{restopt_problem()}} Restoration problem object.}
+\item{x}{\code{\link[=restopt_problem]{restopt_problem()}} Restoration problem object.}
 
 \item{...}{Arguments not used.}
 }
