@@ -24,7 +24,10 @@ NULL
 #' # TODO
 #'
 #' @export
-add_restorable_constraint <- function(problem, min_restore, max_restore, cell_area,
+add_restorable_constraint <- function(problem,
+                                      min_restore,
+                                      max_restore,
+                                      cell_area,
                                       min_proportion = 1) {
   # assert argument is valid
   assertthat::assert_that(

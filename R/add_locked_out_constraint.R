@@ -26,7 +26,9 @@ NULL
 #' # TODO
 #'
 #' @export
-add_locked_out_constraint <- function(problem, data, raster_value = 1, lock_out = FALSE) {
+add_locked_out_constraint <- function(problem, data,
+                                      raster_value = 1,
+                                      lock_out = FALSE) {
   # assert argument is valid
   ## Check locked_out_raster_value and available_raster_value
   assertthat::is.flag(lock_out)

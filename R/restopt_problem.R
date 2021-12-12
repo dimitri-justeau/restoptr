@@ -120,7 +120,9 @@ add_restopt_constraint <- function(problem, constraint) {
   )
 
   # throw warning if constraint specified
-  i <- which(vapply(problem$constraints, inherits, logical(1), class(constraint)[[1]]))
+  i <- which(vapply(
+    problem$constraints, inherits, logical(1), class(constraint)[[1]]
+  ))
   if (length(i) > 0) {
     warning(
       "overwriting previously defined constraint.",

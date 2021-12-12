@@ -21,7 +21,9 @@ NULL
 #' # TODO
 #'
 #' @export
-add_components_constraint <- function(problem, min_nb_components, max_nb_components) {
+add_components_constraint <- function(problem,
+                                      min_nb_components,
+                                      max_nb_components) {
   # assert argument is valid
   assertthat::assert_that(
     inherits(problem, "RestoptProblem"),
