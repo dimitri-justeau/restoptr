@@ -72,15 +72,15 @@ solve.RestoptProblem <- function(a, b, ...) {
   attributes(r)$metadata <- utils::read.csv(paste0(output_path, ".csv"))
 
   # clean up
-  if (eh_on_disk) {
+  if (!eh_on_disk) {
     unlink(terra::sources(eh_data)[[1]])
     rm(eh_data)
   }
-  if (rh_on_disk) {
+  if (!rh_on_disk) {
     unlink(terra::sources(rh_data)[[1]])
     rm(rh_data)
   }
-  if (ac_on_disk) {
+  if (!ac_on_disk) {
     unlink(terra::sources(ac_data)[[1]])
     rm(ac_data)
   }
