@@ -66,7 +66,7 @@ restopt_problem <- function(existing_habitat, restorable_habitat) {
     msg = "argument to \"existing_habitat\" must have binary values"
   )
   assertthat::assert_that(
-    terra::global(restorable_habitat, "min", na.rm = TRUE)[[]] >= 0,
+    terra::global(restorable_habitat, "min", na.rm = TRUE)$min >= 0,
     msg = paste(
       "argument to \"restorable_habitat\" must have integer values greater",
       "than 0"
