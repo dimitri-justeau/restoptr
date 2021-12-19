@@ -53,7 +53,7 @@ solve.RestoptProblem <- function(a, b, ...) {
   # add objective and solve the problem
   output_path <- tempfile()
   result <- try(
-    problem$objective$post(
+    a$objective$post(
       jproblem,
       a$settings$precision,
       a$settings$time_limit,
@@ -64,7 +64,7 @@ solve.RestoptProblem <- function(a, b, ...) {
 
   # throw error if failed
   if (inherits(result, "try-error")) {
-    stop("failed to complete optimization")
+    stop(paste("failed to complete optimization\n\t", result))
   }
 
   # import results
