@@ -4,11 +4,10 @@
 ## restopr: Interface to the ‘Restopt’ Ecological Restoration Planning Software
 
 [![lifecycle](https://img.shields.io/badge/Lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html)
-[![R-CMD-check-Ubuntu](https://img.shields.io/github/workflow/status/dimitri-justeau/restoptr/Ubuntu/master.svg?label=Ubuntu)](https://github.com/dimitri-justeau/restoptr/actions)
+[![R-CMD-check-Ubuntu](https://github.com/dimitri-justeau/restoptr/actions/workflows/build_ubuntu.yml/badge.svg)](https://github.com/dimitri-justeau/restoptr/actions/workflows/build_ubuntu.yml)
 [![R-CMD-check-Windows](https://img.shields.io/github/workflow/status/dimitri-justeau/restoptr/Windows/master.svg?label=Windows)](https://github.com/dimitri-justeau/restoptr/actions)
 [![R-CMD-check-MacOS](https://img.shields.io/github/workflow/status/dimitri-justeau/restoptr/Mac%20OSX/master.svg?label=MacOS)](https://github.com/dimitri-justeau/restoptr/actions)
-[![Coverage
-Status](https://codecov.io/github/dimitri-justeau/restoptr/coverage.svg?branch=master)](https://codecov.io/github/dimitri-justeau/restoptr?branch=master)
+[![codecov](https://codecov.io/gh/dimitri-justeau/restoptr/branch/master/graph/badge.svg?token=zprsLj8Fhz)](https://codecov.io/gh/dimitri-justeau/restoptr)
 [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/restoptr)](https://CRAN.R-project.org/package=restoptr)
 
 ## Overview
