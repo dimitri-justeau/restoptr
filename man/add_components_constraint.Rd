@@ -23,6 +23,6 @@ TODO. Provide details on what components are and what sensible values
 should be.
 }
 \examples{
-# TODO
+\dontrun{TODO}
 
 }

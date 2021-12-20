@@ -20,6 +20,6 @@ A \code{\link[terra:rast]{terra::rast()}} object.
 Solve a restoration optimization problem to generate a solution.
 }
 \examples{
-# TODO
+\dontrun{TODO}
 
 }

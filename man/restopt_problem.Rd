@@ -26,6 +26,6 @@ restoration.
 TODO.
 }
 \examples{
-# TODO
+\dontrun{TODO}
 
 }

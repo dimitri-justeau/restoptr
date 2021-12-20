@@ -32,6 +32,6 @@ to specify specify the available amount of surface for restoration
 TODO
 }
 \examples{
-# TODO
+\dontrun{TODO}
 
 }

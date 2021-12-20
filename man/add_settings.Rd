@@ -21,6 +21,6 @@ Add settings to a restoration problem (\code{\link[=restopt_problem]{restopt_pro
 to customize the optimization procedure.
 }
 \examples{
-# TODO
+\dontrun{TODO}
 
 }

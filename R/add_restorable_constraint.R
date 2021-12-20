@@ -21,7 +21,7 @@ NULL
 #' TODO
 #'
 #' @examples
-#' # TODO
+#' \dontrun{TODO}
 #'
 #' @export
 add_restorable_constraint <- function(problem,

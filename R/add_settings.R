@@ -16,7 +16,7 @@ NULL
 #' Defaults to 0.
 #'
 #' @examples
-#' # TODO
+#' \dontrun{TODO}
 #'
 #' @export
 add_settings <- function(problem, precision = 4, time_limit = 0) {

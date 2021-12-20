@@ -18,7 +18,7 @@ NULL
 #' should be.
 #'
 #' @examples
-#' # TODO
+#' \dontrun{TODO}
 #'
 #' @export
 add_components_constraint <- function(problem,

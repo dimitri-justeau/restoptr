@@ -15,7 +15,7 @@ NULL
 #' should be.
 #'
 #' @examples
-#' # TODO
+#' \dontrun{TODO}
 #'
 #' @export
 add_compactness_constraint <- function(problem, max_diameter) {

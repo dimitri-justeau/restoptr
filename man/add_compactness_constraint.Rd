@@ -20,6 +20,6 @@ TODO. Provide details on how diameter is calculated and what sensible values
 should be.
 }
 \examples{
-# TODO
+\dontrun{TODO}
 
 }

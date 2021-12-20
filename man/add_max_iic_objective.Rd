@@ -20,6 +20,6 @@ the integral index of connectivity (IIC).
 TODO. Provide details on what IIC is.
 }
 \examples{
-# TODO
+\dontrun{TODO}
 
 }

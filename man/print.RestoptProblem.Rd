@@ -15,6 +15,6 @@
 Display information about a restoration optimization problem.
 }
 \examples{
-TODO.
+\dontrun{TODO}
 
 }

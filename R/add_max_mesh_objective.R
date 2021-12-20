@@ -17,7 +17,7 @@ NULL
 #' TODO. Citation for effective mesh size.
 #'
 #' @examples
-#' # TODO
+#' \dontrun{TODO}
 #'
 #' @export
 add_max_mesh_objective <- function(problem) {

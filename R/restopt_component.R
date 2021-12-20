@@ -22,7 +22,7 @@ NULL
 #' @return An `RestoptComponent` object.
 #'
 #' @examples
-#' # TODO
+#' \dontrun{TODO}
 #'
 #' @noRd
 restopt_component <- function(name, class, post) {

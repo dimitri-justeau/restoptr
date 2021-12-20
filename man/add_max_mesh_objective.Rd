@@ -20,7 +20,7 @@ maximize effective mesh size.
 TODO. Provide details on what effective mesh size is.
 }
 \examples{
-# TODO
+\dontrun{TODO}
 
 }
 \references{

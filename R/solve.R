@@ -14,7 +14,7 @@ NULL
 #' @return A [terra::rast()] object.
 #'
 #' @examples
-#' # TODO
+#' \dontrun{TODO}
 #'
 #' @export
 solve.RestoptProblem <- function(a, b, ...) {

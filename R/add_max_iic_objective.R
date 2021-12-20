@@ -14,7 +14,7 @@ NULL
 #' @return An updated restoration problem ([restopt_problem()] object.
 #'
 #' @examples
-#' # TODO
+#' \dontrun{TODO}
 #'
 #' @export
 add_max_iic_objective <- function(problem) {

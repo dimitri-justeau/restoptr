@@ -23,7 +23,7 @@ NULL
 #' TODO.
 #'
 #' @examples
-#' # TODO
+#' \dontrun{TODO}
 #'
 #' @export
 add_locked_out_constraint <- function(problem, data,

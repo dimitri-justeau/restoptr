@@ -28,6 +28,6 @@ for any restoration activities.
 TODO.
 }
 \examples{
-# TODO
+\dontrun{TODO}
 
 }

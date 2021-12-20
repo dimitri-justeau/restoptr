@@ -40,7 +40,7 @@ NULL
 #' TODO.
 #'
 #' @examples
-#' # TODO
+#' \dontrun{TODO}
 #'
 #' @export
 restopt_problem <- function(existing_habitat, restorable_habitat) {
@@ -102,7 +102,7 @@ restopt_problem <- function(existing_habitat, restorable_habitat) {
 #' @param ... Arguments not used.
 #'
 #' @examples
-#' TODO.
+#' \dontrun{TODO}
 #'
 #' @export
 print.RestoptProblem <- function(x, ...) {
@@ -145,7 +145,7 @@ print.RestoptProblem <- function(x, ...) {
 #' @param constraint `RestoptConstraint` Constraint object.
 #'
 #' @examples
-#' TODO.
+#' \dontrun{TODO}
 #'
 #' @noRd
 add_restopt_constraint <- function(problem, constraint) {
@@ -184,7 +184,7 @@ add_restopt_constraint <- function(problem, constraint) {
 #' @param objective `RestoptObjective` Objective object.
 #'
 #' @examples
-#' TODO.
+#' \dontrun{TODO}
 #'
 #' @noRd
 add_restopt_objective <- function(problem, objective) {
