@@ -29,6 +29,8 @@ solve.RestoptProblem <- function(a, b, ...) {
   ## save rasters to disk if needed
   eh_data <- terra_force_disk(a$data$existing_habitat)
   rh_data <- terra_force_disk(a$data$restorable_habitat)
+  # Force NODATA values of locked out raster to avoid terra writing them as 0
+  a$data$locked_out$data[is.na(a$data$locked_out$data)] <- -9999
   ac_data <- terra_force_disk(a$data$locked_out$data)
 
   # import data
@@ -42,7 +44,7 @@ solve.RestoptProblem <- function(a, b, ...) {
   # initialize problem
   jproblem <-rJava::.jnew(
     "org.restopt.BaseProblem", jdata,
-    as.integer(a$data$locked_out$raster_value)
+    0L
   )
 
   # add constraints

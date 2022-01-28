@@ -26,15 +26,8 @@ NULL
 #' \dontrun{TODO}
 #'
 #' @export
-add_locked_out_constraint <- function(problem, data,
-                                      raster_value = 1,
-                                      lock_out = FALSE) {
+add_locked_out_constraint <- function(problem, data) {
   # assert argument is valid
-  ## Check locked_out_raster_value and available_raster_value
-  assertthat::is.flag(lock_out)
-  assertthat::noNA(raster_value)
-  assertthat::is.count(raster_value)
-  ##
   assertthat::assert_that(
     inherits(problem, "RestoptProblem"),
     inherits(data, "SpatRaster")
@@ -55,9 +48,7 @@ add_locked_out_constraint <- function(problem, data,
   )
 
   problem$data$locked_out <- list(
-    data = data,
-    raster_value = as.integer(raster_value),
-    lock_out = lock_out
+    data = data
   )
 
   add_restopt_constraint(
@@ -65,9 +56,7 @@ add_locked_out_constraint <- function(problem, data,
     constraint = restopt_component(
       name = paste0(
         "locked out (",
-        "data = ", basename(terra::sources(data)$source[[1]]),
-        ", raster_value = ", raster_value,
-        ", lock_out = ", lock_out, ")"
+        "data = ", basename(terra::sources(data)$source[[1]])
       ),
       class = c("LockedOutConstraint", "RestoptConstraint"),
       post = function(jproblem) {} # nothing to do here

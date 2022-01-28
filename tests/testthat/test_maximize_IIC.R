@@ -8,7 +8,7 @@ test_that("maximize_iic", {
   accessible <- terra::rast(system.file("extdata", "accessible.tif", package = "restoptr"))
 
   problem <- restopt_problem(habitat, restorable) %>%
-    add_locked_out_constraint(accessible) %>%
+    add_locked_out_constraint(round(accessible == 2)) %>%
     add_components_constraint(min_nb_components = 1, max_nb_components = 1) %>%
     add_compactness_constraint(max_diameter = 6) %>%
     add_restorable_constraint(min_restore = 90, max_restore = 110, cell_area = 23, min_proportion = 0.7) %>%
