@@ -4,20 +4,11 @@
 \alias{add_locked_out_constraint}
 \title{Add locked out constraint}
 \usage{
-add_locked_out_constraint(problem, data, raster_value = 1, lock_out = FALSE)
+add_locked_out_constraint(problem, data)
 }
 \arguments{
-\item{problem}{\code{\link[=restopt_problem]{restopt_problem()}} Restoration problem object.}
-
 \item{data}{\code{\link[terra:rast]{terra::rast()}} Raster object containing binary values
 that indicate which planning units cannot be selected for any restoration.}
-
-\item{raster_value}{Raster value of cells to lock out (or not to lock out,
-see \code{lock_out} parameter)}
-
-\item{lock_out}{If TRUE cell with value \code{raster_value} in \code{data} are locked
-out, otherwise cells with values different from \code{raster_value} are locked
-out.}
 }
 \description{
 Add constraint to a restoration problem (\code{\link[=restopt_problem]{restopt_problem()}} object
