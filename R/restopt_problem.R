@@ -107,13 +107,15 @@ restopt_problem <- function(existing_habitat, restorable_habitat) {
 #' @export
 print.RestoptProblem <- function(x, ...) {
   message("Restopt problem")
+  source_habitat <- basename(terra::sources(x$data$existing_habitat)[[1]])
+  source_restorable <- basename(terra::sources(x$data$restorable_habitat)[[1]])
   message(
     "existing habitat:   ",
-    basename(terra::sources(x$data$existing_habitat)$source[[1]])
+    ifelse(source_habitat != "", source_habitat, "in memory")
   )
   message(
     "restorable habitat: ",
-    basename(terra::sources(x$data$restorable_habitat)$source[[1]])
+    ifelse(source_restorable != "", source_habitat, "in memory")
   )
   message(
     "objective:          ",

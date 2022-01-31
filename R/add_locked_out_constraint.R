@@ -12,13 +12,6 @@ NULL
 #' @param data [terra::rast()] Raster object containing binary values
 #'  that indicate which planning units cannot be selected for any restoration.
 #'
-#' @param raster_value Raster value of cells to lock out (or not to lock out,
-#'  see `lock_out` parameter)
-#'
-#' @param lock_out If TRUE cell with value `raster_value` in `data` are locked
-#'  out, otherwise cells with values different from `raster_value` are locked
-#'  out.
-#'
 #' @details
 #' TODO.
 #'
@@ -51,12 +44,15 @@ add_locked_out_constraint <- function(problem, data) {
     data = data
   )
 
+  src_locked_out <- basename(terra::sources(data)[[1]])
+
   add_restopt_constraint(
     problem = problem,
     constraint = restopt_component(
       name = paste0(
         "locked out (",
-        "data = ", basename(terra::sources(data)$source[[1]])
+        "data = ", ifelse(src_locked_out != "", src_locked_out, "in memory"),
+        ")"
       ),
       class = c("LockedOutConstraint", "RestoptConstraint"),
       post = function(jproblem) {} # nothing to do here

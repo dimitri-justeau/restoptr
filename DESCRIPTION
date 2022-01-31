@@ -51,7 +51,7 @@ Imports:
     magrittr
 Depends:
     R (>= 4.1.0),
-    terra (>= 1.4-22),
+    terra (>= 1.5-12),
     rJava (>= 1.0.5)
 Suggests:
     testthat (>= 2.0.1),

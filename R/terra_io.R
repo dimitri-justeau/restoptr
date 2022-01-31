@@ -16,13 +16,10 @@ NULL
 #' @noRd
 terra_on_disk <- function(x) {
   assertthat::assert_that(inherits(x, "SpatRaster"))
-  s <- terra::sources(x)
-  out <-
-    (nrow(s) == 1) &&
-    all(nchar(s$source) > 0) &&
-    all(file.exists(s$source))
+  s <- terra::sources(x)[[1]]
+  out <- all(nchar(s > 0) && all(file.exists(s)))
   if (!out) return(out)
-  out && (terra::nlyr(x) == terra::nlyr(terra::rast(s$source[[1]])))
+  out && (terra::nlyr(x) == terra::nlyr(terra::rast(s)))
 }
 
 #' Force file-backed raster
