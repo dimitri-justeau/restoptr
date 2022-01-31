@@ -47,7 +47,7 @@ jobs:
 
       - uses: actions/setup-java@v2
         with:
-          java-version: ${{ matrix.java }}
+          java-version: ${{ matrix.config.java }}
 
       - uses: r-lib/actions/setup-pandoc@v1
 
