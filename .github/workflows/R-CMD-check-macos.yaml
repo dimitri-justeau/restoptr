@@ -70,7 +70,7 @@ jobs:
           brew install proj
           brew install geos
           brew install gdal
-          R CMD javareconf
+          sudo R CMD javareconf
 
       - name: Install dependencies
         run: |
