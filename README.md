@@ -33,7 +33,7 @@ remotes::install_github("dimitri-justeau/restoptr")
 ### System dependencies
 
 The packages requires [Java (version 8 or
-higher)](https://www.java.com/). Below we provide platform-specific
+higher)](https://www.java.com/en/). Below we provide platform-specific
 instructions to install it.
 
 #### *Windows*
