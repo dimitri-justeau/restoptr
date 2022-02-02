@@ -96,6 +96,10 @@ jobs:
           sessioninfo::session_info(pkgs, include_base = TRUE)
         shell: Rscript {0}
 
+      - name: Java information
+        run: java -version && which java && echo $PATH && echo $JAVA_HOME
+        shell: bash
+
       - name: Set environmental variables for package checks
         if: matrix.config.pkgs == 'depends only'
         run: |

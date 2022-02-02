@@ -93,6 +93,10 @@ jobs:
           sessioninfo::session_info(pkgs, include_base = TRUE)
         shell: Rscript {0}
 
+      - name: Java information
+        run: java -version && which java && echo $PATH && echo $JAVA_HOME
+        shell: bash
+
       - name: Check
         run: |
           rcmdcheck::rcmdcheck(args = c("--no-manual", "--as-cran", "--no-build-vignettes"), error_on = "warning", check_dir = "check")
