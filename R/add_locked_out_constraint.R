@@ -9,8 +9,9 @@ NULL
 #'
 #' @inheritParams add_max_mesh_objective
 #'
-#' @param data [terra::rast()] Raster object containing binary values
-#'  that indicate which planning units cannot be selected for any restoration.
+#' @param data [terra::rast()] Raster object containing binary values.
+#'  that indicate which planning units cannot be selected for any restoration
+#'  (i.e., cells with a value equal one are locked out from the solution).
 #'
 #' @details
 #' Locked out constraints can be used to incorporate a wide range of

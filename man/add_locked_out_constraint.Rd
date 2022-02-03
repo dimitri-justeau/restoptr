@@ -9,8 +9,9 @@ add_locked_out_constraint(problem, data)
 \arguments{
 \item{problem}{\code{\link[=restopt_problem]{restopt_problem()}} Restoration problem object.}
 
-\item{data}{\code{\link[terra:rast]{terra::rast()}} Raster object containing binary values
-that indicate which planning units cannot be selected for any restoration.}
+\item{data}{\code{\link[terra:rast]{terra::rast()}} Raster object containing binary values.
+that indicate which planning units cannot be selected for any restoration
+(i.e., cells with a value equal one are locked out from the solution).}
 }
 \description{
 Add constraint to a restoration problem (\code{\link[=restopt_problem]{restopt_problem()}} object
