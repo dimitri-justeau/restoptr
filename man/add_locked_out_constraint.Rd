@@ -4,7 +4,7 @@
 \alias{add_locked_out_constraint}
 \title{Add locked out constraint}
 \usage{
-add_locked_out_constraint(problem, data, raster_value = 1, lock_out = FALSE)
+add_locked_out_constraint(problem, data)
 }
 \arguments{
 \item{problem}{\code{\link[=restopt_problem]{restopt_problem()}} Restoration problem object.}
