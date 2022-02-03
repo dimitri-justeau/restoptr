@@ -61,3 +61,5 @@ examples.log
 java
 *.log
 check
+/doc/
+/Meta/
