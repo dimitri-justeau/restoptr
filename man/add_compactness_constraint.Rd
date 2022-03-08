@@ -16,10 +16,48 @@ Add constraint to a restoration problem (\code{\link[=restopt_problem]{restopt_p
 to specify the compactness of a solution.
 }
 \details{
-TODO. Provide details on how diameter is calculated and what sensible values
-should be.
+The compactness constraint is defined according to the diameter of
+the smallest enclosing circle which contains the center of selected planning
+units for restoration (see https://w.wiki/4vfg). The unit of the diameter
+corresponds to planning unit width. For example, a diameter of 4 means that
+no more than 4 cells can be found in line in the solution.
 }
 \examples{
-\dontrun{TODO}
+\dontrun{
+# load data
+habitat_data <- rast(
+  system.file("extdata", "habitat.tif", package = "restoptr")
+)
+
+restorable_data <- rast(
+  system.file("extdata", "restorable.tif", package = "restoptr")
+)
+
+# plot data
+plot(rast(list(habitat_data, restorable_data)), nc = 2)
+
+# create problem
+p <- restopt_problem(
+       existing_habitat = habitat_data,
+       restorable_habitat = restorable_data
+) \%>\%
+add_restorable_constraint(
+  min_restore = 200,
+  max_restore = 300,
+  cell_area = 23
+) \%>\%
+add_compactness_constraint(4)
+
+# print problem
+print(p)
+
+# Solve problem
+s <- solve(p)
+# plot solution
+plot(
+  x = s, main = "solution",
+  col = c("#E5E5E5", "#ffffff", "#b2df8a", "#1f78b4")
+)
+}
 
 }

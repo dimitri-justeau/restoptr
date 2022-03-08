@@ -41,7 +41,7 @@ plot(rast(list(habitat_data, restorable_data)), nc = 2)
 p <- restopt_problem(
        existing_habitat = habitat_data,
        restorable_habitat = restorable_data
-) >\% add_no_objective()
+) \%>\% add_no_objective()
 
 # print problem
 print(p)

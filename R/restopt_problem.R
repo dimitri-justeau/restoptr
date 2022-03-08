@@ -113,9 +113,7 @@ restopt_problem <- function(existing_habitat, restorable_habitat) {
           existing_habitat = existing_habitat,
           restorable_habitat = restorable_habitat,
           locked_out = list(
-            data = round(restorable_habitat > 0),
-            raster_value = 0,
-            lock_out = TRUE
+            data = round(restorable_habitat <= 0)
           )
         ),
         constraints = list(),
@@ -156,7 +154,6 @@ restopt_problem <- function(existing_habitat, restorable_habitat) {
 #' )
 #' # print problem
 #' print(p)
-#' }
 #' }
 #'
 #' @export
