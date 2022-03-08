@@ -20,7 +20,7 @@ NULL
 #' @details Given the `restorable_habitat` input raster in \link{restopt_problem},
 #' this constraint ensures that the total amount of restorable habitat in
 #' selected planning units is at least `min_restore` and at most `max_restore`.
-#' The `min_proportion` parameter is a numeric in [0, 1], and correspond to the
+#' The `min_proportion` parameter is a numeric between 0 and 1, and correspond to the
 #' minimum proportion of habitat area that needs to be restored in the planning
 #' unit to consider the planning unit as restored. This proportion is relative
 #' to the area of a planning unit, the `cell_area` parameter, which must be
