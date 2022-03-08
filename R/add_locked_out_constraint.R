@@ -5,19 +5,75 @@ NULL
 #'
 #' Add constraint to a restoration problem ([restopt_problem()] object
 #' to specify that certain planning units cannot be selected
-#' for any restoration activities.
+#' for restoration activities.
 #'
 #' @inheritParams add_max_mesh_objective
 #'
-#' @param data [terra::rast()] Raster object containing binary values
-#'  that indicate which planning units cannot be selected for any restoration.
+#' @param data [terra::rast()] Raster object containing binary values.
+#'  that indicate which planning units cannot be selected for any restoration
+#'  (i.e., cells with a value equal one are locked out from the solution).
 #'
 #' @details
-#' TODO.
+#' Locked out constraints can be used to incorporate a wide range of
+#' criteria into conservation planning problems.
+#' They can be used to account for existing land-use practices,
+#' feasibility of restoration activities, and stakeholder preferences.
+#' For example, locked out constraints can be used to
+#' ensure that urban areas are not selected for restoration.
+#' Additionally, if restoration activities can only be implemented depending
+#' on certain conditions -- such as places where landscape slope is not
+#' too steep -- then locked out constraints could be used to ensure
+#' restoration activities are not prioritized for places where they
+#' could not be implemented.
+#' Furthermore, if stakeholders require solutions that do not prioritize
+#' particular places for restoration, then locked out constraints
+#' can also be used to achieve this.
 #'
 #' @examples
-#' \dontrun{TODO}
+#' \dontrun{
+#' # load data
+#' habitat_data <- rast(
+#'   system.file("extdata", "habitat.tif", package = "restoptr")
+#' )
 #'
+#' restorable_data <- rast(
+#'   system.file("extdata", "restorable.tif", package = "restoptr")
+#' )
+#'
+#' locked_out_data <- rast(
+#'  system.file("extdata", "locked-out.tif", package = "restoptr")
+#' )
+#'
+#' # plot data
+#' plot(rast(list(habitat_data, restorable_data, locked_out_data)), nc = 3)
+#'
+#' # create problem with locked out constraints
+#' p <-
+#'   restopt_problem(
+#'     existing_habitat = habitat_data,
+#'     restorable_habitat = restorable_data
+#'   ) %>%
+#'   add_max_iic_objective() %>%
+#'   add_restorable_constraint(
+#'     min_restore = 5,
+#'     max_restore = 5,
+#'     cell_area = 1
+#'   ) %>%
+#'   add_locked_out_constraint(data = locked_out_data) %>%
+#'   add_settings(time_limit = 1)
+#'
+#' # print problem
+#' print(p)
+#'
+#' # solve problem
+#' s <- solve(p)
+#'
+#' # plot solution
+#' plot(
+#'   x = s, main = "solution",
+#'   col = c("#E5E5E5", "#ffffff", "#b2df8a", "#1f78b4")
+#' )
+#' }
 #' @export
 add_locked_out_constraint <- function(problem, data) {
   # assert argument is valid
