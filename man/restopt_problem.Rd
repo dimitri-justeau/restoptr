@@ -8,24 +8,57 @@ restopt_problem(existing_habitat, restorable_habitat)
 }
 \arguments{
 \item{existing_habitat}{\code{\link[terra:rast]{terra::rast()}} Raster object containing binary
-values that indicate if each planning unit contains habitat or not.}
+values that indicate if each planning unit contains habitat or not. Cells
+with the value \code{1} must correspond to existing habitat. Cells with the value
+\code{0} must correspond to degraded (or simply non-habitat) areas. Finally,
+\code{NA} (or \code{NO_DATA}) cells are considered to be outside of the landscape.}
 
 \item{restorable_habitat}{\code{\link[terra:rast]{terra::rast()}} Raster object containing
 integer values that indicate the amount of habitat that can
-be restored within each planning unit.}
+be restored within each planning unit. Note that if the raster contains
+real values, they will be rounded to integer during the solving procedure.}
 }
 \value{
 A new restoration problem (\code{RestoptProblem}) object.
 }
 \description{
-Create a new restoration optimization problem using data that describe
-the spatial distribution of existing habitat and potential for
-restoration.
+Create a new restoration optimization problem (\code{RestoptProblem}) using data
+that describe the spatial distribution of existing habitat and potential for
+restoration. Constraints can be added to a restopt problem using
+\verb{add_****_constraint()} functions, and an optimization objective can be set
+using \verb{add_****_objective()} functions.
 }
 \details{
-TODO.
+This function creates the base restoration optimization problem
+object, that can be further extended with constraints and optimization
+objectives. Two input rasters are necessary to instantiate a restopt problem:
+the \code{existing_habitat} raster, which contains data about where are habitat
+areas (raster value \code{1}), non-habitat areas (raster value \code{0}), and areas
+that must not be considered during the solving procedure (\code{NA} or \code{NO_DATA}).
+\strong{Important:} Both input raster must have the same dimensions and the same
+spatial extent.
 }
 \examples{
-\dontrun{TODO}
+\dontrun{
+# load data
+habitat_data <- rast(
+  system.file("extdata", "habitat.tif", package = "restoptr")
+)
+
+restorable_data <- rast(
+  system.file("extdata", "restorable.tif", package = "restoptr")
+)
+
+# plot data
+plot(rast(list(habitat_data, restorable_data)), nc = 2)
+
+# create problem
+p <- restopt_problem(
+       existing_habitat = habitat_data,
+       restorable_habitat = restorable_data
+)
+# print problem
+print(p)
+}
 
 }

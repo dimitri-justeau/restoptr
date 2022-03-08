@@ -23,24 +23,56 @@ NULL
 
 #' Restoration optimization problem
 #'
-#' Create a new restoration optimization problem using data that describe
-#' the spatial distribution of existing habitat and potential for
-#' restoration.
+#' Create a new restoration optimization problem (`RestoptProblem`) using data
+#' that describe the spatial distribution of existing habitat and potential for
+#' restoration. Constraints can be added to a restopt problem using
+#' `add_****_constraint()` functions, and an optimization objective can be set
+#' using `add_****_objective()` functions.
 #'
 #' @param existing_habitat [terra::rast()] Raster object containing binary
-#' values that indicate if each planning unit contains habitat or not.
+#' values that indicate if each planning unit contains habitat or not. Cells
+#' with the value `1` must correspond to existing habitat. Cells with the value
+#' `0` must correspond to degraded (or simply non-habitat) areas. Finally,
+#' `NA` (or `NO_DATA`) cells are considered to be outside of the landscape.
 #'
 #' @param restorable_habitat [terra::rast()] Raster object containing
 #' integer values that indicate the amount of habitat that can
-#' be restored within each planning unit.
+#' be restored within each planning unit. Note that if the raster contains
+#' real values, they will be rounded to integer during the solving procedure.
 #'
 #' @return A new restoration problem (`RestoptProblem`) object.
 #'
-#' @details
-#' TODO.
+#' @details This function creates the base restoration optimization problem
+#' object, that can be further extended with constraints and optimization
+#' objectives. Two input rasters are necessary to instantiate a restopt problem:
+#' the `existing_habitat` raster, which contains data about where are habitat
+#' areas (raster value `1`), non-habitat areas (raster value `0`), and areas
+#' that must not be considered during the solving procedure (`NA` or `NO_DATA`).
+#' **Important:** Both input raster must have the same dimensions and the same
+#' spatial extent.
 #'
 #' @examples
-#' \dontrun{TODO}
+#' \dontrun{
+#' # load data
+#' habitat_data <- rast(
+#'   system.file("extdata", "habitat.tif", package = "restoptr")
+#' )
+#'
+#' restorable_data <- rast(
+#'   system.file("extdata", "restorable.tif", package = "restoptr")
+#' )
+#'
+#' # plot data
+#' plot(rast(list(habitat_data, restorable_data)), nc = 2)
+#'
+#' # create problem
+#' p <- restopt_problem(
+#'        existing_habitat = habitat_data,
+#'        restorable_habitat = restorable_data
+#' )
+#' # print problem
+#' print(p)
+#' }
 #'
 #' @export
 restopt_problem <- function(existing_habitat, restorable_habitat) {
@@ -74,22 +106,24 @@ restopt_problem <- function(existing_habitat, restorable_habitat) {
   )
 
   # return object
-  structure(
-    list(
-      data = list(
-        existing_habitat = existing_habitat,
-        restorable_habitat = restorable_habitat,
-        locked_out = list(
-          data = round(restorable_habitat > 0),
-          raster_value = 0,
-          lock_out = TRUE
-        )
+  add_no_objective(
+      structure(
+      list(
+        data = list(
+          existing_habitat = existing_habitat,
+          restorable_habitat = restorable_habitat,
+          locked_out = list(
+            data = round(restorable_habitat > 0),
+            raster_value = 0,
+            lock_out = TRUE
+          )
+        ),
+        constraints = list(),
+        objective = NULL,
+        settings = list(precision = 4L, time_limit = 0L)
       ),
-      constraints = list(),
-      objective = NULL,
-      settings = list(precision = 4L, time_limit = 0L)
-    ),
-    class = "RestoptProblem"
+      class = "RestoptProblem"
+    )
   )
 }
 
@@ -102,7 +136,28 @@ restopt_problem <- function(existing_habitat, restorable_habitat) {
 #' @param ... Arguments not used.
 #'
 #' @examples
-#' \dontrun{TODO}
+#' \dontrun{
+#' #' # load data
+#' habitat_data <- rast(
+#'   system.file("extdata", "habitat.tif", package = "restoptr")
+#' )
+#'
+#' restorable_data <- rast(
+#'   system.file("extdata", "restorable.tif", package = "restoptr")
+#' )
+#'
+#' # plot data
+#' plot(rast(list(habitat_data, restorable_data)), nc = 2)
+#'
+#' # create problem
+#' p <- restopt_problem(
+#'        existing_habitat = habitat_data,
+#'        restorable_habitat = restorable_data
+#' )
+#' # print problem
+#' print(p)
+#' }
+#' }
 #'
 #' @export
 print.RestoptProblem <- function(x, ...) {
@@ -140,14 +195,12 @@ print.RestoptProblem <- function(x, ...) {
   )
 }
 
-#' Add a constraint to a restoration optimization problem
+#' Generic function to add a constraint to a restoration optimization problem
+#' For internal use only.
 #'
 #' @inheritParams add_max_mesh_objective
 #'
 #' @param constraint `RestoptConstraint` Constraint object.
-#'
-#' @examples
-#' \dontrun{TODO}
 #'
 #' @noRd
 add_restopt_constraint <- function(problem, constraint) {
@@ -177,16 +230,12 @@ add_restopt_constraint <- function(problem, constraint) {
   problem
 }
 
-#' Add an objective to a restoration optimization problem
-#'
-#' Display information about a restoration
+#' Generic function to add an objective to a restoration optimization problem
+#' For internal use only.
 #'
 #' @inheritParams add_max_mesh_objective
 #'
 #' @param objective `RestoptObjective` Objective object.
-#'
-#' @examples
-#' \dontrun{TODO}
 #'
 #' @noRd
 add_restopt_objective <- function(problem, objective) {

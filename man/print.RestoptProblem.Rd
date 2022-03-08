@@ -14,7 +14,3 @@
 \description{
 Display information about a restoration optimization problem.
 }
-\examples{
-\dontrun{TODO}
-
-}

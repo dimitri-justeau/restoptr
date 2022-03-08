@@ -66,6 +66,7 @@ Collate:
     'add_locked_out_constraint.R'
     'add_max_iic_objective.R'
     'add_max_mesh_objective.R'
+    'add_no_objective.R'
     'add_restorable_constraint.R'
     'add_settings.R'
     'package.R'
