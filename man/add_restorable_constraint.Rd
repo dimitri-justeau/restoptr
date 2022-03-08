@@ -25,13 +25,63 @@ add_restorable_constraint(
 as restored.}
 }
 \description{
-Add constraint to a restoration problem (\code{\link[=restopt_problem]{restopt_problem()}} object
+Add constraint to a restoration problem (\code{\link[=restopt_problem]{restopt_problem()}}) object
 to specify specify the available amount of surface for restoration
 }
 \details{
-TODO
+Given the \code{restorable_habitat} input raster in \link{restopt_problem},
+this constraint ensures that the total amount of restorable habitat in
+selected planning units is at least \code{min_restore} and at most \code{max_restore}.
+The \code{min_proportion} parameter is a numeric in \link{0, 1}, and correspond to the
+minimum proportion of habitat area that needs to be restored in the planning
+unit to consider the planning unit as restored. This proportion is relative
+to the area of a planning unit, the \code{cell_area} parameter, which must be
+consistent with the values provided in the \code{restorable_habitat} input
+raster. The same applies for the \code{min_restore} and \code{max_restore} parameters.
+Note that when a solution is found, the "maximum restorable habitat" is
+displayed, this value does not correspond to the \code{max_restore} parameter,
+but to the total area that can be restored in the selected planning units.
+The \code{max_restore} parameter is actually an upper bound of the minimum habitat
+that needs to be restored to reach the \code{min_proportion} of habitat in every
+selected planning units.
 }
 \examples{
-\dontrun{TODO}
+\dontrun{
+#load data
+habitat_data <- rast(
+  system.file("extdata", "habitat.tif", package = "restoptr")
+)
+
+restorable_data <- rast(
+  system.file("extdata", "restorable.tif", package = "restoptr")
+)
+
+# plot data
+plot(rast(list(habitat_data, restorable_data)), nc = 2)
+
+# create problem
+p <- restopt_problem(
+       existing_habitat = habitat_data,
+       restorable_habitat = restorable_data
+) \%>\%
+add_restorable_constraint(
+  min_restore = 200,
+  max_restore = 300,
+  cell_area = 23,
+  min_proportion = 0.7
+) \%>\%
+add_compactness_constraint(5)
+
+# print problem
+print(p)
+
+# Solve problem
+s <- solve(p)
+# plot solution
+plot(
+  x = s, main = "solution",
+  col = c("#E5E5E5", "#ffffff", "#b2df8a", "#1f78b4")
+)
+}
 
 }

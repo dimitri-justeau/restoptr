@@ -20,6 +20,49 @@ A \code{\link[terra:rast]{terra::rast()}} object.
 Solve a restoration optimization problem to generate a solution.
 }
 \examples{
-\dontrun{TODO}
+\dontrun{
+#' # load data
+habitat_data <- rast(
+  system.file("extdata", "habitat.tif", package = "restoptr")
+)
+
+restorable_data <- rast(
+  system.file("extdata", "restorable.tif", package = "restoptr")
+)
+
+locked_out_data <- rast(
+ system.file("extdata", "locked-out.tif", package = "restoptr")
+)
+
+# plot data
+plot(rast(list(habitat_data, restorable_data, locked_out_data)), nc = 3)
+
+# create problem with locked out constraints
+p <-
+  restopt_problem(
+    existing_habitat = habitat_data,
+    restorable_habitat = restorable_data
+  ) \%>\%
+  add_max_mesh_objective() \%>\%
+  add_restorable_constraint(
+    min_restore = 5,
+    max_restore = 5,
+    cell_area = 1
+  ) \%>\%
+  add_locked_out_constraint(data = locked_out_data) \%>\%
+  add_settings(time_limit = 1)
+
+# print problem
+print(p)
+
+# solve problem
+s <- solve(p)
+
+# plot solution
+plot(
+  x = s, main = "solution",
+  col = c("#E5E5E5", "#ffffff", "#b2df8a", "#1f78b4")
+)
+}
 
 }
