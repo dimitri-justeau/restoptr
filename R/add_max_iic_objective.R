@@ -3,18 +3,69 @@ NULL
 
 #' Add an objective to maximize the integral index of connectivity
 #'
-#' Specify that a restoration problem ([restopt_problem()] should
+#' Specify that a restoration problem ([restopt_problem()]) should
 #' the integral index of connectivity (IIC).
 #'
 #' @inheritParams add_max_mesh_objective
 #'
-#' @details
-#' TODO. Provide details on what IIC is.
+#' @details The integral index of connectivity is a graph-based inter-patch
+#' connectivity index based on a binary connection model (Pascual-Hortal &
+#' Saura, 2006). Its maximization in the context of restoration favours
+#' restoring the structural connectivity between large patches.
 #'
 #' @return An updated restoration problem ([restopt_problem()] object.
 #'
+#' @references
+#' Pascual-Hortal, L., & Saura, S. (2006).
+#' Comparison and development of new graph-based landscape connectivity indices:
+#' Towards the priorization of habitat patches and corridors for conservation.
+#' Landscape Ecology, 21(7), 959‑967. https://doi.org/10.1007/s10980-006-0013-z
+#'
 #' @examples
-#' \dontrun{TODO}
+#' \dontrun{
+#' #' # load data
+#' habitat_data <- rast(
+#'   system.file("extdata", "habitat.tif", package = "restoptr")
+#' )
+#'
+#' restorable_data <- rast(
+#'   system.file("extdata", "restorable.tif", package = "restoptr")
+#' )
+#'
+#' locked_out_data <- rast(
+#'  system.file("extdata", "locked-out.tif", package = "restoptr")
+#' )
+#'
+#' # plot data
+#' plot(rast(list(habitat_data, restorable_data, locked_out_data)), nc = 3)
+#'
+#' # create problem with locked out constraints
+#' p <-
+#'   restopt_problem(
+#'     existing_habitat = habitat_data,
+#'     restorable_habitat = restorable_data
+#'   ) %>%
+#'   add_max_iic_objective() %>%
+#'   add_restorable_constraint(
+#'     min_restore = 5,
+#'     max_restore = 5,
+#'     cell_area = 1
+#'   ) %>%
+#'   add_locked_out_constraint(data = locked_out_data) %>%
+#'   add_settings(time_limit = 1)
+#'
+#' # print problem
+#' print(p)
+#'
+#' # solve problem
+#' s <- solve(p)
+#'
+#' # plot solution
+#' plot(
+#'   x = s, main = "solution",
+#'   col = c("#E5E5E5", "#ffffff", "#b2df8a", "#1f78b4")
+#' )
+#' }
 #'
 #' @export
 add_max_iic_objective <- function(problem) {
