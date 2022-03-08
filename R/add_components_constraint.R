@@ -3,7 +3,7 @@ NULL
 
 #' Add constraint to limit the number of connected components
 #'
-#' Add constraint to a restoration problem ([restopt_problem()] object
+#' Add constraint to a restoration problem ([restopt_problem()]) object
 #' to specify the number of connected components that can be
 #' present within a solution.
 #'
@@ -13,12 +13,60 @@ NULL
 #'
 #' @param max_nb_components `integer` Maximum number of connected components.
 #'
-#' @details
-#' TODO. Provide details on what components are and what sensible values
-#' should be.
+#' @details A connected component is a spatially continuous set of planning
+#' units. This constraints applies on the set of planning units that are
+#' selected for restoration, and allows to specify a minimum and maximum
+#' number of connected components. In practice, this constraint is useful
+#' to ensure the feasibility of a restoration project, and to integrate
+#' economies of scale. Less continuous restoration areas (i.e. less connected
+#' components) are usually associated with lower costs, because it ensures that
+#' restoration sites are not too far away from each other (e.g. lower travel
+#' costs between sites, less areas to monitor, etc.). On the other hand,
+#' it can be useful to enforce several disconnected restoration areas to
+#' ensure that hazards (e.g. fire) do not strike all planning units at the
+#' same time.
+#' Also see \link{add_compactness_constraint}.
+#'
+#' @seealso
+#' \link{add_compactness_constraint}
 #'
 #' @examples
-#' \dontrun{TODO}
+#' \dontrun{
+#' # load data
+#' habitat_data <- rast(
+#'   system.file("extdata", "habitat.tif", package = "restoptr")
+#' )
+#'
+#' restorable_data <- rast(
+#'   system.file("extdata", "restorable.tif", package = "restoptr")
+#' )
+#'
+#' # plot data
+#' plot(rast(list(habitat_data, restorable_data)), nc = 2)
+#'
+#' # create problem
+#' p <- restopt_problem(
+#'        existing_habitat = habitat_data,
+#'        restorable_habitat = restorable_data
+#' ) %>%
+#' add_restorable_constraint(
+#'   min_restore = 10,
+#'   max_restore = 100,
+#'   cell_area = 23
+#' ) %>%
+#' add_components_constraint(1, 1)
+#'
+#' # print problem
+#' print(p)
+#'
+#' # Solve problem
+#' s <- solve(p)
+#' # plot solution
+#' plot(
+#'   x = s, main = "solution",
+#'   col = c("#E5E5E5", "#ffffff", "#b2df8a", "#1f78b4")
+#' )
+#' }
 #'
 #' @export
 add_components_constraint <- function(problem,

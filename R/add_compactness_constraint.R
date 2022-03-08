@@ -14,7 +14,16 @@ NULL
 #' the smallest enclosing circle which contains the center of selected planning
 #' units for restoration (see https://w.wiki/4vfg). The unit of the diameter
 #' corresponds to planning unit width. For example, a diameter of 4 means that
-#' no more than 4 cells can be found in line in the solution.
+#' no more than 4 cells can be found in line in the solution. In practice,
+#' this constraint is useful to ensure the feasibility of a restoration project,
+#' and to integrate economies of scale. Compact restoration areas are usually
+#' associated with lower costs and easier management, because it ensures that
+#' restoration sites are not too far away from each other (e.g. lower travel
+#' costs between sites, less areas to monitor, etc.).
+#'#' Also see \link{add_components_constraint}.
+#'
+#' @seealso
+#' \link{add_components_constraint}
 #'
 #' @examples
 #' \dontrun{
