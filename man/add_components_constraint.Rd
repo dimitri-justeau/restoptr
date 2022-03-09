@@ -67,7 +67,7 @@ s <- solve(p)
 # plot solution
 plot(
   x = s, main = "solution",
-  col = c("#E5E5E5", "#ffffff", "#b2df8a", "#1f78b4")
+  col = c("#fff1d6", "#b2df8a", "#1f78b4")
 )
 }
 

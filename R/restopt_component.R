@@ -19,10 +19,7 @@ NULL
 #' objectives should have a `post` function that contains the following
 #' parameters: `jproblem`, `precision`, `time_limit`, and `output_path`.
 #'
-#' @return An `RestoptComponent` object.
-#'
-#' @examples
-#' \dontrun{TODO}
+#' @return A `RestoptComponent` object.
 #'
 #' @noRd
 restopt_component <- function(name, class, post) {

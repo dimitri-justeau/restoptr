@@ -5,6 +5,20 @@ NULL
 #'
 #' Solve a restoration optimization problem to generate a solution.
 #'
+#' @details This function relies on the Choco-solver (https://choco-solver.org/)
+#' to solve a restoration optimization problem. If the solver finds a solution,
+#' it outputs a raster with 4 values:
+#'   - NA: correspond to the NA (or NO_DATA) values in the input habitat raster.
+#'   - 0:  corresponds to non-habitat areas.
+#'     1:  corresponds to habitat areas.
+#'     2:  corresponds to selected planning units for restoration.
+#' If the solve function return an no-solution error, it is either because the
+#' solver could not find a solution within the time limit that was set
+#' (see \link{add_settings}), or because the solver has detected that this is
+#' not possible to satisfy the constraints (the constraints are contradictory).
+#' In the first case, you can try to increase the time limit.
+#' In the second case, you should modify your targets.
+#'
 #' @param a [restopt_problem()] Restoration problem object.
 #'
 #' @param b Argument not used.
@@ -55,7 +69,7 @@ NULL
 #' # plot solution
 #' plot(
 #'   x = s, main = "solution",
-#'   col = c("#E5E5E5", "#ffffff", "#b2df8a", "#1f78b4")
+#'   col = c("#fff1d6", "#b2df8a", "#1f78b4")
 #' )
 #' }
 #'
@@ -110,6 +124,18 @@ solve.RestoptProblem <- function(a, b, ...) {
   # throw error if failed
   if (inherits(result, "try-error")) {
     stop(paste("failed to complete optimization\n\t", result))
+  }
+
+  # Indicate if the solver did not find solution
+  if (result == FALSE) {
+    status <- jproblem$getSearchState()
+    if (status == "TERMINATED") {
+      stop(paste("There is no solution, please adjust your targets\n"))
+    }
+    if (status == "STOPPED") {
+      stop(paste("The research was stopped before a solution was found,",
+                 " consider increasing the time limit\n"))
+    }
   }
 
   # import results
