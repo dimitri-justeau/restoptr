@@ -37,7 +37,7 @@ if (!require(remotes)) install.packages("remotes")
 remotes::install_github("dimitri-justeau/restoptr")
 ```
 
-Or with `devtools`:
+Or with *devtools*:
 
 ``` r
 if (!require(devtools)) install.packages("devtools")
@@ -59,6 +59,10 @@ select the tab for the Windows operating system, and then download the
 x64 Installer file. After downloading the file, please run installer to
 install Java on your system. You will also need to ensure that the
 `PATH` environmental variable if configured so that *R* can access Java.
+*restoptr* relies on *rJava* for the communication between *R* and
+*Java*. If you have any trouble during the installation of *restopt* due
+to *rJava*, please refer to *rJava*’s documentation:
+<https://rforge.net/rJava/index.html>.
 
 #### *Ubuntu*
 
@@ -96,7 +100,7 @@ environmental variable if configured so that *R* can access Java.
 
 ## Citation
 
-Please cite `restoptr` when using it in publications.
+Please cite *restoptr* when using it in publications.
 
 > Justeau-Allaire, D., Vieilledent, G., Rinck, N., Vismara, P., Lorca,
 > X., & Birnbaum, P. (2021). Constrained optimization of landscape
@@ -109,7 +113,7 @@ citation for ressource the R package soon.
 
 ## Usage
 
-The first thing to do to use `restoptr` is to load the package:
+The first thing to do to use *restoptr* is to load the package:
 
 ``` r
 library(restoptr)
@@ -129,8 +133,8 @@ same dimensions and the same spatial extent.
     can be restored for each planning unit (i.e. raster cells that are
     available for restoration, i.e. non-habitat).
 
-Example rasters, from the use case presented [this
-study](in%20https://besjournals.onlinelibrary.wiley.com/doi/full/10.1111/1365-2664.13803)
+Example rasters, from the use case presented in [this
+study](https://besjournals.onlinelibrary.wiley.com/doi/full/10.1111/1365-2664.13803)
 are included in the package:
 
 ``` r
@@ -143,7 +147,7 @@ restorable_data <- rast(
 plot(rast(list(habitat_data, restorable_data)), nc = 2)
 ```
 
-<img src="man/figures/README-unnamed-chunk-8-1.png" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-8-1.png" width="100%" style="display: block; margin: auto;" />
 
 To instantiate a base restoration optimization problem from two input
 rasters, use the `restopt_problem()` function:
@@ -207,7 +211,7 @@ plot(
 )
 ```
 
-<img src="man/figures/README-unnamed-chunk-14-1.png" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-14-1.png" width="100%" style="display: block; margin: auto;" />
 
 You can retrieve the attributes of the solution using the `attributes()`
 function:
@@ -217,7 +221,7 @@ attributes(s)
 ```
 
     ## $ptr
-    ## C++ object <0x55ad291651e0> of class 'SpatRaster' <0x55ad21927db0>
+    ## C++ object <0x5643c29d6c60> of class 'SpatRaster' <0x5643bd52b4e0>
     ## 
     ## $class
     ## [1] "SpatRaster"
@@ -228,11 +232,11 @@ attributes(s)
     ##   Minimum.area.to.restore Maximum.restorable.area no..planning.units
     ## 1                     220                     219                 19
     ##   initial.MESH.value optimal.MESH.value solving.time..ms.
-    ## 1           1035.435           1062.802              6117
+    ## 1           1035.435           1062.802              3107
 
 ## Getting help
 
-If you have any questions about `restoptr`, improvement suggestions, or
+If you have any questions about *restoptr*, improvement suggestions, or
 if you detect a bug, please [open an
 issue](https://github.com/dimitri-justeau/restoptr/issues/new/choose) in
 this GitHub repository.

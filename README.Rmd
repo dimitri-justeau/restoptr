@@ -39,7 +39,7 @@ if (!require(remotes)) install.packages("remotes")
 remotes::install_github("dimitri-justeau/restoptr")
 ```
 
-Or with `devtools`:
+Or with _devtools_:
 
 ```{r, eval = FALSE}
 if (!require(devtools)) install.packages("devtools")
@@ -53,7 +53,7 @@ The packages requires a Java Runtime Environment (JRE), version 8 or higher. Bel
 
 #### _Windows_
 
-Please install the latest Java Development Kit from [Oracle](www.oracle.com) website. To achieve this, navigate to the [downloads section of the website](https://www.oracle.com/java/technologies/javase-downloads.html), select the tab for the Windows operating system, and then download the x64 Installer file. After downloading the file, please run installer to install Java on your system. You will also need to ensure that the `PATH` environmental variable if configured so that _R_ can access Java.
+Please install the latest Java Development Kit from [Oracle](www.oracle.com) website. To achieve this, navigate to the [downloads section of the website](https://www.oracle.com/java/technologies/javase-downloads.html), select the tab for the Windows operating system, and then download the x64 Installer file. After downloading the file, please run installer to install Java on your system. You will also need to ensure that the `PATH` environmental variable if configured so that _R_ can access Java. _restoptr_ relies on _rJava_ for the communication between _R_ and _Java_. If you have any trouble during the installation of _restopt_ due to _rJava_, please refer to _rJava_'s documentation: https://rforge.net/rJava/index.html.
 
 #### _Ubuntu_
 
@@ -81,7 +81,7 @@ Please note that you might also need to ensure that the `PATH` environmental var
 
 ## Citation
 
-Please cite `restoptr` when using it in publications.
+Please cite _restoptr_ when using it in publications.
 
 > Justeau-Allaire, D., Vieilledent, G., Rinck, N., Vismara, P., Lorca, X., & Birnbaum, P. (2021). Constrained optimization of landscape indices in conservation planning to support ecological restoration in New Caledonia. Journal of Applied Ecology, 58(4), 744‑754. https://doi.org/10.1111/1365-2664.13803
 
@@ -89,7 +89,7 @@ This article describes the methodology. We will provide a specific citation for 
 
 ## Usage
 
-The first thing to do to use `restoptr` is to load the package:
+The first thing to do to use _restoptr_ is to load the package:
 
 ```{r}
 library(restoptr)
@@ -109,10 +109,10 @@ spatial extent.
   restored for each planning unit (i.e. raster cells that are available for 
   restoration, i.e. non-habitat).
   
-Example rasters, from the use case presented [this study](in https://besjournals.onlinelibrary.wiley.com/doi/full/10.1111/1365-2664.13803)
+Example rasters, from the use case presented in [this study](https://besjournals.onlinelibrary.wiley.com/doi/full/10.1111/1365-2664.13803)
 are included in the package:
 
-```{r}
+```{r, out.width="100%", fig.width = 10}
 habitat_data <- rast(
   system.file("extdata", "habitat.tif", package = "restoptr")
 )
@@ -173,7 +173,7 @@ larger patches.
 Finally, we use the `solve()` function to identify the optimal restoration area,
 according to the constraints and the optimization objective.
 
-```{r}
+```{r, out.width="100%", fig.width = 10}
 s <- solve(p)
 plot(
   x = s, main = "solution",
@@ -189,4 +189,4 @@ attributes(s)
 
 ## Getting help
 
-If you have any questions about `restoptr`, improvement suggestions, or if you detect a bug, please [open an issue](https://github.com/dimitri-justeau/restoptr/issues/new/choose) in this GitHub repository.
+If you have any questions about _restoptr_, improvement suggestions, or if you detect a bug, please [open an issue](https://github.com/dimitri-justeau/restoptr/issues/new/choose) in this GitHub repository.
