@@ -207,7 +207,7 @@ objective.
 s <- solve(p)
 plot(
   x = s, main = "solution",
-  col = c("#fff1d6", "#b2df8a", "#1f78b4")
+  col = c("#E5E5E5", "#fff1d6", "#b2df8a", "#1f78b4")
 )
 ```
 
@@ -221,7 +221,7 @@ attributes(s)
 ```
 
     ## $ptr
-    ## C++ object <0x5643c29d6c60> of class 'SpatRaster' <0x5643bd52b4e0>
+    ## C++ object <0x55828ccb6d70> of class 'SpatRaster' <0x5582872c8f30>
     ## 
     ## $class
     ## [1] "SpatRaster"
@@ -232,7 +232,7 @@ attributes(s)
     ##   Minimum.area.to.restore Maximum.restorable.area no..planning.units
     ## 1                     220                     219                 19
     ##   initial.MESH.value optimal.MESH.value solving.time..ms.
-    ## 1           1035.435           1062.802              3107
+    ## 1           1035.435           1062.802              3098
 
 ## Getting help
 

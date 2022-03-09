@@ -7,9 +7,10 @@ NULL
 #'
 #' @details This function relies on the Choco-solver (https://choco-solver.org/)
 #' to solve a restoration optimization problem. If the solver finds a solution,
-#' it outputs a raster with 4 values:
-#'   - NA: correspond to the NA (or NO_DATA) values in the input habitat raster.
-#'   - 0:  corresponds to non-habitat areas.
+#' it outputs a raster with 5 possible values:
+#'   - NA: corresponds to the NA (or NO_DATA) values in the input habitat raster.
+#'     -1: corresponds to non-habitat areas that were locked out.
+#'   - 0:  corresponds to non-habitat areas that were available for selection.
 #'     1:  corresponds to habitat areas.
 #'     2:  corresponds to selected planning units for restoration.
 #' If the solve function return an no-solution error, it is either because the
