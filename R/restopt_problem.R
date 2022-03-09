@@ -45,9 +45,11 @@ NULL
 #' @details This function creates the base restoration optimization problem
 #' object, that can be further extended with constraints and optimization
 #' objectives. Two input rasters are necessary to instantiate a restopt problem:
-#' the `existing_habitat` raster, which contains data about where are habitat
-#' areas (raster value `1`), non-habitat areas (raster value `0`), and areas
-#' that must not be considered during the solving procedure (`NA` or `NO_DATA`).
+#' the `existing_habitat` raster and the `restorable_habitat` raster. The first
+#' which contains data about where are habitat areas (raster value `1`),
+#' non-habitat areas (raster value `0`), and areas that must not be considered
+#' during the solving procedure (`NA` or `NO_DATA`). The second raster indicates,
+#' for each non-habitat planning unit, the amount of habitat that can be restored.
 #' **Important:** Both input raster must have the same dimensions and the same
 #' spatial extent.
 #'
@@ -243,7 +245,7 @@ add_restopt_objective <- function(problem, objective) {
   )
 
   # throw warning if objective specified
-  if (!is.null(problem$objective)) {
+  if (!is.null(problem$objective) && !inherits(problem$objective, "NoObjective")) {
     warning(
       "overwriting previously defined objective.",
       call. = FALSE, immediate. = TRUE

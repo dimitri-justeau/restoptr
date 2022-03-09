@@ -9,14 +9,21 @@
 [![R-CMD-check-MacOS](https://img.shields.io/github/workflow/status/dimitri-justeau/restoptr/Mac%20OSX/master.svg?label=MacOS)](https://github.com/dimitri-justeau/restoptr/actions)
 [![Coverage
 Status](https://codecov.io/github/dimitri-justeau/restoptr/coverage.svg?branch=master)](https://app.codecov.io/gh/dimitri-justeau/restoptr)
-[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/restoptr)](https://github.com/dimitri-justeau/restoptr)
+[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/restoptr)](https://github.com/dimitri-justeau/restoptr)
 
 ## Overview
 
 Interface to the `restopt` ecological restoration planning software,
 which is specifically designed to identify connected, accessible, and
 compact areas for ecological restoration, with an emphasis on reducing
-habitat fragmentation and increasing habitat connectivity.
+habitat fragmentation and increasing habitat connectivity. This software
+reproduces the methodology described in [this
+article](https://besjournals.onlinelibrary.wiley.com/doi/full/10.1111/1365-2664.13803),
+and is based on Constraint Programming (CP), which is a constrained
+optimization solving technique based on automated reasoning.
+Specifically, our model was implemented using
+[Choco-solver](https://choco-solver.org/), an open-source and
+state-of-the-art Java CP solver.
 
 ## Installation
 
@@ -30,10 +37,17 @@ if (!require(remotes)) install.packages("remotes")
 remotes::install_github("dimitri-justeau/restoptr")
 ```
 
+Or with `devtools`:
+
+``` r
+if (!require(devtools)) install.packages("devtools")
+devtools::install_github("dimitri-justeau/rflsgen")
+```
+
 ### System dependencies
 
-The packages requires Java (version 8 or higher). Below we provide
-platform-specific instructions to install it.
+The packages requires a Java Runtime Environment (JRE), version 8 or
+higher. Below we provide platform-specific instructions to install it.
 
 #### *Windows*
 
@@ -56,9 +70,16 @@ following system commands.
 sudo apt-get install default-jdk
 ```
 
+If you want to install a specific JRE version, please follow
+instructions from
+[Oracle](https://www.oracle.com/java/technologies/javase-downloads.html),
+or [OpenJDK](https://openjdk.java.net/install/).
+
 #### *Linux*
 
-For Unix-alikes, `javac` (&gt;= 8) is required.
+Please follow instructions from
+[Oracle](https://www.oracle.com/java/technologies/javase-downloads.html),
+or [OpenJDK](https://openjdk.java.net/install/).
 
 #### *MacOS*
 
@@ -75,41 +96,143 @@ environmental variable if configured so that *R* can access Java.
 
 ## Citation
 
-TODO.
+Please cite `restoptr` when using it in publications.
+
+> Justeau-Allaire, D., Vieilledent, G., Rinck, N., Vismara, P., Lorca,
+> X., & Birnbaum, P. (2021). Constrained optimization of landscape
+> indices in conservation planning to support ecological restoration in
+> New Caledonia. Journal of Applied Ecology, 58(4), 744‑754.
+> <https://doi.org/10.1111/1365-2664.13803>
+
+This article describes the methodology. We will provide a specific
+citation for ressource the R package soon.
 
 ## Usage
 
-To reproduce the example from
-<https://github.com/dimitri-justeau/restopt>
-
-### Example : maximize MESH
+The first thing to do to use `restoptr` is to load the package:
 
 ``` r
 library(restoptr)
-habitat <- terra::rast("./inst/extdata/habitat.tif")
-restorable <- terra::rast("./inst/extdata/restorable.tif")
-accessible <- terra::rast("./inst/extdata/accessible.tif")
-problem <- RestoptProblem(habitat=habitat, restorable=restorable, accessible=accessible)
-problem <- postNbComponentsConstraint(problem, 1, 1)
-problem <- postRestorableConstraint(problem, 90, 110, 23, 0.7)
-problem <- postCompactnessConstraint(problem, 6)
-result <- maximizeMESH(problem, 3)
 ```
 
-### Example : maximize IIC
+We will now create and solve a restoration optimization problem. Two
+input rasters are necessary, the *existing_habitat* raster and the
+*restorable_habitat* raster. **Important**: Both raster mus have the
+same dimensions and the same spatial extent.
+
+-   The *existing_habitat* raster indicates the habitat area (raster
+    value 1), the non-habitat area (raster value 0), and area which is
+    not part of the landscape (raster value NA, or NODATA, e.g. ocean if
+    the landscape is terrestrial).
+
+-   The *restorable_habitat* raster indicates the amount of habitat that
+    can be restored for each planning unit (i.e. raster cells that are
+    available for restoration, i.e. non-habitat).
+
+Example rasters, from the use case presented [this
+study](in%20https://besjournals.onlinelibrary.wiley.com/doi/full/10.1111/1365-2664.13803)
+are included in the package:
 
 ``` r
-library(restoptr)
-habitat <- terra::rast("./inst/extdata/habitat.tif")
-restorable <- terra::rast("./inst/extdata/restorable.tif")
-accessible <- terra::rast("./inst/extdata/accessible.tif")
-problem <- RestoptProblem(habitat=habitat, restorable=restorable, accessible=accessible)
-problem <- postNbComponentsConstraint(problem, 1, 1)
-problem <- postRestorableConstraint(problem, 90, 110, 23, 0.7)
-problem <- postCompactnessConstraint(problem, 6)
-result <- maximizeIIC(problem, 3)
+habitat_data <- rast(
+  system.file("extdata", "habitat.tif", package = "restoptr")
+)
+restorable_data <- rast(
+  system.file("extdata", "restorable.tif", package = "restoptr")
+)
+plot(rast(list(habitat_data, restorable_data)), nc = 2)
 ```
+
+<img src="man/figures/README-unnamed-chunk-8-1.png" style="display: block; margin: auto;" />
+
+To instantiate a base restoration optimization problem from two input
+rasters, use the `restopt_problem()` function:
+
+``` r
+p <- restopt_problem(existing_habitat = habitat_data, 
+                     restorable_habitat = restorable_data) 
+```
+
+Then, we can add constraints to this base problem. For instance, lets
+add a locked-out constraint, to restrict the number of planning units
+that can be selected for restoration. Such a constraint can be used to
+account for existing land-use practices, feasibility of restoration
+activities, and stakeholder preferences.
+
+``` r
+locked_out_data <- rast(
+ system.file("extdata", "locked-out.tif", package = "restoptr")
+)
+p <- p %>% add_locked_out_constraint(data = locked_out_data)
+```
+
+We can also add a constraint on the amount of restored area that is
+allowed by the project:
+
+``` r
+p <- p %>% add_restorable_constraint(90, 220, 23)
+```
+
+And finally a compactness constraint, which limits the spatial extent of
+the selected restoration area:
+
+``` r
+p <- p %>% add_compactness_constraint(5)
+```
+
+Once we have added constraints to the problem, we need to define an
+optimization objective. For example, lets configure `restopr` to
+identify, under the previous constraints, which restoration areas
+maximises the effective mesh size (MESH).
+
+``` r
+p <- p %>% add_max_mesh_objective()
+```
+
+*Note* The effective mesh size is a measure of landscape fragmentation
+based on the probability that two randomly chosen points are located in
+the same patch [Jaeger, 2000](https://doi.org/10.1023/A:1008129329289).
+Maximizing it in the context of restoration favours fewer and larger
+patches.
+
+Finally, we use the `solve()` function to identify the optimal
+restoration area, according to the constraints and the optimization
+objective.
+
+``` r
+s <- solve(p)
+plot(
+  x = s, main = "solution",
+  col = c("#fff1d6", "#b2df8a", "#1f78b4")
+)
+```
+
+<img src="man/figures/README-unnamed-chunk-14-1.png" style="display: block; margin: auto;" />
+
+You can retrieve the attributes of the solution using the `attributes()`
+function:
+
+``` r
+attributes(s)
+```
+
+    ## $ptr
+    ## C++ object <0x55ad291651e0> of class 'SpatRaster' <0x55ad21927db0>
+    ## 
+    ## $class
+    ## [1] "SpatRaster"
+    ## attr(,"package")
+    ## [1] "terra"
+    ## 
+    ## $metadata
+    ##   Minimum.area.to.restore Maximum.restorable.area no..planning.units
+    ## 1                     220                     219                 19
+    ##   initial.MESH.value optimal.MESH.value solving.time..ms.
+    ## 1           1035.435           1062.802              6117
 
 ## Getting help
 
-TODO.
+If you have any questions about `restoptr`, improvement suggestions, or
+if you detect a bug, please [open an
+issue](https://github.com/dimitri-justeau/restoptr/issues/new/choose) in
+this GitHub repository.

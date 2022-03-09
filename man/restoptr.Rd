@@ -3,7 +3,7 @@
 \docType{package}
 \name{restoptr}
 \alias{restoptr}
-\title{restopt: Interface to the 'Restopt' Ecological Restoration Planning Software}
+\title{restoptr: Interface to the 'Restopt' Ecological Restoration Planning Software}
 \description{
 Interface to the \code{restopt} ecological restoration planning software,
 which is specifically designed to identify connected, accessible, and

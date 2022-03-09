@@ -1,7 +1,7 @@
 #' @include internal.R
 NULL
 
-#' restopt: Interface to the 'Restopt' Ecological Restoration Planning Software
+#' restoptr: Interface to the 'Restopt' Ecological Restoration Planning Software
 #'
 #' Interface to the `restopt` ecological restoration planning software,
 #' which is specifically designed to identify connected, accessible, and

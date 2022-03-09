@@ -32,9 +32,11 @@ using \verb{add_****_objective()} functions.
 This function creates the base restoration optimization problem
 object, that can be further extended with constraints and optimization
 objectives. Two input rasters are necessary to instantiate a restopt problem:
-the \code{existing_habitat} raster, which contains data about where are habitat
-areas (raster value \code{1}), non-habitat areas (raster value \code{0}), and areas
-that must not be considered during the solving procedure (\code{NA} or \code{NO_DATA}).
+the \code{existing_habitat} raster and the \code{restorable_habitat} raster. The first
+which contains data about where are habitat areas (raster value \code{1}),
+non-habitat areas (raster value \code{0}), and areas that must not be considered
+during the solving procedure (\code{NA} or \code{NO_DATA}). The second raster indicates,
+for each non-habitat planning unit, the amount of habitat that can be restored.
 \strong{Important:} Both input raster must have the same dimensions and the same
 spatial extent.
 }
