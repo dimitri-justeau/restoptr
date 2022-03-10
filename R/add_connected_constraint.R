@@ -19,11 +19,11 @@ NULL
 #' sites are not too far away from each other (e.g. lower travel
 #' costs between sites, less areas to monitor, etc.). **Note** This constraint
 #' relies on the add_components_constraint(), with parameters set to enforce
-#' exactly one connected component. Also see \link{add_coomponents_constraint}
+#' exactly one connected component. Also see \link{add_components_constraint}
 #' and \link{add_compactness_constraint}.
 #'
 #' @seealso
-#' \link{add_compactness_constraint}, \link{add_coomponents_constraint}
+#' \link{add_compactness_constraint}, \link{add_components_constraint}
 #'
 #' @examples
 #' \dontrun{
