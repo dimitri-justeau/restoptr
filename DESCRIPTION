@@ -59,7 +59,8 @@ Suggests:
     knitr (>= 1.2.0),
     roxygen2 (>= 6.1.1),
     rmarkdown (>= 1.10),
-    landscapemetrics (>= 1.5.4)
+    landscapemetrics (>= 1.5.4),
+    raster (>= 3.5)
 Roxygen: list(markdown = TRUE)
 Collate:
     'internal.R'
