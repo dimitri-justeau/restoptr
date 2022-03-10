@@ -26,7 +26,7 @@ devtools::load_all()
 
 ## Overview
 
-Interface to the `restopt` ecological restoration planning software, which is specifically designed to identify connected, accessible, and compact areas for ecological restoration, with an emphasis on reducing habitat fragmentation and increasing habitat connectivity. This software reproduces the methodology described in [this article](https://besjournals.onlinelibrary.wiley.com/doi/full/10.1111/1365-2664.13803), and is based on Constraint Programming (CP), which is a constrained optimization solving technique based on automated reasoning. Specifically, our model was implemented using [Choco-solver](https://choco-solver.org/), an open-source and state-of-the-art Java CP solver.
+Interface to the `restopt` ecological restoration planning software, which is specifically designed to identify connected, accessible, and compact areas for ecological restoration, with an emphasis on reducing habitat fragmentation and increasing habitat connectivity. This software reproduces the methodology described in [this article](https://www.researchgate.net/publication/346597935_Constrained_optimization_of_landscape_indices_in_conservation_planning_to_support_ecological_restoration_in_New_Caledonia), and is based on Constraint Programming (CP), which is a constrained optimization solving technique based on automated reasoning. Specifically, our model was implemented using [Choco-solver](https://choco-solver.org/), an open-source and state-of-the-art Java CP solver.
 
 ## Installation
 
@@ -83,7 +83,7 @@ Please note that you might also need to ensure that the `PATH` environmental var
 
 Please cite _restoptr_ when using it in publications.
 
-> Justeau-Allaire, D., Vieilledent, G., Rinck, N., Vismara, P., Lorca, X., & Birnbaum, P. (2021). Constrained optimization of landscape indices in conservation planning to support ecological restoration in New Caledonia. Journal of Applied Ecology, 58(4), 744‑754. https://doi.org/10.1111/1365-2664.13803
+> Justeau-Allaire, D., Vieilledent, G., Rinck, N., Vismara, P., Lorca, X., & Birnbaum, P. (2021). Constrained optimization of landscape indices in conservation planning to support ecological restoration in New Caledonia. Journal of Applied Ecology, 58(4), 744‑754.
 
 This article describes the methodology. We will provide a specific citation for ressource the R package soon.
 
@@ -109,7 +109,7 @@ spatial extent.
   restored for each planning unit (i.e. raster cells that are available for 
   restoration, i.e. non-habitat).
   
-Example rasters, from the use case presented in [this study](https://besjournals.onlinelibrary.wiley.com/doi/full/10.1111/1365-2664.13803)
+Example rasters, from the use case presented in [this study](https://www.researchgate.net/publication/346597935_Constrained_optimization_of_landscape_indices_in_conservation_planning_to_support_ecological_restoration_in_New_Caledonia)
 are included in the package:
 
 ```{r, out.width="100%", fig.width = 10}

@@ -18,7 +18,7 @@ which is specifically designed to identify connected, accessible, and
 compact areas for ecological restoration, with an emphasis on reducing
 habitat fragmentation and increasing habitat connectivity. This software
 reproduces the methodology described in [this
-article](https://besjournals.onlinelibrary.wiley.com/doi/full/10.1111/1365-2664.13803),
+article](https://www.researchgate.net/publication/346597935_Constrained_optimization_of_landscape_indices_in_conservation_planning_to_support_ecological_restoration_in_New_Caledonia),
 and is based on Constraint Programming (CP), which is a constrained
 optimization solving technique based on automated reasoning.
 Specifically, our model was implemented using
@@ -106,7 +106,6 @@ Please cite *restoptr* when using it in publications.
 > X., & Birnbaum, P. (2021). Constrained optimization of landscape
 > indices in conservation planning to support ecological restoration in
 > New Caledonia. Journal of Applied Ecology, 58(4), 744‑754.
-> <https://doi.org/10.1111/1365-2664.13803>
 
 This article describes the methodology. We will provide a specific
 citation for ressource the R package soon.
@@ -134,7 +133,7 @@ same dimensions and the same spatial extent.
     available for restoration, i.e. non-habitat).
 
 Example rasters, from the use case presented in [this
-study](https://besjournals.onlinelibrary.wiley.com/doi/full/10.1111/1365-2664.13803)
+study](https://www.researchgate.net/publication/346597935_Constrained_optimization_of_landscape_indices_in_conservation_planning_to_support_ecological_restoration_in_New_Caledonia)
 are included in the package:
 
 ``` r
@@ -221,7 +220,7 @@ attributes(s)
 ```
 
     ## $ptr
-    ## C++ object <0x55828ccb6d70> of class 'SpatRaster' <0x5582872c8f30>
+    ## C++ object <0x55ea0a465a30> of class 'SpatRaster' <0x55ea02b1a490>
     ## 
     ## $class
     ## [1] "SpatRaster"
@@ -232,7 +231,7 @@ attributes(s)
     ##   Minimum.area.to.restore Maximum.restorable.area no..planning.units
     ## 1                     220                     219                 19
     ##   initial.MESH.value optimal.MESH.value solving.time..ms.
-    ## 1           1035.435           1062.802              3098
+    ## 1           1035.435           1062.802              1381
 
 ## Getting help
 
