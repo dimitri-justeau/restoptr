@@ -24,7 +24,7 @@ units. This constraints applies on the set of planning units that are
 selected for restoration, and allows to specify a minimum and maximum
 number of connected components. In practice, this constraint is useful
 to ensure the feasibility of a restoration project, and to integrate
-economies of scale. Less continuous restoration areas (i.e. less connected
+economies of scale. Continuous restoration areas (i.e. less connected
 components) are usually associated with lower costs, because it ensures that
 restoration sites are not too far away from each other (e.g. lower travel
 costs between sites, less areas to monitor, etc.). On the other hand,
@@ -67,7 +67,7 @@ s <- solve(p)
 # plot solution
 plot(
   x = s, main = "solution",
-  col = c("#fff1d6", "#b2df8a", "#1f78b4")
+  col = c("#E5E5E5", "#fff1d6", "#b2df8a", "#1f78b4")
 )
 }
 

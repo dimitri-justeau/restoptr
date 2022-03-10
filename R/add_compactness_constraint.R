@@ -59,7 +59,7 @@ NULL
 #' # plot solution
 #' plot(
 #'   x = s, main = "solution",
-#'   col = c("#fff1d6", "#b2df8a", "#1f78b4")
+#'   col = c("#E5E5E5", "#fff1d6", "#b2df8a", "#1f78b4")
 #' )
 #' }
 #'
