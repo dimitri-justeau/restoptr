@@ -10,17 +10,20 @@ add_max_mesh_objective(problem)
 \item{problem}{\code{\link[=restopt_problem]{restopt_problem()}} Restoration problem object.}
 }
 \value{
-An updated restoration problem (\code{\link[=restopt_problem]{restopt_problem()}} object.
+An updated restoration problem (\code{\link[=restopt_problem]{restopt_problem()}}) object.
 }
 \description{
 Specify that a restoration problem (\code{\link[=restopt_problem]{restopt_problem()}}) should
 maximize effective mesh size.
 }
 \details{
-The effective mesh size is a measure of landscape fragmentation
+The effective mesh size (MESH) is a measure of landscape fragmentation
 based on the probability that two randomly chosen points are located in the
 same patch (Jaeger, 2000). Maximizing it in the context of restoration
-favours fewer and larger patches.
+favours fewer and larger patches. \strong{Important}: MESH expresses in surface
+units, restoptr uses the cell surface as the surface unit. Thus, if you want
+a result in meters, ha, or any other unit, you will need to convert the
+resulting MESH value by multiplying it with the surface of a raster cell.
 }
 \examples{
 \dontrun{

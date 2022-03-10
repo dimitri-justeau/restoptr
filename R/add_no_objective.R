@@ -4,7 +4,7 @@ NULL
 #' Configure the solver to only satisfy the constraints, without optimization
 #' objective
 #'
-#' Specify that a restoration problem ([restopt_problem()] should satisfy
+#' Specify that a restoration problem ([restopt_problem()]) should satisfy
 #' the constraints without optimization objective.
 #'
 #' @param problem [restopt_problem()] Restoration problem object.
@@ -14,7 +14,7 @@ NULL
 #' optimization objective. This "no objective" setting is set by default
 #' when creating a restopt problem.
 #'
-#' @return An updated restoration problem ([restopt_problem()] object.
+#' @return An updated restoration problem ([restopt_problem()]) object.
 #'
 #' @examples
 #' \dontrun{

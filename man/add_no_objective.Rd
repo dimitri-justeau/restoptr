@@ -11,10 +11,10 @@ add_no_objective(problem)
 \item{problem}{\code{\link[=restopt_problem]{restopt_problem()}} Restoration problem object.}
 }
 \value{
-An updated restoration problem (\code{\link[=restopt_problem]{restopt_problem()}} object.
+An updated restoration problem (\code{\link[=restopt_problem]{restopt_problem()}}) object.
 }
 \description{
-Specify that a restoration problem (\code{\link[=restopt_problem]{restopt_problem()}} should satisfy
+Specify that a restoration problem (\code{\link[=restopt_problem]{restopt_problem()}}) should satisfy
 the constraints without optimization objective.
 }
 \details{

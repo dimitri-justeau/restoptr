@@ -8,10 +8,12 @@ NULL
 #'
 #' @inheritParams add_max_mesh_objective
 #'
-#' @details The integral index of connectivity is a graph-based inter-patch
+#' @details The integral index of connectivity (IIC) is a graph-based inter-patch
 #' connectivity index based on a binary connection model (Pascual-Hortal &
 #' Saura, 2006). Its maximization in the context of restoration favours
-#' restoring the structural connectivity between large patches.
+#' restoring the structural connectivity between large patches. IIC is unitless
+#' and comprised between 0 (no connectivity) and 1 (all the landscape is
+#' habitat, thus fully connected).
 #'
 #' @return An updated restoration problem ([restopt_problem()] object.
 #'

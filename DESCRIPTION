@@ -48,7 +48,8 @@ RoxygenNote: 7.1.2
 Imports:
     utils,
     assertthat (>= 0.2.1),
-    magrittr
+    magrittr,
+    crayon (>= 1.4.1)
 Depends:
     R (>= 4.1.0),
     terra (>= 1.5-12),

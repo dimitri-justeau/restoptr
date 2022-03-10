@@ -3,7 +3,7 @@ NULL
 
 #' Add locked out constraint
 #'
-#' Add constraint to a restoration problem ([restopt_problem()] object
+#' Add constraint to a restoration problem ([restopt_problem()]) object
 #' to specify that certain planning units cannot be selected
 #' for restoration activities.
 #'

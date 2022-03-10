@@ -127,15 +127,32 @@ solve.RestoptProblem <- function(a, b, ...) {
     stop(paste("failed to complete optimization\n\t", result))
   }
 
+  status <- jproblem$getSearchState()
+
   # Indicate if the solver did not find solution
   if (result == FALSE) {
-    status <- jproblem$getSearchState()
     if (status == "TERMINATED") {
       stop(paste("There is no solution, please adjust your targets\n"))
     }
     if (status == "STOPPED") {
       stop(paste("The research was stopped before a solution was found,",
                  " consider increasing the time limit\n"))
+    }
+  }
+
+  # If the solver found a solution, indicate whether it was proven optimal,
+  # or if it is the best solution found within the time limit but not proven
+  # optimal
+  if (result == TRUE) {
+    if (status == "TERMINATED") {
+      cat(crayon::green("Good news: the solver found a solution that was proven optimal !\n"))
+    }
+    if (status == "STOPPED") {
+      cat(crayon::yellow(paste("Note: The current solution is the best that the ",
+                               "solver could find within the time limit. ",
+                               "However, the solver had not enough to prove ",
+                               "whether it is optimal or not. Consider increasing ",
+                               "the time limit if you need a better solution.\n")))
     }
   }
 

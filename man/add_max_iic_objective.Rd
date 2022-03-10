@@ -17,10 +17,12 @@ Specify that a restoration problem (\code{\link[=restopt_problem]{restopt_proble
 the integral index of connectivity (IIC).
 }
 \details{
-The integral index of connectivity is a graph-based inter-patch
+The integral index of connectivity (IIC) is a graph-based inter-patch
 connectivity index based on a binary connection model (Pascual-Hortal &
 Saura, 2006). Its maximization in the context of restoration favours
-restoring the structural connectivity between large patches.
+restoring the structural connectivity between large patches. IIC is unitless
+and comprised between 0 (no connectivity) and 1 (all the landscape is
+habitat, thus fully connected).
 }
 \examples{
 \dontrun{

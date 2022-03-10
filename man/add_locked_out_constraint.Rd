@@ -14,7 +14,7 @@ that indicate which planning units cannot be selected for any restoration
 (i.e., cells with a value equal one are locked out from the solution).}
 }
 \description{
-Add constraint to a restoration problem (\code{\link[=restopt_problem]{restopt_problem()}} object
+Add constraint to a restoration problem (\code{\link[=restopt_problem]{restopt_problem()}}) object
 to specify that certain planning units cannot be selected
 for restoration activities.
 }

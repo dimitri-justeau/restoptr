@@ -8,12 +8,15 @@ NULL
 #'
 #' @param problem [restopt_problem()] Restoration problem object.
 #'
-#' @details The effective mesh size is a measure of landscape fragmentation
+#' @details The effective mesh size (MESH) is a measure of landscape fragmentation
 #' based on the probability that two randomly chosen points are located in the
 #' same patch (Jaeger, 2000). Maximizing it in the context of restoration
-#' favours fewer and larger patches.
+#' favours fewer and larger patches. **Important**: MESH expresses in surface
+#' units, restoptr uses the cell surface as the surface unit. Thus, if you want
+#' a result in meters, ha, or any other unit, you will need to convert the
+#' resulting MESH value by multiplying it with the surface of a raster cell.
 #'
-#' @return An updated restoration problem ([restopt_problem()] object.
+#' @return An updated restoration problem ([restopt_problem()]) object.
 #'
 #' @references
 #' Jaeger, J. A. G. (2000). Landscape division, splitting index, and effective
