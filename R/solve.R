@@ -124,6 +124,7 @@ solve.RestoptProblem <- function(a, b, ...) {
 
   # throw error if failed
   if (inherits(result, "try-error")) {
+    .jgc()
     stop(paste("failed to complete optimization\n\t", result))
   }
 
@@ -131,6 +132,7 @@ solve.RestoptProblem <- function(a, b, ...) {
 
   # Indicate if the solver did not find solution
   if (result == FALSE) {
+    .jgc()
     if (status == "TERMINATED") {
       stop(paste("There is no solution, please adjust your targets\n"))
     }
@@ -140,19 +142,21 @@ solve.RestoptProblem <- function(a, b, ...) {
     }
   }
 
-  # If the solver found a solution, indicate whether it was proven optimal,
-  # or if it is the best solution found within the time limit but not proven
-  # optimal
-  if (result == TRUE) {
-    if (status == "TERMINATED") {
-      cat(crayon::green("Good news: the solver found a solution that was proven optimal !\n"))
-    }
-    if (status == "STOPPED") {
-      cat(crayon::yellow(paste("Note: The current solution is the best that the ",
-                               "solver could find within the time limit. ",
-                               "However, the solver had not enough to prove ",
-                               "whether it is optimal or not. Consider increasing ",
-                               "the time limit if you need a better solution.\n")))
+  # If the solver found a solution, and if an optimization objective was
+  # defined, indicate whether it was proven optimal, or if it is the best
+  # solution found within the time limit but not proven optimal
+  if (!inherits(a$objective, "NoObjective")) {
+    if (result == TRUE) {
+      if (status == "TERMINATED") {
+        cat(crayon::green("Good news: the solver found a solution that was proven optimal !\n"))
+      }
+      if (status == "STOPPED") {
+        cat(crayon::yellow(paste("Note: The current solution is the best that the ",
+                                 "solver could find within the time limit. ",
+                                 "However, the solver had not enough to prove ",
+                                 "whether it is optimal or not. Consider increasing ",
+                                 "the time limit if you need a better solution.\n")))
+      }
     }
   }
 
@@ -173,7 +177,7 @@ solve.RestoptProblem <- function(a, b, ...) {
     unlink(terra::sources(ac_data)[[1]])
     rm(ac_data)
   }
-
+  .jgc()
   return(r)
 
 }
