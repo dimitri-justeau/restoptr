@@ -24,7 +24,8 @@ NULL
 #'
 #' @param b Argument not used.
 #'
-#' @param verbose if TRUE, output solver logs. (FALSE by default)
+#' @param ... Additional arguments:
+#' `verbose`: if TRUE, output solver logs. (FALSE by default)
 #'
 #' @return A [terra::rast()] object.
 #'
