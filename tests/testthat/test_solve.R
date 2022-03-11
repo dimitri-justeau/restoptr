@@ -29,13 +29,13 @@ test_that("add_restorable_constraint", {
   a <- attributes(result)
   testthat::expect_true(a$metadata$optimality_proven == "true")
 
-  # Test 4: Find best solution but not optimal (time limit)
+  # Test 4: Find best solution but not optimal (time limit) (with verobse)
   problem <- restopt_problem(habitat, restorable) %>%
     add_restorable_constraint(min_restore = 90, max_restore = 110, cell_area = 23, min_proportion = 1) %>%
     add_compactness_constraint(6) %>%
     add_max_mesh_objective() %>%
     add_settings(time_limit = 1)
-  result <- solve(problem)
+  result <- solve(problem, verbose=TRUE)
   a <- attributes(result)
   testthat::expect_true(a$metadata$optimality_proven == "false")
 })

@@ -15,10 +15,24 @@ test_that("create_problem", {
 
   problem <- add_settings(problem, time_limit = 30)
 
+  # Test print problem (just run to ensure there is no error)
+  print(problem)
+
   testthat::expect_equal(class(problem), "RestoptProblem")
   testthat::expect_equal(length(problem$constraints), 4)
   testthat::expect_true(inherits(problem$objective, "MaxMeshObjective"))
   testthat::expect_equal(problem$settings$time_limit, 30)
+
+  # Test overwrite constraint
+  testthat::expect_warning(problem <- problem %>% add_compactness_constraint(5))
+  i <- which(vapply(
+    problem$constraints, inherits, logical(1), "CompactnessConstraint"
+  ))
+  testthat::expect_equal(problem$constraints[[i]]$name, "compactness (max_diameter = 5)")
+
+  # Test overwrite objective
+  testthat::expect_warning(problem <- problem %>% add_max_iic_objective())
+  testthat::expect_true(inherits(problem$objective, "MaxIicObjective"))
 
   ## Test invalid inputs
   testthat::expect_error(restopt_problem(1, restorable))

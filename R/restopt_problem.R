@@ -160,37 +160,52 @@ restopt_problem <- function(existing_habitat, restorable_habitat) {
 #'
 #' @export
 print.RestoptProblem <- function(x, ...) {
-  message("Restopt problem")
+  message(crayon::bold(crayon::green(paste0(
+      "-----------------------------------------------------------------",
+    "\n                         Restopt problem                         "),
+    "\n-----------------------------------------------------------------")))
   source_habitat <- basename(terra::sources(x$data$existing_habitat)[[1]])
   source_restorable <- basename(terra::sources(x$data$restorable_habitat)[[1]])
   message(
-    "existing habitat:   ",
-    ifelse(source_habitat != "", source_habitat, "in memory")
+    crayon::bold(crayon::silver("existing habitat:    ")),
+    crayon::cyan(ifelse(source_habitat != "", source_habitat, "in memory"))
   )
   message(
-    "restorable habitat: ",
-    ifelse(source_restorable != "", source_habitat, "in memory")
+    crayon::bold(crayon::silver("restorable habitat:  ")),
+    crayon::cyan(ifelse(source_restorable != "", source_restorable, "in memory"))
   )
   message(
-    "objective:          ",
-    ifelse(is.null(x$objective), "none defined", x$objective$name)
+    crayon::green("-----------------------------------------------------------------")
   )
   message(
-    "constraints:        ",
+    crayon::bold(crayon::silver("objective:           ")),
+    crayon::blue(ifelse(is.null(x$objective), "none defined", x$objective$name))
+  )
+  message(
+    crayon::green("-----------------------------------------------------------------")
+  )
+  message(
+    crayon::bold(crayon::silver("constraints:        ")),
     ifelse(length(x$constraints) == 0, "none defined", "")
   )
   for (i in seq_along(x$constraints)) {
-    message(
+    message(crayon::blue(
       "  - ",
       x$constraints[[i]]$name
-    )
+    ))
   }
   message(
-    "settings:           ",
-    paste(
-      paste(names(x$settings), "=", unlist(x$settings, use.names = FALSE)),
-      collapse = ", "
-    )
+    crayon::green("-----------------------------------------------------------------")
+  )
+  message(
+    crayon::bold(crayon::silver("settings:\n")),
+    paste(crayon::magenta(
+      paste0("  - ", names(x$settings), " = ", unlist(x$settings, use.names = FALSE)),
+      collapse = "\n"
+    ))
+  )
+  message(
+    crayon::bold(crayon::green("-----------------------------------------------------------------\n"))
   )
 }
 
