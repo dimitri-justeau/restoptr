@@ -25,7 +25,7 @@ test_that("maximize_iic", {
   testthat::expect_lte(metadata$solving.time..ms., 30000)
   testthat::expect_gte(metadata$Minimum.area.to.restore, 90)
   testthat::expect_lte(metadata$Minimum.area.to.restore, 110)
-  initial_value <- metadata$initial.IIC.value
-  optimal_value <- metadata$optimal.IIC.value
+  initial_value <- metadata$IIC_initial
+  optimal_value <- metadata$IIC_best
   testthat::expect_true(initial_value <= optimal_value)
 })

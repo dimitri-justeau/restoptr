@@ -25,6 +25,6 @@ test_that("add_settings", {
   # Assert that the solving time is less than 1s (more or less 10%, thus 1.1s)
   testthat::expect_true(metadata$solving.time..ms. < 1100)
   # Assert that the precision is correct
-  optimal_value <- metadata$optimal.MESH.value
+  optimal_value <- metadata$MESH_best
   testthat::expect_equal(round(optimal_value, 2), optimal_value)
 })

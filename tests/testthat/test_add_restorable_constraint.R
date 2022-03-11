@@ -1,19 +1,20 @@
 context("restopt_problem")
 
 test_that("add_restorable_constraint", {
-  # Test 1: exact amount of restoration area
+  # Load data
   habitat <- terra::rast(system.file("extdata", "habitat.tif", package = "restoptr"))
   restorable <- terra::rast(system.file("extdata", "restorable.tif", package = "restoptr"))
+  # Test 1: exact amount of restoration area
   problem <- restopt_problem(habitat, restorable) %>%
     add_restorable_constraint(min_restore = 90, max_restore = 90, cell_area = 23, min_proportion = 1)
-  result <- solve(problem, verbose=TRUE)
+  result <- solve(problem)
   rest_cells <- which(result[,] == 2)
   val <- sum(round(restorable)[rest_cells])
   testthat::expect_equal(val, 90)
   # Test 2: interval of restoration area
   problem <- restopt_problem(habitat, restorable) %>%
     add_restorable_constraint(min_restore = 200, max_restore = 211, cell_area = 23, min_proportion = 1)
-  result <- solve(problem, verbose=TRUE)
+  result <- solve(problem)
   rest_cells <- which(result[,] == 2)
   val <- sum(round(restorable)[rest_cells])
   testthat::expect_gte(val, 200)
