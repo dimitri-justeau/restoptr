@@ -24,7 +24,7 @@ NULL
 #'
 #' @param b Argument not used.
 #'
-#' @param ... Unused arguments.
+#' @param verbose if TRUE, output solver logs. (FALSE by default)
 #'
 #' @return A [terra::rast()] object.
 #'
@@ -78,7 +78,13 @@ NULL
 solve.RestoptProblem <- function(a, b, ...) {
   # assert argument is valid
   assertthat::assert_that(inherits(a, "RestoptProblem"))
-
+  args <- list(...)
+  if ("verbose" %in% names(args)) {
+    assertthat::is.flag(args$verbose)
+    verbose <- args$verbose
+  } else {
+    verbose <- FALSE
+  }
   # prepare data
   ## check if data already saved to disk
   eh_on_disk <- terra_on_disk(a$data$existing_habitat)
@@ -117,7 +123,8 @@ solve.RestoptProblem <- function(a, b, ...) {
       jproblem,
       a$settings$precision,
       a$settings$time_limit,
-      output_path
+      output_path,
+      verbose
     ),
     silent = TRUE
   )
@@ -142,27 +149,34 @@ solve.RestoptProblem <- function(a, b, ...) {
     }
   }
 
+  # import results
+  r <- terra::rast(paste0(output_path, ".tif"))
+  attributes(r)$metadata <- utils::read.csv(paste0(output_path, ".csv"))
+
+  solving_time <- attributes(r)$metadata$solving.time..ms.
+
   # If the solver found a solution, and if an optimization objective was
   # defined, indicate whether it was proven optimal, or if it is the best
   # solution found within the time limit but not proven optimal
   if (!inherits(a$objective, "NoObjective")) {
-    if (result == TRUE) {
-      if (status == "TERMINATED") {
-        cat(crayon::green("Good news: the solver found a solution that was proven optimal !\n"))
-      }
-      if (status == "STOPPED") {
-        cat(crayon::yellow(paste("Note: The current solution is the best that the ",
-                                 "solver could find within the time limit. ",
-                                 "However, the solver had not enough to prove ",
-                                 "whether it is optimal or not. Consider increasing ",
-                                 "the time limit if you need a better solution.\n")))
-      }
+    if (status == "TERMINATED") {
+      cat(crayon::green(paste("Good news: the solver found a solution statisfying",
+                              "the constraints that was proven optimal !",
+                              "(solving time =", solving_time / 1000 ,"s)\n")))
     }
+    if (status == "STOPPED") {
+      cat(crayon::yellow(paste("Note: The current solution is the best that the",
+                               "solver could find within the time limit.",
+                               "However, the solver had not enough to prove",
+                               "whether it is optimal or not. Consider increasing",
+                               "the time limit if you need a better solution",
+                               "(solving time =", solving_time / 1000 ,"s)\n")))
+    }
+  } else {
+      cat(crayon::green(paste("Good news: the solver found a solution satisfying",
+                              "the constraints ! (solving time =",
+                              solving_time / 1000 ,"s)\n")))
   }
-
-  # import results
-  r <- terra::rast(paste0(output_path, ".tif"))
-  attributes(r)$metadata <- utils::read.csv(paste0(output_path, ".csv"))
 
   # clean up
   if (!eh_on_disk) {

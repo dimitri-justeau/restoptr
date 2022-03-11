@@ -80,9 +80,9 @@ add_max_iic_objective <- function(problem) {
     objective = restopt_component(
       name = "Maximize integral index of connectivity",
       class = c("MaxIicObjective", "RestoptObjectve"),
-      post = function(jproblem, precision, time_limit, output_path) {
+      post = function(jproblem, precision, time_limit, output_path, verbose=FALSE) {
         rJava::.jcall(
-          jproblem, "Z", "maximizeIIC", precision, output_path, time_limit
+          jproblem, "Z", "maximizeIIC", precision, output_path, time_limit, verbose
         )
       }
     )

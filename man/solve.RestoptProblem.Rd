@@ -11,7 +11,7 @@
 
 \item{b}{Argument not used.}
 
-\item{...}{Unused arguments.}
+\item{verbose}{if TRUE, output solver logs. (FALSE by default)}
 }
 \value{
 A \code{\link[terra:rast]{terra::rast()}} object.
