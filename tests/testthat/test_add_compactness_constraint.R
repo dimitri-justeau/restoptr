@@ -1,4 +1,4 @@
-context("restopt_problem")
+context("add_compactness_constraint")
 
 test_that("add_compactness_constraint", {
   # Create problem

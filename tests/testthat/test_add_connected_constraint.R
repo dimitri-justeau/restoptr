@@ -1,4 +1,4 @@
-context("restopt_problem")
+context("add_connected_constraint")
 
 test_that("add_connected_constraint", {
   # Create problem without optimization

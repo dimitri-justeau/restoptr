@@ -1,6 +1,6 @@
 context("solve")
 
-test_that("add_restorable_constraint", {
+test_that("solve", {
   # Load data
   habitat <- terra::rast(system.file("extdata", "habitat.tif", package = "restoptr"))
   restorable <- terra::rast(system.file("extdata", "restorable.tif", package = "restoptr"))

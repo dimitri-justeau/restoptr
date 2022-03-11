@@ -1,4 +1,4 @@
-context("restopt_problem")
+context("add_components_constraint")
 
 test_that("add_components_constraint", {
   # Create problem with 1 component

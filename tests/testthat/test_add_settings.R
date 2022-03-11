@@ -1,4 +1,4 @@
-context("restopt_problem")
+context("add_settings")
 
 test_that("add_settings", {
   # Create problem

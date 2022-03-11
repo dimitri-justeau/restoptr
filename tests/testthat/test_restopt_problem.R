@@ -1,6 +1,6 @@
 context("restopt_problem")
 
-test_that("create_problem", {
+test_that("restopt_problem", {
 
   ## Test valid inputs
   habitat <- terra::rast(system.file("extdata", "habitat.tif", package = "restoptr"))

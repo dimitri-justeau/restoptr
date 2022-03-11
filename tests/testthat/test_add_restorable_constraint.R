@@ -1,4 +1,4 @@
-context("restopt_problem")
+context("add_restorable_constraint")
 
 test_that("add_restorable_constraint", {
   # Load data
