@@ -13,5 +13,5 @@ test_that("terra_io",{
   path <- tempfile(fileext = ".tif")
   y <- terra_force_disk(x, filename = path)
   testthat::expect_true(terra_on_disk(y))
-  testthat::expect_equal(terra::sources(y)[[1]], path)
+  testthat::expect_true(file.path(terra::sources(y)[[1]]) == file.path(path))
 })
