@@ -16,7 +16,7 @@ test_that("add_connected_constraint", {
   restorable <- terra::rast(system.file("extdata", "restorable.tif", package = "restoptr"))
   problem <- restopt_problem(habitat, restorable) %>%
     add_connected_constraint() %>%
-    add_max_mesh_objective()
+    set_max_mesh_objective()
   result <- solve(problem)
   if (require(landscapemetrics)) {
     np <- landscapemetrics::lsm_c_np(result, directions = 4)

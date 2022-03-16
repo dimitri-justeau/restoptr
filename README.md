@@ -6,7 +6,7 @@
 [![lifecycle](https://img.shields.io/badge/Lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html)
 [![R-CMD-check-Ubuntu](https://img.shields.io/github/workflow/status/dimitri-justeau/restoptr/Ubuntu/master.svg?label=Ubuntu)](https://github.com/dimitri-justeau/restoptr/actions)
 [![R-CMD-check-Windows](https://img.shields.io/github/workflow/status/dimitri-justeau/restoptr/Windows/master.svg?label=Windows)](https://github.com/dimitri-justeau/restoptr/actions)
-[![R-CMD-check-MacOS](https://img.shields.io/github/workflow/status/dimitri-justeau/restoptr/macOS/master.svg?label=MacOS)](https://github.com/dimitri-justeau/restoptr/actions)
+[![R-CMD-check-MacOS](https://img.shields.io/github/workflow/status/dimitri-justeau/restoptr/Mac%20OSX/master.svg?label=MacOS)](https://github.com/dimitri-justeau/restoptr/actions)
 [![Coverage
 Status](https://codecov.io/github/dimitri-justeau/restoptr/coverage.svg?branch=master)](https://app.codecov.io/gh/dimitri-justeau/restoptr)
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/restoptr)](https://github.com/dimitri-justeau/restoptr)
@@ -189,7 +189,7 @@ identify, under the previous constraints, which restoration areas
 maximises the effective mesh size (MESH).
 
 ``` r
-p <- p %>% add_max_mesh_objective()
+p <- p %>% set_max_mesh_objective()
 ```
 
 *Note* The effective mesh size is a measure of landscape fragmentation
@@ -204,6 +204,11 @@ objective.
 
 ``` r
 s <- solve(p)
+```
+
+    ## Good news: the solver found a solution statisfying the constraints that was proven optimal ! (solving time = 1.73 s)
+
+``` r
 plot(
   x = s, main = "solution",
   col = c("#E5E5E5", "#fff1d6", "#b2df8a", "#1f78b4")
@@ -220,7 +225,7 @@ attributes(s)
 ```
 
     ## $ptr
-    ## C++ object <0x55ea0a465a30> of class 'SpatRaster' <0x55ea02b1a490>
+    ## C++ object <0x55909967f720> of class 'SpatRaster' <0x5590914c8420>
     ## 
     ## $class
     ## [1] "SpatRaster"
@@ -229,9 +234,9 @@ attributes(s)
     ## 
     ## $metadata
     ##   Minimum.area.to.restore Maximum.restorable.area no..planning.units
-    ## 1                     220                     219                 19
-    ##   initial.MESH.value optimal.MESH.value solving.time..ms.
-    ## 1           1035.435           1062.802              1381
+    ## 1                     202                     200                 19
+    ##   MESH_initial MESH_best optimality_proven solving.time..ms.
+    ## 1     1035.435  1062.802              true              1730
 
 ## Getting help
 

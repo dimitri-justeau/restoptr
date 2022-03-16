@@ -12,7 +12,7 @@ test_that("maximize_iic", {
     add_components_constraint(min_nb_components = 1, max_nb_components = 1) %>%
     add_compactness_constraint(max_diameter = 6) %>%
     add_restorable_constraint(min_restore = 90, max_restore = 110, cell_area = 23, min_proportion = 0.7) %>%
-    add_max_iic_objective()
+    set_max_iic_objective()
 
   problem <- add_settings(problem, time_limit = 30)
 

@@ -162,7 +162,7 @@ objective. For example, lets configure `restopr` to identify, under the previous
 constraints, which restoration areas maximises the effective mesh size (MESH).
 
 ```{r}
-p <- p %>% add_max_mesh_objective()
+p <- p %>% set_max_mesh_objective()
 ```
 
 *Note* The effective mesh size is a measure of landscape fragmentation based on

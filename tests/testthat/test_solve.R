@@ -24,7 +24,7 @@ test_that("solve", {
     add_restorable_constraint(min_restore = 90, max_restore = 110, cell_area = 23, min_proportion = 1) %>%
     add_compactness_constraint(4) %>%
     add_components_constraint(1, 1) %>%
-    add_max_mesh_objective()
+    set_max_mesh_objective()
   result <- solve(problem)
   a <- attributes(result)
   testthat::expect_true(a$metadata$optimality_proven == "true")
@@ -33,7 +33,7 @@ test_that("solve", {
   problem <- restopt_problem(habitat, restorable) %>%
     add_restorable_constraint(min_restore = 90, max_restore = 110, cell_area = 23, min_proportion = 1) %>%
     add_compactness_constraint(6) %>%
-    add_max_mesh_objective() %>%
+    set_max_mesh_objective() %>%
     add_settings(time_limit = 1)
   result <- solve(problem, verbose=TRUE)
   a <- attributes(result)

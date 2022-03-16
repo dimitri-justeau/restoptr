@@ -7,7 +7,7 @@ NULL
 #' to specify the number of connected components that can be
 #' present within a solution.
 #'
-#' @inheritParams add_max_mesh_objective
+#' @inheritParams set_max_mesh_objective
 #'
 #' @param min_nb_components `integer` Minimum number of connected components.
 #'

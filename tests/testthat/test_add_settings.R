@@ -19,7 +19,7 @@ test_that("add_settings", {
     add_components_constraint(min_nb_components = 1, max_nb_components = 1) %>%
     add_compactness_constraint(max_diameter = 6) %>%
     add_restorable_constraint(min_restore = 90, max_restore = 110, cell_area = 23, min_proportion = 0.7) %>%
-    add_max_mesh_objective()
+    set_max_mesh_objective()
   result <- solve(problem)
   metadata <- attributes(result)$metadata
   # Assert that the solving time is less than 1s (more or less 10%, thus 1.1s)

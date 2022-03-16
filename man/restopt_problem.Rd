@@ -26,7 +26,7 @@ Create a new restoration optimization problem (\code{RestoptProblem}) using data
 that describe the spatial distribution of existing habitat and potential for
 restoration. Constraints can be added to a restopt problem using
 \verb{add_****_constraint()} functions, and an optimization objective can be set
-using \verb{add_****_objective()} functions.
+using \verb{set_****_objective()} functions.
 }
 \details{
 This function creates the base restoration optimization problem

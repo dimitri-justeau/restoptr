@@ -53,7 +53,7 @@ NULL
 #'     existing_habitat = habitat_data,
 #'     restorable_habitat = restorable_data
 #'   ) %>%
-#'   add_max_mesh_objective() %>%
+#'   set_max_mesh_objective() %>%
 #'   add_restorable_constraint(
 #'     min_restore = 5,
 #'     max_restore = 5,

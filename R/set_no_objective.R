@@ -34,7 +34,7 @@ NULL
 #' p <- restopt_problem(
 #'        existing_habitat = habitat_data,
 #'        restorable_habitat = restorable_data
-#' ) %>% add_no_objective()
+#' ) %>% set_no_objective()
 #'
 #' # print problem
 #' print(p)
@@ -49,11 +49,11 @@ NULL
 #' }
 #'
 #' @export
-add_no_objective <- function(problem) {
+set_no_objective <- function(problem) {
   # assert argument is valid
   assertthat::assert_that(inherits(problem, "RestoptProblem"))
   # add objective
-  add_restopt_objective(
+  set_restopt_objective(
     problem = problem,
     objective = restopt_component(
       name = "No optimization objective",

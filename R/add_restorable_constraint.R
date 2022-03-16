@@ -6,7 +6,7 @@ NULL
 #' Add constraint to a restoration problem ([restopt_problem()]) object
 #' to specify specify the available amount of surface for restoration
 #'
-#' @inheritParams add_max_mesh_objective
+#' @inheritParams set_max_mesh_objective
 #'
 #' @param min_restore `integer` Minimum allowed area to restore in the solution.
 #'

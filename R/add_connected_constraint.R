@@ -7,7 +7,7 @@ NULL
 #' Add constraint to a restoration problem ([restopt_problem()]) object
 #' to specify the selected planning units are connected
 #'
-#' @inheritParams add_max_mesh_objective
+#' @inheritParams set_max_mesh_objective
 #'
 #'
 #' @details A connected area is such that there is a path between any to

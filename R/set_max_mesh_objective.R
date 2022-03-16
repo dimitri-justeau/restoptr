@@ -1,27 +1,27 @@
 #' @include internal.R
 NULL
 
-#' Add an objective to maximize the integral index of connectivity
+#' Set an objective to maximize effective mesh size
 #'
 #' Specify that a restoration problem ([restopt_problem()]) should
-#' the integral index of connectivity (IIC).
+#' maximize effective mesh size.
 #'
-#' @inheritParams add_max_mesh_objective
+#' @param problem [restopt_problem()] Restoration problem object.
 #'
-#' @details The integral index of connectivity (IIC) is a graph-based inter-patch
-#' connectivity index based on a binary connection model (Pascual-Hortal &
-#' Saura, 2006). Its maximization in the context of restoration favours
-#' restoring the structural connectivity between large patches. IIC is unitless
-#' and comprised between 0 (no connectivity) and 1 (all the landscape is
-#' habitat, thus fully connected).
+#' @details The effective mesh size (MESH) is a measure of landscape fragmentation
+#' based on the probability that two randomly chosen points are located in the
+#' same patch (Jaeger, 2000). Maximizing it in the context of restoration
+#' favours fewer and larger patches. **Important**: MESH expresses in surface
+#' units, restoptr uses the cell surface as the surface unit. Thus, if you want
+#' a result in meters, ha, or any other unit, you will need to convert the
+#' resulting MESH value by multiplying it with the surface of a raster cell.
 #'
-#' @return An updated restoration problem ([restopt_problem()] object.
+#' @return An updated restoration problem ([restopt_problem()]) object.
 #'
 #' @references
-#' Pascual-Hortal, L., & Saura, S. (2006).
-#' Comparison and development of new graph-based landscape connectivity indices:
-#' Towards the priorization of habitat patches and corridors for conservation.
-#' Landscape Ecology, 21(7), 959‑967. https://doi.org/10.1007/s10980-006-0013-z
+#' Jaeger, J. A. G. (2000). Landscape division, splitting index, and effective
+#' mesh size: New measures of landscape fragmentation. Landscape Ecology, 15(2),
+#' 115‑130. https://doi.org/10.1023/A:1008129329289
 #'
 #' @examples
 #' \dontrun{
@@ -47,7 +47,7 @@ NULL
 #'     existing_habitat = habitat_data,
 #'     restorable_habitat = restorable_data
 #'   ) %>%
-#'   add_max_iic_objective() %>%
+#'   set_max_mesh_objective() %>%
 #'   add_restorable_constraint(
 #'     min_restore = 5,
 #'     max_restore = 5,
@@ -70,19 +70,19 @@ NULL
 #' }
 #'
 #' @export
-add_max_iic_objective <- function(problem) {
+set_max_mesh_objective <- function(problem) {
   # assert argument is valid
   assertthat::assert_that(inherits(problem, "RestoptProblem"))
 
-  # add objective
-  add_restopt_objective(
+  # set objective
+  set_restopt_objective(
     problem = problem,
     objective = restopt_component(
-      name = "Maximize integral index of connectivity",
-      class = c("MaxIicObjective", "RestoptObjectve"),
+      name = "Maximize effective mesh size",
+      class = c("MaxMeshObjective", "RestoptObjectve"),
       post = function(jproblem, precision, time_limit, output_path, verbose=FALSE) {
         rJava::.jcall(
-          jproblem, "Z", "maximizeIIC", precision, output_path, time_limit, verbose
+          jproblem, "Z", "maximizeMESH", precision, output_path, time_limit, verbose
         )
       }
     )

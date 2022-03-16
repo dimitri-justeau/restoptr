@@ -27,7 +27,7 @@ NULL
 #' that describe the spatial distribution of existing habitat and potential for
 #' restoration. Constraints can be added to a restopt problem using
 #' `add_****_constraint()` functions, and an optimization objective can be set
-#' using `add_****_objective()` functions.
+#' using `set_****_objective()` functions.
 #'
 #' @param existing_habitat [terra::rast()] Raster object containing binary
 #' values that indicate if each planning unit contains habitat or not. Cells
@@ -108,7 +108,7 @@ restopt_problem <- function(existing_habitat, restorable_habitat) {
   )
 
   # return object
-  add_no_objective(
+  set_no_objective(
       structure(
       list(
         data = list(
@@ -212,7 +212,7 @@ print.RestoptProblem <- function(x, ...) {
 #' Generic function to add a constraint to a restoration optimization problem
 #' For internal use only.
 #'
-#' @inheritParams add_max_mesh_objective
+#' @inheritParams set_max_mesh_objective
 #'
 #' @param constraint `RestoptConstraint` Constraint object.
 #'
@@ -244,15 +244,15 @@ add_restopt_constraint <- function(problem, constraint) {
   problem
 }
 
-#' Generic function to add an objective to a restoration optimization problem
+#' Generic function to set an objective to a restoration optimization problem
 #' For internal use only.
 #'
-#' @inheritParams add_max_mesh_objective
+#' @inheritParams set_max_mesh_objective
 #'
 #' @param objective `RestoptObjective` Objective object.
 #'
 #' @noRd
-add_restopt_objective <- function(problem, objective) {
+set_restopt_objective <- function(problem, objective) {
   # assert arguments are valid
   assertthat::assert_that(
     inherits(problem, "RestoptProblem"),
@@ -267,7 +267,7 @@ add_restopt_objective <- function(problem, objective) {
     )
   }
 
-  # add objective
+  # set objective
   problem$objective <- objective
 
   # return updated problem
