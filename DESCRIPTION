@@ -72,6 +72,7 @@ Collate:
     'add_restorable_constraint.R'
     'add_settings.R'
     'package.R'
+    'preprocessing.R'
     'restopt_component.R'
     'restopt_problem.R'
     'set_max_iic_objective.R'
