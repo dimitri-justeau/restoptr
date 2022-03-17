@@ -4,10 +4,10 @@
 \alias{prepare_inputs}
 \title{Restopr input preprocessing function.}
 \usage{
-prepare_inputs(existing_habitat, habitat_threshold = 1, aggregation_factor = 1)
+prepare_inputs(habitat, habitat_threshold = 1, aggregation_factor = 1)
 }
 \arguments{
-\item{existing_habitat}{\code{\link[terra:rast]{terra::rast()}} Raster object containing binary
+\item{habitat}{\code{\link[terra:rast]{terra::rast()}} Raster object containing binary
 values that indicate if each planning unit contains habitat or not. Cells
 with the value \code{1} must correspond to existing habitat. Cells with the value
 \code{0} must correspond to degraded (or simply non-habitat) areas. Finally,
@@ -19,11 +19,11 @@ original raster) are required within the downsampled raster to be considered
 as habitat.}
 
 \item{aggregation_factor}{positive integer corresponding to the level of
-downsampling that will be applied to the existing_habitat. This parameter is
+downsampling that will be applied to the habitat. This parameter is
 important to ensure the tractability of a problem.}
 }
 \value{
-A list containing two suitable input rasters for restoptr.
+A vector : c(downsampled_habitat, restorable_area)
 }
 \description{
 From a binary, possibly high resolution, habitat raster, this function

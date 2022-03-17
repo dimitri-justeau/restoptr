@@ -17,7 +17,7 @@ NULL
 #'   surface of habitat is computed according to the spatial resolution, and the
 #'   number of habitat pixel present in one larger aggregated cell.
 #'
-#' @param existing_habitat [terra::rast()] Raster object containing binary
+#' @param habitat [terra::rast()] Raster object containing binary
 #' values that indicate if each planning unit contains habitat or not. Cells
 #' with the value `1` must correspond to existing habitat. Cells with the value
 #' `0` must correspond to degraded (or simply non-habitat) areas. Finally,
@@ -29,10 +29,10 @@ NULL
 #' as habitat.
 #'
 #' @param aggregation_factor positive integer corresponding to the level of
-#' downsampling that will be applied to the existing_habitat. This parameter is
+#' downsampling that will be applied to the habitat. This parameter is
 #' important to ensure the tractability of a problem.
 #'
-#' @return A list containing two suitable input rasters for restoptr.
+#' @return A vector : c(downsampled_habitat, restorable_area)
 #'
 #' @details TODO
 #'
@@ -46,26 +46,35 @@ NULL
 #' }
 #'
 #' @export
-prepare_inputs <- function(existing_habitat, habitat_threshold = 1, aggregation_factor = 1) {
+prepare_inputs <- function(habitat, habitat_threshold = 1, aggregation_factor = 1) {
   ## initial checks
   assertthat::assert_that(
-    inherits(existing_habitat, "SpatRaster")
+    inherits(habitat, "SpatRaster")
   )
   ## further checks
   assertthat::assert_that(
-    terra::hasValues(existing_habitat),
-    terra::nlyr(existing_habitat) == 1
+    terra::hasValues(habitat),
+    terra::nlyr(habitat) == 1
   )
   ## assert valid values
   assertthat::assert_that(
-    is_binary_raster(existing_habitat),
-    msg = "argument to \"existing_habitat\" must have binary values"
+    is_binary_raster(habitat),
+    msg = "argument to \"habitat\" must have binary values"
   )
-  downsampled_habitat <- terra::aggregate(
-    existing_habitat,
+  all_ones <- habitat >= 0
+  cell_area <- terra::aggregate(
+    all_ones,
     fact = aggregation_factor,
-    "sum"
+    fun = "sum",
+    na.rm = TRUE
   )
-  downsampled_habitat <- (downsampled_habitat / aggregation_factor^2) >= habitat_threshold
-  return(downsampled_habitat)
+  down_sum <- terra::aggregate(
+    habitat,
+    fact = aggregation_factor,
+    fun = "sum",
+    na.rm = TRUE
+  )
+  downsampled_habitat <- (down_sum / cell_area) >= habitat_threshold
+  restorable_habitat <- cell_area - down_sum
+  return(c(downsampled_habitat, restorable_habitat))
 }
