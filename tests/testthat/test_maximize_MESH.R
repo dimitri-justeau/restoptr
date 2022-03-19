@@ -22,10 +22,10 @@ test_that("maximize_mesh", {
 
   metadata <- attributes(result)$metadata
 
-  testthat::expect_lte(metadata$solving.time..ms., 30000)
-  testthat::expect_gte(metadata$Minimum.area.to.restore, 90)
-  testthat::expect_lte(metadata$Minimum.area.to.restore, 110)
-  initial_value <- metadata$MESH_initial
-  optimal_value <- metadata$MESH_best
+  testthat::expect_lte(metadata$solving_time, 30)
+  testthat::expect_gte(metadata$min_restore, 90)
+  testthat::expect_lte(metadata$min_restore, 110)
+  initial_value <- metadata$mesh_initial
+  optimal_value <- metadata$mesh_best
   testthat::expect_true(initial_value <= optimal_value)
 })

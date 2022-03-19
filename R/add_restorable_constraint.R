@@ -115,3 +115,44 @@ add_restorable_constraint <- function(problem,
     )
   )
 }
+
+#' @export
+add_restorable_constraint_2 <- function(problem,
+                                      min_restore,
+                                      max_restore,
+                                      min_proportion = 1) {
+  # assert argument is valid
+  assertthat::assert_that(
+    inherits(problem, "RestoptProblem"),
+    assertthat::is.count(min_restore),
+    assertthat::noNA(min_restore),
+    assertthat::is.count(max_restore),
+    assertthat::noNA(max_restore),
+    assertthat::is.number(min_proportion),
+    assertthat::noNA(min_proportion),
+    min_proportion >= 0,
+    min_proportion <= 1,
+    max_restore >= min_restore
+  )
+
+  # add constraint
+  add_restopt_constraint(
+    problem = problem,
+    constraint = restopt_component(
+      name = paste0(
+        "restorable (",
+        "min_restore = ", as.integer(min_restore),
+        ", max_restore = ", max_restore, ")"
+      ),
+      class = c("RestorableConstraint", "RestoptConstraint"),
+      post = function(jproblem) {
+        cell_area <- problem$data$cell_area
+        rJava::.jcall(
+          jproblem, "V", "postRestorableConstraint",
+          as.integer(min_restore), as.integer(max_restore),
+          .jarray(as.integer(as.vector(problem$data$cell_area))), min_proportion
+        )
+      }
+    )
+  )
+}

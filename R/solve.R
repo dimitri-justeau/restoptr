@@ -92,11 +92,11 @@ solve.RestoptProblem <- function(a, b, ...) {
   rh_on_disk <- terra_on_disk(a$data$restorable_habitat)
   ac_on_disk <- terra_on_disk(a$data$locked_out$data)
   ## save rasters to disk if needed
-  eh_data <- terra_force_disk(a$data$existing_habitat)
+  eh_data <- terra_force_disk(a$data$existing_habitat, datatype="INT4S")
   rh_data <- terra_force_disk(a$data$restorable_habitat)
   # Force NODATA values of locked out raster to avoid terra writing them as 0
   a$data$locked_out$data[is.na(a$data$locked_out$data)] <- -9999
-  ac_data <- terra_force_disk(a$data$locked_out$data)
+  ac_data <- terra_force_disk(a$data$locked_out$data, NAflag = -9999)
 
   # import data
   jdata <- rJava::.jnew(
@@ -154,7 +154,7 @@ solve.RestoptProblem <- function(a, b, ...) {
   r <- terra::rast(paste0(output_path, ".tif"))
   attributes(r)$metadata <- utils::read.csv(paste0(output_path, ".csv"))
 
-  solving_time <- attributes(r)$metadata$solving.time..ms.
+  solving_time <- attributes(r)$metadata$solving_time
 
   # If the solver found a solution, and if an optimization objective was
   # defined, indicate whether it was proven optimal, or if it is the best
@@ -163,7 +163,7 @@ solve.RestoptProblem <- function(a, b, ...) {
     if (status == "TERMINATED") {
       cat(crayon::green(paste("Good news: the solver found a solution statisfying",
                               "the constraints that was proven optimal !",
-                              "(solving time =", solving_time / 1000 ,"s)\n")))
+                              "(solving time =", solving_time, "s)\n")))
     }
     if (status == "STOPPED") {
       cat(crayon::yellow(paste("Note: The current solution is the best that the",
@@ -171,12 +171,12 @@ solve.RestoptProblem <- function(a, b, ...) {
                                "However, the solver had not enough to prove",
                                "whether it is optimal or not. Consider increasing",
                                "the time limit if you need a better solution",
-                               "(solving time =", solving_time / 1000 ,"s)\n")))
+                               "(solving time =", solving_time, "s)\n")))
     }
   } else {
       cat(crayon::green(paste("Good news: the solver found a solution satisfying",
                               "the constraints ! (solving time =",
-                              solving_time / 1000 ,"s)\n")))
+                              solving_time, "s)\n")))
   }
 
   # clean up
@@ -193,6 +193,6 @@ solve.RestoptProblem <- function(a, b, ...) {
     rm(ac_data)
   }
   .jgc()
+  # return(restopt_solution(problem, r, attributes(r)$metadata))
   return(r)
-
 }

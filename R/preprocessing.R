@@ -76,5 +76,5 @@ prepare_inputs <- function(habitat, habitat_threshold = 1, aggregation_factor = 
   )
   downsampled_habitat <- (down_sum / cell_area) >= habitat_threshold
   restorable_habitat <- cell_area - down_sum
-  return(c(downsampled_habitat, restorable_habitat))
+  return(c(downsampled_habitat, restorable_habitat, cell_area))
 }

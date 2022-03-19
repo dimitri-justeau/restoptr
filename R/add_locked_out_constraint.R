@@ -115,3 +115,61 @@ add_locked_out_constraint <- function(problem, data) {
     )
   )
 }
+
+#' @export
+add_locked_out_constraint_2 <- function(problem, data) {
+  # assert argument is valid
+  assertthat::assert_that(
+    inherits(problem, "RestoptProblem"),
+    inherits(data, "SpatRaster") || inherits(data, "SpatVector")
+  )
+  ## further checks
+  if (inherits(data, "SpatRaster")) {
+    assertthat::assert_that(
+      terra::hasValues(data)
+    )
+    original_res <- terra::compareGeom(
+      problem$data$original_habitat, data, stopiffalse = FALSE
+    )
+    assertthat::assert_that(
+      terra::compareGeom(
+        problem$data$existing_habitat, data, stopiffalse = FALSE
+      ) || original_res,
+      msg = paste(
+        "argument to \"data\" has different spatial properties to",
+        "the \"existing_habitat\" and \"original_habitat\" data in",
+        "the problem"
+      )
+    )
+    if (original_res) {
+      down_sum <- terra::aggregate(
+        data,
+        fact = problem$data$aggregation_factor,
+        fun = "sum",
+        na.rm = TRUE
+      )
+      data <- (down_sum / problem$data$cell_area) >= problem$data$habitat_threshold
+    }
+  } else {
+
+    data <- rasterize(data, problem$data$existing_habitat, background = 0, touches = TRUE)
+  }
+  problem$data$locked_out <- list(
+    data = data
+  )
+
+  src_locked_out <- basename(terra::sources(data)[[1]])
+
+  add_restopt_constraint(
+    problem = problem,
+    constraint = restopt_component(
+      name = paste0(
+        "locked out (",
+        "data = ", ifelse(src_locked_out != "", src_locked_out, "in memory"),
+        ")"
+      ),
+      class = c("LockedOutConstraint", "RestoptConstraint"),
+      post = function(jproblem) {} # nothing to do here
+    )
+  )
+}

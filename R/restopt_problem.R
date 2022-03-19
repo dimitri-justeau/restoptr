@@ -127,6 +127,109 @@ restopt_problem <- function(existing_habitat, restorable_habitat) {
   )
 }
 
+#' Restoration optimization problem
+#'
+#' Create a new restoration optimization problem (`RestoptProblem`) using data
+#' that describe the spatial distribution of existing habitat (potentially at
+#' high resolution), and parameters to derive a downsampled existing habitat
+#' raster, suitable for a tractable optimization, and a restorable habitat
+#' raster. Constraints can be added to a restopt problem using
+#' `add_****_constraint()` functions, and an optimization objective can be set
+#' using `set_****_objective()` functions.
+#'
+#' @param existing_habitat [terra::rast()] Raster object containing binary
+#' values that indicate if each planning unit contains habitat or not. Cells
+#' with the value `1` must correspond to existing habitat. Cells with the value
+#' `0` must correspond to degraded (or simply non-habitat) areas. Finally,
+#' `NA` (or `NO_DATA`) cells are considered to be outside of the landscape.
+#' This raster can have a high resolution, the `aggregation_factor` and the
+#' `habitat_threshold` parameters, described below, will be used to down sample
+#' the habitat raster to a tractable resolution for the optimization engine, and
+#' automatically derive the restorable habitat raster.
+#'
+#' @param habitat_threshold Numeric between 0 and 1, which corresponds to the
+#' minimum proportion of habitat that must be present within an aggregated pixel
+#' to consider it as an habitat pixel.
+#'
+#' @param aggregation_factor Integer greater than 1, which corresponds to the
+#' aggregation factor for down sampling the data. For example, if
+#' `aggregation_factor = 2`, aggregated pixel will contain 4 original pixel.
+#' See `terra::aggregate()` for more details.
+#'
+#' @return A new restoration problem (`RestoptProblem`) object.
+#'
+#' @details This function creates the base restoration optimization problem
+#' object, that can be further extended with constraints and optimization
+#' objectives. One input rasters is necessary to instantiate a restopt problem:
+#' the `existing_habitat` raster (potentially with high resolution). This raster
+#' must contains data about where are habitat areas (raster value `1`),
+#' non-habitat areas (raster value `0`), and areas that must not be considered
+#' during the solving procedure (`NA` or `NO_DATA`). The `aggregation_factor`
+#' parameter is used to down sample the `existing_habitat` to a resolution that
+#' will be tractable for the optimization engine, and the `habitat_threshold`
+#' parameter indicates the minimum proportion of habitat required in aggregated
+#' habitat pixels to consider them as habitat.
+#'
+#' @examples
+#' \dontrun{
+#' # load data
+#' habitat_data <- rast(
+#'   system.file("extdata", "habitat_hi_res.tif", package = "restoptr")
+#' )
+#'
+#' # create problem
+#' p <- restopt_problem_2(
+#'        existing_habitat = habitat_data,
+#'        aggregation_factor = 4,
+#'        habitat_threshold = 0.7
+#' )
+#'
+#' # Plot down sampled data
+#' plot(c(p$data$existing_habitat, p$data$restorable_habitat))
+#'
+#' # print problem
+#' print(p)
+#' }
+#'
+#' @export
+restopt_problem_2 <- function(existing_habitat, habitat_threshold = 1, aggregation_factor = 1) {
+  # assert arguments are valid
+  ## initial checks
+  assertthat::assert_that(
+    inherits(existing_habitat, "SpatRaster")
+  )
+  preprocessed <- prepare_inputs(
+     habitat = existing_habitat,
+     habitat_threshold = habitat_threshold,
+     aggregation_factor = aggregation_factor
+  )
+  habitat_down <- preprocessed[[1]]
+  restorable_down <- preprocessed[[2]]
+  cell_area <- preprocessed[[3]]
+  # return object
+  set_no_objective(
+    structure(
+      list(
+        data = list(
+          habitat_original = existing_habitat,
+          existing_habitat = habitat_down,
+          restorable_habitat = restorable_down,
+          aggregation_factor = aggregation_factor,
+          cell_area = cell_area,
+          habitat_threshold = habitat_threshold,
+          locked_out = list(
+            data = round(restorable_down <= 0)
+          )
+        ),
+        constraints = list(),
+        objective = NULL,
+        settings = list(precision = 4L, time_limit = 0L)
+      ),
+      class = "RestoptProblem"
+    )
+  )
+}
+
 #' Print a restoration optimization problem
 #'
 #' Display information about a restoration optimization problem.
