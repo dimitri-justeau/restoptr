@@ -17,6 +17,21 @@ NULL
 #'
 #' @return A [terra::vect()] Vector object.
 #'
+#'#' @examples
+#' \dontrun{
+#' habitat_data <- rast(
+#'   system.file("extdata", "habitat_hi_res.tif", package = "restoptr")
+#' )
+#' available <- vect(
+#'   system.file("extdata", "accessible_areas.gpkg", package = "restoptr")
+#' )
+#' locked_out <- invert_vector(
+#'   vector_layer = available,
+#'   extent = ext(habitat_data),
+#'   filter = available$ID==2
+#' )
+#' }
+#'
 #' @export
 invert_vector <- function(vector_layer, extent=NULL, filter=NULL) {
   # assert argument is valid

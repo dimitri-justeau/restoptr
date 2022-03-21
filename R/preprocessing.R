@@ -40,9 +40,12 @@ NULL
 #' \dontrun{
 #' # load data
 #' habitat_data <- rast(
-#'   system.file("extdata", "habitat.tif", package = "restoptr")
+#'   system.file("extdata", "habitat_hi_res.tif", package = "restoptr")
+#' data <- prepare_inputs(
+#'     habitat = habitat_data,
+#'     habitat_threshold = 0.7,
+#'     aggregation_factor = 16
 #' )
-#' TODO
 #' }
 #'
 #' @export

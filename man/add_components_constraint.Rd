@@ -37,27 +37,24 @@ Also see \link{add_compactness_constraint}.
 \dontrun{
 # load data
 habitat_data <- rast(
-  system.file("extdata", "habitat.tif", package = "restoptr")
+  system.file("extdata", "habitat_hi_res.tif", package = "restoptr")
 )
-
-restorable_data <- rast(
-  system.file("extdata", "restorable.tif", package = "restoptr")
-)
-
-# plot data
-plot(rast(list(habitat_data, restorable_data)), nc = 2)
 
 # create problem
 p <- restopt_problem(
-       existing_habitat = habitat_data,
-       restorable_habitat = restorable_data
-) \%>\%
-add_restorable_constraint(
-  min_restore = 10,
-  max_restore = 100,
-  cell_area = 23
-) \%>\%
-add_components_constraint(1, 1)
+    existing_habitat = habitat_data,
+    aggregation_factor = 16,
+    habitat_threshold = 0.7
+  ) \%>\%
+  add_restorable_constraint(
+    min_restore = 10,
+    max_restore = 100,
+    cell_area = 23
+  ) \%>\%
+  add_components_constraint(1, 1)
+
+# plot preprocessed data
+plot(rast(list(p$data$existing_habitat, p$data$restorable_habitat)), nc = 2)
 
 # print problem
 print(p)

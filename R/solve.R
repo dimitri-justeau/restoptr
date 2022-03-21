@@ -8,12 +8,12 @@ NULL
 #' @details This function relies on the Choco-solver (https://choco-solver.org/)
 #' to solve a restoration optimization problem. If the solver finds a solution,
 #' it outputs a raster with 5 possible values:
-#'   - NA: corresponds to the NA (or NO_DATA) values in the input habitat raster.
-#'     -1: corresponds to non-habitat areas that were locked out.
-#'   - 0:  corresponds to non-habitat areas that were available for selection.
-#'     1:  corresponds to habitat areas.
-#'     2:  corresponds to selected planning units for restoration.
-#' If the solve function return an no-solution error, it is either because the
+#'    NA : NA (or NO_DATA) areas from the input habitat raster.
+#'    -1 : non-habitat areas that were locked out.
+#'     0 : non-habitat areas that were available for selection.
+#'     1 : habitat areas.
+#'     2 : selected planning units for restoration.
+#' If the solve function return a no-solution error, it is either because the
 #' solver could not find a solution within the time limit that was set
 #' (see \link{add_settings}), or because the solver has detected that this is
 #' not possible to satisfy the constraints (the constraints are contradictory).
@@ -31,27 +31,20 @@ NULL
 #'
 #' @examples
 #' \dontrun{
-#' #' # load data
+#' # load data
 #' habitat_data <- rast(
-#'   system.file("extdata", "habitat.tif", package = "restoptr")
+#'   system.file("extdata", "habitat_hi_res.tif", package = "restoptr")
 #' )
 #'
-#' restorable_data <- rast(
-#'   system.file("extdata", "restorable.tif", package = "restoptr")
+#' available <- vect(
+#'   system.file("extdata", "accessible_areas.gpkg", package = "restoptr")
 #' )
-#'
-#' locked_out_data <- rast(
-#'  system.file("extdata", "locked-out.tif", package = "restoptr")
-#' )
-#'
-#' # plot data
-#' plot(rast(list(habitat_data, restorable_data, locked_out_data)), nc = 3)
 #'
 #' # create problem with locked out constraints
-#' p <-
-#'   restopt_problem(
+#' p <- restopt_problem(
 #'     existing_habitat = habitat_data,
-#'     restorable_habitat = restorable_data
+#'     aggregation_factor = 16,
+#'     habitat_threshold = 0.7
 #'   ) %>%
 #'   set_max_mesh_objective() %>%
 #'   add_restorable_constraint(
@@ -59,7 +52,7 @@ NULL
 #'     max_restore = 5,
 #'     cell_area = 1
 #'   ) %>%
-#'   add_locked_out_constraint(data = locked_out_data) %>%
+#'   add_available_areas_constraint(available) %>%
 #'   add_settings(time_limit = 1)
 #'
 #' # print problem

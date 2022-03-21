@@ -42,17 +42,17 @@ NULL
 #' )
 #'
 #' locked_out_data <- rast(
-#'  system.file("extdata", "locked-out.tif", package = "restoptr")
+#'  system.file("extdata", "locked_out.tif", package = "restoptr")
 #' )
 #'
 #' # plot data
-#' plot(rast(list(habitat_data, restorable_data, locked_out_data)), nc = 3)
+#' plot(rast(list(habitat_data, locked_out_data)), nc = 2)
 #'
 #' # create problem with locked out constraints
-#' p <-
-#'   restopt_problem(
+#' p <- restopt_problem(
 #'     existing_habitat = habitat_data,
-#'     restorable_habitat = restorable_data
+#'     aggregation_factor = 16,
+#'     habitat_threshold = 0.7
 #'   ) %>%
 #'   set_max_iic_objective() %>%
 #'   add_restorable_constraint(

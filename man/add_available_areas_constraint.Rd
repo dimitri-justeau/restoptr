@@ -49,7 +49,7 @@ habitat_data <- rast(
   system.file("extdata", "habitat_hi_res.tif", package = "restoptr")
 )
 
-available <- rast(
+available <- vect(
 system.file("extdata", "accessible_areas.gpkg", package = "restoptr")
 )
 
@@ -58,7 +58,7 @@ plot(habitat_data)
 plot(available, add=TRUE)
 
 # create problem with available areas constraints
-  restopt_problem(
+p <- restopt_problem(
     existing_habitat = habitat_data,
     aggregation_factor = 16,
     habitat_threshold = 0.7
@@ -84,4 +84,5 @@ plot(
   col = c("#E5E5E5", "#fff1d6", "#b2df8a", "#1f78b4")
 )
 }
+
 }

@@ -45,7 +45,7 @@ NULL
 #'   system.file("extdata", "habitat_hi_res.tif", package = "restoptr")
 #' )
 #'
-#' available <- rast(
+#' available <- vect(
 #' system.file("extdata", "accessible_areas.gpkg", package = "restoptr")
 #' )
 #'
@@ -54,8 +54,7 @@ NULL
 #' plot(available, add=TRUE)
 #'
 #' # create problem with available areas constraints
-# p <-
-#'   restopt_problem(
+#' p <- restopt_problem(
 #'     existing_habitat = habitat_data,
 #'     aggregation_factor = 16,
 #'     habitat_threshold = 0.7
@@ -81,6 +80,7 @@ NULL
 #'   col = c("#E5E5E5", "#fff1d6", "#b2df8a", "#1f78b4")
 #' )
 #' }
+#'
 #' @export
 add_available_areas_constraint <- function(problem, data) {
   # assert argument is valid

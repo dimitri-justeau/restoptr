@@ -35,33 +35,30 @@ NULL
 #'
 #' @examples
 #' \dontrun{
-#' #load data
+#' # load data
 #' habitat_data <- rast(
-#'   system.file("extdata", "habitat.tif", package = "restoptr")
+#'   system.file("extdata", "habitat_hi_res.tif", package = "restoptr")
 #' )
-#'
-#' restorable_data <- rast(
-#'   system.file("extdata", "restorable.tif", package = "restoptr")
-#' )
-#'
-#' # plot data
-#' plot(rast(list(habitat_data, restorable_data)), nc = 2)
 #'
 #' # create problem
 #' p <- restopt_problem(
-#'        existing_habitat = habitat_data,
-#'        restorable_habitat = restorable_data
-#' ) %>%
-#' add_restorable_constraint(
-#'   min_restore = 200,
-#'   max_restore = 300,
-#'   cell_area = 23,
-#'   min_proportion = 0.7
-#' ) %>%
-#' add_compactness_constraint(5)
+#'     existing_habitat = habitat_data,
+#'     aggregation_factor = 16,
+#'     habitat_threshold = 0.7
+#'   ) %>%
+#'   add_restorable_constraint(
+#'     min_restore = 200,
+#'     max_restore = 300,
+#'     cell_area = 23,
+#'     min_proportion = 0.7
+#'   ) %>%
+#'   add_compactness_constraint(5)
 #'
 #' # print problem
 #' print(p)
+#'
+#' # plot preprocessed data
+#' plot(rast(list(p$data$existing_habitat, p$data$restorable_habitat, p$data$locked_out)), nc = 3)
 #'
 #' # Solve problem
 #' s <- solve(p)

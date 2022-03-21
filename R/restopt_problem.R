@@ -134,21 +134,16 @@ restopt_problem <- function(existing_habitat, habitat_threshold = 1, aggregation
 #' \dontrun{
 #' #' # load data
 #' habitat_data <- rast(
-#'   system.file("extdata", "habitat.tif", package = "restoptr")
+#'   system.file("extdata", "habitat_hi_res.tif", package = "restoptr")
 #' )
-#'
-#' restorable_data <- rast(
-#'   system.file("extdata", "restorable.tif", package = "restoptr")
-#' )
-#'
-#' # plot data
-#' plot(rast(list(habitat_data, restorable_data)), nc = 2)
 #'
 #' # create problem
-#' p <- restopt_problem(
+#' p <- restopt_problem_2(
 #'        existing_habitat = habitat_data,
-#'        restorable_habitat = restorable_data
+#'        aggregation_factor = 4,
+#'        habitat_threshold = 0.7
 #' )
+#'
 #' # print problem
 #' print(p)
 #' }
