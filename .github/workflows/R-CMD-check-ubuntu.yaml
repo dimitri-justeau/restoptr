@@ -11,6 +11,7 @@ on:
     branches:
       - main
       - master
+  workflow_dispatch
 
 name: Ubuntu
 
