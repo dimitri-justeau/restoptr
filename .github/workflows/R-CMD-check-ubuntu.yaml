@@ -7,11 +7,11 @@ on:
     branches:
       - main
       - master
+      - data_preprocess
   pull_request:
     branches:
       - main
       - master
-  workflow_dispatch: {}
 
 name: Ubuntu
 
