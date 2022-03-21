@@ -67,7 +67,6 @@ p <- restopt_problem(
   add_restorable_constraint(
     min_restore = 5,
     max_restore = 5,
-    cell_area = 1
   ) \%>\%
   add_available_areas_constraint(available) \%>\%
   add_settings(time_limit = 1)

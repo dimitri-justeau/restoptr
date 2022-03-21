@@ -10,7 +10,7 @@ test_that("restopt_problem", {
     add_locked_out_constraint(locked_out) %>%
     add_components_constraint(min_nb_components = 1, max_nb_components = 1) %>%
     add_compactness_constraint(max_diameter = 6) %>%
-    add_restorable_constraint(min_restore = 90, max_restore = 110, cell_area = 23, min_proportion = 0.7) %>%
+    add_restorable_constraint(min_restore = 90, max_restore = 110, unit = "ha", min_proportion = 0.7) %>%
     set_max_mesh_objective()
 
   problem <- add_settings(problem, time_limit = 30)

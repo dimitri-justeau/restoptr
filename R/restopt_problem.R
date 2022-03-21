@@ -154,8 +154,21 @@ print.RestoptProblem <- function(x, ...) {
       "-----------------------------------------------------------------",
     "\n                         Restopt problem                         "),
     "\n-----------------------------------------------------------------")))
+  source_original_habitat <- basename(terra::sources(x$data$habitat_original)[[1]])
   source_habitat <- basename(terra::sources(x$data$existing_habitat)[[1]])
   source_restorable <- basename(terra::sources(x$data$restorable_habitat)[[1]])
+  message(
+    crayon::bold(crayon::silver("original habitat:    ")),
+    crayon::cyan(ifelse(source_habitat != "", source_habitat, "in memory"))
+  )
+  message(
+    crayon::bold(crayon::silver("aggregation factor:  ")),
+    crayon::cyan(x$data$aggregation_factor)
+  )
+  message(
+    crayon::bold(crayon::silver("habitat threshold:   ")),
+    crayon::cyan(x$data$habitat$threshold)
+  )
   message(
     crayon::bold(crayon::silver("existing habitat:    ")),
     crayon::cyan(ifelse(source_habitat != "", source_habitat, "in memory"))

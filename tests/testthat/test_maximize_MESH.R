@@ -8,12 +8,12 @@ test_that("maximize_mesh", {
     add_locked_out_constraint(locked_out) %>%
     add_components_constraint(min_nb_components = 1, max_nb_components = 1) %>%
     add_compactness_constraint(max_diameter = 6) %>%
-    add_restorable_constraint(min_restore = 90, max_restore = 110, cell_area = 23, min_proportion = 0.7) %>%
+    add_restorable_constraint(min_restore = 90, max_restore = 110, unit = "ha", min_proportion = 0.7) %>%
     set_max_mesh_objective()
   problem <- add_settings(problem, time_limit = 30)
   result <- solve(problem)
-  testthat::expect_s4_class(result, "SpatRaster")
-  metadata <- attributes(result)$metadata
+  testthat::expect_s4_class(result, "RestoptSolution")
+  metadata <- get_metadata(result, area_unit = "ha")
   testthat::expect_lte(metadata$solving_time, 30)
   testthat::expect_gte(metadata$min_restore, 90)
   testthat::expect_lte(metadata$min_restore, 110)

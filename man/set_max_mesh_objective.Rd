@@ -49,7 +49,6 @@ p <- restopt_problem(
   add_restorable_constraint(
     min_restore = 5,
     max_restore = 5,
-    cell_area = 1
   ) \%>\%
   add_locked_out_constraint(data = locked_out_data) \%>\%
   add_settings(time_limit = 1)

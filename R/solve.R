@@ -27,7 +27,7 @@ NULL
 #' @param ... Additional arguments:
 #' `verbose`: if TRUE, output solver logs. (FALSE by default)
 #'
-#' @return A [terra::rast()] object.
+#' @return A [RestoptSolution] object.
 #'
 #' @examples
 #' \dontrun{
@@ -50,7 +50,6 @@ NULL
 #'   add_restorable_constraint(
 #'     min_restore = 5,
 #'     max_restore = 5,
-#'     cell_area = 1
 #'   ) %>%
 #'   add_available_areas_constraint(available) %>%
 #'   add_settings(time_limit = 1)
@@ -186,6 +185,5 @@ solve.RestoptProblem <- function(a, b, ...) {
     rm(ac_data)
   }
   .jgc()
-  # return(restopt_solution(problem, r, attributes(r)$metadata))
-  return(r)
+  return(restopt_solution(problem, r, attributes(r)$metadata))
 }

@@ -49,7 +49,6 @@ p <- restopt_problem(
   add_restorable_constraint(
     min_restore = 10,
     max_restore = 100,
-    cell_area = 23
   ) \%>\%
   add_components_constraint(1, 1)
 

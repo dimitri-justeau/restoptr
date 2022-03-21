@@ -44,7 +44,6 @@ p <- restopt_problem(
   add_restorable_constraint(
     min_restore = 200,
     max_restore = 300,
-    cell_area = 23
   ) \%>\%
   add_compactness_constraint(4)
 
