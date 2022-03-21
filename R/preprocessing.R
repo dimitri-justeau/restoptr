@@ -49,7 +49,9 @@ NULL
 prepare_inputs <- function(habitat, habitat_threshold = 1, aggregation_factor = 1) {
   ## initial checks
   assertthat::assert_that(
-    inherits(habitat, "SpatRaster")
+    inherits(habitat, "SpatRaster"),
+    habitat_threshold >= 0 && habitat_threshold <= 1,
+    aggregation_factor >= 1
   )
   ## further checks
   assertthat::assert_that(

@@ -65,6 +65,7 @@ Suggests:
 Roxygen: list(markdown = TRUE)
 Collate:
     'internal.R'
+    'add_available_areas_constraint.R'
     'add_compactness_constraint.R'
     'add_components_constraint.R'
     'add_connected_constraint.R'

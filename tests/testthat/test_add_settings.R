@@ -2,10 +2,10 @@ context("add_settings")
 
 test_that("add_settings", {
   # Create problem
-  habitat <- terra::rast(system.file("extdata", "habitat.tif", package = "restoptr"))
-  restorable <- terra::rast(system.file("extdata", "restorable.tif", package = "restoptr"))
-  locked_out <- terra::rast(system.file("extdata", "locked-out.tif", package = "restoptr"))
-  problem <- restopt_problem(habitat, restorable)
+  habitat <- terra::rast(system.file("extdata", "habitat_hi_res.tif", package = "restoptr"))
+  accessible <- terra::vect(system.file("extdata", "accessible_areas.gpkg", package = "restoptr"))
+  locked_out <- invert_vector(accessible, extent = ext(habitat))
+  problem <- restopt_problem(habitat, aggregation_factor = 16, habitat_threshold = 0.7)
   # Check default parameters
   testthat::expect_equal(problem$settings$precision, 4L)
   testthat::expect_equal(problem$settings$time_limit, 0L)
@@ -23,8 +23,8 @@ test_that("add_settings", {
   result <- solve(problem)
   metadata <- attributes(result)$metadata
   # Assert that the solving time is less than 1s (more or less 10%, thus 1.1s)
-  testthat::expect_true(metadata$solving.time..ms. < 1100)
+  testthat::expect_true(metadata$solving_time < 1100)
   # Assert that the precision is correct
-  optimal_value <- metadata$MESH_best
+  optimal_value <- metadata$mesh_best
   testthat::expect_equal(round(optimal_value, 2), optimal_value)
 })

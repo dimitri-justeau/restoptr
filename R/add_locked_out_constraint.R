@@ -9,13 +9,16 @@ NULL
 #'
 #' @inheritParams set_max_mesh_objective
 #'
-#' @param data [terra::rast()] Raster object containing binary values.
-#'  that indicate which planning units cannot be selected for any restoration
-#'  (i.e., cells with a value equal one are locked out from the solution).
+#' @param data [terra::rast()]  or [terra::vect()] Either a raster object
+#' containing binary values hat indicate which planning units cannot be selected
+#' for any restoration (i.e., cells with a value equal one are locked out from
+#' the solution), or a vector object whose features correspond to the locked
+#' out areas. See the function `add_available_areas_constraint()` to get a locked
+#' out constraint from allowed restoration areas.
 #'
 #' @details
 #' Locked out constraints can be used to incorporate a wide range of
-#' criteria into conservation planning problems.
+#' criteria into restoration planning problems.
 #' They can be used to account for existing land-use practices,
 #' feasibility of restoration activities, and stakeholder preferences.
 #' For example, locked out constraints can be used to
@@ -28,16 +31,14 @@ NULL
 #' Furthermore, if stakeholders require solutions that do not prioritize
 #' particular places for restoration, then locked out constraints
 #' can also be used to achieve this.
+#' See `add_available_areas_constraint()`, which achieve the same as the locked
+#' out constraint by defining areas that ARE available for restoration.
 #'
 #' @examples
 #' \dontrun{
 #' # load data
 #' habitat_data <- rast(
-#'   system.file("extdata", "habitat.tif", package = "restoptr")
-#' )
-#'
-#' restorable_data <- rast(
-#'   system.file("extdata", "restorable.tif", package = "restoptr")
+#'   system.file("extdata", "habitat_hi_res.tif", package = "restoptr")
 #' )
 #'
 #' locked_out_data <- rast(
@@ -79,48 +80,6 @@ add_locked_out_constraint <- function(problem, data) {
   # assert argument is valid
   assertthat::assert_that(
     inherits(problem, "RestoptProblem"),
-    inherits(data, "SpatRaster")
-  )
-  ## further checks
-  assertthat::assert_that(
-    terra::hasValues(data)
-  )
-  assertthat::assert_that(
-    terra::compareGeom(
-      problem$data$existing_habitat, data, stopiffalse = FALSE
-    ),
-    msg = paste(
-      "argument to \"data\" has different spatial properties to",
-      "the \"existing_habitat\" and \"restorable_habitat\" data in",
-      "the problem"
-    )
-  )
-
-  problem$data$locked_out <- list(
-    data = data
-  )
-
-  src_locked_out <- basename(terra::sources(data)[[1]])
-
-  add_restopt_constraint(
-    problem = problem,
-    constraint = restopt_component(
-      name = paste0(
-        "locked out (",
-        "data = ", ifelse(src_locked_out != "", src_locked_out, "in memory"),
-        ")"
-      ),
-      class = c("LockedOutConstraint", "RestoptConstraint"),
-      post = function(jproblem) {} # nothing to do here
-    )
-  )
-}
-
-#' @export
-add_locked_out_constraint_2 <- function(problem, data) {
-  # assert argument is valid
-  assertthat::assert_that(
-    inherits(problem, "RestoptProblem"),
     inherits(data, "SpatRaster") || inherits(data, "SpatVector")
   )
   ## further checks
@@ -155,9 +114,7 @@ add_locked_out_constraint_2 <- function(problem, data) {
 
     data <- rasterize(data, problem$data$existing_habitat, background = 0, touches = TRUE)
   }
-  problem$data$locked_out <- list(
-    data = data
-  )
+  problem$data$locked_out <- data
 
   src_locked_out <- basename(terra::sources(data)[[1]])
 

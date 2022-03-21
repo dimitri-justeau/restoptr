@@ -2,9 +2,9 @@ context("add_compactness_constraint")
 
 test_that("add_compactness_constraint", {
   # Create problem
-  habitat <- terra::rast(system.file("extdata", "habitat.tif", package = "restoptr"))
-  restorable <- terra::rast(system.file("extdata", "restorable.tif", package = "restoptr"))
-  problem <- restopt_problem(habitat, restorable) %>%
+  habitat <- terra::rast(system.file("extdata", "habitat_hi_res.tif", package = "restoptr"))
+  accessible <- terra::vect(system.file("extdata", "accessible_areas.gpkg", package = "restoptr"))
+  problem <- restopt_problem(habitat, aggregation_factor = 16, habitat_threshold = 0.7) %>%
     add_compactness_constraint(max_diameter = 6)
   result <- solve(problem)
   rest_cells <- which(result[,] == 2)

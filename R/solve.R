@@ -90,13 +90,13 @@ solve.RestoptProblem <- function(a, b, ...) {
   ## check if data already saved to disk
   eh_on_disk <- terra_on_disk(a$data$existing_habitat)
   rh_on_disk <- terra_on_disk(a$data$restorable_habitat)
-  ac_on_disk <- terra_on_disk(a$data$locked_out$data)
+  ac_on_disk <- terra_on_disk(a$data$locked_out)
   ## save rasters to disk if needed
   eh_data <- terra_force_disk(a$data$existing_habitat, datatype="INT4S")
   rh_data <- terra_force_disk(a$data$restorable_habitat)
   # Force NODATA values of locked out raster to avoid terra writing them as 0
-  a$data$locked_out$data[is.na(a$data$locked_out$data)] <- -9999
-  ac_data <- terra_force_disk(a$data$locked_out$data, NAflag = -9999)
+  a$data$locked_out[is.na(a$data$locked_out)] <- -9999
+  ac_data <- terra_force_disk(a$data$locked_out, NAflag = -9999)
 
   # import data
   jdata <- rJava::.jnew(

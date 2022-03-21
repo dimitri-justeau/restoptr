@@ -9,9 +9,12 @@ add_locked_out_constraint(problem, data)
 \arguments{
 \item{problem}{\code{\link[=restopt_problem]{restopt_problem()}} Restoration problem object.}
 
-\item{data}{\code{\link[terra:rast]{terra::rast()}} Raster object containing binary values.
-that indicate which planning units cannot be selected for any restoration
-(i.e., cells with a value equal one are locked out from the solution).}
+\item{data}{\code{\link[terra:rast]{terra::rast()}}  or \code{\link[terra:vect]{terra::vect()}} Either a raster object
+containing binary values hat indicate which planning units cannot be selected
+for any restoration (i.e., cells with a value equal one are locked out from
+the solution), or a vector object whose features correspond to the locked
+out areas. See the function \code{add_available_areas_constraint()} to get a locked
+out constraint from allowed restoration areas.}
 }
 \description{
 Add constraint to a restoration problem (\code{\link[=restopt_problem]{restopt_problem()}}) object
@@ -20,7 +23,7 @@ for restoration activities.
 }
 \details{
 Locked out constraints can be used to incorporate a wide range of
-criteria into conservation planning problems.
+criteria into restoration planning problems.
 They can be used to account for existing land-use practices,
 feasibility of restoration activities, and stakeholder preferences.
 For example, locked out constraints can be used to
@@ -33,16 +36,14 @@ could not be implemented.
 Furthermore, if stakeholders require solutions that do not prioritize
 particular places for restoration, then locked out constraints
 can also be used to achieve this.
+See \code{add_available_areas_constraint()}, which achieve the same as the locked
+out constraint by defining areas that ARE available for restoration.
 }
 \examples{
 \dontrun{
 # load data
 habitat_data <- rast(
-  system.file("extdata", "habitat.tif", package = "restoptr")
-)
-
-restorable_data <- rast(
-  system.file("extdata", "restorable.tif", package = "restoptr")
+  system.file("extdata", "habitat_hi_res.tif", package = "restoptr")
 )
 
 locked_out_data <- rast(
