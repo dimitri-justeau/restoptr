@@ -7,7 +7,7 @@
 restopt_solution(restopt_problem, solution_raster, metadata)
 }
 \arguments{
-\item{restopt_problem}{\code{\link{RestoptProblem}} Reference to the problem corresponding
+\item{restopt_problem}{\code{\link[=restopt_problem]{restopt_problem()}} Reference to the problem corresponding
 to this solution.}
 
 \item{solution_raster}{\code{\link[terra:rast]{terra::rast()}} Solution raster.}
@@ -15,7 +15,7 @@ to this solution.}
 \item{metadata}{\code{\link{list}} List containing metadata attributes of the solution.}
 }
 \value{
-A new restoration problem solution (\code{RestoptSolution}).
+A new restoration problem solution (\code{restopt_solution()}).
 }
 \description{
 An object representing a restopt problem solution. It is basically a

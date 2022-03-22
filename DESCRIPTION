@@ -49,7 +49,8 @@ Imports:
     utils,
     assertthat (>= 0.2.1),
     magrittr,
-    crayon (>= 1.4.1)
+    crayon (>= 1.4.1),
+    methods
 Depends:
     R (>= 4.1.0),
     terra (>= 1.5-12),
@@ -61,7 +62,8 @@ Suggests:
     rmarkdown (>= 1.10),
     landscapemetrics (>= 1.5.4),
     raster (>= 3.5),
-    rgdal
+    rgdal,
+    fansi
 Roxygen: list(markdown = TRUE)
 Collate:
     'internal.R'

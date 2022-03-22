@@ -8,7 +8,7 @@ test_that("add_components_constraint", {
   result <- solve(problem)
   if (require(landscapemetrics)) {
     np <- landscapemetrics::lsm_c_np(result, directions = 4)
-    testthat::expect_equal(np[np$class == 2,]$value, 1)
+    testthat::expect_equal(np[np$class == 3,]$value, 1)
   }
   # Create problem with 2 components
   problem <- restopt_problem(habitat, aggregation_factor = 16, habitat_threshold = 0.7) %>%
@@ -16,7 +16,7 @@ test_that("add_components_constraint", {
   result <- solve(problem)
   if (require(landscapemetrics)) {
     np <- landscapemetrics::lsm_c_np(result, directions = 4)
-    testthat::expect_equal(np[np$class == 2,]$value, 2)
+    testthat::expect_equal(np[np$class == 3,]$value, 2)
   }
   # Create problem with 5 components
   problem <- restopt_problem(habitat, aggregation_factor = 16, habitat_threshold = 0.7) %>%
@@ -24,7 +24,7 @@ test_that("add_components_constraint", {
   result <- solve(problem)
   if (require(landscapemetrics)) {
     np <- landscapemetrics::lsm_c_np(result, directions = 4)
-    testthat::expect_equal(np[np$class == 2,]$value, 5)
+    testthat::expect_equal(np[np$class == 3,]$value, 5)
   }
   # Create problem with between 6 and 10 components
   problem <- restopt_problem(habitat, aggregation_factor = 16, habitat_threshold = 0.7) %>%
@@ -32,7 +32,7 @@ test_that("add_components_constraint", {
   result <- solve(problem)
   if (require(landscapemetrics)) {
     np <- landscapemetrics::lsm_c_np(result, directions = 4)
-    testthat::expect_gte(np[np$class == 2,]$value, 6)
-    testthat::expect_lte(np[np$class == 2,]$value, 10)
+    testthat::expect_gte(np[np$class == 3,]$value, 6)
+    testthat::expect_lte(np[np$class == 3,]$value, 10)
   }
 })

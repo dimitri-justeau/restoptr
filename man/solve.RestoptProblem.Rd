@@ -15,7 +15,7 @@
 \code{verbose}: if TRUE, output solver logs. (FALSE by default)}
 }
 \value{
-A \link{RestoptSolution} object.
+A \code{\link[=restopt_solution]{restopt_solution()}} object.
 }
 \description{
 Solve a restoration optimization problem to generate a solution.
@@ -25,10 +25,10 @@ This function relies on the Choco-solver (https://choco-solver.org/)
 to solve a restoration optimization problem. If the solver finds a solution,
 it outputs a raster with 5 possible values:
 NA : NA (or NO_DATA) areas from the input habitat raster.
--1 : non-habitat areas that were locked out.
-0 : non-habitat areas that were available for selection.
-1 : habitat areas.
-2 : selected planning units for restoration.
+0 : non-habitat areas that were locked out.
+1 : non-habitat areas that were available for selection.
+2 : habitat areas.
+3 : selected planning units for restoration.
 If the solve function return a no-solution error, it is either because the
 solver could not find a solution within the time limit that was set
 (see \link{add_settings}), or because the solver has detected that this is

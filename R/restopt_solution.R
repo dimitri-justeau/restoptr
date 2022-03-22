@@ -9,21 +9,23 @@ setClass("RestoptSolution", contains = "SpatRaster", slots = representation(meta
 #' An object representing a restopt problem solution. It is basically a
 #' SpatRaster with a few metadata attributes added.
 #'
-#' @param restopt_problem [`RestoptProblem`] Reference to the problem corresponding
+#' @param restopt_problem [`restopt_problem()`] Reference to the problem corresponding
 #' to this solution.
 #'
 #' @param solution_raster [terra::rast()] Solution raster.
 #'
 #' @param metadata [`list`] List containing metadata attributes of the solution.
 #'
-#' @return A new restoration problem solution (`RestoptSolution`).
+#' @return A new restoration problem solution (`restopt_solution()`).
+#'
+#' @importFrom methods as
 #'
 restopt_solution <- function(restopt_problem, solution_raster, metadata) {
   # assert arguments are valid
   ## initial checks
   assertthat::assert_that(
     inherits(solution_raster, "SpatRaster"),
-    inherits(problem, "RestoptProblem"),
+    inherits(restopt_problem, "RestoptProblem"),
     is.list(metadata)
   )
   ## further checks
@@ -35,9 +37,16 @@ restopt_solution <- function(restopt_problem, solution_raster, metadata) {
     )
   )
   # convert object to RestoptSolution
+  names(solution_raster) <- "Restoration problem solution"
+  levels(solution_raster) <- c(
+    "Locked out",
+    "Available",
+    "Habitat",
+    "Restoration"
+  )
   solution <- as(solution_raster, "RestoptSolution")
   solution@metadata <- metadata
-  solution@problem <- problem
+  solution@problem <- restopt_problem
   return(solution)
 }
 
@@ -50,8 +59,11 @@ restopt_solution <- function(restopt_problem, solution_raster, metadata) {
 #' kilometers), and "cells" (cells from the original input habitat raster).
 #' Note that the solving time is expressed in seconds.
 #'
-#' @param restopt_solution [`RestoptSolution`] Restopt solution
+#' @param restopt_solution [`restopt_solution()`] Restopt solution
 #' to this solution.
+#'
+#' @param area_unit Unit of the area ("ha" for hectares, "m" for square meters,
+#' "km" for square kilometers)
 #'
 #' @return A list containing the characteristics of the restopt solution.
 #'

@@ -6,7 +6,7 @@ test_that("add_compactness_constraint", {
   problem <- restopt_problem(habitat, aggregation_factor = 16, habitat_threshold = 0.7) %>%
     add_compactness_constraint(max_diameter = 6)
   result <- solve(problem)
-  rest_cells <- which(result[,] == 2)
+  rest_cells <- which(result[,] == 3)
   for (i in 1:length(rest_cells)) {
     for (j in i:length(rest_cells)) {
       if (i != j) {

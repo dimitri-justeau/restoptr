@@ -17,7 +17,7 @@ NULL
 #'
 #' @return A [terra::vect()] Vector object.
 #'
-#'#' @examples
+#' @examples
 #' \dontrun{
 #' habitat_data <- rast(
 #'   system.file("extdata", "habitat_hi_res.tif", package = "restoptr")

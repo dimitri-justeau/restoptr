@@ -7,8 +7,11 @@
 get_metadata(restopt_solution, area_unit = "ha")
 }
 \arguments{
-\item{restopt_solution}{\code{\link{RestoptSolution}} Restopt solution
+\item{restopt_solution}{\code{\link[=restopt_solution]{restopt_solution()}} Restopt solution
 to this solution.}
+
+\item{area_unit}{Unit of the area ("ha" for hectares, "m" for square meters,
+"km" for square kilometers)}
 }
 \value{
 A list containing the characteristics of the restopt solution.

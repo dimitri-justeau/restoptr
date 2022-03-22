@@ -11,7 +11,7 @@ test_that("add_available_areas_constraint", {
     add_settings(time_limit = 30)
   result <- solve(problem, verbose=TRUE)
   testthat::expect_true(inherits(result, "SpatRaster"))
-  wrong <- result == 2 & problem$data$locked_out
+  wrong <- result == 3 & problem$data$locked_out
   testthat::expect_equal(length(which(wrong[,] == 1)), 0)
   # Test from raster data
   habitat <- terra::rast(system.file("extdata", "habitat_hi_res.tif", package = "restoptr"))
@@ -23,7 +23,7 @@ test_that("add_available_areas_constraint", {
     add_settings(time_limit = 30)
   result <- solve(problem, verbose=TRUE)
   testthat::expect_true(inherits(result, "SpatRaster"))
-  wrong <- result == 2 & problem$data$locked_out
+  wrong <- result == 3 & problem$data$locked_out
   testthat::expect_equal(length(which(wrong[,] == 1)), 0)
   # Test wrong iput raster data
   habitat <- terra::rast(system.file("extdata", "habitat_hi_res.tif", package = "restoptr"))

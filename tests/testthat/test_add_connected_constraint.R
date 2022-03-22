@@ -8,7 +8,7 @@ test_that("add_connected_constraint", {
   result <- solve(problem)
   if (require(landscapemetrics)) {
     np <- landscapemetrics::lsm_c_np(result, directions = 4)
-    testthat::expect_equal(np[np$class == 2,]$value, 1)
+    testthat::expect_equal(np[np$class == 3,]$value, 1)
   }
   # Create problem with optimization
   problem <- restopt_problem(habitat, aggregation_factor = 16, habitat_threshold = 0.7) %>%
@@ -17,6 +17,6 @@ test_that("add_connected_constraint", {
   result <- solve(problem)
   if (require(landscapemetrics)) {
     np <- landscapemetrics::lsm_c_np(result, directions = 4)
-    testthat::expect_equal(np[np$class == 2,]$value, 1)
+    testthat::expect_equal(np[np$class == 3,]$value, 1)
   }
 })

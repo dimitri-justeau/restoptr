@@ -110,9 +110,9 @@ add_locked_out_constraint <- function(problem, data) {
       )
     }
   } else {
-
     data <- rasterize(data, problem$data$existing_habitat, background = 0, touches = TRUE)
   }
+  data[is.na(data) & !is.na(problem$data$existing_habitat)] <- 0
   problem$data$locked_out <- data
 
   src_locked_out <- basename(terra::sources(data)[[1]])

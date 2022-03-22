@@ -9,10 +9,10 @@ NULL
 #' to solve a restoration optimization problem. If the solver finds a solution,
 #' it outputs a raster with 5 possible values:
 #'    NA : NA (or NO_DATA) areas from the input habitat raster.
-#'    -1 : non-habitat areas that were locked out.
-#'     0 : non-habitat areas that were available for selection.
-#'     1 : habitat areas.
-#'     2 : selected planning units for restoration.
+#'     0 : non-habitat areas that were locked out.
+#'     1 : non-habitat areas that were available for selection.
+#'     2 : habitat areas.
+#'     3 : selected planning units for restoration.
 #' If the solve function return a no-solution error, it is either because the
 #' solver could not find a solution within the time limit that was set
 #' (see \link{add_settings}), or because the solver has detected that this is
@@ -27,7 +27,7 @@ NULL
 #' @param ... Additional arguments:
 #' `verbose`: if TRUE, output solver logs. (FALSE by default)
 #'
-#' @return A [RestoptSolution] object.
+#' @return A [restopt_solution()] object.
 #'
 #' @examples
 #' \dontrun{
@@ -84,7 +84,7 @@ solve.RestoptProblem <- function(a, b, ...) {
   rh_on_disk <- terra_on_disk(a$data$restorable_habitat)
   ac_on_disk <- terra_on_disk(a$data$locked_out)
   ## save rasters to disk if needed
-  eh_data <- terra_force_disk(a$data$existing_habitat, datatype="INT4S")
+  eh_data <- terra_force_disk(round(a$data$existing_habitat), datatype="INT4S")
   rh_data <- terra_force_disk(a$data$restorable_habitat)
   # Force NODATA values of locked out raster to avoid terra writing them as 0
   a$data$locked_out[is.na(a$data$locked_out)] <- -9999
@@ -155,7 +155,7 @@ solve.RestoptProblem <- function(a, b, ...) {
     if (status == "TERMINATED") {
       cat(crayon::green(paste("Good news: the solver found a solution statisfying",
                               "the constraints that was proven optimal !",
-                              "(solving time =", solving_time, "s)\n")))
+                              "(solving time =", solving_time, "s)")), "\n")
     }
     if (status == "STOPPED") {
       cat(crayon::yellow(paste("Note: The current solution is the best that the",
@@ -163,12 +163,12 @@ solve.RestoptProblem <- function(a, b, ...) {
                                "However, the solver had not enough to prove",
                                "whether it is optimal or not. Consider increasing",
                                "the time limit if you need a better solution",
-                               "(solving time =", solving_time, "s)\n")))
+                               "(solving time =", solving_time, "s)")), "\n")
     }
   } else {
       cat(crayon::green(paste("Good news: the solver found a solution satisfying",
                               "the constraints ! (solving time =",
-                              solving_time, "s)\n")))
+                              solving_time, "s)")), "\n")
   }
 
   # clean up
@@ -185,5 +185,5 @@ solve.RestoptProblem <- function(a, b, ...) {
     rm(ac_data)
   }
   .jgc()
-  return(restopt_solution(problem, r, attributes(r)$metadata))
+  return(restopt_solution(a, r, attributes(r)$metadata))
 }

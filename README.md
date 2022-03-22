@@ -1,4 +1,7 @@
 
+<STYLE type='text/css' scoped>
+PRE.fansi SPAN {padding-top: .25em; padding-bottom: .25em};
+</STYLE>
 <!--- README.md is generated from README.Rmd. Please edit that file -->
 
 ## restopr: Interface to the ‘Restopt’ Ecological Restoration Planning Software
@@ -118,43 +121,90 @@ The first thing to do to use *restoptr* is to load the package:
 library(restoptr)
 ```
 
-We will now create and solve a restoration optimization problem. Two
-input rasters are necessary, the *existing_habitat* raster and the
-*restorable_habitat* raster. **Important**: Both raster mus have the
-same dimensions and the same spatial extent.
+We will now create and solve a restoration optimization problem. One
+input raster are necessary, the *existing_habitat* raster, which is a
+binary raster indicating the habitat areas (raster value 1), the
+non-habitat areas (raster value 0), and areas that are not part of the
+landscape (raster value NA, or NODATA, e.g. ocean if the landscape is
+terrestrial). Note that the resolution can be high, as the down sampling
+of the input data to ensure a tractable optimization problem is part of
+the restoration optimization problem construction (see the next
+paragraph).
 
--   The *existing_habitat* raster indicates the habitat area (raster
-    value 1), the non-habitat area (raster value 0), and area which is
-    not part of the landscape (raster value NA, or NODATA, e.g. ocean if
-    the landscape is terrestrial).
+Along with this *existing_habitat* input raster, it is necessary to
+provide two parameters that inform `restoptr` how to eventually reduce
+the resolution to ensure a tractable optimization problem: the
+*aggregation_factor* and the *habitat_threshold* :
 
--   The *restorable_habitat* raster indicates the amount of habitat that
-    can be restored for each planning unit (i.e. raster cells that are
-    available for restoration, i.e. non-habitat).
+-   *aggregation_factor*: if the resolution of the *existing_habitat* is
+    high, it can be unsuited to use as is into the constrained
+    optimization engine, which will either be limited by the system’s
+    available RAM, or have a very long computation time. The
+    *aggregation_factor* indicates how to reduce the resolution of the
+    aggregating cells (see `terra::aggregate()`). The amount of habitat
+    and restorable area within each aggregated cell will be
+    automatically computed.
 
-Example rasters, from the use case presented in [this
+-   *habitat_threshold*: as the lower resolution habitat raster that
+    will be used into the constrained optimization engine must be
+    binary, it is necessary to define a condition which indicates
+    whether an aggregated is considered as habitat or not. This
+    condition is defined by the *habitat_threshold*, which indicates how
+    much proportion of habitat is needed into an aggregated cell to
+    consider it as habitat.
+
+**Note:** In the following, we will also refer to the aggregated cells
+as **planning units**.
+
+**Note:** we implemented this data pre processing step as a new feature
+in `restoptr` to facilitate its usage, to ensure that problems are
+instantiated with consistent information, and to facilitate the
+automation of workflows.
+
+Example data, from the use case presented in [this
 study](https://www.researchgate.net/publication/346597935_Constrained_optimization_of_landscape_indices_in_conservation_planning_to_support_ecological_restoration_in_New_Caledonia)
-are included in the package:
+is included in the package:
 
 ``` r
 habitat_data <- rast(
-  system.file("extdata", "habitat.tif", package = "restoptr")
+  system.file("extdata", "habitat_hi_res.tif", package = "restoptr")
 )
-restorable_data <- rast(
-  system.file("extdata", "restorable.tif", package = "restoptr")
-)
-plot(rast(list(habitat_data, restorable_data)), nc = 2)
+plot(habitat_data, plg=list(x="topright"))
 ```
 
-<img src="man/figures/README-unnamed-chunk-8-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-9-1.png" width="100%" style="display: block; margin: auto;" />
 
-To instantiate a base restoration optimization problem from two input
-rasters, use the `restopt_problem()` function:
+To instantiate a base restoration optimization problem from such an
+input raster, use the `restopt_problem()` function:
 
 ``` r
-p <- restopt_problem(existing_habitat = habitat_data, 
-                     restorable_habitat = restorable_data) 
+p <- restopt_problem(
+  existing_habitat = habitat_data, 
+  aggregation_factor = 16,
+  habitat_threshold = 0.7
+) 
 ```
+
+Input data and preprocessed aggregated rasters can be accessed in
+`p$data`:
+
+-   `p$data$habitat_original` is the input, high resolution habitat
+    raster.
+-   `p$data$existing_habitat` is the aggregated habitat raster.
+-   `p$data$restorable_habitat` is the aggregated restorable area
+    raster.
+-   `p$data$cell_area` is the area of each planning, in number of cells
+    from the original raster. Note that this area is not necessarily the
+    same for all planning units, as if there are NA cells in the input
+    raster some planning units can partially cover NA and non-NA cells.
+
+We can plot the aggregated data:
+
+``` r
+plot(rast(list(p$data$existing_habitat, p$data$restorable_habitat)), nc = 2,  plg=list(x="topright"))
+```
+
+<img src="man/figures/README-unnamed-chunk-11-1.png" width="100%" style="display: block; margin: auto;" />
 
 Then, we can add constraints to this base problem. For instance, lets
 add a locked-out constraint, to restrict the number of planning units
@@ -164,7 +214,7 @@ activities, and stakeholder preferences.
 
 ``` r
 locked_out_data <- rast(
- system.file("extdata", "locked-out.tif", package = "restoptr")
+ system.file("extdata", "locked_out.tif", package = "restoptr")
 )
 p <- p %>% add_locked_out_constraint(data = locked_out_data)
 ```
@@ -173,7 +223,7 @@ We can also add a constraint on the amount of restored area that is
 allowed by the project:
 
 ``` r
-p <- p %>% add_restorable_constraint(90, 220, 23)
+p <- p %>% add_restorable_constraint(90, 220, unit = "ha")
 ```
 
 And finally a compactness constraint, which limits the spatial extent of
@@ -186,7 +236,7 @@ p <- p %>% add_compactness_constraint(5)
 Once we have added constraints to the problem, we need to define an
 optimization objective. For example, lets configure `restopr` to
 identify, under the previous constraints, which restoration areas
-maximises the effective mesh size (MESH).
+maximizes the effective mesh size (MESH).
 
 ``` r
 p <- p %>% set_max_mesh_objective()
@@ -198,6 +248,34 @@ the same patch [Jaeger, 2000](https://doi.org/10.1023/A:1008129329289).
 Maximizing it in the context of restoration favours fewer and larger
 patches.
 
+We can get a summary of the restoration problem:
+
+``` r
+p
+```
+
+<PRE class="fansi fansi-output"><CODE>## <span style='color: #00BB00; font-weight: bold;'>-----------------------------------------------------------------</span>
+## <span style='color: #00BB00; font-weight: bold;'>                         Restopt problem                         </span>
+## <span style='color: #00BB00; font-weight: bold;'>-----------------------------------------------------------------</span>
+## <span style='color: #BBBBBB; font-weight: bold;'>original habitat:    </span> <span style='color: #00BBBB;'>in memory</span> 
+## <span style='color: #BBBBBB; font-weight: bold;'>aggregation factor:  </span> <span style='color: #00BBBB;'>16</span> 
+## <span style='color: #BBBBBB; font-weight: bold;'>habitat threshold:   </span> <span style='color: #00BBBB;'>0.7</span> 
+## <span style='color: #BBBBBB; font-weight: bold;'>existing habitat:    </span> <span style='color: #00BBBB;'>in memory</span> 
+## <span style='color: #BBBBBB; font-weight: bold;'>restorable habitat:  </span> <span style='color: #00BBBB;'>in memory</span> 
+## <span style='color: #00BB00;'>-----------------------------------------------------------------</span> 
+## <span style='color: #BBBBBB; font-weight: bold;'>objective:           </span> <span style='color: #0000BB;'>Maximize effective mesh size</span> 
+## <span style='color: #00BB00;'>-----------------------------------------------------------------</span> 
+## <span style='color: #BBBBBB; font-weight: bold;'>constraints:        </span>  
+## <span style='color: #0000BB;'>  -  locked out (data = in memory)</span> 
+## <span style='color: #0000BB;'>  -  restorable (min_restore = 90, max_restore = 220, unit = ha)</span> 
+## <span style='color: #0000BB;'>  -  compactness (max_diameter = 5)</span> 
+## <span style='color: #00BB00;'>-----------------------------------------------------------------</span> 
+## <span style='color: #BBBBBB; font-weight: bold;'>settings:</span>
+## <span style='color: #BB00BB;'>  - precision = 4</span>
+## <span style='color: #BB00BB;'>  - time_limit = 0</span>
+## <span style='color: #00BB00; font-weight: bold;'>-----------------------------------------------------------------</span>
+</CODE></PRE>
+
 Finally, we use the `solve()` function to identify the optimal
 restoration area, according to the constraints and the optimization
 objective.
@@ -206,37 +284,31 @@ objective.
 s <- solve(p)
 ```
 
-    ## Good news: the solver found a solution statisfying the constraints that was proven optimal ! (solving time = 0.5775273 s)
+<PRE class="fansi fansi-output"><CODE>## <span style='color: #00BB00;'>Good news: the solver found a solution statisfying the constraints that was proven optimal ! (solving time = 1.7124147 s)</span>
+</CODE></PRE>
 
 ``` r
 plot(
-  x = s, main = "solution",
-  col = c("#E5E5E5", "#fff1d6", "#b2df8a", "#1f78b4")
+  s,
+  main = "Solution",
+  col = c("#E5E5E5", "#fff1d6", "#b2df8a", "#1f78b4"),
+  plg = list(x="topright")
 )
 ```
 
-<img src="man/figures/README-unnamed-chunk-14-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-17-1.png" width="100%" style="display: block; margin: auto;" />
 
-You can retrieve the attributes of the solution using the `attributes()`
-function:
+You can retrieve the attributes of the solution using the
+`get_metadata()` function:
 
 ``` r
-attributes(s)
+get_metadata(s, area_unit = "ha")
 ```
 
-    ## $ptr
-    ## C++ object <0x556ea2572660> of class 'SpatRaster' <0x556e981d3600>
-    ## 
-    ## $class
-    ## [1] "SpatRaster"
-    ## attr(,"package")
-    ## [1] "terra"
-    ## 
-    ## $metadata
     ##   min_restore total_restorable nb_planning_units optimality_proven solving_time
-    ## 1         197              196                17              true    0.5775273
+    ## 1    202.2526         202.2526                13              true     1.712415
     ##   mesh_initial mesh_best
-    ## 1     1035.435  1061.181
+    ## 1     53.38999  55.41522
 
 ## Getting help
 

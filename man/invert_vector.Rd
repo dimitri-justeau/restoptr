@@ -16,8 +16,16 @@ input vector layer extent for the inversion.}
 }
 \value{
 A \code{\link[terra:vect]{terra::vect()}} Vector object.
-
-#' @examples
+}
+\description{
+Invert a vector layer according to the extent of a restopt problem.
+}
+\details{
+Invert a vector layer according to its extent, or a user-specified extent.
+This function is useful to derive locked out areas from accessible areas,
+e.g. buffer around tracks.
+}
+\examples{
 \dontrun{
 habitat_data <- rast(
   system.file("extdata", "habitat_hi_res.tif", package = "restoptr")
@@ -31,12 +39,5 @@ locked_out <- invert_vector(
   filter = available$ID==2
 )
 }
-}
-\description{
-Invert a vector layer according to the extent of a restopt problem.
-}
-\details{
-Invert a vector layer according to its extent, or a user-specified extent.
-This function is useful to derive locked out areas from accessible areas,
-e.g. buffer around tracks.
+
 }
