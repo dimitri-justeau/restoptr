@@ -21,11 +21,11 @@ This raster can have a high resolution, the \code{aggregation_factor} and the
 the habitat raster to a tractable resolution for the optimization engine, and
 automatically derive the restorable habitat raster.}
 
-\item{habitat_threshold}{Numeric between 0 and 1, which corresponds to the
+\item{habitat_threshold}{\code{numeric} number between 0 and 1, which corresponds to the
 minimum proportion of habitat that must be present within an aggregated pixel
 to consider it as an habitat pixel.}
 
-\item{aggregation_factor}{Integer greater than 1, which corresponds to the
+\item{aggregation_factor}{\code{integer} Integer greater than 1, which corresponds to the
 aggregation factor for down sampling the data. For example, if
 \code{aggregation_factor = 2}, aggregated pixel will contain 4 original pixel.
 See \code{terra::aggregate()} for more details.}

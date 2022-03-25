@@ -41,11 +41,11 @@ NULL
 #' the habitat raster to a tractable resolution for the optimization engine, and
 #' automatically derive the restorable habitat raster.
 #'
-#' @param habitat_threshold Numeric between 0 and 1, which corresponds to the
+#' @param habitat_threshold `numeric` number between 0 and 1, which corresponds to the
 #' minimum proportion of habitat that must be present within an aggregated pixel
 #' to consider it as an habitat pixel.
 #'
-#' @param aggregation_factor Integer greater than 1, which corresponds to the
+#' @param aggregation_factor `integer` Integer greater than 1, which corresponds to the
 #' aggregation factor for down sampling the data. For example, if
 #' `aggregation_factor = 2`, aggregated pixel will contain 4 original pixel.
 #' See `terra::aggregate()` for more details.
@@ -112,7 +112,7 @@ restopt_problem <- function(existing_habitat, habitat_threshold = 1, aggregation
     structure(
       list(
         data = list(
-          habitat_original = existing_habitat,
+          original_habitat = existing_habitat,
           existing_habitat = habitat_down,
           restorable_habitat = restorable_down,
           aggregation_factor = aggregation_factor,
@@ -163,12 +163,12 @@ print.RestoptProblem <- function(x, ...) {
     crayon::bold(crayon::green("-----------------------------------------------------------------")), "\n",
     sep = ""
   )
-  source_original_habitat <- basename(terra::sources(x$data$habitat_original)[[1]])
+  source_original_habitat <- basename(terra::sources(x$data$original_habitat)[[1]])
   source_habitat <- basename(terra::sources(x$data$existing_habitat)[[1]])
   source_restorable <- basename(terra::sources(x$data$restorable_habitat)[[1]])
   cat(
     crayon::bold(crayon::white("original habitat:    ")),
-    crayon::cyan(ifelse(source_habitat != "", source_habitat, "in memory")),
+    crayon::cyan(ifelse(source_original_habitat != "", source_original_habitat, "in memory")),
     "\n"
   )
   cat(
@@ -291,4 +291,324 @@ set_restopt_objective <- function(problem, objective) {
 
   # return updated problem
   problem
+}
+
+#' Retrieve the original (i.e. not aggregated) habitat data.
+#'
+#' @param problem [restopt_problem()] Restoration problem object.
+#'
+#' @return [terra::rast()] The original (i.e. not aggregated) habitat data.
+#'
+#' @examples
+#' \dontrun{
+#' #' # load data
+#' habitat_data <- rast(
+#'   system.file("extdata", "habitat_hi_res.tif", package = "restoptr")
+#' )
+#'
+#' # create problem
+#' p <- restopt_problem_2(
+#'        existing_habitat = habitat_data,
+#'        aggregation_factor = 4,
+#'        habitat_threshold = 0.7
+#' )
+#'
+#' plot(get_original_habitat(problem))
+#' }
+#'
+#' @export
+get_original_habitat <- function(problem) {
+  # assert arguments are valid
+  assertthat::assert_that(
+    inherits(problem, "RestoptProblem")
+  )
+  return(problem$data$original_habitat)
+}
+
+#' Retrieve the existing (i.e. aggregated) habitat data.
+#'
+#' @param problem [restopt_problem()] Restoration problem object.
+#'
+#' @return [terra::rast()] The existing (aggregated) habitat data.
+#'
+#' @examples
+#' \dontrun{
+#' #' # load data
+#' habitat_data <- rast(
+#'   system.file("extdata", "habitat_hi_res.tif", package = "restoptr")
+#' )
+#'
+#' # create problem
+#' p <- restopt_problem_2(
+#'        existing_habitat = habitat_data,
+#'        aggregation_factor = 4,
+#'        habitat_threshold = 0.7
+#' )
+#'
+#' plot(get_existing_habitat(problem))
+#' }
+#'
+#' @export
+get_existing_habitat <- function(problem) {
+  # assert arguments are valid
+  assertthat::assert_that(
+    inherits(problem, "RestoptProblem")
+  )
+  return(problem$data$existing_habitat)
+}
+
+#' Retrieve the restorable habitat (aggregated) data.
+#'
+#' @param problem [restopt_problem()] Restoration problem object.
+#'
+#' @return [terra::rast()] The restorable habitat (aggregated) data.
+#'
+#' @examples
+#' \dontrun{
+#' #' # load data
+#' habitat_data <- rast(
+#'   system.file("extdata", "habitat_hi_res.tif", package = "restoptr")
+#' )
+#'
+#' # create problem
+#' p <- restopt_problem_2(
+#'        existing_habitat = habitat_data,
+#'        aggregation_factor = 4,
+#'        habitat_threshold = 0.7
+#' )
+#'
+#' plot(get_restorable_habitat(problem))
+#' }
+#'
+#' @export
+get_restorable_habitat <- function(problem) {
+  # assert arguments are valid
+  assertthat::assert_that(
+    inherits(problem, "RestoptProblem")
+  )
+  return(problem$data$restorable_habitat)
+}
+
+#' Retrieve the aggregation factor of a restopt problem.
+#'
+#' @param problem [restopt_problem()] Restoration problem object.
+#'
+#' @return `numeric` The aggregation factor of the restopt problem.
+#'
+#' @examples
+#' \dontrun{
+#' #' # load data
+#' habitat_data <- rast(
+#'   system.file("extdata", "habitat_hi_res.tif", package = "restoptr")
+#' )
+#'
+#' # create problem
+#' p <- restopt_problem_2(
+#'        existing_habitat = habitat_data,
+#'        aggregation_factor = 4,
+#'        habitat_threshold = 0.7
+#' )
+#'
+#' get_aggregation_factor(problem)
+#' }
+#'
+#' @export
+get_aggregation_factor <- function(problem) {
+  # assert arguments are valid
+  assertthat::assert_that(
+    inherits(problem, "RestoptProblem")
+  )
+  return(problem$data$aggregation_factor)
+}
+
+#' Retrieve the habitat threshold parameter of a restopt problem.
+#'
+#' @param problem [restopt_problem()] Restoration problem object.
+#'
+#' @return `numeric` The habitat threshold parameter of the restopt problem.
+#'
+#' @examples
+#' \dontrun{
+#' #' # load data
+#' habitat_data <- rast(
+#'   system.file("extdata", "habitat_hi_res.tif", package = "restoptr")
+#' )
+#'
+#' # create problem
+#' p <- restopt_problem_2(
+#'        existing_habitat = habitat_data,
+#'        aggregation_factor = 4,
+#'        habitat_threshold = 0.7
+#' )
+#'
+#' get_habitat_threshold(problem)
+#' }
+#'
+#' @export
+get_habitat_threshold <- function(problem) {
+  # assert arguments are valid
+  assertthat::assert_that(
+    inherits(problem, "RestoptProblem")
+  )
+  return(problem$data$habitat_threshold)
+}
+
+#' Retrieve the locked out areas of a restopt problem.
+#'
+#' @param problem [restopt_problem()] Restoration problem object.
+#'
+#' @return [terra::rast()] The locked out areas of the restopt problem.
+#'
+#' @examples
+#' \dontrun{
+#' #' # load data
+#' habitat_data <- rast(
+#'   system.file("extdata", "habitat_hi_res.tif", package = "restoptr")
+#' )
+#'
+#' # create problem
+#' p <- restopt_problem_2(
+#'        existing_habitat = habitat_data,
+#'        aggregation_factor = 4,
+#'        habitat_threshold = 0.7
+#' )
+#'
+#' get_habitat_threshold(problem)
+#' }
+#'
+#' @export
+get_locked_out_areas <- function(problem) {
+  # assert arguments are valid
+  assertthat::assert_that(
+    inherits(problem, "RestoptProblem")
+  )
+  return(problem$data$locked_out)
+}
+
+#' Retrieve the aggregated cell area of a restopt problem.
+#'
+#' @param problem [restopt_problem()] Restoration problem object.
+#'
+#' @return [terra::rast()] The aggregated cell area of the restopt problem.
+#'
+#' @examples
+#' \dontrun{
+#' #' # load data
+#' habitat_data <- rast(
+#'   system.file("extdata", "habitat_hi_res.tif", package = "restoptr")
+#' )
+#'
+#' # create problem
+#' p <- restopt_problem_2(
+#'        existing_habitat = habitat_data,
+#'        aggregation_factor = 4,
+#'        habitat_threshold = 0.7
+#' )
+#'
+#' get_cell_area(problem)
+#' }
+#'
+#' @export
+get_cell_area <- function(problem) {
+  # assert arguments are valid
+  assertthat::assert_that(
+    inherits(problem, "RestoptProblem")
+  )
+  return(problem$data$cell_area)
+}
+
+#' Retrieve the constraints of a restopt problem.
+#'
+#' @param problem [restopt_problem()] Restoration problem object.
+#'
+#' @return `list` The constraints of the restopt problem.
+#'
+#' @examples
+#' \dontrun{
+#' #' # load data
+#' habitat_data <- rast(
+#'   system.file("extdata", "habitat_hi_res.tif", package = "restoptr")
+#' )
+#'
+#' # create problem
+#' p <- restopt_problem_2(
+#'        existing_habitat = habitat_data,
+#'        aggregation_factor = 4,
+#'        habitat_threshold = 0.7
+#' )
+#'
+#' get_constraints(problem)
+#' }
+#'
+#' @export
+get_constraints <- function(problem) {
+  # assert arguments are valid
+  assertthat::assert_that(
+    inherits(problem, "RestoptProblem")
+  )
+  return(problem$constraints)
+}
+
+#' Retrieve the optimization objective of a restopt problem.
+#'
+#' @param problem [restopt_problem()] Restoration problem object.
+#'
+#' @return `RestoptObjectve` The optimization objective of the restopt problem.
+#'
+#' @examples
+#' \dontrun{
+#' #' # load data
+#' habitat_data <- rast(
+#'   system.file("extdata", "habitat_hi_res.tif", package = "restoptr")
+#' )
+#'
+#' # create problem
+#' p <- restopt_problem_2(
+#'        existing_habitat = habitat_data,
+#'        aggregation_factor = 4,
+#'        habitat_threshold = 0.7
+#' )
+#'
+#' get_objective(problem)
+#' }
+#'
+#' @export
+get_objective <- function(problem) {
+  # assert arguments are valid
+  assertthat::assert_that(
+    inherits(problem, "RestoptProblem")
+  )
+  return(problem$objective)
+}
+
+#' Retrieve the settings of a restopt problem.
+#'
+#' @param problem [restopt_problem()] Restoration problem object.
+#'
+#' @return `list` The settings associated with the restopt problem.
+#'
+#' @examples
+#' \dontrun{
+#' #' # load data
+#' habitat_data <- rast(
+#'   system.file("extdata", "habitat_hi_res.tif", package = "restoptr")
+#' )
+#'
+#' # create problem
+#' p <- restopt_problem_2(
+#'        existing_habitat = habitat_data,
+#'        aggregation_factor = 4,
+#'        habitat_threshold = 0.7
+#' )
+#'
+#' get_settings(problem)
+#' }
+#'
+#' @export
+get_settings <- function(problem) {
+  # assert arguments are valid
+  assertthat::assert_that(
+    inherits(problem, "RestoptProblem")
+  )
+  return(problem$settings)
 }

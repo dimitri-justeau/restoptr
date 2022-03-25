@@ -18,10 +18,22 @@ test_that("restopt_problem", {
   # Test print problem (just run to ensure there is no error)
   print(problem)
 
+  # Retrieve problem data
   testthat::expect_equal(class(problem), "RestoptProblem")
-  testthat::expect_equal(length(problem$constraints), 4)
-  testthat::expect_true(inherits(problem$objective, "MaxMeshObjective"))
-  testthat::expect_equal(problem$settings$time_limit, 30)
+  testthat::expect_equal(length(get_constraints(problem)), 4)
+  testthat::expect_true(inherits(get_objective(problem), "MaxMeshObjective"))
+  testthat::expect_equal(get_settings(problem)$time_limit, 30)
+  testthat::expect_equal(get_aggregation_factor(problem), 16)
+  testthat::expect_equal(get_habitat_threshold(problem), 0.7)
+  testthat::expect_true(inherits(get_original_habitat(problem), "SpatRaster"))
+  testthat::expect_true(inherits(get_existing_habitat(problem), "SpatRaster"))
+  testthat::expect_true(inherits(get_restorable_habitat(problem), "SpatRaster"))
+  testthat::expect_true(inherits(get_locked_out_areas(problem), "SpatRaster"))
+  testthat::expect_true(inherits(get_cell_area(problem), "SpatRaster"))
+  testthat::expect_equal(
+    max(as.vector(get_cell_area(problem)), na.rm = TRUE),
+    get_aggregation_factor(problem)^2
+  )
 
   # Test overwrite constraint
   testthat::expect_warning(problem <- problem %>% add_compactness_constraint(5))

@@ -65,7 +65,7 @@ restopt_solution <- function(restopt_problem, solution_raster, metadata) {
 #' @param area_unit Unit of the area ("ha" for hectares, "m" for square meters,
 #' "km" for square kilometers)
 #'
-#' @return A list containing the characteristics of the restopt solution.
+#' @return A `list` containing the characteristics of the restopt solution.
 #'
 #' @export
 get_metadata <- function(restopt_solution, area_unit = "ha") {
@@ -74,7 +74,7 @@ get_metadata <- function(restopt_solution, area_unit = "ha") {
     area_unit %in% c("ha", "m", "km", "cells")
   )
   metadata <- restopt_solution@metadata
-  original_habitat <- restopt_solution@problem$data$habitat_original
+  original_habitat <- restopt_solution@problem$data$original_habitat
   min_rest <- as.numeric(metadata$min_restore)
   max_rest <- as.numeric(metadata$total_restorable)
   if (area_unit == "ha") {

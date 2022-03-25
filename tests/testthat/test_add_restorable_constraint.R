@@ -10,7 +10,7 @@ test_that("add_restorable_constraint", {
   rest_cells <- which(result[,] == 3)
   val <- nb_cell_to_area(
     habitat,
-    sum(round(problem$data$restorable_habitat)[rest_cells]),
+    sum(round(get_restorable_habitat(problem))[rest_cells]),
     unit="ha"
   )
   testthat::expect_equal(round(val), 90)
@@ -21,7 +21,7 @@ test_that("add_restorable_constraint", {
   rest_cells <- which(result[,] == 3)
   val <- nb_cell_to_area(
     habitat,
-    sum(round(problem$data$restorable_habitat)[rest_cells]),
+    sum(round(get_restorable_habitat(problem))[rest_cells]),
     unit="ha"
   )
   testthat::expect_gte(round(val), 200)
@@ -34,7 +34,7 @@ test_that("add_restorable_constraint", {
   cellArea <- problem$data$cell_area
   val <- nb_cell_to_area(
     habitat,
-    sum(max(round(problem$data$restorable_habitat) - ceiling(0.3 * cellArea), 0)[rest_cells]),
+    sum(max(round(get_restorable_habitat(problem)) - ceiling(0.3 * cellArea), 0)[rest_cells]),
     unit="ha"
   )
   testthat::expect_equal(round(val), 90)
@@ -45,7 +45,7 @@ test_that("add_restorable_constraint", {
   rest_cells <- which(result[,] == 3)
   val <- nb_cell_to_area(
     habitat,
-    sum(max(round(problem$data$restorable_habitat) - ceiling(0.5 * cellArea), 0)[rest_cells]),
+    sum(max(round(get_restorable_habitat(problem)) - ceiling(0.5 * cellArea), 0)[rest_cells]),
     unit="ha"
   )
   testthat::expect_gte(round(val), 50)

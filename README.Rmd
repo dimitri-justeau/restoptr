@@ -9,11 +9,6 @@ knitr::opts_chunk$set(fig.path = "man/figures/README-", fig.align = "center",
                       fig.height = 4.5, fig.width = 4.5)
 ```
 
-```{r, comment="", results="asis", echo=FALSE}
-old.hooks <- fansi::set_knit_hooks(knitr::knit_hooks)
-options(crayon.enabled=TRUE)
-```
-
 <!--- README.md is generated from README.Rmd. Please edit that file -->
 
 ## restopr: Interface to the 'Restopt' Ecological Restoration Planning Software
@@ -156,12 +151,12 @@ p <- restopt_problem(
 ) 
 ```
 
-Input data and preprocessed aggregated rasters can be accessed in `p$data`:
+Input data and preprocessed aggregated rasters can be accessed with:
 
-- `p$data$habitat_original` is the input, high resolution habitat raster.
-- `p$data$existing_habitat` is the aggregated habitat raster.
-- `p$data$restorable_habitat` is the aggregated restorable area raster.
-- `p$data$cell_area` is the area of each planning, in number of cells
+- `get_original_habiata(p)` is the input, high resolution habitat raster.
+- `get_existing_habitat(p)` is the aggregated habitat raster.
+- `get_restorable_habitat(p)` is the aggregated restorable area raster.
+- `get_cell_area(p)` is the area of each planning, in number of cells
   from the original raster. Note that this area is not necessarily the same
   for all planning units, as if there are NA cells in the input raster some
   planning units can partially cover NA and non-NA cells.

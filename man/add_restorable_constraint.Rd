@@ -22,7 +22,7 @@ add_restorable_constraint(
 \item{min_proportion}{\code{float} Minimum habitat proportion to consider a cell
 as restored.}
 
-\item{unit}{Area unit ("ha" for hectares, "m" for square meters,
+\item{unit}{\code{character} Area unit ("ha" for hectares, "m" for square meters,
 "km" for square kilometers, "cells" for number of cells from the original
 habitat raster). If the input habitat raster does not use a projected
 coordinate system, only "cells" is available.}

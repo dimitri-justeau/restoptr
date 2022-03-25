@@ -87,7 +87,7 @@ add_locked_out_constraint <- function(problem, data) {
       terra::hasValues(data)
     )
     original_res <- terra::compareGeom(
-      problem$data$habitat_original, data, stopiffalse = FALSE
+      problem$data$original_habitat, data, stopiffalse = FALSE
     )
     if (original_res) {
       down_sum <- terra::aggregate(

@@ -1,7 +1,4 @@
 
-<STYLE type='text/css' scoped>
-PRE.fansi SPAN {padding-top: .25em; padding-bottom: .25em};
-</STYLE>
 <!--- README.md is generated from README.Rmd. Please edit that file -->
 
 ## restopr: Interface to the ‘Restopt’ Ecological Restoration Planning Software
@@ -172,7 +169,7 @@ habitat_data <- rast(
 plot(habitat_data, plg=list(x="topright"))
 ```
 
-<img src="man/figures/README-unnamed-chunk-9-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-8-1.png" width="100%" style="display: block; margin: auto;" />
 
 To instantiate a base restoration optimization problem from such an
 input raster, use the `restopt_problem()` function:
@@ -185,15 +182,14 @@ p <- restopt_problem(
 ) 
 ```
 
-Input data and preprocessed aggregated rasters can be accessed in
-`p$data`:
+Input data and preprocessed aggregated rasters can be accessed with:
 
--   `p$data$habitat_original` is the input, high resolution habitat
+-   `get_original_habiata(p)` is the input, high resolution habitat
     raster.
--   `p$data$existing_habitat` is the aggregated habitat raster.
--   `p$data$restorable_habitat` is the aggregated restorable area
+-   `get_existing_habitat(p)` is the aggregated habitat raster.
+-   `get_restorable_habitat(p)` is the aggregated restorable area
     raster.
--   `p$data$cell_area` is the area of each planning, in number of cells
+-   `get_cell_area(p)` is the area of each planning, in number of cells
     from the original raster. Note that this area is not necessarily the
     same for all planning units, as if there are NA cells in the input
     raster some planning units can partially cover NA and non-NA cells.
@@ -204,7 +200,7 @@ We can plot the aggregated data:
 plot(rast(list(p$data$existing_habitat, p$data$restorable_habitat)), nc = 2,  plg=list(x="topright"))
 ```
 
-<img src="man/figures/README-unnamed-chunk-11-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-10-1.png" width="100%" style="display: block; margin: auto;" />
 
 Then, we can add constraints to this base problem. For instance, lets
 add a locked-out constraint, to restrict the number of planning units
@@ -254,27 +250,26 @@ We can get a summary of the restoration problem:
 p
 ```
 
-<PRE class="fansi fansi-output"><CODE>## <span style='color: #00BB00; font-weight: bold;'>-----------------------------------------------------------------</span>
-## <span style='color: #00BB00; font-weight: bold;'>                         Restopt problem                         </span>
-## <span style='color: #00BB00; font-weight: bold;'>-----------------------------------------------------------------</span>
-## <span style='color: #BBBBBB; font-weight: bold;'>original habitat:    </span> <span style='color: #00BBBB;'>in memory</span> 
-## <span style='color: #BBBBBB; font-weight: bold;'>aggregation factor:  </span> <span style='color: #00BBBB;'>16</span> 
-## <span style='color: #BBBBBB; font-weight: bold;'>habitat threshold:   </span> <span style='color: #00BBBB;'>0.7</span> 
-## <span style='color: #BBBBBB; font-weight: bold;'>existing habitat:    </span> <span style='color: #00BBBB;'>in memory</span> 
-## <span style='color: #BBBBBB; font-weight: bold;'>restorable habitat:  </span> <span style='color: #00BBBB;'>in memory</span> 
-## <span style='color: #00BB00;'>-----------------------------------------------------------------</span> 
-## <span style='color: #BBBBBB; font-weight: bold;'>objective:           </span> <span style='color: #0000BB;'>Maximize effective mesh size</span> 
-## <span style='color: #00BB00;'>-----------------------------------------------------------------</span> 
-## <span style='color: #BBBBBB; font-weight: bold;'>constraints:        </span>  
-## <span style='color: #0000BB;'>  -  locked out (data = in memory)</span> 
-## <span style='color: #0000BB;'>  -  restorable (min_restore = 90, max_restore = 220, unit = ha)</span> 
-## <span style='color: #0000BB;'>  -  compactness (max_diameter = 5)</span> 
-## <span style='color: #00BB00;'>-----------------------------------------------------------------</span> 
-## <span style='color: #BBBBBB; font-weight: bold;'>settings:</span>
-## <span style='color: #BB00BB;'>  - precision = 4</span>
-## <span style='color: #BB00BB;'>  - time_limit = 0</span>
-## <span style='color: #00BB00; font-weight: bold;'>-----------------------------------------------------------------</span>
-</CODE></PRE>
+    ## -----------------------------------------------------------------
+    ##                          Restopt problem                         
+    ## -----------------------------------------------------------------
+    ## original habitat:     habitat_hi_res.tif 
+    ## aggregation factor:   16 
+    ## habitat threshold:    0.7 
+    ## existing habitat:     in memory 
+    ## restorable habitat:   in memory 
+    ## ----------------------------------------------------------------- 
+    ## objective:            Maximize effective mesh size 
+    ## ----------------------------------------------------------------- 
+    ## constraints:          
+    ##   -  locked out (data = in memory) 
+    ##   -  restorable (min_restore = 90, max_restore = 220, unit = ha) 
+    ##   -  compactness (max_diameter = 5) 
+    ## ----------------------------------------------------------------- 
+    ## settings:
+    ##   - precision = 4
+    ##   - time_limit = 0
+    ## -----------------------------------------------------------------
 
 Finally, we use the `solve()` function to identify the optimal
 restoration area, according to the constraints and the optimization
@@ -284,8 +279,7 @@ objective.
 s <- solve(p)
 ```
 
-<PRE class="fansi fansi-output"><CODE>## <span style='color: #00BB00;'>Good news: the solver found a solution statisfying the constraints that was proven optimal ! (solving time = 1.7124147 s)</span>
-</CODE></PRE>
+    ## Good news: the solver found a solution statisfying the constraints that was proven optimal ! (solving time = 2.4142299 s)
 
 ``` r
 plot(
@@ -296,7 +290,7 @@ plot(
 )
 ```
 
-<img src="man/figures/README-unnamed-chunk-17-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-16-1.png" width="100%" style="display: block; margin: auto;" />
 
 You can retrieve the attributes of the solution using the
 `get_metadata()` function:
@@ -306,9 +300,9 @@ get_metadata(s, area_unit = "ha")
 ```
 
     ##   min_restore total_restorable nb_planning_units optimality_proven solving_time
-    ## 1    202.2526         202.2526                13              true     1.712415
+    ## 1    209.9005         209.9005                13              true      2.41423
     ##   mesh_initial mesh_best
-    ## 1     53.38999  55.41522
+    ## 1     53.38999  55.47555
 
 ## Getting help
 

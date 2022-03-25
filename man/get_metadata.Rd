@@ -14,7 +14,7 @@ to this solution.}
 "km" for square kilometers)}
 }
 \value{
-A list containing the characteristics of the restopt solution.
+A \code{list} containing the characteristics of the restopt solution.
 }
 \description{
 Return the metadata associated with a restopt solution, which contains

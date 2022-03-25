@@ -57,7 +57,7 @@ invert_vector <- function(vector_layer, extent=NULL, filter=NULL) {
 #'
 #' @param raster_layer [terra::rast()] Raster object.
 #'
-#' @param unit Unit of the area ("ha" for hectares, "m" for square meters,
+#' @param unit `character` Unit of the area ("ha" for hectares, "m" for square meters,
 #' "km" for square kilometers)
 #'
 #' @details
@@ -68,7 +68,7 @@ invert_vector <- function(vector_layer, extent=NULL, filter=NULL) {
 #' However, at larger scales, the best is to use an equal-area projected
 #' coordinate system.
 #'
-#' @return The area of a cell in the desired unit.
+#' @return `numeric` The area of a cell in the desired unit.
 #'
 #' @examples
 #' \dontrun{
@@ -107,9 +107,9 @@ cell_area <- function(raster_layer, unit = "ha") {
 #'
 #' @param raster_layer [terra::rast()] Raster object.
 #'
-#' @param area Area, in ha, m^2, or km^2.
+#' @param area `numeric` Area, in ha, m^2, or km^2.
 #'
-#' @param unit Unit of the area ("ha" for hectares, "m" for square meters,
+#' @param unit `character` Unit of the area ("ha" for hectares, "m" for square meters,
 #' "km" for square kilometers)
 #'
 #' @details
@@ -120,7 +120,7 @@ cell_area <- function(raster_layer, unit = "ha") {
 #' However, at larger scales, the best is to use an equal-area projected
 #' coordinate system.
 #'
-#' @return The number of raster cell correspond to the given area.
+#' @return `numeric` The number of raster cell correspond to the given area.
 #'
 #' @examples
 #' \dontrun{
@@ -142,9 +142,9 @@ area_to_nb_cells <- function(raster_layer, area, unit = "ha") {
 #'
 #' @param raster_layer [terra::rast()] Raster object.
 #'
-#' @param nb_cells Number of raster cells.
+#' @param nb_cells `numeric` Number of raster cells.
 #'
-#' @param unit Unit of the area ("ha" for hectares, "m" for square meters,
+#' @param unit `character` Unit of the area ("ha" for hectares, "m" for square meters,
 #' "km" for square kilometers)
 #'
 #' @details
@@ -155,7 +155,7 @@ area_to_nb_cells <- function(raster_layer, area, unit = "ha") {
 #' However, at larger scales, the best is to use an equal-area projected
 #' coordinate system.
 #'
-#' @return The area corresponding to `nb_cells` in the desired unit.
+#' @return `numeric` The area corresponding to `nb_cells` in the desired unit.
 #'
 #' @examples
 #' \dontrun{

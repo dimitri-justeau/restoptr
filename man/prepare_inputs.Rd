@@ -13,12 +13,12 @@ with the value \code{1} must correspond to existing habitat. Cells with the valu
 \code{0} must correspond to degraded (or simply non-habitat) areas. Finally,
 \code{NA} (or \code{NO_DATA}) cells are considered to be outside of the landscape.}
 
-\item{habitat_threshold}{Number between 0 and 1 indicating, when the habitat
+\item{habitat_threshold}{\code{numeric} Number between 0 and 1 indicating, when the habitat
 raster is downsampled, the minimum proportion of habitat cells (from the
 original raster) are required within the downsampled raster to be considered
 as habitat.}
 
-\item{aggregation_factor}{positive integer corresponding to the level of
+\item{aggregation_factor}{\code{integer} positive integer corresponding to the level of
 downsampling that will be applied to the habitat. This parameter is
 important to ensure the tractability of a problem.}
 }

@@ -12,7 +12,7 @@ NULL
 #'
 #' @param max_restore `integer` Maximum allowed area to restore in the solution
 #'
-#' @param unit Area unit ("ha" for hectares, "m" for square meters,
+#' @param unit `character` Area unit ("ha" for hectares, "m" for square meters,
 #' "km" for square kilometers, "cells" for number of cells from the original
 #' habitat raster). If the input habitat raster does not use a projected
 #' coordinate system, only "cells" is available.
@@ -99,19 +99,19 @@ add_restorable_constraint <- function(problem,
     unit %in% c("ha", "m", "km", "cells")
   )
 
-  if (unit != "cells" && is.lonlat(problem$data$habitat_original)) {
+  if (unit != "cells" && is.lonlat(problem$data$original_habitat)) {
     stop(paste("The input raster does not use a projected coordinate system.",
                "Please reproject, or use 'cell' as the unit measure for the",
                "restorable constraint."))
   }
   if (unit != "cells") {
     converted_area_min <- area_to_nb_cells(
-      raster_layer = problem$data$habitat_original,
+      raster_layer = problem$data$original_habitat,
       area = min_restore,
       unit = unit
     )
     converted_area_max <- area_to_nb_cells(
-      raster_layer = problem$data$habitat_original,
+      raster_layer = problem$data$original_habitat,
       area = max_restore,
       unit = unit
     )

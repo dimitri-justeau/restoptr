@@ -9,11 +9,11 @@ cell_area(raster_layer, unit = "ha")
 \arguments{
 \item{raster_layer}{\code{\link[terra:rast]{terra::rast()}} Raster object.}
 
-\item{unit}{Unit of the area ("ha" for hectares, "m" for square meters,
+\item{unit}{\code{character} Unit of the area ("ha" for hectares, "m" for square meters,
 "km" for square kilometers)}
 }
 \value{
-The area of a cell in the desired unit.
+\code{numeric} The area of a cell in the desired unit.
 }
 \description{
 Compute the area of a cell in ha, m^2, or km^2

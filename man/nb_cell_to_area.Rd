@@ -9,13 +9,13 @@ nb_cell_to_area(raster_layer, nb_cells, unit = "ha")
 \arguments{
 \item{raster_layer}{\code{\link[terra:rast]{terra::rast()}} Raster object.}
 
-\item{nb_cells}{Number of raster cells.}
+\item{nb_cells}{\code{numeric} Number of raster cells.}
 
-\item{unit}{Unit of the area ("ha" for hectares, "m" for square meters,
+\item{unit}{\code{character} Unit of the area ("ha" for hectares, "m" for square meters,
 "km" for square kilometers)}
 }
 \value{
-The area corresponding to \code{nb_cells} in the desired unit.
+\code{numeric} The area corresponding to \code{nb_cells} in the desired unit.
 }
 \description{
 Compute the area corresponding to a given number of cells.
