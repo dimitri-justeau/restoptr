@@ -73,20 +73,20 @@ add_compactness_constraint <- function(problem, max_diameter, unit = "m") {
     assertthat::noNA(max_diameter),
     (unit == "cells" || units::ud_are_convertible(unit, "m"))
   )
-
+  max_diameter_unitless <- max_diameter
   if (unit != "cells") {
     width <- cell_width(get_existing_habitat(problem), unit = unit)
-    max_diameter <- max_diameter / width
+    max_diameter_unitless <- max_diameter / width
   }
 
   # add constraint
   add_restopt_constraint(
     problem = problem,
     constraint = restopt_component(
-      name = paste0("compactness (max_diameter = ", max_diameter, ")"),
+      name = paste0("compactness (max_diameter = ", max_diameter, ", unit = ", unit, ")"),
       class = c("CompactnessConstraint", "RestoptConstraint"),
       post = function(jproblem) {
-        rJava::.jcall(jproblem, "V", "postCompactnessConstraint", max_diameter)
+        rJava::.jcall(jproblem, "V", "postCompactnessConstraint", max_diameter_unitless)
       }
     )
   )

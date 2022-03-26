@@ -11,7 +11,15 @@
 Status](https://codecov.io/github/dimitri-justeau/restoptr/coverage.svg?branch=master)](https://app.codecov.io/gh/dimitri-justeau/restoptr)
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/restoptr)](https://github.com/dimitri-justeau/restoptr)
 
-## Overview
+-   [Overview](#overview)
+-   [Installation](#installation)
+    -   [Package installation](#package_install)
+    -   [System dependencies](#system_deps)
+-   [Citation](#citation)
+-   [Usage](#usage)
+-   [Getting help](#help)
+
+## Overview <a name="overview"></a>
 
 Interface to the `restopt` ecological restoration planning software,
 which is specifically designed to identify connected, accessible, and
@@ -25,9 +33,9 @@ Specifically, our model was implemented using
 [Choco-solver](https://choco-solver.org/), an open-source and
 state-of-the-art Java CP solver.
 
-## Installation
+## Installation <a name="installation"></a>
 
-### Package installation
+### Package installation <a name="package_install"></a>
 
 The latest developmental version of the *restoptr R* package can be
 installed using the following *R* code.
@@ -44,7 +52,7 @@ if (!require(devtools)) install.packages("devtools")
 devtools::install_github("dimitri-justeau/rflsgen")
 ```
 
-### System dependencies
+### System dependencies <a name="system_deps"></a>
 
 The packages requires a Java Runtime Environment (JRE), version 8 or
 higher. Below we provide platform-specific instructions to install it.
@@ -98,7 +106,7 @@ brew install openjdk
 Please note that you might also need to ensure that the `PATH`
 environmental variable if configured so that *R* can access Java.
 
-## Citation
+## Citation <a name="citation"></a>
 
 Please cite *restoptr* when using it in publications.
 
@@ -110,7 +118,7 @@ Please cite *restoptr* when using it in publications.
 This article describes the methodology. We will provide a specific
 citation for ressource the R package soon.
 
-## Usage
+## Usage <a name="usage"></a>
 
 The first thing to do to use *restoptr* is to load the package:
 
@@ -226,7 +234,7 @@ And finally a compactness constraint, which limits the spatial extent of
 the selected restoration area:
 
 ``` r
-p <- p %>% add_compactness_constraint(5)
+p <- p %>% add_compactness_constraint(2.4, unit = "km")
 ```
 
 Once we have added constraints to the problem, we need to define an
@@ -264,7 +272,7 @@ p
     ## constraints:          
     ##   -  locked out (data = in memory) 
     ##   -  restorable (min_restore = 90, max_restore = 220, unit = ha) 
-    ##   -  compactness (max_diameter = 5) 
+    ##   -  compactness (max_diameter = 2.4, unit = km) 
     ## ----------------------------------------------------------------- 
     ## settings:
     ##   - precision = 4
@@ -279,7 +287,7 @@ objective.
 s <- solve(p)
 ```
 
-    ## Good news: the solver found a solution statisfying the constraints that was proven optimal ! (solving time = 2.4142299 s)
+    ## Good news: the solver found a solution statisfying the constraints that was proven optimal ! (solving time = 1.3770796 s)
 
 ``` r
 plot(
@@ -299,12 +307,12 @@ You can retrieve the attributes of the solution using the
 get_metadata(s, area_unit = "ha")
 ```
 
-    ##   min_restore total_restorable nb_planning_units optimality_proven solving_time
-    ## 1    209.9005         209.9005                13              true      2.41423
-    ##   mesh_initial mesh_best
-    ## 1     53.38999  55.47555
+    ##     min_restore total_restorable nb_planning_units optimality_proven
+    ## 1 182.3848 [ha]    182.3848 [ha]                11              true
+    ##   solving_time  mesh_initial     mesh_best
+    ## 1      1.37708 53.38999 [ha] 55.29463 [ha]
 
-## Getting help
+## Getting help <a name="help"></a>
 
 If you have any questions about *restoptr*, improvement suggestions, or
 if you detect a bug, please [open an

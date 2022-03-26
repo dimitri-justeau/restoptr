@@ -40,7 +40,7 @@ test_that("restopt_problem", {
   i <- which(vapply(
     problem$constraints, inherits, logical(1), "CompactnessConstraint"
   ))
-  testthat::expect_equal(problem$constraints[[i]]$name, "compactness (max_diameter = 5)")
+  testthat::expect_equal(problem$constraints[[i]]$name, "compactness (max_diameter = 5, unit = cells)")
 
   # Test overwrite objective
   testthat::expect_warning(problem <- problem %>% set_max_iic_objective())
