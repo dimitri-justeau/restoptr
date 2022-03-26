@@ -22,8 +22,8 @@ add_restorable_constraint(
 \item{min_proportion}{\code{float} Minimum habitat proportion to consider a cell
 as restored.}
 
-\item{unit}{\code{character} Area unit ("ha" for hectares, "m" for square meters,
-"km" for square kilometers, "cells" for number of cells from the original
+\item{unit}{\code{unit} object or a \code{character} that can be coerced to an area
+unit (see \code{unit} package), or "cells" for number of cells from the original
 habitat raster). If the input habitat raster does not use a projected
 coordinate system, only "cells" is available.}
 }
@@ -35,18 +35,18 @@ to specify specify the available amount of surface for restoration
 Given the \code{restorable_habitat} input raster in \link{restopt_problem},
 this constraint ensures that the total amount of restorable habitat in
 selected planning units is at least \code{min_restore} and at most \code{max_restore}.
-The unit of \code{min_restore} and \code{max_restore} can be either hectares ("ha"),
-square meters ("m"), square kilometers ("km"), or number of cells from the
-original habitat input raster ("cells"). The \code{min_proportion} parameter is a
-numeric between 0 and 1, and correspond to the minimum proportion of habitat
-area that needs to be restored in the planning unit to consider the planning
-unit as restored. This proportion is relative to the area of a planning unit,
-which is computed automatically from the input habitat raster. Note that
-planning unit area is considered uniform, and the distortion is not corrected.
-It could be using the \code{cellSize} function of the \code{terra} package, but this
-function is currently pretty slow for large rasters. If your problem is at
-regional scale, the distortion should be negligible. However, at larger
-scales, the best is to use an equal-area projected coordinate system.
+The unit of \code{min_restore} and \code{max_restore} can be either in a surface unit handled
+by the \code{unit} package, or in number of cells from the original habitat input raster
+("cells"). The \code{min_proportion} parameter is a numeric between 0 and 1, and
+correspond to the minimum proportion of habitat area that needs to be restored
+in the planning unit to consider the planning unit as restored. This proportion
+is relative to the area of a planning unit, which is computed automatically
+from the input habitat raster. Note that planning unit area is considered
+uniform, and the distortion is not corrected. It could be using the \code{cellSize}
+function of the \code{terra} package, but this function is currently pretty slow
+for large rasters. If your problem is at regional scale, the distortion
+should be negligible. However, at larger scales, the best is to use an
+equal-area projected coordinate system.
 
 Note that when a solution is found, the "maximum restorable habitat" is
 displayed, this value does not correspond to the \code{max_restore} parameter,
@@ -73,7 +73,7 @@ p <- restopt_problem(
     max_restore = 300,
     min_proportion = 0.7
   ) \%>\%
-  add_compactness_constraint(5)
+  add_compactness_constraint(5, unit = "cells")
 
 # print problem
 print(p)

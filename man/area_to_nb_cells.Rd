@@ -9,10 +9,10 @@ area_to_nb_cells(raster_layer, area, unit = "ha")
 \arguments{
 \item{raster_layer}{\code{\link[terra:rast]{terra::rast()}} Raster object.}
 
-\item{area}{\code{numeric} Area, in ha, m^2, or km^2.}
+\item{area}{\code{numeric} Area.}
 
-\item{unit}{\code{character} Unit of the area ("ha" for hectares, "m" for square meters,
-"km" for square kilometers)}
+\item{unit}{\code{unit} object or a \code{character} that can be coerced to a unit
+(see \code{unit} package). Must be an area unit.}
 }
 \value{
 \code{numeric} The number of raster cell correspond to the given area.

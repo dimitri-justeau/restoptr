@@ -53,12 +53,12 @@ invert_vector <- function(vector_layer, extent=NULL, filter=NULL) {
   return(as.polygons(extent)  - y)
 }
 
-#' Compute the area of a cell in ha, m^2, or km^2
+#' Compute the area of a cell
 #'
 #' @param raster_layer [terra::rast()] Raster object.
 #'
-#' @param unit `character` Unit of the area ("ha" for hectares, "m" for square meters,
-#' "km" for square kilometers)
+#' @param unit `unit` object or a `character` that can be coerced to a unit
+#' (see `unit` package). Must be an area unit.
 #'
 #' @details
 #' The input raster must have a projected coordinate system. The distortion is
@@ -84,33 +84,67 @@ cell_area <- function(raster_layer, unit = "ha") {
   assertthat::assert_that(
     inherits(raster_layer, "SpatRaster"),
     assertthat::is.string(unit),
-    unit %in% c("ha", "m", "km")
+    units::ud_are_convertible("m^2", unit)
   )
   # Throw an error if the raster is not projected
   if (is.lonlat(raster_layer)) {
     stop("The input raster does not use a projected coordinate system. Please reproject.")
   }
-  if (unit == "ha") {
-    dividend <- 10000
+  cell_area_m2 <- (prod(res(raster_layer)) * linearUnits(raster_layer))
+  cell_area_m2 <- units::set_units(cell_area_m2, "m^2")
+  return(units::set_units(cell_area_m2, unit, mode="symbol"))
+}
+
+#' Compute the width of a cell
+#'
+#' @param raster_layer [terra::rast()] Raster object.
+#'
+#' @param unit `unit` object or a `character` that can be coerced to a unit
+#' (see `unit` package). Must be an length unit.
+#'
+#' @details
+#' The input raster must have a projected coordinate system. The distortion is
+#' not corrected. It could be using the `cellSize` function of the `terra`
+#' package, but this function is currently pretty slow for large rasters. If
+#' your problem is at regional scale, the distortion should be negligible.
+#' However, at larger scales, the best is to use an equal-area projected
+#' coordinate system.
+#'
+#' @return `numeric` The width of a cell in the desired unit.
+#'
+#' @examples
+#' \dontrun{
+#' habitat_data <- rast(
+#'   system.file("extdata", "habitat_hi_res.tif", package = "restoptr")
+#' )
+#' cell_width(habitat_data, "m")
+#' }
+#'
+#' @export
+cell_width <- function(raster_layer, unit = "m") {
+  # Check arguments
+  assertthat::assert_that(
+    inherits(raster_layer, "SpatRaster"),
+    assertthat::is.string(unit),
+    units::ud_are_convertible("m", unit)
+  )
+  # Throw an error if the raster is not projected
+  if (is.lonlat(raster_layer)) {
+    stop("The input raster does not use a projected coordinate system. Please reproject.")
   }
-  if (unit == "m") {
-    dividend <- 1
-  }
-  if (unit == "km") {
-    dividend <- 1000000
-  }
-  cell_area <- (prod(res(raster_layer)) * linearUnits(raster_layer)) / dividend
-  return(cell_area)
+  cell_width_m <- res(raster_layer)[[1]] * linearUnits(raster_layer)
+  cell_width_m <- units::set_units(cell_width_m, "m")
+  return(units::set_units(cell_width_m, unit, mode="symbol"))
 }
 
 #' Compute the number of cells corresponding to a given area.
 #'
 #' @param raster_layer [terra::rast()] Raster object.
 #'
-#' @param area `numeric` Area, in ha, m^2, or km^2.
+#' @param area `numeric` Area.
 #'
-#' @param unit `character` Unit of the area ("ha" for hectares, "m" for square meters,
-#' "km" for square kilometers)
+#' @param unit `unit` object or a `character` that can be coerced to a unit
+#' (see `unit` package). Must be an area unit.
 #'
 #' @details
 #' The input raster must have a projected coordinate system. The distortion is
@@ -144,8 +178,8 @@ area_to_nb_cells <- function(raster_layer, area, unit = "ha") {
 #'
 #' @param nb_cells `numeric` Number of raster cells.
 #'
-#' @param unit `character` Unit of the area ("ha" for hectares, "m" for square meters,
-#' "km" for square kilometers)
+#' @param unit `unit` object or a `character` that can be coerced to a unit
+#' (see `unit` package). Must be an area unit.
 #'
 #' @details
 #' The input raster must have a projected coordinate system. The distortion is

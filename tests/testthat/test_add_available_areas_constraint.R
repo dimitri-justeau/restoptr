@@ -6,7 +6,7 @@ test_that("add_available_areas_constraint", {
   accessible <- terra::vect(system.file("extdata", "accessible_areas.gpkg", package = "restoptr"))
   problem <- restopt_problem(habitat, aggregation_factor = 16, habitat_threshold = 0.7) %>%
     add_available_areas_constraint(accessible) %>%
-    add_compactness_constraint(10) %>%
+    add_compactness_constraint(4.4, unit = "km") %>%
     set_max_mesh_objective() %>%
     add_settings(time_limit = 30)
   result <- solve(problem, verbose=TRUE)
@@ -18,7 +18,7 @@ test_that("add_available_areas_constraint", {
   locked_out <- terra::rast(system.file("extdata", "locked_out.tif", package = "restoptr"))
   problem <- restopt_problem(habitat, aggregation_factor = 16, habitat_threshold = 0.7) %>%
     add_available_areas_constraint(round(!locked_out)) %>%
-    add_compactness_constraint(10) %>%
+    add_compactness_constraint(4.4, unit = "km") %>%
     set_max_mesh_objective() %>%
     add_settings(time_limit = 30)
   result <- solve(problem, verbose=TRUE)

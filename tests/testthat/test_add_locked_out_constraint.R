@@ -7,7 +7,7 @@ test_that("add_locked_out_constraint", {
   locked_out <- invert_vector(accessible, extent = ext(habitat), filter = accessible$ID==1)
   problem <- restopt_problem(habitat, aggregation_factor = 16, habitat_threshold = 0.7) %>%
     add_locked_out_constraint(locked_out) %>%
-    add_compactness_constraint(10) %>%
+    add_compactness_constraint(10, unit = "cells") %>%
     set_max_mesh_objective() %>%
     add_settings(time_limit = 30)
   result <- solve(problem, verbose=TRUE)
@@ -19,7 +19,7 @@ test_that("add_locked_out_constraint", {
   locked_out <- terra::rast(system.file("extdata", "locked_out.tif", package = "restoptr"))
   problem <- restopt_problem(habitat, aggregation_factor = 16, habitat_threshold = 0.7) %>%
     add_locked_out_constraint(locked_out) %>%
-    add_compactness_constraint(10) %>%
+    add_compactness_constraint(10, unit = "cells") %>%
     set_max_mesh_objective() %>%
     add_settings(time_limit = 30)
   result <- solve(problem, verbose=TRUE)

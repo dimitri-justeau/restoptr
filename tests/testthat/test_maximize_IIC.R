@@ -9,7 +9,7 @@ test_that("maximize_iic", {
   problem <- restopt_problem(habitat, aggregation_factor = 16, habitat_threshold = 0.7) %>%
     add_locked_out_constraint(locked_out) %>%
     add_components_constraint(min_nb_components = 1, max_nb_components = 1) %>%
-    add_compactness_constraint(max_diameter = 6) %>%
+    add_compactness_constraint(max_diameter = 2700, unit = "m") %>%
     add_restorable_constraint(min_restore = 90, max_restore = 110, unit = "ha", min_proportion = 0.7) %>%
     set_max_iic_objective()
 
@@ -22,8 +22,8 @@ test_that("maximize_iic", {
   metadata <- get_metadata(result, area_unit = "ha")
 
   testthat::expect_lte(metadata$solving_time, 30)
-  testthat::expect_gte(metadata$min_restore, 90)
-  testthat::expect_lte(metadata$min_restore, 110)
+  testthat::expect_gte(metadata$min_restore, set_units(90, "ha"))
+  testthat::expect_lte(metadata$min_restore, set_units(110, "ha"))
   initial_value <- metadata$iic_initial
   optimal_value <- metadata$iic_best
   testthat::expect_true(initial_value <= optimal_value)

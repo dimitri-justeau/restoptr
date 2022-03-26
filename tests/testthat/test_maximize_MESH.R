@@ -7,7 +7,7 @@ test_that("maximize_mesh", {
   problem <- restopt_problem(habitat, aggregation_factor = 16, habitat_threshold = 0.7) %>%
     add_locked_out_constraint(locked_out) %>%
     add_components_constraint(min_nb_components = 1, max_nb_components = 1) %>%
-    add_compactness_constraint(max_diameter = 6) %>%
+    add_compactness_constraint(max_diameter = 6, unit = "cells") %>%
     add_restorable_constraint(min_restore = 90, max_restore = 110, unit = "ha", min_proportion = 0.7) %>%
     set_max_mesh_objective()
   problem <- add_settings(problem, time_limit = 30)
@@ -15,8 +15,8 @@ test_that("maximize_mesh", {
   testthat::expect_s4_class(result, "RestoptSolution")
   metadata <- get_metadata(result, area_unit = "ha")
   testthat::expect_lte(metadata$solving_time, 30)
-  testthat::expect_gte(metadata$min_restore, 90)
-  testthat::expect_lte(metadata$min_restore, 110)
+  testthat::expect_gte(metadata$min_restore, set_units(90, "ha"))
+  testthat::expect_lte(metadata$min_restore, set_units(110, "ha"))
   initial_value <- metadata$mesh_initial
   optimal_value <- metadata$mesh_best
   testthat::expect_true(initial_value <= optimal_value)

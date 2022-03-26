@@ -9,7 +9,7 @@ test_that("restopt_problem", {
   problem <- restopt_problem(habitat, aggregation_factor = 16, habitat_threshold = 0.7) %>%
     add_locked_out_constraint(locked_out) %>%
     add_components_constraint(min_nb_components = 1, max_nb_components = 1) %>%
-    add_compactness_constraint(max_diameter = 6) %>%
+    add_compactness_constraint(max_diameter = 6, unit = "cells") %>%
     add_restorable_constraint(min_restore = 90, max_restore = 110, unit = "ha", min_proportion = 0.7) %>%
     set_max_mesh_objective()
 
@@ -36,7 +36,7 @@ test_that("restopt_problem", {
   )
 
   # Test overwrite constraint
-  testthat::expect_warning(problem <- problem %>% add_compactness_constraint(5))
+  testthat::expect_warning(problem <- problem %>% add_compactness_constraint(5, unit = "cells"))
   i <- which(vapply(
     problem$constraints, inherits, logical(1), "CompactnessConstraint"
   ))

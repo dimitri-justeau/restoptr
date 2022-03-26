@@ -4,12 +4,17 @@
 \alias{add_compactness_constraint}
 \title{Add constraint to limit compactness}
 \usage{
-add_compactness_constraint(problem, max_diameter)
+add_compactness_constraint(problem, max_diameter, unit = "m")
 }
 \arguments{
 \item{problem}{\code{\link[=restopt_problem]{restopt_problem()}} Restoration problem object.}
 
 \item{max_diameter}{\code{numeric} Maximum diameter value.}
+
+\item{unit}{\code{unit} object or a \code{character} that can be coerced to an area
+unit (see \code{unit} package), or "cells" for cell width of aggregated
+habitat raster. If the input habitat raster does not use a projected
+coordinate system, only "cells" is available.}
 }
 \description{
 Add constraint to a restoration problem (\code{\link[=restopt_problem]{restopt_problem()}}) object
@@ -45,7 +50,7 @@ p <- restopt_problem(
     min_restore = 200,
     max_restore = 300,
   ) \%>\%
-  add_compactness_constraint(4)
+  add_compactness_constraint(1800, unit = "m")
 
 # plot preprocessed data
 plot(rast(list(p$data$existing_habitat, p$data$restorable_habitat)), nc = 2)

@@ -54,7 +54,8 @@ Imports:
 Depends:
     R (>= 4.1.0),
     terra (>= 1.5-12),
-    rJava (>= 1.0.5)
+    rJava (>= 1.0.5),
+    units (>= 0.8-0)
 Suggests:
     testthat (>= 2.0.1),
     knitr (>= 1.2.0),
@@ -62,8 +63,7 @@ Suggests:
     rmarkdown (>= 1.10),
     landscapemetrics (>= 1.5.4),
     raster (>= 3.5),
-    rgdal,
-    fansi
+    rgdal
 Roxygen: list(markdown = TRUE)
 Collate:
     'internal.R'

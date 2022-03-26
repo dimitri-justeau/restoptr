@@ -10,6 +10,11 @@ NULL
 #'
 #' @param max_diameter `numeric` Maximum diameter value.
 #'
+#' @param unit `unit` object or a `character` that can be coerced to an area
+#' unit (see `unit` package), or "cells" for cell width of aggregated
+#' habitat raster. If the input habitat raster does not use a projected
+#' coordinate system, only "cells" is available.
+#'
 #' @details The compactness constraint is defined according to the diameter of
 #' the smallest enclosing circle which contains the center of selected planning
 #' units for restoration (see https://w.wiki/4vfg). The unit of the diameter
@@ -42,7 +47,7 @@ NULL
 #'     min_restore = 200,
 #'     max_restore = 300,
 #'   ) %>%
-#'   add_compactness_constraint(4)
+#'   add_compactness_constraint(1800, unit = "m")
 #'
 #' # plot preprocessed data
 #' plot(rast(list(p$data$existing_habitat, p$data$restorable_habitat)), nc = 2)
@@ -60,13 +65,19 @@ NULL
 #' }
 #'
 #' @export
-add_compactness_constraint <- function(problem, max_diameter) {
+add_compactness_constraint <- function(problem, max_diameter, unit = "m") {
   # assert argument is valid
   assertthat::assert_that(
     inherits(problem, "RestoptProblem"),
     assertthat::is.number(max_diameter),
-    assertthat::noNA(max_diameter)
+    assertthat::noNA(max_diameter),
+    (unit == "cells" || units::ud_are_convertible(unit, "m"))
   )
+
+  if (unit != "cells") {
+    width <- cell_width(get_existing_habitat(problem), unit = unit)
+    max_diameter <- max_diameter / width
+  }
 
   # add constraint
   add_restopt_constraint(

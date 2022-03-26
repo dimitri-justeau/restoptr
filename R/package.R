@@ -15,4 +15,5 @@ NULL
 
 #' @import terra
 #' @import rJava
+#' @import units
 NULL

@@ -11,8 +11,8 @@ nb_cell_to_area(raster_layer, nb_cells, unit = "ha")
 
 \item{nb_cells}{\code{numeric} Number of raster cells.}
 
-\item{unit}{\code{character} Unit of the area ("ha" for hectares, "m" for square meters,
-"km" for square kilometers)}
+\item{unit}{\code{unit} object or a \code{character} that can be coerced to a unit
+(see \code{unit} package). Must be an area unit.}
 }
 \value{
 \code{numeric} The area corresponding to \code{nb_cells} in the desired unit.
