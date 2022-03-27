@@ -287,7 +287,7 @@ objective.
 s <- solve(p)
 ```
 
-    ## Good news: the solver found a solution statisfying the constraints that was proven optimal ! (solving time = 1.3770796 s)
+    ## Good news: the solver found a solution statisfying the constraints that was proven optimal ! (solving time = 1.3754321 s)
 
 ``` r
 plot(
@@ -308,9 +308,9 @@ get_metadata(s, area_unit = "ha")
 ```
 
     ##     min_restore total_restorable nb_planning_units optimality_proven
-    ## 1 182.3848 [ha]    182.3848 [ha]                11              true
+    ## 1 219.3772 [ha]    219.3772 [ha]                15              true
     ##   solving_time  mesh_initial     mesh_best
-    ## 1      1.37708 53.38999 [ha] 55.29463 [ha]
+    ## 1     1.375432 53.38999 [ha] 55.59634 [ha]
 
 ## Getting help <a name="help"></a>
 
