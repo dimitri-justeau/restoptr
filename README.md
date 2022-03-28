@@ -164,7 +164,8 @@ as **planning units**.
 **Note:** we implemented this data pre processing step as a new feature
 in `restoptr` to facilitate its usage, to ensure that problems are
 instantiated with consistent information, and to facilitate the
-automation of workflows.
+automation of workflows. For more details on the aggregation method,
+please refer to `prepare_inputs()` function documentation.
 
 Example data, from the use case presented in [this
 study](https://www.researchgate.net/publication/346597935_Constrained_optimization_of_landscape_indices_in_conservation_planning_to_support_ecological_restoration_in_New_Caledonia)
@@ -237,6 +238,10 @@ the selected restoration area:
 p <- p %>% add_compactness_constraint(2.4, unit = "km")
 ```
 
+**Note:** units conversions are handled by the
+[units](https://r-quantities.github.io/units/) package, thus feel free
+to use any surface or length unit when defining your constraints.
+
 Once we have added constraints to the problem, we need to define an
 optimization objective. For example, lets configure `restopr` to
 identify, under the previous constraints, which restoration areas
@@ -287,7 +292,7 @@ objective.
 s <- solve(p)
 ```
 
-    ## Good news: the solver found a solution statisfying the constraints that was proven optimal ! (solving time = 1.3754321 s)
+    ## Good news: the solver found a solution statisfying the constraints that was proven optimal ! (solving time = 7.579788 s)
 
 ``` r
 plot(
@@ -310,7 +315,7 @@ get_metadata(s, area_unit = "ha")
     ##     min_restore total_restorable nb_planning_units optimality_proven
     ## 1 219.3772 [ha]    219.3772 [ha]                15              true
     ##   solving_time  mesh_initial     mesh_best
-    ## 1     1.375432 53.38999 [ha] 55.59634 [ha]
+    ## 1     7.579788 53.38999 [ha] 55.59634 [ha]
 
 ## Getting help <a name="help"></a>
 

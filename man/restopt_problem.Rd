@@ -19,7 +19,8 @@ with the value \code{1} must correspond to existing habitat. Cells with the valu
 This raster can have a high resolution, the \code{aggregation_factor} and the
 \code{habitat_threshold} parameters, described below, will be used to down sample
 the habitat raster to a tractable resolution for the optimization engine, and
-automatically derive the restorable habitat raster.}
+automatically derive the restorable habitat raster (see \link{prepare_inputs}
+for more details on the method).}
 
 \item{habitat_threshold}{\code{numeric} number between 0 and 1, which corresponds to the
 minimum proportion of habitat that must be present within an aggregated pixel
@@ -53,7 +54,8 @@ during the solving procedure (\code{NA} or \code{NO_DATA}). The \code{aggregatio
 parameter is used to down sample the \code{existing_habitat} to a resolution that
 will be tractable for the optimization engine, and the \code{habitat_threshold}
 parameter indicates the minimum proportion of habitat required in aggregated
-habitat pixels to consider them as habitat.
+habitat pixels to consider them as habitat (see \link{prepare_inputs}
+for more details on the method).
 }
 \examples{
 \dontrun{

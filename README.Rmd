@@ -135,7 +135,9 @@ to ensure a tractable optimization problem: the *aggregation_factor* and the
 
 **Note:** we implemented this data pre processing step as a new feature in
 `restoptr` to facilitate its usage, to ensure that problems are instantiated with
-consistent information, and to facilitate the automation of workflows.
+consistent information, and to facilitate the automation of workflows. For more
+details on the aggregation method, please refer to `prepare_inputs()` function
+documentation.
 
 Example data, from the use case presented in [this study](https://www.researchgate.net/publication/346597935_Constrained_optimization_of_landscape_indices_in_conservation_planning_to_support_ecological_restoration_in_New_Caledonia)
 is included in the package:
@@ -200,6 +202,9 @@ selected restoration area:
 ```{r}
 p <- p %>% add_compactness_constraint(2.4, unit = "km")
 ```
+
+**Note:** units conversions are handled by the [units](https://r-quantities.github.io/units/)
+package, thus feel free to use any surface or length unit when defining your constraints.
 
 Once we have added constraints to the problem, we need to define an optimization
 objective. For example, lets configure `restopr` to identify, under the previous

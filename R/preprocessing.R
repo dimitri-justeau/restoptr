@@ -32,9 +32,25 @@ NULL
 #' downsampling that will be applied to the habitat. This parameter is
 #' important to ensure the tractability of a problem.
 #'
-#' @return A vector : c(downsampled_habitat, restorable_area)
+#' @return A vector : c(downsampled_habitat, restorable_area, cell_area)
 #'
-#' @details TODO
+#' @details This preprocessing function produces the necessary inputs of a
+#' restopt problem from a single binary habitat raster (`habitat`), which can
+#' be at high resolution. Restopt solves a hard constrained combinatorial problem
+#' (it can be reduced to a constrained 0/1 knapsack problem, which is know to
+#' be NP-Complete), thus the input resolution might need to be reduced to
+#' ensure a tractable problem. Performing this downsampling in a systematic
+#' and reproducible way is the aim of this function, which relies on the
+#' `terra::aggregate()` function to do it. The `aggregation_factor` parameter
+#' indicates how much the resolution must be reduced. An aggregated pixel
+#' will contain at most `aggregation_factor^2` pixels from the input `habitat`
+#' raster (`cell_area` raster in this function outputs). If an aggregated pixel
+#' is close to the spatial boundaries of the problem (i.e. NA cells), it can
+#' contain less than `aggregation_factor^2` fine grained pixels. The
+#' `habitat_threshold` parameter indicates the minimum proportion of `habitat`
+#' pixels (relative to `cell_area`) whose value is 1 to consider an aggregated
+#' pixel as habitat (`downsampled_habitat` output raster). The `restorable_area`
+#' output raster correspond to the number of pixel with value 0 in aggregated pixels.
 #'
 #' @examples
 #' \dontrun{
