@@ -4,7 +4,7 @@
 \alias{restopt_solution}
 \title{Restopt solution}
 \usage{
-restopt_solution(restopt_problem, solution_raster, metadata)
+restopt_solution(restopt_problem, solution_raster, metadata, id_solution = 1)
 }
 \arguments{
 \item{restopt_problem}{\code{\link[=restopt_problem]{restopt_problem()}} Reference to the problem corresponding
@@ -13,6 +13,8 @@ to this solution.}
 \item{solution_raster}{\code{\link[terra:rast]{terra::rast()}} Solution raster.}
 
 \item{metadata}{\code{\link{list}} List containing metadata attributes of the solution.}
+
+\item{id_solution}{\code{\link{integer}} Identifier of the solution.}
 }
 \value{
 A new restoration problem solution (\code{restopt_solution()}).

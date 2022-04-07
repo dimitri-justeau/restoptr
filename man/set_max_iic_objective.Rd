@@ -4,10 +4,22 @@
 \alias{set_max_iic_objective}
 \title{Set an objective to maximize the integral index of connectivity}
 \usage{
-set_max_iic_objective(problem)
+set_max_iic_objective(problem, distance_threshold = -1, unit = "m")
 }
 \arguments{
 \item{problem}{\code{\link[=restopt_problem]{restopt_problem()}} Restoration problem object.}
+
+\item{distance_threshold}{\code{numeric} greater than 0. Minimum distance (in
+\code{unit}) between two patches to consider them connected in the computation of
+the IIC. The default value -1 causes the function to use 1 aggregated cell as
+the distance threshold.}
+
+\item{unit}{\code{unit} object or a \code{character} that can be coerced to an area
+unit (see \code{unit} package), or "cells" for cell width of aggregated
+habitat raster. Units of the \code{distance_threshold} parameter. If the input
+habitat raster does not use a projected coordinate system, only "cells" is
+available. Meters by default, expected if \code{distance_threshold} is set to its
+default value (-1), which causes the function to use 1 cell by default.}
 }
 \value{
 An updated restoration problem (\code{\link[=restopt_problem]{restopt_problem()}} object.
@@ -22,7 +34,12 @@ connectivity index based on a binary connection model (Pascual-Hortal &
 Saura, 2006). Its maximization in the context of restoration favours
 restoring the structural connectivity between large patches. IIC is unitless
 and comprised between 0 (no connectivity) and 1 (all the landscape is
-habitat, thus fully connected).
+habitat, thus fully connected). The \code{distance_threshold} parameter indicates
+to the solver how to construct the habitat graph, i.e. what is the minimum
+distance between two patches to consider them as connected. Note that, as
+the computation occurs on aggregated cells, if \code{distance_threshold} is used
+with a different unit than "cells", it will be rounded to the closest
+corresponding number of cells.
 }
 \examples{
 \dontrun{

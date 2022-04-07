@@ -13,7 +13,7 @@ test_that("restopt_problem", {
     add_restorable_constraint(min_restore = 90, max_restore = 110, unit = "ha", min_proportion = 0.7) %>%
     set_max_mesh_objective()
 
-  problem <- add_settings(problem, time_limit = 30)
+  problem <- add_settings(problem, time_limit = 30, nb_solutions = 5)
 
   # Test print problem (just run to ensure there is no error)
   print(problem)

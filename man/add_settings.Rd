@@ -4,7 +4,7 @@
 \alias{add_settings}
 \title{Add settings}
 \usage{
-add_settings(problem, precision = 4, time_limit = 0)
+add_settings(problem, precision = 4, time_limit = 0, nb_solutions = 1)
 }
 \arguments{
 \item{problem}{\code{\link[=restopt_problem]{restopt_problem()}} Restoration problem object.}
@@ -15,6 +15,8 @@ Defaults to 4.}
 \item{time_limit}{\code{integer} Maximum permitted run time for optimization
 (seconds).
 Defaults to 0.}
+
+\item{nb_solutions}{\code{integer} Number of desired solutions. Defaults to 1.}
 }
 \description{
 Add settings to a restoration problem (\code{\link[=restopt_problem]{restopt_problem()}}) object
@@ -33,7 +35,7 @@ p <- restopt_problem(
     aggregation_factor = 16,
     habitat_threshold = 0.7
   ) \%>\%
-  add_settings(time_limit = 1, precision = 4)
+  add_settings(time_limit = 1, precision = 4, nb_solutions = 2)
 # print problem
 print(p)
 }

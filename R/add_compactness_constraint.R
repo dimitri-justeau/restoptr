@@ -12,20 +12,25 @@ NULL
 #'
 #' @param unit `unit` object or a `character` that can be coerced to an area
 #' unit (see `unit` package), or "cells" for cell width of aggregated
-#' habitat raster. If the input habitat raster does not use a projected
-#' coordinate system, only "cells" is available.
+#' habitat raster. Corresponds to the unit of the maximum diameter. If the
+#' input habitat raster does not use a projected coordinate system, only "cells"
+#' is available.
 #'
 #' @details The compactness constraint is defined according to the diameter of
 #' the smallest enclosing circle which contains the center of selected planning
 #' units for restoration (see https://w.wiki/4vfg). The unit of the diameter
-#' corresponds to planning unit width. For example, a diameter of 4 means that
-#' no more than 4 cells can be found in line in the solution. In practice,
+#' corresponds either to a unit available in the `unit` package, or to planning
+#' unit width ("cells"). Note that, as the computation occurs on aggregated cells,
+#' if `max_diameter` is used with a different unit than "cells", it will be rounded
+#' to the closest corresponding number of cells. For example, a diameter of 4 cells
+#' means that no more than 4 cells can be found in line in the solution. In practice,
 #' this constraint is useful to ensure the feasibility of a restoration project,
 #' and to integrate economies of scale. Compact restoration areas are usually
 #' associated with lower costs and easier management, because it ensures that
-#' restoration sites are not too far away from each other (e.g. lower travel
-#' costs between sites, less areas to monitor, etc.).
-#'#' Also see \link{add_components_constraint}.
+#' restoration sites are not too far away from each other (e.g. lower travel costs
+#' between sites, less areas to monitor, etc.).
+#'
+#' Also see \link{add_components_constraint}.
 #'
 #' @seealso
 #' \link{add_components_constraint}

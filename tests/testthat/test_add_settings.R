@@ -21,9 +21,9 @@ test_that("add_settings", {
     add_restorable_constraint(min_restore = 90, max_restore = 110, unit = "ha", min_proportion = 0.7) %>%
     set_max_mesh_objective()
   result <- solve(problem)
-  metadata <- attributes(result)$metadata
+  metadata <- get_metadata(result, area_unit = "cells")
   # Assert that the solving time is less than 1s (more or less 10%, thus 1.1s)
-  testthat::expect_true(metadata$solving_time < 1100)
+  testthat::expect_true(metadata$solving_time < 1.1)
   # Assert that the precision is correct
   optimal_value <- metadata$mesh_best
   testthat::expect_equal(round(optimal_value, 2), optimal_value)

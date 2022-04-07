@@ -91,16 +91,26 @@ solve.RestoptProblem <- function(a, b, ...) {
   ac_data <- terra_force_disk(a$data$locked_out, NAflag = -9999)
 
   # import data
+  # jdata <- rJava::.jnew(
+  #   "org.restopt.DataLoader",
+  #   terra::sources(eh_data)[[1]],
+  #   terra::sources(ac_data)[[1]],
+  #   terra::sources(rh_data)[[1]]
+  # )
   jdata <- rJava::.jnew(
     "org.restopt.DataLoader",
-    terra::sources(eh_data)[[1]],
-    terra::sources(ac_data)[[1]],
-    terra::sources(rh_data)[[1]]
+    .jarray(as.integer(as.vector(a$data$existing_habitat))),
+    .jarray(as.integer(as.vector(a$data$locked_out))),
+    .jarray(as.vector(a$data$restorable_habitat)),
+    .jarray(as.integer(as.vector(a$data$cell_area))),
+    as.integer(ncol(a$data$existing_habitat)),
+    as.integer(nrow(a$data$existing_habitat)),
+    NaN
   )
 
   # initialize problem
   jproblem <-rJava::.jnew(
-    "org.restopt.BaseProblem", jdata,
+    "org.restopt.RestoptProblem", jdata,
     0L
   )
 
@@ -110,17 +120,18 @@ solve.RestoptProblem <- function(a, b, ...) {
   }
 
   # add objective and solve the problem
-  output_path <- tempfile()
+  t <- Sys.time()
   result <- try(
     a$objective$post(
       jproblem,
+      a$settings$nb_solutions,
       a$settings$precision,
       a$settings$time_limit,
-      output_path,
       verbose
     ),
     silent = TRUE
   )
+  solving_time <- difftime(Sys.time(), t, units = "secs")
 
   # throw error if failed
   if (inherits(result, "try-error")) {
@@ -143,17 +154,24 @@ solve.RestoptProblem <- function(a, b, ...) {
   }
 
   # import results
-  r <- terra::rast(paste0(output_path, ".tif"))
-  attributes(r)$metadata <- utils::read.csv(paste0(output_path, ".csv"))
-
-  solving_time <- attributes(r)$metadata$solving_time
+  nb_sols <- result$size()
+  solutions <- sapply(seq(0, nb_sols - 1), function(i) {
+    sol <- result$get(as.integer(i))
+    pus <- sol$getRestorationPlanningUnitsCompleteIndex() + 1 # Java arrays are 0-based
+    r <- round(a$data$existing_habitat) + 1
+    r[r == 1 & a$data$locked_out == 1] <- 0
+    r[pus] <- 3
+    m <- sol$getCharacteristicsAsCsv()
+    metadata <- read.csv(text = .jstrVal(m))
+    restopt_solution(a, r, metadata, id_solution = i)
+  })
 
   # If the solver found a solution, and if an optimization objective was
   # defined, indicate whether it was proven optimal, or if it is the best
   # solution found within the time limit but not proven optimal
   if (!inherits(a$objective, "NoObjective")) {
     if (status == "TERMINATED") {
-      cat(crayon::green(paste("Good news: the solver found a solution statisfying",
+      cat(crayon::green(paste("Good news: the solver found", nb_sols ,"solution(s) statisfying",
                               "the constraints that was proven optimal !",
                               "(solving time =", solving_time, "s)")), "\n")
     }
@@ -166,7 +184,7 @@ solve.RestoptProblem <- function(a, b, ...) {
                                "(solving time =", solving_time, "s)")), "\n")
     }
   } else {
-      cat(crayon::green(paste("Good news: the solver found a solution satisfying",
+      cat(crayon::green(paste("Good news: the solver found", nb_sols ,"solution(s) satisfying",
                               "the constraints ! (solving time =",
                               solving_time, "s)")), "\n")
   }
@@ -185,5 +203,8 @@ solve.RestoptProblem <- function(a, b, ...) {
     rm(ac_data)
   }
   .jgc()
-  return(restopt_solution(a, r, attributes(r)$metadata))
+  if (length(solutions) == 1) {
+    return(solutions[[1]])
+  }
+  return(solutions)
 }

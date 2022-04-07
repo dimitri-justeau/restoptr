@@ -16,16 +16,19 @@ setClass("RestoptSolution", contains = "SpatRaster", slots = representation(meta
 #'
 #' @param metadata [`list`] List containing metadata attributes of the solution.
 #'
+#' @param id_solution [`integer`] Identifier of the solution.
+#'
 #' @return A new restoration problem solution (`restopt_solution()`).
 #'
 #' @importFrom methods as
 #'
-restopt_solution <- function(restopt_problem, solution_raster, metadata) {
+restopt_solution <- function(restopt_problem, solution_raster, metadata, id_solution = 1) {
   # assert arguments are valid
   ## initial checks
   assertthat::assert_that(
     inherits(solution_raster, "SpatRaster"),
     inherits(restopt_problem, "RestoptProblem"),
+    is.integer(id_solution),
     is.list(metadata)
   )
   ## further checks
@@ -37,7 +40,7 @@ restopt_solution <- function(restopt_problem, solution_raster, metadata) {
     )
   )
   # convert object to RestoptSolution
-  names(solution_raster) <- "Restoration problem solution"
+  names(solution_raster) <- paste("Solution", id_solution)
   levels(solution_raster) <- c(
     "Locked out",
     "Available",

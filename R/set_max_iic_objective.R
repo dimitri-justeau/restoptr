@@ -8,12 +8,29 @@ NULL
 #'
 #' @inheritParams set_max_mesh_objective
 #'
+#' @param distance_threshold `numeric` greater than 0. Minimum distance (in
+#' `unit`) between two patches to consider them connected in the computation of
+#' the IIC. The default value -1 causes the function to use 1 aggregated cell as
+#' the distance threshold.
+#'
+#' @param unit `unit` object or a `character` that can be coerced to an area
+#' unit (see `unit` package), or "cells" for cell width of aggregated
+#' habitat raster. Units of the `distance_threshold` parameter. If the input
+#' habitat raster does not use a projected coordinate system, only "cells" is
+#' available. Meters by default, expected if `distance_threshold` is set to its
+#' default value (-1), which causes the function to use 1 cell by default.
+#'
 #' @details The integral index of connectivity (IIC) is a graph-based inter-patch
 #' connectivity index based on a binary connection model (Pascual-Hortal &
 #' Saura, 2006). Its maximization in the context of restoration favours
 #' restoring the structural connectivity between large patches. IIC is unitless
 #' and comprised between 0 (no connectivity) and 1 (all the landscape is
-#' habitat, thus fully connected).
+#' habitat, thus fully connected). The `distance_threshold` parameter indicates
+#' to the solver how to construct the habitat graph, i.e. what is the minimum
+#' distance between two patches to consider them as connected. Note that, as
+#' the computation occurs on aggregated cells, if `distance_threshold` is used
+#' with a different unit than "cells", it will be rounded to the closest
+#' corresponding number of cells.
 #'
 #' @return An updated restoration problem ([restopt_problem()] object.
 #'
@@ -62,19 +79,34 @@ NULL
 #' }
 #'
 #' @export
-set_max_iic_objective <- function(problem) {
+set_max_iic_objective <- function(problem, distance_threshold = -1, unit = "m") {
   # assert argument is valid
   assertthat::assert_that(inherits(problem, "RestoptProblem"))
-
+  if (distance_threshold < 0) {
+    distance_threshold <- 1
+    units <- "cells"
+  }
+  assertthat::assert_that(
+    assertthat::is.number(distance_threshold),
+    assertthat::noNA(distance_threshold),
+    (unit == "cells" || units::ud_are_convertible(unit, "m"))
+  )
+  distance_threshold_unitless <- distance_threshold
+  if (unit != "cells") {
+    width <- cell_width(get_existing_habitat(problem), unit = unit)
+    distance_threshold_unitless <- distance_threshold / width
+  }
+  distance_threshold_unitless <- as.integer(round(distance_threshold_unitless))
   # set objective
   set_restopt_objective(
     problem = problem,
     objective = restopt_component(
       name = "Maximize integral index of connectivity",
       class = c("MaxIicObjective", "RestoptObjectve"),
-      post = function(jproblem, precision, time_limit, output_path, verbose=FALSE) {
+      post = function(jproblem, nb_solutions, precision, time_limit, verbose=FALSE) {
         rJava::.jcall(
-          jproblem, "Z", "maximizeIIC", precision, output_path, time_limit, verbose
+          jproblem, "Ljava/util/List;", "maximizeIIC", nb_solutions, precision,
+          distance_threshold_unitless, time_limit, verbose
         )
       }
     )
