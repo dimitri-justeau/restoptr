@@ -97,6 +97,11 @@ set_max_iic_objective <- function(problem, distance_threshold = -1, unit = "m") 
     distance_threshold_unitless <- distance_threshold / width
   }
   distance_threshold_unitless <- as.integer(round(distance_threshold_unitless))
+  if (distance_threshold_unitless == 0) {
+    warning(paste0("The distance threshold was rounded to 1 aggregated cell (",
+                   width, ") because it was less than this minimum value"))
+    distance_threshold_unitless <- 1L
+  }
   # set objective
   set_restopt_objective(
     problem = problem,
