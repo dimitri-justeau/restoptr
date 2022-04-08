@@ -131,7 +131,7 @@ solve.RestoptProblem <- function(a, b, ...) {
     ),
     silent = TRUE
   )
-  solving_time <- difftime(Sys.time(), t, units = "secs")
+  solving_time <- round(difftime(Sys.time(), t, units = "secs"), 2)
 
   # throw error if failed
   if (inherits(result, "try-error")) {
@@ -142,6 +142,9 @@ solve.RestoptProblem <- function(a, b, ...) {
   status <- jproblem$getSearchState()
 
   # Indicate if the solver did not find solution
+  if (length(result) == 0) {
+    result <- FALSE
+  }
   if (result == FALSE) {
     .jgc()
     if (status == "TERMINATED") {
@@ -163,19 +166,37 @@ solve.RestoptProblem <- function(a, b, ...) {
     r[pus] <- 3
     m <- sol$getCharacteristicsAsCsv()
     metadata <- read.csv(text = .jstrVal(m))
-    restopt_solution(a, r, metadata, id_solution = i)
+    restopt_solution(a, r, metadata, id_solution = as.integer(i + 1))
   })
+
+  proven_optimal <- get_metadata(solutions[[1]])$optimality_proven
 
   # If the solver found a solution, and if an optimization objective was
   # defined, indicate whether it was proven optimal, or if it is the best
   # solution found within the time limit but not proven optimal
   if (!inherits(a$objective, "NoObjective")) {
-    if (status == "TERMINATED") {
-      cat(crayon::green(paste("Good news: the solver found", nb_sols ,"solution(s) statisfying",
-                              "the constraints that was proven optimal !",
-                              "(solving time =", solving_time, "s)")), "\n")
-    }
-    if (status == "STOPPED") {
+    if (proven_optimal == "true") {
+      if (nb_sols == 1) {
+        cat(crayon::green(paste("Good news: the solver found", nb_sols ,"solution statisfying",
+                                "the constraints that was proven optimal !",
+                                "(solving time =", solving_time, "s)")), "\n")
+      } else {
+        cat(crayon::green(paste("Good news: the solver found", nb_sols ,"solutions statisfying",
+                                "the constraints that were proven optimal !",
+                                "(solving time =", solving_time, "s)")), "\n")
+      }
+      if (nb_sols != a$settings$nb_solutions) {
+        if (status == "STOPPED") {
+          cat(crayon::yellow(paste(a$settings$nb_solutions, "optimal solutions",
+                                   "were requested, however the solver only had",
+                                   "enough time to find", nb_sols)) , "\n")
+        } else {
+          cat(crayon::yellow(paste(a$settings$nb_solutions, "optimal solutions",
+                                   "were requested, however only", nb_sols,
+                                   "optimal solution exist")), "\n")
+          }
+      }
+    } else {
       cat(crayon::yellow(paste("Note: The current solution is the best that the",
                                "solver could find within the time limit.",
                                "However, the solver had not enough to prove",
@@ -184,9 +205,26 @@ solve.RestoptProblem <- function(a, b, ...) {
                                "(solving time =", solving_time, "s)")), "\n")
     }
   } else {
-      cat(crayon::green(paste("Good news: the solver found", nb_sols ,"solution(s) satisfying",
+    if (nb_sols == 1) {
+      cat(crayon::green(paste("Good news: the solver found", nb_sols ,"solution satisfying",
                               "the constraints ! (solving time =",
                               solving_time, "s)")), "\n")
+    } else {
+      cat(crayon::green(paste("Good news: the solver found", nb_sols ,"solutions satisfying",
+                              "the constraints ! (solving time =",
+                              solving_time, "s)")), "\n")
+    }
+    if (nb_sols != a$settings$nb_solutions) {
+      if (status == "STOPPED") {
+        cat(crayon::yellow(paste(a$settings$nb_solutions, "solutions",
+                                 "were requested, however the solver only had",
+                                 "enough time to find", nb_sols)), "\n")
+      } else {
+        cat(crayon::yellow(paste(a$settings$nb_solutions, "optimal solutions",
+                                 "were requested, however only", nb_sols,
+                                 "solution satisfying the constraints exist")), "\n")
+      }
+    }
   }
 
   # clean up

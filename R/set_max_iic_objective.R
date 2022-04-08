@@ -84,7 +84,7 @@ set_max_iic_objective <- function(problem, distance_threshold = -1, unit = "m") 
   assertthat::assert_that(inherits(problem, "RestoptProblem"))
   if (distance_threshold < 0) {
     distance_threshold <- 1
-    units <- "cells"
+    unit <- "cells"
   }
   assertthat::assert_that(
     assertthat::is.number(distance_threshold),
