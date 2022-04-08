@@ -87,7 +87,7 @@ add_locked_out_constraint <- function(problem, data) {
       terra::hasValues(data)
     )
     original_res <- terra::compareGeom(
-      problem$data$original_habitat, data, stopiffalse = FALSE
+      problem$data$original_habitat, data, stopOnError = FALSE
     )
     if (original_res) {
       down_sum <- terra::aggregate(
@@ -100,7 +100,7 @@ add_locked_out_constraint <- function(problem, data) {
     } else {
       assertthat::assert_that(
         terra::compareGeom(
-          problem$data$existing_habitat, data, stopiffalse = FALSE
+          problem$data$existing_habitat, data, stopOnError = FALSE
         ) || original_res,
         msg = paste(
           "argument to \"data\" has different spatial properties to",
