@@ -86,4 +86,12 @@ test_that("solve", {
     testthat::expect_true(a$optimality_proven == "true")
   }
 
+  # Test 9: Ask for 100 solutions without enough time
+  problem <- restopt_problem(habitat, aggregation_factor = 16, habitat_threshold = 0.7) %>%
+    add_restorable_constraint(min_restore = 109, max_restore = 110, unit = "ha", min_proportion = 0.7) %>%
+    add_compactness_constraint(3, unit = "cells") %>%
+    set_no_objective() %>%
+    add_settings(time_limit = 1, nb_solutions = 100)
+  result <- solve(problem)
+  testthat::expect_true(length(result) < 100)
 })

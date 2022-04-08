@@ -31,5 +31,5 @@ test_that("add_locked_out_constraint", {
   locked_out <- terra::rast(system.file("extdata", "locked_out.tif", package = "restoptr"))
   locked_out <- terra::aggregate(locked_out, factor = 2)
   problem <- restopt_problem(habitat, aggregation_factor = 16, habitat_threshold = 0.7)
-  testthat::expect_error(p %>% add_locked_out_constraint(locked_out))
+  testthat::expect_error(problem %>% add_locked_out_constraint(locked_out))
 })

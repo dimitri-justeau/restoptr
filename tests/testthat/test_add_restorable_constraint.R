@@ -50,4 +50,20 @@ test_that("add_restorable_constraint", {
   )
   testthat::expect_gte(round(val), set_units(50, "ha"))
   testthat::expect_lte(round(val), set_units(60, "ha"))
+
+  # Test 5: With cells unit
+  problem <- restopt_problem(habitat, aggregation_factor = 16, habitat_threshold = 1) %>%
+    add_restorable_constraint(min_restore = 50, max_restore = 60, unit = "cells", min_proportion = 1)
+  result <- solve(problem)
+  rest_cells <- which(result[,] == 3)
+  val <- sum(round(get_restorable_habitat(problem))[rest_cells])
+  testthat::expect_gte(val, 50)
+  testthat::expect_lte(val, 60)
+
+  # Test 6: Not projected raster
+  habitat_not_projected <- round(terra::project(habitat, "epsg:4326"))
+  problem <- restopt_problem(habitat_not_projected, aggregation_factor = 16, habitat_threshold = 1)
+  testthat::expect_error(
+    problem %>% add_restorable_constraint(min_restore = 50, max_restore = 60, unit = "ha", min_proportion = 1)
+  )
 })

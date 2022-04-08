@@ -4,14 +4,21 @@
 \alias{get_metadata}
 \title{Restopt solution metadata}
 \usage{
-get_metadata(restopt_solution, area_unit = "ha")
+get_metadata(restopt_solution, area_unit = "ha", distance_unit = "m")
 }
 \arguments{
 \item{restopt_solution}{\code{\link[=restopt_solution]{restopt_solution()}} Restopt solution
 to this solution.}
 
-\item{area_unit}{Unit of the area ("ha" for hectares, "m" for square meters,
-"km" for square kilometers)}
+\item{area_unit}{\code{unit} object or a \code{character} that can be coerced to an area
+unit (see \code{unit} package), or "cells" for number of cells from the original
+habitat raster). Unit for areas. If the input habitat raster does not use a projected
+coordinate system, only "cells" is available. Default is "ha"}
+
+\item{distance_unit}{\code{unit} object or a \code{character} that can be coerced to an area
+unit (see \code{unit} package), or "cells" for number of cell width from the original
+habitat raster). Unit for distances. If the input habitat raster does not use a projected
+coordinate system, only "cells" is available. Default is "m"}
 }
 \value{
 A \code{list} containing the characteristics of the restopt solution.

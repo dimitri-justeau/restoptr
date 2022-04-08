@@ -140,12 +140,10 @@ solve.RestoptProblem <- function(a, b, ...) {
   }
 
   status <- jproblem$getSearchState()
+  nb_sols <- result$size()
 
   # Indicate if the solver did not find solution
-  if (length(result) == 0) {
-    result <- FALSE
-  }
-  if (result == FALSE) {
+  if (nb_sols == 0) {
     .jgc()
     if (status == "TERMINATED") {
       stop(paste("There is no solution, please adjust your targets\n"))
@@ -157,7 +155,6 @@ solve.RestoptProblem <- function(a, b, ...) {
   }
 
   # import results
-  nb_sols <- result$size()
   solutions <- sapply(seq(0, nb_sols - 1), function(i) {
     sol <- result$get(as.integer(i))
     pus <- sol$getRestorationPlanningUnitsCompleteIndex() + 1 # Java arrays are 0-based

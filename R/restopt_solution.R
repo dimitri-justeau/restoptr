@@ -65,44 +65,42 @@ restopt_solution <- function(restopt_problem, solution_raster, metadata, id_solu
 #' @param restopt_solution [`restopt_solution()`] Restopt solution
 #' to this solution.
 #'
-#' @param area_unit Unit of the area ("ha" for hectares, "m" for square meters,
-#' "km" for square kilometers)
+#' @param area_unit `unit` object or a `character` that can be coerced to an area
+#' unit (see `unit` package), or "cells" for number of cells from the original
+#' habitat raster). Unit for areas. If the input habitat raster does not use a projected
+#' coordinate system, only "cells" is available. Default is "ha"
+#'
+#' @param distance_unit `unit` object or a `character` that can be coerced to an area
+#' unit (see `unit` package), or "cells" for number of cell width from the original
+#' habitat raster). Unit for distances. If the input habitat raster does not use a projected
+#' coordinate system, only "cells" is available. Default is "m"
 #'
 #' @return A `list` containing the characteristics of the restopt solution.
 #'
 #' @export
-get_metadata <- function(restopt_solution, area_unit = "ha") {
+get_metadata <- function(restopt_solution, area_unit = "ha", distance_unit = "m") {
   assertthat::assert_that(
     inherits(restopt_solution, "RestoptSolution"),
-    area_unit %in% c("ha", "m", "km", "cells")
+    (area_unit == "cells" || units::ud_are_convertible(area_unit, "ha")),
+    (distance_unit == "cells" || units::ud_are_convertible(distance_unit, "m"))
   )
   metadata <- restopt_solution@metadata
-  original_habitat <- restopt_solution@problem$data$original_habitat
-  min_rest <- as.numeric(metadata$min_restore)
-  max_rest <- as.numeric(metadata$total_restorable)
-  if (area_unit == "ha") {
-    metadata$min_restore <- nb_cell_to_area(original_habitat, min_rest, "ha")
-    metadata$total_restorable <- nb_cell_to_area(original_habitat, max_rest, "ha")
+  if (area_unit != "cells") {
+    min_rest <- as.numeric(metadata$min_restore)
+    max_rest <- as.numeric(metadata$total_restorable)
+    original_habitat <- get_original_habitat(restopt_solution@problem)
+    metadata$min_restore <- nb_cell_to_area(original_habitat, min_rest, area_unit)
+    metadata$total_restorable <- nb_cell_to_area(original_habitat, max_rest, area_unit)
     if ("mesh_initial" %in% names(metadata)) {
-      metadata$mesh_initial <- nb_cell_to_area(original_habitat, metadata$mesh_initial, "ha")
-      metadata$mesh_best <- nb_cell_to_area(original_habitat, metadata$mesh_best, "ha")
+      metadata$mesh_initial <- nb_cell_to_area(original_habitat, metadata$mesh_initial, area_unit)
+      metadata$mesh_best <- nb_cell_to_area(original_habitat, metadata$mesh_best, area_unit)
     }
   }
-  if (area_unit == "m") {
-    metadata$min_restore <- nb_cell_to_area(original_habitat, min_rest, "m")
-    metadata$total_restorable <- nb_cell_to_area(original_habitat, max_rest, "m")
-    if ("mesh_initial" %in% names(metadata)) {
-      metadata$mesh_initial <- nb_cell_to_area(original_habitat, metadata$mesh_initial, "m")
-      metadata$mesh_best <- nb_cell_to_area(original_habitat, metadata$mesh_best, "m")
-    }
-  }
-  if (area_unit == "km") {
-    metadata$min_restore <- nb_cell_to_area(original_habitat, min_rest, "km")
-    metadata$total_restorable <- nb_cell_to_area(original_habitat, max_rest, "km")
-    if ("mesh_initial" %in% names(metadata)) {
-      metadata$mesh_initial <- nb_cell_to_area(original_habitat, metadata$mesh_initial, "km")
-      metadata$mesh_best <- nb_cell_to_area(original_habitat, metadata$mesh_best, "km")
-    }
+  if (distance_unit != "cells") {
+    existing_habitat <- get_existing_habitat(restopt_solution@problem)
+    width <- cell_width(existing_habitat, unit = distance_unit)
+    diameter <- metadata$diameter * width
+    metadata$diameter <- diameter
   }
   return(metadata)
 }

@@ -282,6 +282,7 @@ p
     ## settings:
     ##   - precision = 4
     ##   - time_limit = 0
+    ##   - nb_solutions = 1
     ## -----------------------------------------------------------------
 
 Finally, we use the `solve()` function to identify the optimal
@@ -292,7 +293,7 @@ objective.
 s <- solve(p)
 ```
 
-    ## Good news: the solver found a solution statisfying the constraints that was proven optimal ! (solving time = 7.579788 s)
+    ## Good news: the solver found 1 solution statisfying the constraints that was proven optimal ! (solving time = 1.42 s)
 
 ``` r
 plot(
@@ -312,10 +313,10 @@ You can retrieve the attributes of the solution using the
 get_metadata(s, area_unit = "ha")
 ```
 
-    ##     min_restore total_restorable nb_planning_units optimality_proven
-    ## 1 219.3772 [ha]    219.3772 [ha]                15              true
-    ##   solving_time  mesh_initial     mesh_best
-    ## 1     7.579788 53.38999 [ha] 55.59634 [ha]
+    ##     min_restore total_restorable nb_planning_units nb_components diameter
+    ## 1 219.3772 [ha]    219.3772 [ha]                15             3  5.09902
+    ##   optimality_proven search_state solving_time  mesh_initial     mesh_best
+    ## 1              true   TERMINATED        1.395 53.38999 [ha] 55.59634 [ha]
 
 ## Getting help <a name="help"></a>
 
