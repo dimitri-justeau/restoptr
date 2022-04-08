@@ -91,7 +91,7 @@ test_that("solve", {
     add_restorable_constraint(min_restore = 109, max_restore = 110, unit = "ha", min_proportion = 0.7) %>%
     add_compactness_constraint(3, unit = "cells") %>%
     set_no_objective() %>%
-    add_settings(time_limit = 1, nb_solutions = 100)
+    add_settings(time_limit = 2, nb_solutions = 1000)
   result <- solve(problem)
-  testthat::expect_true(length(result) < 100)
+  testthat::expect_true(length(result) < 1000)
 })
