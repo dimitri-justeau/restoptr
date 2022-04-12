@@ -1,7 +1,7 @@
 context("terra_io")
 
 test_that("terra_io",{
-  habitat <- terra::rast(system.file("extdata", "habitat.tif", package = "restoptr"))
+  habitat <- terra::rast(system.file("extdata", "habitat_hi_res.tif", package = "restoptr"))
   testthat::expect_true(terra_on_disk(habitat))
   minus_habitat <- -habitat
   testthat::expect_false(terra_on_disk(minus_habitat))
