@@ -43,8 +43,5 @@
   rJava::J("java.lang.System")$setProperty("EPSG-HSQL.directory", tempdir())
 }
 
-# define donwload URL for restopt jae file
-restopt_url <- paste0(
-  "https://github.com/dimitri-justeau/restopt/releases/download/1.0-beta/",
-  "restopt-1.0-SNAPSHOT.jar"
-)
+# define donwload URL for restopt jar file
+restopt_url <- "https://github.com/dimitri-justeau/restopt/releases/download/2.0.0/restopt-2.0.0.jar"

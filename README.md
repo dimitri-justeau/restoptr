@@ -13,6 +13,8 @@ Status](https://codecov.io/github/dimitri-justeau/restoptr/coverage.svg?branch=m
 
 -   [Overview](#overview)
 -   [Installation](#installation)
+    -   [Optional - Building `restopt` (Java core library) from
+        source](#java_sources)
     -   [Package installation](#package_install)
     -   [System dependencies](#system_deps)
 -   [Citation](#citation)
@@ -34,6 +36,44 @@ Specifically, our model was implemented using
 state-of-the-art Java CP solver.
 
 ## Installation <a name="installation"></a>
+
+### Optional - Building `restopt` (Java core library) from source <a name="java_sources"></a>
+
+`restoptr` relies on a core Java library called
+[`restopt`](https://github.com/dimitri-justeau/restopt), which handle
+the constrained optimization process with
+[Choco-solver](https://choco-solver.org/). We included a compiled
+`restopt` jar file in `restoptr` to spare users from compiling the Java
+source code themselves.
+
+However, if you want to compile `restopt` Java source code and use it in
+`restoptr`, you need a Java Development Kit (JDK) version 8 or higher
+(see [Oracle
+JDK](https://www.oracle.com/java/technologies/javase-downloads.html),
+[OpenJDK](https://openjdk.java.net/install/), or
+[GraalVM](https://www.graalvm.org/downloads/)). You also need to install
+[Maven](https://maven.apache.org/).
+
+Once these dependencies are installed, from `restoptr/restopt` folder
+execute the following command lines from a terminal to build `restopt`:
+
+First update the source code:
+
+``` bash
+git pull
+```
+
+Then build the Java source code with Maven:
+
+``` bash
+mvn clean package -DskipTests
+```
+
+Finally, copy the generated jar file into `restoptr` java directory:
+
+``` bash
+cp target/restopt-2.0.0.jar ../java/restopt-2.0.0.jar
+```
 
 ### Package installation <a name="package_install"></a>
 
@@ -59,7 +99,7 @@ higher. Below we provide platform-specific instructions to install it.
 
 #### *Windows*
 
-Please install the latest Java Development Kit from
+Please install the latest Java Runtime Environment from
 [Oracle](www.oracle.com) website. To achieve this, navigate to the
 [downloads section of the
 website](https://www.oracle.com/java/technologies/javase-downloads.html),
@@ -85,13 +125,15 @@ sudo apt-get install default-jdk
 If you want to install a specific JRE version, please follow
 instructions from
 [Oracle](https://www.oracle.com/java/technologies/javase-downloads.html),
-or [OpenJDK](https://openjdk.java.net/install/).
+[OpenJDK](https://openjdk.java.net/install/), or
+[GraalVM](https://www.graalvm.org/downloads/).
 
 #### *Linux*
 
 Please follow instructions from
 [Oracle](https://www.oracle.com/java/technologies/javase-downloads.html),
-or [OpenJDK](https://openjdk.java.net/install/).
+[OpenJDK](https://openjdk.java.net/install/), or
+[GraalVM](https://www.graalvm.org/downloads/).
 
 #### *MacOS*
 
@@ -178,7 +220,7 @@ habitat_data <- rast(
 plot(habitat_data, plg=list(x="topright"))
 ```
 
-<img src="man/figures/README-unnamed-chunk-8-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-11-1.png" width="100%" style="display: block; margin: auto;" />
 
 To instantiate a base restoration optimization problem from such an
 input raster, use the `restopt_problem()` function:
@@ -209,7 +251,7 @@ We can plot the aggregated data:
 plot(rast(list(p$data$existing_habitat, p$data$restorable_habitat)), nc = 2,  plg=list(x="topright"))
 ```
 
-<img src="man/figures/README-unnamed-chunk-10-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-13-1.png" width="100%" style="display: block; margin: auto;" />
 
 Then, we can add constraints to this base problem. For instance, lets
 add a locked-out constraint, to restrict the number of planning units
@@ -293,7 +335,7 @@ objective.
 s <- solve(p)
 ```
 
-    ## Good news: the solver found 1 solution statisfying the constraints that was proven optimal ! (solving time = 1.42 s)
+    ## Good news: the solver found 1 solution statisfying the constraints that was proven optimal ! (solving time = 1.37 s)
 
 ``` r
 plot(
@@ -304,7 +346,7 @@ plot(
 )
 ```
 
-<img src="man/figures/README-unnamed-chunk-16-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-19-1.png" width="100%" style="display: block; margin: auto;" />
 
 You can retrieve the attributes of the solution using the
 `get_metadata()` function:
@@ -313,10 +355,10 @@ You can retrieve the attributes of the solution using the
 get_metadata(s, area_unit = "ha")
 ```
 
-    ##     min_restore total_restorable nb_planning_units nb_components diameter
-    ## 1 219.3772 [ha]    219.3772 [ha]                15             3  5.09902
+    ##     min_restore total_restorable nb_planning_units nb_components     diameter
+    ## 1 219.3772 [ha]    219.3772 [ha]                15             3 2280.175 [m]
     ##   optimality_proven search_state solving_time  mesh_initial     mesh_best
-    ## 1              true   TERMINATED        1.395 53.38999 [ha] 55.59634 [ha]
+    ## 1              true   TERMINATED        1.347 53.38999 [ha] 55.59634 [ha]
 
 ## Getting help <a name="help"></a>
 
