@@ -159,75 +159,90 @@ restopt_problem <- function(existing_habitat, habitat_threshold = 1, aggregation
 #'
 #' @export
 print.RestoptProblem <- function(x, ...) {
-  cat(
-    crayon::bold(crayon::green("-----------------------------------------------------------------")), "\n",
-    crayon::bold(crayon::green("                         Restopt problem                         ")), "\n",
-    crayon::bold(crayon::green("-----------------------------------------------------------------")), "\n",
-    sep = ""
-  )
-  source_original_habitat <- basename(terra::sources(x$data$original_habitat)[[1]])
+  # print header
+  message(crayon::bold(crayon::green(paste(rep("-", 65), collapse = ""))))
+  message(crayon::bold(crayon::green(
+    paste0(
+      paste(rep(" ", 25), collapse = ""),
+      "Restopt",
+      paste(rep(" ", 25), collapse = "")
+    )
+  )))
+  message(crayon::bold(crayon::green(paste(rep("-", 65), collapse = ""))))
+
+  # print data and parameters
+  source_original_habitat <-
+    basename(terra::sources(x$data$original_habitat)[[1]])
   source_habitat <- basename(terra::sources(x$data$existing_habitat)[[1]])
   source_restorable <- basename(terra::sources(x$data$restorable_habitat)[[1]])
-  cat(
+  message(
     crayon::bold(crayon::white("original habitat:    ")),
-    crayon::cyan(ifelse(source_original_habitat != "", source_original_habitat, "in memory")),
-    "\n"
+    crayon::cyan(
+      ifelse(
+        source_original_habitat != "",
+        source_original_habitat, "in memory"
+      )
+    )
   )
-  cat(
+  message(
     crayon::bold(crayon::white("aggregation factor:  ")),
-    crayon::cyan(x$data$aggregation_factor),
-    "\n"
+    crayon::cyan(x$data$aggregation_factor)
   )
-  cat(
+  message(
     crayon::bold(crayon::white("habitat threshold:   ")),
-    crayon::cyan(x$data$habitat_threshold),
-    "\n"
+    crayon::cyan(x$data$habitat_threshold)
   )
-  cat(
+  message(
     crayon::bold(crayon::white("existing habitat:    ")),
-    crayon::cyan(ifelse(source_habitat != "", source_habitat, "in memory")),
-    "\n"
+    crayon::cyan(
+      ifelse(source_habitat != "", source_habitat, "in memory")
+    )
   )
-  cat(
+  message(
     crayon::bold(crayon::white("restorable habitat:  ")),
-    crayon::cyan(ifelse(source_restorable != "", source_restorable, "in memory")),
-    "\n"
+    crayon::cyan(
+      ifelse(source_restorable != "", source_restorable, "in memory")
+    )
   )
-  cat(
-    crayon::green("-----------------------------------------------------------------"), "\n"
-  )
-  cat(
+  message(crayon::green(paste(rep("-", 65), collapse = "")))
+
+  # print objective
+  message(
     crayon::bold(crayon::white("objective:           ")),
-    crayon::blue(ifelse(is.null(x$objective), "none defined", x$objective$name)),
-    "\n"
+    crayon::blue(
+      ifelse(is.null(x$objective), "none defined", x$objective$name)
+    )
   )
-  cat(
-    crayon::green("-----------------------------------------------------------------"),  "\n"
-  )
-  cat(
+  message(crayon::green(paste(rep("-", 65), collapse = "")))
+
+  # print constraints
+  message(
     crayon::bold(crayon::white("constraints:        ")),
-    ifelse(length(x$constraints) == 0, "none defined", ""),
-    "\n"
+    ifelse(length(x$constraints) == 0, "none defined", "")
   )
   for (i in seq_along(x$constraints)) {
-    cat(crayon::blue(
-      "  - ",
-      x$constraints[[i]]$name
-    ), "\n")
+    message(
+      crayon::blue("  - ", x$constraints[[i]]$name)
+    )
   }
-  cat(
-    crayon::green("-----------------------------------------------------------------"), "\n"
+  message(crayon::green(paste(rep("-", 65), collapse = "")))
+
+  # print settings
+  message(crayon::bold(crayon::white("settings:")))
+  message(
+    paste(
+      crayon::magenta(
+        paste0(
+          "  - ", names(x$settings), " = ",
+          unlist(x$settings, use.names = FALSE)
+        ),
+        collapse = crayon::reset("\n")
+      )
+    )
   )
-  cat(
-    crayon::bold(crayon::white("settings:")), "\n",
-    paste(crayon::magenta(
-      paste0("  - ", names(x$settings), " = ", unlist(x$settings, use.names = FALSE)),
-      collapse = crayon::reset("\n")
-    )), "\n", sep = ""
-  )
-  cat(
-    crayon::bold(crayon::green("-----------------------------------------------------------------")), "\n"
-  )
+
+  # print footer
+  message(crayon::bold(crayon::green(paste(rep("-", 65), collapse = ""))))
 }
 
 #' Generic function to add a constraint to a restoration optimization problem
