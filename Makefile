@@ -30,6 +30,14 @@ vigns:
 	R --slave -e "devtools::build_vignettes()"
 	cp -R doc inst/
 
+purl_vigns:
+	R --slave -e "lapply(dir('vignettes', '^.*\\\\.Rmd$$'), function(x) knitr::purl(file.path('vignettes', x), gsub('.Rmd', '.R', x, fixed = TRUE)))"
+	rm -f Rplots.pdf
+
+check_vigns:
+	R --slave -e "f <- sapply(dir('vignettes', '^.*\\\\.Rmd$$'), function(x) {p <- file.path(tempdir(), gsub('.Rmd', '.R', x, fixed = TRUE)); knitr::purl(file.path('vignettes', x), p); p}); for (i in f) {message('\n########################################\nstarting ', basename(i), '\n########################################\n'); source(i)}"
+	rm -f Rplots.pdf
+
 quicksite:
 	R --slave -e "pkgdown::build_site(run_dont_run = TRUE, lazy = TRUE)"
 
