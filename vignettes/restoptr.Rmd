@@ -1,5 +1,5 @@
 ---
-title: "restoptr: Interface to the 'Restopt' Ecological Restoration Planning Software"
+title: "Getting started"
 output:
   rmarkdown::html_vignette:
     toc: true
@@ -30,12 +30,262 @@ knitr::opts_chunk$set(fig.align = "center", eval = !is_check)
 
 ## Introduction
 
+Habitat restoration is urgently need to prevent further declines in biodiversity [@rTODO]. Since the resources available for restoring habitat are limited [@rTODO], plans for restoring habitat (hereafter, "restoration prioritizations") need to achieve conservation objectives for minimal cost. Indeed, restoration prioritizations need to strategically site restoration actions in places that will enhance connectivity among remaining habitats [@rTODO]. They also need to account for existing land-use constraints that prevent such actions for being implemented in particular places (e.g., places that are too heavily modified for conservation activities) [@rTODO]. As a consequence, there has been increasing interest in developing decision support tools to help inform restoration efforts [@rTODO].
+
+Here we provide a tutorial for using the _restoptr R_ package for ecological restoration planning [@rTODO]. Briefly, this decision support tool identifies cost-effective restoration prioritizations for promoting connectivity, whilst also accounting for economic and land-use constraints. It uses constraint programming techniques to identify optimal restoration prioritizations [@rTODO]. After generating restoration prioritizations, they can be evaluated to explore trade-offs between total cost and the ability for restoration actions to promote connectivity. By using decision support tools to identify priority areas for habitat restoration, restoration efforts stand a far greater chance at reversing declines in biodiversity.
+
+## Setup
+
+Let's setup our _R_ session for the tutorial. Here, we will load the _restoptr R_ package, as well as the _terra_, _vegan_ and the _ggplot2 R_ packages.
+
+```{r, echo = FALSE, results = "hide"}
+# load packages
+library(restoptr)
+library(terra)
+library(vegan)
+library(cluster)
+```
+
+Also, since Java needs to be installed to generate restoration prioritizations using the _restoptr R_ package, let's verify that Java is installed correctly.
+
+```{r}
+# check if Java is available for usage
+is_java_available()
+```
+
+If the previous code returns a `TRUE`, then this means that Java is installed on your computer and ready to use. If not, please see the package README documentation for instructions on installing and setting up Java (see https://github.com/dimitri-justeau/restoptr). Assuming that Java is installed correctly, we can then proceed with the tutorial.
+
 ## Data
+
+Let's import data for generating restoration prioritizations. Specifically, we use data that was originally obtained from Justeau-Allaire *et al.* [-@r1]. To begin with, let's import a raster layer to describe the spatial distribution of existing habitat across the study area. This raster layer (i.e., `habitat_data`) contains binary values (zeros and ones) indicating places that  (0) do not contain existing habitat and (1) currently contain existing habitat. This raster layer also contains places with missing (`NA`) values, which represent places that should not be considered as part of the prioritization exercise (e.g., places located outside the study area, or over marine areas).
+
+```{r, echo = FALSE, results = "hide"}
+# load habitat data
+habitat_data <- rast(system.file(
+  "extdata", "habitat_hi_res.tif", package = "restoptr"
+))
+
+# preview habitat data
+print(habitat_data)
+
+# visualize habitat data
+plot(habitat_data, plg = list(x = "topright"))
+```
+
+Next, let's import a raster layer to describe the spatial distribution of places inside the study area that are not available for restoration activities. For example, these places could include places where restoration efforts would be too costly to implement, or places where restoration is not possible because they are needed for other land-uses (e.g., places needed for urban development). Similar to the previous raster layer, this raster layer (i.e., `locked_out_data`) contains binary values (zeros and ones) indicating places that (0) are suitable for restoration actions and (1) not suitable for restoration actions. This raster layer also contains missing (`NA`) values in the same places as the previous layer.
+
+```{r}
+# load locked out data
+locked_out_data <- rast(system.file(
+  "extdata", "locked_out.tif", package = "restoptr"
+))
+
+# preview locked out data
+print(locked_out_data)
+
+# visualize locked out data
+plot(locked_out_data, plg = list(x = "topright"))
+```
+
+After loading in the data, we can begin formulating an optimization problem.
 
 ## Problem formulation
 
-## Prioritization
+Now let's formulate a restoration optimization problem. To achieve this, we will build an object that contains the data and settings needed to perform the optimization process. First, we will create an object for the underlying data (using the `restopt_problem()` function). Here, we will specify that we are using the `habitat_data` raster layer to specify the spatial distribution of existing habitat (via the `existing_habitat` parameter). We will also specify that the data should be internally aggregated (using a factor of 16) to reduce computational processing (via the `aggregation_factor` parameter). Additionally, we will specify that -- following data aggregation -- places must contain at least 70% of habitat to be considered adequately managed for biodiversity (via the `habitat_threshold` parameter, see below for further details). Second, we will specify that the objective function -- the metric used to compare competing solutions -- will be the effective mesh size statistic measure of connectivity (via the `set_max_mesh_objective()` function) [@r2]. Third, we will specify that the total amount of land selected for restoration should not exceed 200 ha (via the `add_restorable_constraint()` function). Fourth, we will specify that particular places -- per the `locked_out_data` raster layer -- should not be selected for restoration activities (via the `add_locked_out_constraint()` function). Finally, we will specify that we wish to generate a single optimal prioritization (via the `add_settings()` function).
+
+```{r}
+# build problem
+rp <-
+  restopt_problem(
+    existing_habitat = habitat_data,
+    aggregation_factor = 16,
+    habitat_threshold = 0.7
+  ) %>%
+  set_max_mesh_objective() %>%
+  add_restorable_constraint(min_restore = 0, max_restore = 200, unit = "ha") %>%
+  add_locked_out_constraint(data = locked_out_data) %>%
+  add_settings(nb = 1)
+
+# preview problem
+print(rp)
+```
+
+After building the problem formulation object, we can solve it.
+
+## Generating a prioritization
+
+We can generate a prioritization by solving the restoration problem object (i.e., `rp`). Specifically, the prioritization is generated using constraint programming techniques as implemented by the [Choco-solver](https://choco-solver.org/) software [@r3].
+
+```{r}
+# solve problem to generate prioritization
+rs <- solve(rp)
+
+# preview prioritization
+print(rs)
+
+# visualize prioritization
+## here, values indicate:
+## 0 : places that were locked out.
+## 1 : places that were potential candidates for restoration
+## 2 : places that already contain existing habitat.
+## 3 : places selected for restoration actions.
+plot(
+  rs, col = c("#E5E5E5", "#fff1d6", "#b2df8a", "#1f78b4"),
+  plg = list(x = "topright")
+)
+```
+
+We can see that many planning units were selected in the TODO.
+
+
+After generating a prioritization, we can also extract metadata for it. These metadata describe the spatial extent of priority areas, and their ability to promote connectivity according to various metrics.
+
+```{r}
+# extract metadata
+get_metadata(rs)
+```
+
+Although this prioritization identifies a set of places that -- in combination -- can help promote connectivity, it does not necessarily tell us which of places are more (or less) important for achieving this objective.
+
+## Relative importance
+
+We can assess the relative importance of places for restoring connectivity. This information is useful to help facilitate stakeholder discussions and determine which places in the prioritization should targeted first for restoration efforts. To assess relative importance, one approach is to  generate a portfolio of multiple prioritizations and calculate the number of times that each place is selected for prioritization. This approach based on the selection frequency statistics provided by the _Marxan_ decision support tool for conservation planning [@r4]. So, let's generate a portfolio of 1000 optimal prioritizations and use them examine relative importance.
+
+```{r}
+# generate portfolio with 1000 prioritizations
+prt <-
+  rp %>%
+  add_settings(nb = 1000) %>%
+  solve()
+
+# preview prioritizations
+print(prt)
+
+# calculate selection frequency of priority areas
+prt_selfreq <- sum(prt == 3)
+
+# preview selection frequency data
+print(prt_selfreq)
+
+# visualize selection frequencies
+plot(prt_selfreq)
+```
+
+We can see TODO. In addition to examining relative importance, we can also use the portfolio of prioritizations to explore alternative restoration prioritizations.
+
+## Portfolios
+
+A portfolio of prioritizations can be useful to help facilitate stakeholders discussions by presenting a range of alternatives. This is because stakeholders can have objectives that were not directly used to generate prioritizations (e.g., conservation of a particular charismatic species, or ensuring that conservation areas do not impede agricultural production), and providing multiple prioritizations that -- despite promoting a similar level of connectivity -- have a different spatial configuration of priority can help them identify prioritizations that meet these objectives. As such, it can be extremely beneficial to generate a set of near-optimal prioritizations that have similar performance -- when measured using the criteria used to generate them -- and exhibit different spatial configurations. Although we already generated a portfolio of different prioritizations, it contains far too many prioritizations to view them one by one. So, let's conduct a statistical analysis to visualize differences among the planning units -- based on which planning units they selected -- using a hierarchical cluster analysis [@r5].
+
+```{r}
+# extract prioritization values
+prt_values <- as.data.frame(prt == 3)
+
+# calculate pair-wise distances between different prioritizations for analysis
+prt_dists <- vegan::vegdist(t(prt_values), method = "jaccard", binary = TRUE)
+
+# run cluster analysis
+prt_clust <- hclust(as.dist(prt_dists), method = "average")
+
+# visualize clusters
+opar <- par()
+par(oma = c(0, 0, 0, 0), mar= c(0, 4.1, 1.5, 2.1))
+plot(prt_clust, labels = FALSE, sub = NA, xlab = "",
+     main = "Different prioritizations in portfolio")
+suppressWarnings(par(opar))
+```
+
+We can see that there are approximately TODO main groups of prioritizations in the portfolio. To explore these different groups, let's conduct another cluster analysis (i.e., a k-medoids analysis) to extract the most representative prioritization from each of these groups. In other words, we will run another statistical analysis to find the most central prioritization within each group.
+
+```{r}
+# run k-medoids analysis
+prt_med <- pam(prt_dists, k = 6)
+
+# extract names of prioritizations that are most central for each group
+prt_med_names <- prt_med$medoids
+print(prt_med_names)
+
+# create a new portfolio based on these prioritizations
+prt2 <- prt[[prt_med_names]]
+
+# visualize prioritizations in subset portfolio
+## here, values indicate:
+## 0 : places that were locked out.
+## 1 : places that were potential candidates for restoration
+## 2 : places that already contain existing habitat.
+## 3 : places selected for restoration actions.
+plot(
+  prt2, col = c("#E5E5E5", "#fff1d6", "#b2df8a", "#1f78b4"),
+  plg = list(x = "topright")
+)
+```
+
+We can see TODO.
+
+## Evaluating trade-offs between connectivity and cost
+
+Conservation decision making fundamentally involves making trade-offs between multiple objectives. Here, one of the main trade-offs is between (i) maximizing the level of connectivity that can be promoted by restoring habitats and (ii) minimizing the total cost of restoration actions. Specifically, we consider total cost to be reflected by the total area of the places selected for restoration. This trade-off can be particularly acute, wherein large gains in connectivity can be achieved through only a minor increase in cost. As such, it can be very useful to understand how the increasing the maximum amount of land available for restoration can influence the connectivity of prioritizations. To explore this, we will generate a portfolio of prioritizations using different constraints and measure their performance.
+
+```{r}
+# define a set of different maximum area values for generating prioritizations
+## N.B. these values are in hectares
+max_restore_values <- seq(1, 1000, 100)
+
+# build a baseline problem without restorable constraints
+bp <-
+  restopt_problem(
+    existing_habitat = habitat_data,
+    aggregation_factor = 16,
+    habitat_threshold = 0.7
+  ) %>%
+  set_max_mesh_objective() %>%
+  add_locked_out_constraint(data = locked_out_data) %>%
+  add_settings(nb = 1)
+
+# generate a portfolio of prioritizations based on different constraints
+prt3 <- lapply(max_restore_values, function(x) {
+  bp %>%
+  add_restorable_constraint(min_restore = 0, max_restore = x, unit = "ha") %>%
+  solve()
+})
+
+# extract metadata for each prioritization
+prt3_metadata <- do.call(rbind, lapply(prt3, get_metadata()))
+prt3_metadata$max_restore <- max_restore_values
+
+# convert portfolio into a stack of rasters
+prt3 <- do.call(rast, prt3)
+
+# preview portfolio
+print(prt3)
+
+# visualize prioritizations in portfolio
+## here, titles indicate maximum area and values indicate:
+## 0 : places that were locked out.
+## 1 : places that were potential candidates for restoration
+## 2 : places that already contain existing habitat.
+## 3 : places selected for restoration actions.
+plot(
+  prt3, col = c("#E5E5E5", "#fff1d6", "#b2df8a", "#1f78b4"),
+  main = max_restore_values
+  plg = list(x = "topright")
+)
+```
+
+We can see TODO. Next, let's visualize the relationship between the maximum area constraint used to generate the prioritizations and the level of connectivity they can promote.
+
+```{r}
+# create plot
+plot(
+  mesh_best ~ max_restore_values, data = prt3_metadata,
+  xlab = "Maximum area (ha)", ylab = "Connectivity (MESH statistic)"
+)
+```
+
+We can see TODO.
 
 ## Conclusion
+
+Hopefully, this tutorial has provided a useful introduction to the _restoptr R_ package. For more information on using the package, please consult the package documentation which provides examples for each of the functions. If you have any questions about using the package, suggestions for improving it, or encounter bugs, please [open an issue](https://github.com/dimitri-justeau/restoptr/issues/new/choose) on the online code repository.
 
 ## References

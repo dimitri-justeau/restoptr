@@ -63,7 +63,9 @@ Suggests:
     rmarkdown (>= 1.10),
     landscapemetrics (>= 1.5.4),
     raster (>= 3.5),
-    rgdal
+    rgdal,
+    vegan (>= 2.5.7),
+    cluster (>= 2.1.2)
 Roxygen: list(markdown = TRUE)
 Collate:
     'internal.R'
@@ -74,6 +76,7 @@ Collate:
     'add_locked_out_constraint.R'
     'add_restorable_constraint.R'
     'add_settings.R'
+    'is_java_available.R'
     'package.R'
     'preprocessing.R'
     'restopt_component.R'
