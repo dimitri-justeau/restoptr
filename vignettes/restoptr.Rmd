@@ -91,7 +91,7 @@ After loading in the data, we can begin formulating an optimization problem.
 
 ## Problem formulation
 
-Now let's formulate a restoration optimization problem. To achieve this, we will build an object that contains the data and settings needed to perform the optimization process. First, we will create an object for the underlying data (using the `restopt_problem()` function). Here, we will specify that we are using the `habitat_data` raster layer to specify the spatial distribution of existing habitat (via the `existing_habitat` parameter). We will also specify that the data should be internally aggregated (using a factor of 16) to reduce computational processing (via the `aggregation_factor` parameter). Additionally, we will specify that -- following data aggregation -- places must contain at least 70% of habitat to be considered adequately managed for biodiversity (via the `habitat_threshold` parameter, see below for further details). Second, we will specify that the objective function -- the metric used to compare competing solutions -- will be the effective mesh size statistic measure of connectivity (via the `set_max_mesh_objective()` function) [@r2]. Third, we will specify that the total amount of land selected for restoration should not exceed 200 ha (via the `add_restorable_constraint()` function). Fourth, we will specify that particular places -- per the `locked_out_data` raster layer -- should not be selected for restoration activities (via the `add_locked_out_constraint()` function). Finally, we will specify that we wish to generate a single optimal prioritization (via the `add_settings()` function).
+Now let's formulate a restoration optimization problem. To achieve this, we will build an object that contains the data and settings needed to perform the optimization process. First, we will create an object for the underlying data (using the `restopt_problem()` function). Here, we will specify that we are using the `habitat_data` raster layer to specify the spatial distribution of existing habitat (via the `existing_habitat` parameter). We will also specify that the data should be internally aggregated (using a factor of 16) to reduce computational processing (via the `aggregation_factor` parameter). Additionally, we will specify that -- following data aggregation -- places must contain at least 70% of habitat to be considered adequately managed for biodiversity (via the `habitat_threshold` parameter, see below for further details). Second, we will specify that the objective function -- the metric used to compare competing solutions -- will be the effective mesh size statistic measure of connectivity (via the `set_max_mesh_objective()` function) [@r2]. Third, we will specify that the total amount of land selected for restoration should not exceed 200 ha (via the `add_restorable_constraint()` function). Fourth, we will specify that the spatial extent of the priority areas must not exceed 2.4 km (via the `add_compactness_constraint()` function). Fifth, we will specify that particular places -- per the `locked_out_data` raster layer -- should not be selected for restoration activities (via the `add_locked_out_constraint()` function). Finally, we will specify that we wish to generate a single optimal prioritization (via the `add_settings()` function).
 
 ```{r}
 # build problem
@@ -102,7 +102,10 @@ rp <-
     habitat_threshold = 0.7
   ) %>%
   set_max_mesh_objective() %>%
-  add_restorable_constraint(min_restore = 0, max_restore = 200, unit = "ha") %>%
+  add_restorable_constraint(
+    min_restore = 1, max_restore = 2000, unit = "ha"
+  ) %>%
+  add_compactness_constraint(5, unit = "km") %>%
   add_locked_out_constraint(data = locked_out_data) %>%
   add_settings(nb = 1)
 
@@ -245,7 +248,7 @@ bp <-
 # generate a portfolio of prioritizations based on different constraints
 prt3 <- lapply(max_restore_values, function(x) {
   bp %>%
-  add_restorable_constraint(min_restore = 0, max_restore = x, unit = "ha") %>%
+  add_restorable_constraint(min_restore = x, max_restore = x, unit = "ha") %>%
   solve()
 })
 
@@ -267,7 +270,7 @@ print(prt3)
 ## 3 : places selected for restoration actions.
 plot(
   prt3, col = c("#E5E5E5", "#fff1d6", "#b2df8a", "#1f78b4"),
-  main = max_restore_values
+  main = max_restore_values,
   plg = list(x = "topright")
 )
 ```
