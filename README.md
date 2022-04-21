@@ -66,13 +66,14 @@ git pull --recurse-submodules
 Then build the Java source code with Maven:
 
 ``` bash
+cd restopt
 mvn clean package -DskipTests
 ```
 
 Finally, copy the generated jar file into `restoptr` java directory:
 
 ``` bash
-cp target/restopt-2.0.0.jar ../java/restopt-2.0.0.jar
+cp target/restopt-*.jar ../java/
 ```
 
 ### Package installation <a name="package_install"></a>
@@ -335,7 +336,7 @@ objective.
 s <- solve(p)
 ```
 
-    ## Good news: the solver found 1 solution statisfying the constraints that was proven optimal ! (solving time = 1.48 s)
+    ## Good news: the solver found 1 solution statisfying the constraints that was proven optimal ! (solving time = 0.88 s)
 
 ``` r
 plot(
@@ -358,7 +359,7 @@ get_metadata(s, area_unit = "ha")
     ##     min_restore total_restorable nb_planning_units nb_components     diameter
     ## 1 219.3772 [ha]    219.3772 [ha]                15             3 2280.175 [m]
     ##   optimality_proven search_state solving_time  mesh_initial     mesh_best
-    ## 1              true   TERMINATED        1.423 53.38999 [ha] 55.59634 [ha]
+    ## 1              true   TERMINATED        0.866 53.38999 [ha] 55.59634 [ha]
 
 ## Getting help <a name="help"></a>
 

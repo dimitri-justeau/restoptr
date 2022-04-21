@@ -56,13 +56,14 @@ git pull --recurse-submodules
 Then build the Java source code with Maven:
 
 ```{bash, eval = FALSE}
+cd restopt
 mvn clean package -DskipTests
 ```
 
 Finally, copy the generated jar file into `restoptr` java directory:
 
 ```{bash, eval = FALSE}
-cp target/restopt-2.0.0.jar ../java/restopt-2.0.0.jar
+cp target/restopt-*.jar ../java/
 ```
 
 ### Package installation <a name="package_install"></a>
