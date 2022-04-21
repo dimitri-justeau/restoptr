@@ -1,0 +1,27 @@
+citHeader("To cite the restoptr package in publications, use:")
+
+citEntry(
+  entry = "Article",
+  author = personList(person(c("D"), "Justeau-Allaire"),
+                      person(c("G"), "Vieilledent"),
+                      person(c("N"), "Rinck"),
+                      person(c("P"), "Vismara"),
+                      person(c("X"), "Lorca"),
+                      person(c("P"), "Birnbaum")),
+  title = "Constrained optimization of landscape indices in conservation planning to support ecological restoration in New Caledonia",
+  journal = "Journal of Applied Ecology",
+  year = 2021,
+  volume = "58",
+  number = "4",
+  pages = "744-754",
+  url = "https://doi.org/10.1111/1365-2664.13803",
+  textVersion = paste(
+     "Justeau-Allaire D, Vieilledent G, Rinck N, Vismara P,",
+     "Lorca X & Birnbaum P (2021)",
+     "Constrained optimization of landscape indices in conservation planning",
+     "to support ecological restoration in New Caledonia.",
+     "Journal of Applied Ecology, 58(4), 744‑754."
+  )
+)
+
+citFooter("You may also want to cite the package version.\nFind it with \"help(package=restoptr)\".")
