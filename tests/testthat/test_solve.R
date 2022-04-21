@@ -27,7 +27,7 @@ test_that("solve", {
     set_max_mesh_objective()
   result <- solve(problem)
   a <- get_metadata(result)
-  testthat::expect_true(a$optimality_proven == "true")
+  testthat::expect_true(a$optimality_proven)
 
   # Test 4: Find best solution but not optimal (time limit) (with verbose)
   problem <- restopt_problem(habitat, aggregation_factor = 16, habitat_threshold = 0.7) %>%
@@ -37,7 +37,7 @@ test_that("solve", {
     add_settings(time_limit = 1)
   result <- solve(problem, verbose=TRUE)
   a <- get_metadata(result)
-  testthat::expect_true(a$optimality_proven == "false")
+  testthat::expect_false(a$optimality_proven)
 
   # Test 5: Find 10 solutions without optimization
   problem <- restopt_problem(habitat, aggregation_factor = 16, habitat_threshold = 0.7) %>%
@@ -83,7 +83,7 @@ test_that("solve", {
     testthat::expect_true(inherits(r, "RestoptSolution"))
     testthat::expect_equal(names(r), paste("Solution", i))
     a <- get_metadata(r)
-    testthat::expect_true(a$optimality_proven == "true")
+    testthat::expect_true(a$optimality_proven)
   }
 
   # Test 9: Ask for 100 solutions without enough time

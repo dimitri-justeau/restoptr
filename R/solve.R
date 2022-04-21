@@ -145,6 +145,11 @@ solve.RestoptProblem <- function(a, b, ...) {
     r[pus] <- 3
     m <- sol$getCharacteristicsAsCsv()
     metadata <- read.csv(text = .jstrVal(m))
+    metadata$optimality_proven <- ifelse(
+      metadata$optimality_proven == "true",
+      TRUE,
+      FALSE
+    )
     restopt_solution(a, r, metadata, id_solution = as.integer(i + 1))
   })
 
@@ -154,7 +159,7 @@ solve.RestoptProblem <- function(a, b, ...) {
   # defined, indicate whether it was proven optimal, or if it is the best
   # solution found within the time limit but not proven optimal
   if (!inherits(a$objective, "NoObjective")) {
-    if (proven_optimal == "true") {
+    if (proven_optimal) {
       if (nb_sols == 1) {
         cat(crayon::green(paste("Good news: the solver found", nb_sols ,"solution statisfying",
                                 "the constraints that was proven optimal !",
