@@ -159,18 +159,30 @@ restopt_problem <- function(existing_habitat, habitat_threshold = 1, aggregation
 #'
 #' @export
 print.RestoptProblem <- function(x, ...) {
-  cat(
-    crayon::bold(crayon::green("-----------------------------------------------------------------")), "\n",
-    crayon::bold(crayon::green("                         Restopt problem                         ")), "\n",
-    crayon::bold(crayon::green("-----------------------------------------------------------------")), "\n",
-    sep = ""
-  )
-  source_original_habitat <- basename(terra::sources(x$data$original_habitat)[[1]])
+  # print header
+  cat(crayon::bold(crayon::green(paste(rep("-", 65), collapse = ""))), "\n")
+  cat(crayon::bold(crayon::green(
+    paste0(
+      paste(rep(" ", 25), collapse = ""),
+      "Restopt",
+      paste(rep(" ", 25), collapse = "")
+    )
+  )), "\n")
+  cat(crayon::bold(crayon::green(paste(rep("-", 65), collapse = ""))), "\n")
+
+  # print data and parameters
+  source_original_habitat <-
+    basename(terra::sources(x$data$original_habitat)[[1]])
   source_habitat <- basename(terra::sources(x$data$existing_habitat)[[1]])
   source_restorable <- basename(terra::sources(x$data$restorable_habitat)[[1]])
   cat(
     crayon::bold(crayon::white("original habitat:    ")),
-    crayon::cyan(ifelse(source_original_habitat != "", source_original_habitat, "in memory")),
+    crayon::cyan(
+      ifelse(
+        source_original_habitat != "",
+        source_original_habitat, "in memory"
+      )
+    ),
     "\n"
   )
   cat(
@@ -185,49 +197,61 @@ print.RestoptProblem <- function(x, ...) {
   )
   cat(
     crayon::bold(crayon::white("existing habitat:    ")),
-    crayon::cyan(ifelse(source_habitat != "", source_habitat, "in memory")),
+    crayon::cyan(
+      ifelse(source_habitat != "", source_habitat, "in memory")
+    ),
     "\n"
   )
   cat(
     crayon::bold(crayon::white("restorable habitat:  ")),
-    crayon::cyan(ifelse(source_restorable != "", source_restorable, "in memory")),
+    crayon::cyan(
+      ifelse(source_restorable != "", source_restorable, "in memory")
+    ),
     "\n"
   )
-  cat(
-    crayon::green("-----------------------------------------------------------------"), "\n"
-  )
+  cat(crayon::green(paste(rep("-", 65), collapse = "")), "\n")
+
+  # print objective
   cat(
     crayon::bold(crayon::white("objective:           ")),
-    crayon::blue(ifelse(is.null(x$objective), "none defined", x$objective$name)),
+    crayon::blue(
+      ifelse(is.null(x$objective), "none defined", x$objective$name)
+    ),
     "\n"
   )
-  cat(
-    crayon::green("-----------------------------------------------------------------"),  "\n"
-  )
+  cat(crayon::green(paste(rep("-", 65), collapse = "")), "\n")
+
+  # print constraints
   cat(
     crayon::bold(crayon::white("constraints:        ")),
     ifelse(length(x$constraints) == 0, "none defined", ""),
     "\n"
   )
   for (i in seq_along(x$constraints)) {
-    cat(crayon::blue(
-      "  - ",
-      x$constraints[[i]]$name
-    ), "\n")
+    cat(
+      crayon::blue("  - ", x$constraints[[i]]$name),
+      "\n"
+    )
   }
+  cat(crayon::green(paste(rep("-", 65), collapse = "")), "\n")
+
+  # print settings
+  cat(crayon::bold(crayon::white("settings:")), "\n")
   cat(
-    crayon::green("-----------------------------------------------------------------"), "\n"
+    paste(
+      crayon::magenta(
+        paste0(
+          "  - ", names(x$settings), " = ",
+          unlist(x$settings, use.names = FALSE)
+        ),
+        collapse = crayon::reset("\n")
+      )
+    ),
+    "\n"
   )
-  cat(
-    crayon::bold(crayon::white("settings:")), "\n",
-    paste(crayon::magenta(
-      paste0("  - ", names(x$settings), " = ", unlist(x$settings, use.names = FALSE)),
-      collapse = crayon::reset("\n")
-    )), "\n", sep = ""
-  )
-  cat(
-    crayon::bold(crayon::green("-----------------------------------------------------------------")), "\n"
-  )
+
+  # print footer
+  cat(crayon::bold(crayon::green(paste(rep("-", 65), collapse = ""))), "\n")
 }
 
 #' Generic function to add a constraint to a restoration optimization problem

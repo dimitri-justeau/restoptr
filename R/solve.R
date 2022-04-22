@@ -161,52 +161,68 @@ solve.RestoptProblem <- function(a, b, ...) {
   if (!inherits(a$objective, "NoObjective")) {
     if (proven_optimal) {
       if (nb_sols == 1) {
-        cat(crayon::green(paste("Good news: the solver found", nb_sols ,"solution statisfying",
-                                "the constraints that was proven optimal !",
-                                "(solving time =", solving_time, "s)")), "\n")
+        message(crayon::green(paste(
+          "Good news: the solver found", nb_sols ,"solution statisfying",
+          "the constraints that was proven optimal !",
+          "(solving time =", solving_time, "s)"
+        )))
       } else {
-        cat(crayon::green(paste("Good news: the solver found", nb_sols ,"solutions statisfying",
-                                "the constraints that were proven optimal !",
-                                "(solving time =", solving_time, "s)")), "\n")
+        message(crayon::green(paste(
+          "Good news: the solver found", nb_sols ,"solutions statisfying",
+          "the constraints that were proven optimal !",
+          "(solving time =", solving_time, "s)"
+        )))
       }
       if (nb_sols != a$settings$nb_solutions) {
         if (status == "STOPPED") {
-          cat(crayon::yellow(paste(a$settings$nb_solutions, "optimal solutions",
-                                   "were requested, however the solver only had",
-                                   "enough time to find", nb_sols)) , "\n")
+          message(crayon::yellow(paste(
+            a$settings$nb_solutions, "optimal solutions",
+            "were requested, however the solver only had",
+            "enough time to find", nb_sols)))
         } else {
-          cat(crayon::yellow(paste(a$settings$nb_solutions, "optimal solutions",
-                                   "were requested, however only", nb_sols,
-                                   "optimal solution exist")), "\n")
+          message(crayon::yellow(paste(
+            a$settings$nb_solutions, "optimal solutions",
+            "were requested, however only", nb_sols,
+            "optimal solution exist")))
           }
       }
     } else {
-      cat(crayon::yellow(paste("Note: The current solution is the best that the",
-                               "solver could find within the time limit.",
-                               "However, the solver had not enough to prove",
-                               "whether it is optimal or not. Consider increasing",
-                               "the time limit if you need a better solution",
-                               "(solving time =", solving_time, "s)")), "\n")
+      message(crayon::yellow(paste(
+        "Note: The current solution is the best that the",
+        "solver could find within the time limit.",
+        "However, the solver had not enough to prove",
+        "whether it is optimal or not. Consider increasing",
+        "the time limit if you need a better solution",
+        "(solving time =", solving_time, "s)"
+      )))
     }
   } else {
     if (nb_sols == 1) {
-      cat(crayon::green(paste("Good news: the solver found", nb_sols ,"solution satisfying",
-                              "the constraints ! (solving time =",
-                              solving_time, "s)")), "\n")
+      message(crayon::green(paste(
+        "Good news: the solver found", nb_sols ,"solution satisfying",
+        "the constraints ! (solving time =",
+        solving_time, "s)"
+      )))
     } else {
-      cat(crayon::green(paste("Good news: the solver found", nb_sols ,"solutions satisfying",
-                              "the constraints ! (solving time =",
-                              solving_time, "s)")), "\n")
+      message(crayon::green(paste(
+        "Good news: the solver found", nb_sols ,"solutions satisfying",
+        "the constraints ! (solving time =",
+        solving_time, "s)"
+      )))
     }
     if (nb_sols != a$settings$nb_solutions) {
       if (status == "STOPPED") {
-        cat(crayon::yellow(paste(a$settings$nb_solutions, "solutions",
-                                 "were requested, however the solver only had",
-                                 "enough time to find", nb_sols)), "\n")
+        message(crayon::yellow(paste(
+          a$settings$nb_solutions, "solutions",
+          "were requested, however the solver only had",
+          "enough time to find", nb_sols
+        )))
       } else {
-        cat(crayon::yellow(paste(a$settings$nb_solutions, "optimal solutions",
-                                 "were requested, however only", nb_sols,
-                                 "solution satisfying the constraints exist")), "\n")
+        message(crayon::yellow(paste(
+          a$settings$nb_solutions, "optimal solutions",
+          "were requested, however only", nb_sols,
+          "solution satisfying the constraints exist"
+        )))
       }
     }
   }
