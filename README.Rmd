@@ -47,10 +47,12 @@ However, if you want to compile `restopt` Java source code and use it in `restop
 
 Once these dependencies are installed, from the `restoptr` folder execute the following command lines from a terminal to build `restopt`:
 
-First update the source code:
+First clone the repository and update the source code:
 
 ```{bash, eval = FALSE}
-git pull --recurse-submodules
+git clone https://github.com/dimitri-justeau/restoptr.git
+cd restoptr
+git submodule update --init --recursive
 ```
 
 Then build the Java source code with Maven:
@@ -64,6 +66,13 @@ Finally, copy the generated jar file into `restoptr` java directory:
 
 ```{bash, eval = FALSE}
 cp target/restopt-*.jar ../java/
+```
+
+To update `restopt` and `restoptr` with the latest source code, execute the
+following command (from the restoptr folder):
+
+```{bash, eval = FALSE}
+git pull --recurse-submodules
 ```
 
 ### Package installation <a name="package_install"></a>

@@ -57,10 +57,12 @@ JDK](https://www.oracle.com/java/technologies/javase-downloads.html),
 Once these dependencies are installed, from the `restoptr` folder
 execute the following command lines from a terminal to build `restopt`:
 
-First update the source code:
+First clone the repository and update the source code:
 
 ``` bash
-git pull --recurse-submodules
+git clone https://github.com/dimitri-justeau/restoptr.git
+cd restoptr
+git submodule update --init --recursive
 ```
 
 Then build the Java source code with Maven:
@@ -74,6 +76,13 @@ Finally, copy the generated jar file into `restoptr` java directory:
 
 ``` bash
 cp target/restopt-*.jar ../java/
+```
+
+To update `restopt` and `restoptr` with the latest source code, execute
+the following command (from the restoptr folder):
+
+``` bash
+git pull --recurse-submodules
 ```
 
 ### Package installation <a name="package_install"></a>
@@ -221,7 +230,7 @@ habitat_data <- rast(
 plot(habitat_data, plg=list(x="topright"))
 ```
 
-<img src="man/figures/README-unnamed-chunk-11-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-12-1.png" width="100%" style="display: block; margin: auto;" />
 
 To instantiate a base restoration optimization problem from such an
 input raster, use the `restopt_problem()` function:
@@ -252,7 +261,7 @@ We can plot the aggregated data:
 plot(rast(list(p$data$existing_habitat, p$data$restorable_habitat)), nc = 2,  plg=list(x="topright"))
 ```
 
-<img src="man/figures/README-unnamed-chunk-13-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-14-1.png" width="100%" style="display: block; margin: auto;" />
 
 Then, we can add constraints to this base problem. For instance, lets
 add a locked-out constraint, to restrict the number of planning units
@@ -306,9 +315,9 @@ We can get a summary of the restoration problem:
 p
 ```
 
-    ## -----------------------------------------------------------------
-    ##                          Restopt problem                         
-    ## -----------------------------------------------------------------
+    ## ----------------------------------------------------------------- 
+    ##                          Restopt                          
+    ## ----------------------------------------------------------------- 
     ## original habitat:     habitat_hi_res.tif 
     ## aggregation factor:   16 
     ## habitat threshold:    0.7 
@@ -322,10 +331,10 @@ p
     ##   -  restorable (min_restore = 90, max_restore = 220, unit = ha) 
     ##   -  compactness (max_diameter = 2.4, unit = km) 
     ## ----------------------------------------------------------------- 
-    ## settings:
+    ## settings: 
     ##   - precision = 4
     ##   - time_limit = 0
-    ##   - nb_solutions = 1
+    ##   - nb_solutions = 1 
     ## -----------------------------------------------------------------
 
 Finally, we use the `solve()` function to identify the optimal
@@ -336,7 +345,7 @@ objective.
 s <- solve(p)
 ```
 
-    ## Good news: the solver found 1 solution statisfying the constraints that was proven optimal ! (solving time = 0.88 s)
+    ## Good news: the solver found 1 solution statisfying the constraints that was proven optimal ! (solving time = 1.51 s)
 
 ``` r
 plot(
@@ -347,7 +356,7 @@ plot(
 )
 ```
 
-<img src="man/figures/README-unnamed-chunk-19-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-20-1.png" width="100%" style="display: block; margin: auto;" />
 
 You can retrieve the attributes of the solution using the
 `get_metadata()` function:
@@ -359,7 +368,7 @@ get_metadata(s, area_unit = "ha")
     ##     min_restore total_restorable nb_planning_units nb_components     diameter
     ## 1 219.3772 [ha]    219.3772 [ha]                15             3 2280.175 [m]
     ##   optimality_proven search_state solving_time  mesh_initial     mesh_best
-    ## 1              true   TERMINATED        0.866 53.38999 [ha] 55.59634 [ha]
+    ## 1              TRUE   TERMINATED        1.494 53.38999 [ha] 55.59634 [ha]
 
 ## Getting help <a name="help"></a>
 
