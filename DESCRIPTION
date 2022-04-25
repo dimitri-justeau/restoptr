@@ -1,12 +1,16 @@
 Package: restoptr
 Type: Package
-Title: Interface to the 'Restopt' Ecological Restoration Planning Software
+Title: 'restoptr' Ecological Restoration Planning
 Version: 0.0.0.99999
 Description:
-    Interface to the `restopt` ecological restoration planning software,
-    which is specifically designed to identify connected, accessible, and
-    compact areas for ecological restoration, with an emphasis on reducing
-    habitat fragmentation and increasing habitat connectivity.
+    `restoptr` is a flexible ecological restoration planning framework. In 
+    `restoptr`, a restoration planning problem starts from an existing habitat
+    (typically a binary raster), where the aim is to identify optimal areas that
+    are suitable for restoration. Several constraints are available to define
+    what is expected for a suitable area for (e.g. it must be connected, compact,
+    must respect a budget, etc). Several optimization objective are also available
+    to define what is a good restoration area (e.g. it must reduce fragmentation,
+    increase ecological connectivity, minimize costs, etc.).
 Authors@R:
     c(
       person(
@@ -22,10 +26,7 @@ Authors@R:
       person(
         'Ghislain', 'Vieilledent', role = c('aut'),
         comment = c(ORCID = '0000-0002-1685-4997')
-      ),
-      person(
-        'Nicolas', 'Rinck', role = c('aut'),
-      ),
+      )
       person(
         'Philippe', 'Vismara', role = c('aut')
       ),

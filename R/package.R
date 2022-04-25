@@ -1,7 +1,7 @@
 #' @include internal.R
 NULL
 
-#' `restoptr`: Ecological Restoration Planning with R
+#' `restoptr`: Ecological Restoration Planning
 #'
 #' The `restoptr` package relies on Constraint Programming (CP) to build and
 #' solve ecological restoration planning problems. A `restoptr` problem starts

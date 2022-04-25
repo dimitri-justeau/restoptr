@@ -3,7 +3,7 @@
 \docType{package}
 \name{restoptr}
 \alias{restoptr}
-\title{\code{restoptr}: Ecological Restoration Planning with R}
+\title{\code{restoptr}: Ecological Restoration Planning}
 \description{
 The \code{restoptr} package relies on Constraint Programming (CP) to build and
 solve ecological restoration planning problems. A \code{restoptr} problem starts

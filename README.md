@@ -1,7 +1,7 @@
 
 <!--- README.md is generated from README.Rmd. Please edit that file -->
 
-## restopr: Interface to the ‘Restopt’ Ecological Restoration Planning Software
+## restopr: Ecological Restoration Planning
 
 [![lifecycle](https://img.shields.io/badge/Lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html)
 [![R-CMD-check-Ubuntu](https://img.shields.io/github/workflow/status/dimitri-justeau/restoptr/Ubuntu/master.svg?label=Ubuntu)](https://github.com/dimitri-justeau/restoptr/actions)
@@ -20,20 +20,42 @@ Status](https://codecov.io/github/dimitri-justeau/restoptr/coverage.svg?branch=m
 -   [Citation](#citation)
 -   [Usage](#usage)
 -   [Getting help](#help)
+-   [References](#ref)
 
 ## Overview <a name="overview"></a>
 
-Interface to the `restopt` ecological restoration planning software,
-which is specifically designed to identify connected, accessible, and
-compact areas for ecological restoration, with an emphasis on reducing
-habitat fragmentation and increasing habitat connectivity. This software
-reproduces the methodology described in [this
+The `restoptr` R package is a flexible ecological restoration planning
+framework with many ideas inspired from the
+[`prioritizr`](https://prioritizr.net/) conservation planning package
+(Hanson et al., 2022). In `restoptr`, a restoration planning problem
+starts from an existing habitat (typically a binary raster), where the
+aim is to identify optimal areas that are suitable for restoration.
+Several constraints are available to define what is expected for a
+suitable area for (e.g. it must be connected, compact, must respect a
+budget, etc). Several optimization objective are also available to
+define what is a good restoration area (e.g. it must reduce
+fragmentation, increase ecological connectivity, minimize costs, etc.).
+`restoptr` relies on advanced landscape indices such as the effective
+mesh size (Jaeger, 2000), or the integral index of connectivity
+(Pascual-Hortal & Saura, 2006) to address complex restoration planning
+problems.
+
+`restoptr` extends the methodology originally described in [this
 article](https://www.researchgate.net/publication/346597935_Constrained_optimization_of_landscape_indices_in_conservation_planning_to_support_ecological_restoration_in_New_Caledonia),
 and is based on Constraint Programming (CP), which is a constrained
 optimization solving technique based on automated reasoning.
-Specifically, our model was implemented using
-[Choco-solver](https://choco-solver.org/), an open-source and
-state-of-the-art Java CP solver.
+Specifically, `restoptr` relies on
+[Choco-solver](https://choco-solver.org/), an open-source Java CP solver
+(Prud’homme et al., 2017). The computationally intensive solving part is
+thus delegated to Java (see `restopt`,
+<https://github.com/dimitri-justeau/restopt>), and the communication
+between R and Java is handled with the [`rJava`]() package.
+
+**Note:** If you feel like something is missing from `restoptr`
+(e.g. landscape indices, constraints, optimization objectives), feel
+free to [open an issue](#help) and/or contribute. The framework was
+designed to be extensible and we will be happy to integrate new features
+to our roadmap if they are motivated by users’ needs.
 
 ## Installation <a name="installation"></a>
 
@@ -345,7 +367,7 @@ objective.
 s <- solve(p)
 ```
 
-    ## Good news: the solver found 1 solution statisfying the constraints that was proven optimal ! (solving time = 1.51 s)
+    ## Good news: the solver found 1 solution statisfying the constraints that was proven optimal ! (solving time = 0.96 s)
 
 ``` r
 plot(
@@ -368,7 +390,7 @@ get_metadata(s, area_unit = "ha")
     ##     min_restore total_restorable nb_planning_units nb_components     diameter
     ## 1 219.3772 [ha]    219.3772 [ha]                15             3 2280.175 [m]
     ##   optimality_proven search_state solving_time  mesh_initial     mesh_best
-    ## 1              TRUE   TERMINATED        1.494 53.38999 [ha] 55.59634 [ha]
+    ## 1              TRUE   TERMINATED        0.943 53.38999 [ha] 55.59634 [ha]
 
 ## Getting help <a name="help"></a>
 
@@ -376,3 +398,26 @@ If you have any questions about *restoptr*, improvement suggestions, or
 if you detect a bug, please [open an
 issue](https://github.com/dimitri-justeau/restoptr/issues/new/choose) in
 this GitHub repository.
+
+## References <a name="ref"></a>
+
+Hanson JO, Schuster R, Morrell N, Strimas-Mackey M, Edwards BPM, Watts
+ME, Arcese P, Bennett J, Possingham HP (2022). prioritizr: Systematic
+Conservation Prioritization in R. R package version 7.1.1. Available at
+<https://CRAN.R-project.org/package=prioritizr>.
+
+Jaeger, J. A. G. (2000). Landscape division, splitting index, and
+effective mesh size: New measures of landscape fragmentation. Landscape
+Ecology, 15(2), 115‑130. <https://doi.org/10.1023/A:1008129329289>
+
+Justeau-Allaire, D., Vieilledent, G., Rinck, N., Vismara, P., Lorca, X.,
+& Birnbaum, P. (2021). Constrained optimization of landscape indices in
+conservation planning to support ecological restoration in New
+Caledonia. Journal of Applied Ecology, 58(4), 744‑754.
+
+Pascual-Hortal, L., & Saura, S. (2006). Comparison and development of
+new graph-based landscape connectivity indices: Towards the priorization
+of habitat patches and corridors for conservation. Landscape Ecology,
+21(7), 959‑967. <https://doi.org/10.1007/s10980-006-0013-z>
+
+Prud’homme, C., Fages, J.-G., & Lorca, X. (2017). Choco documentation.

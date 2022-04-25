@@ -14,7 +14,8 @@ citEntry(
   volume = "58",
   number = "4",
   pages = "744-754",
-  url = "https://doi.org/10.1111/1365-2664.13803",
+  doi = "10.1111/1365-2664.13803",
+  url = "https://besjournals.onlinelibrary.wiley.com/doi/10.1111/1365-2664.13803",
   textVersion = paste(
      "Justeau-Allaire D, Vieilledent G, Rinck N, Vismara P,",
      "Lorca X & Birnbaum P (2021)",
