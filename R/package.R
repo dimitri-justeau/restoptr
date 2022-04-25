@@ -39,7 +39,7 @@ NULL
 #'
 #' Jaeger, J. A. G. (2000). Landscape division, splitting index, and effective
 #' mesh size: New measures of landscape fragmentation. Landscape Ecology, 15(2),
-#' 115‑130. https://doi.org/10.1023/A:1008129329289
+#' 115‑130.
 #'
 #' Justeau-Allaire, D., Vieilledent, G., Rinck, N., Vismara, P., Lorca, X.,
 #' & Birnbaum, P. (2021). Constrained optimization of landscape indices in
@@ -49,7 +49,7 @@ NULL
 #' Pascual-Hortal, L., & Saura, S. (2006).
 #' Comparison and development of new graph-based landscape connectivity indices:
 #' Towards the priorization of habitat patches and corridors for conservation.
-#' Landscape Ecology, 21(7), 959‑967. https://doi.org/10.1007/s10980-006-0013-z
+#' Landscape Ecology, 21(7), 959‑967.
 #'
 #' Prud'homme, C., Fages, J.-G., & Lorca, X. (2017). Choco documentation.
 #'

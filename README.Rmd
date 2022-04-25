@@ -49,12 +49,12 @@ must reduce fragmentation, increase ecological connectivity, minimize costs, etc
 (Jaeger, 2000), or the integral index of connectivity (Pascual-Hortal & Saura, 2006)
 to address complex restoration planning problems.
 
-`restoptr` extends the methodology originally described in [this article](https://www.researchgate.net/publication/346597935_Constrained_optimization_of_landscape_indices_in_conservation_planning_to_support_ecological_restoration_in_New_Caledonia),
+`restoptr` extends the methodology originally described in Justeau-Allaire et al. (2021),
 and is based on Constraint Programming (CP), which is a constrained optimization solving technique based on automated reasoning. Specifically, `restoptr` relies on
 [Choco-solver](https://choco-solver.org/), an open-source Java CP solver 
 (Prud'homme et al., 2017). The computationally intensive solving part is thus
 delegated to Java (see `restopt`, https://github.com/dimitri-justeau/restopt), 
-and the communication between R and Java is handled with the [`rJava`]()
+and the communication between R and Java is handled with the [`rJava`](https://rforge.net/rJava/index.html)
 package.
 
 **Note:** If you feel like something is missing from `restoptr` (e.g. landscape
@@ -68,7 +68,7 @@ happy to integrate new features to our roadmap if they are motivated by users' n
 
 `restoptr` relies on a core Java library called [`restopt`](https://github.com/dimitri-justeau/restopt), which handle the constrained optimization process with [Choco-solver](https://choco-solver.org/). We included a compiled `restopt` jar file in `restoptr` to spare users from compiling the Java source code themselves.
 
-However, if you want to compile `restopt` Java source code and use it in `restoptr`, you need a Java Development Kit (JDK) version 8 or higher (see [Oracle JDK](https://www.oracle.com/java/technologies/javase-downloads.html), [OpenJDK](https://openjdk.java.net/install/), or [GraalVM](https://www.graalvm.org/downloads/)). You also need to install [Maven](https://maven.apache.org/).
+However, if you want to compile `restopt` Java source code and use it in `restoptr`, you need a Java Development Kit (JDK) version 8 or higher (see [Oracle JDK](https://www.oracle.com/java/technologies/downloads/), [OpenJDK](https://openjdk.java.net/install/), or [GraalVM](https://www.graalvm.org/downloads/)). You also need to install [Maven](https://maven.apache.org/).
 
 Once these dependencies are installed, from the `restoptr` folder execute the following command lines from a terminal to build `restopt`:
 
@@ -122,7 +122,7 @@ The packages requires a Java Runtime Environment (JRE), version 8 or higher. Bel
 
 #### _Windows_
 
-Please install the latest Java Runtime Environment from [Oracle](www.oracle.com) website. To achieve this, navigate to the [downloads section of the website](https://www.oracle.com/java/technologies/javase-downloads.html), select the tab for the Windows operating system, and then download the x64 Installer file. After downloading the file, please run installer to install Java on your system. You will also need to ensure that the `PATH` environmental variable if configured so that _R_ can access Java. _restoptr_ relies on _rJava_ for the communication between _R_ and _Java_. If you have any trouble during the installation of _restopt_ due to _rJava_, please refer to _rJava_'s documentation: https://rforge.net/rJava/index.html.
+Please install the latest Java Runtime Environment from [Oracle](https://www.oracle.com) website. To achieve this, navigate to the [downloads section of the website](https://www.oracle.com/java/technologies/downloads/), select the tab for the Windows operating system, and then download the x64 Installer file. After downloading the file, please run installer to install Java on your system. You will also need to ensure that the `PATH` environmental variable if configured so that _R_ can access Java. _restoptr_ relies on _rJava_ for the communication between _R_ and _Java_. If you have any trouble during the installation of _restopt_ due to _rJava_, please refer to _rJava_'s documentation: https://rforge.net/rJava/index.html.
 
 #### _Ubuntu_
 
@@ -132,11 +132,11 @@ For recent versions of Ubuntu (18.04 and later), the Java libraries are availabl
 sudo apt-get install default-jdk
 ```
 
-If you want to install a specific JRE version, please follow instructions from [Oracle](https://www.oracle.com/java/technologies/javase-downloads.html), [OpenJDK](https://openjdk.java.net/install/), or [GraalVM](https://www.graalvm.org/downloads/).
+If you want to install a specific JRE version, please follow instructions from [Oracle](https://www.oracle.com/java/technologies/downloads/), [OpenJDK](https://openjdk.java.net/install/), or [GraalVM](https://www.graalvm.org/downloads/).
 
 #### _Linux_
 
-Please follow instructions from [Oracle](https://www.oracle.com/java/technologies/javase-downloads.html), [OpenJDK](https://openjdk.java.net/install/), or [GraalVM](https://www.graalvm.org/downloads/).
+Please follow instructions from [Oracle](https://www.oracle.com/java/technologies/downloads/), [OpenJDK](https://openjdk.java.net/install/), or [GraalVM](https://www.graalvm.org/downloads/).
 
 #### _MacOS_
 
@@ -201,7 +201,7 @@ consistent information, and to facilitate the automation of workflows. For more
 details on the aggregation method, please refer to `prepare_inputs()` function
 documentation.
 
-Example data, from the use case presented in [this study](https://www.researchgate.net/publication/346597935_Constrained_optimization_of_landscape_indices_in_conservation_planning_to_support_ecological_restoration_in_New_Caledonia)
+Example data, from the use case presented in Justeau-Allaire et al. (2021)
 is included in the package:
 
 ```{r, out.width="100%", fig.width = 10}
@@ -278,7 +278,7 @@ p <- p %>% set_max_mesh_objective()
 
 *Note* The effective mesh size is a measure of landscape fragmentation based on
 the probability that two randomly chosen points are located in the same patch
-[Jaeger, 2000](https://doi.org/10.1023/A:1008129329289). Maximizing it in the
+(Jaeger, 2000). Maximizing it in the
 context of restoration favours fewer and larger patches.
 
 We can get a summary of the restoration problem:
@@ -319,7 +319,7 @@ https://CRAN.R-project.org/package=prioritizr.
 
 Jaeger, J. A. G. (2000). Landscape division, splitting index, and effective
 mesh size: New measures of landscape fragmentation. Landscape Ecology, 15(2),
-115‑130. https://doi.org/10.1023/A:1008129329289
+115‑130.
 
 Justeau-Allaire, D., Vieilledent, G., Rinck, N., Vismara, P., Lorca, X.,
 & Birnbaum, P. (2021). Constrained optimization of landscape indices in
@@ -329,6 +329,6 @@ Journal of Applied Ecology, 58(4), 744‑754.
 Pascual-Hortal, L., & Saura, S. (2006).
 Comparison and development of new graph-based landscape connectivity indices:
 Towards the priorization of habitat patches and corridors for conservation.
-Landscape Ecology, 21(7), 959‑967. https://doi.org/10.1007/s10980-006-0013-z
+Landscape Ecology, 21(7), 959‑967.
 
 Prud'homme, C., Fages, J.-G., & Lorca, X. (2017). Choco documentation.

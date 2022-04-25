@@ -40,16 +40,16 @@ mesh size (Jaeger, 2000), or the integral index of connectivity
 (Pascual-Hortal & Saura, 2006) to address complex restoration planning
 problems.
 
-`restoptr` extends the methodology originally described in [this
-article](https://www.researchgate.net/publication/346597935_Constrained_optimization_of_landscape_indices_in_conservation_planning_to_support_ecological_restoration_in_New_Caledonia),
-and is based on Constraint Programming (CP), which is a constrained
-optimization solving technique based on automated reasoning.
-Specifically, `restoptr` relies on
+`restoptr` extends the methodology originally described in
+Justeau-Allaire et al. (2021), and is based on Constraint Programming
+(CP), which is a constrained optimization solving technique based on
+automated reasoning. Specifically, `restoptr` relies on
 [Choco-solver](https://choco-solver.org/), an open-source Java CP solver
 (Prud’homme et al., 2017). The computationally intensive solving part is
 thus delegated to Java (see `restopt`,
 <https://github.com/dimitri-justeau/restopt>), and the communication
-between R and Java is handled with the [`rJava`]() package.
+between R and Java is handled with the
+[`rJava`](https://rforge.net/rJava/index.html) package.
 
 **Note:** If you feel like something is missing from `restoptr`
 (e.g. landscape indices, constraints, optimization objectives), feel
@@ -70,8 +70,7 @@ source code themselves.
 
 However, if you want to compile `restopt` Java source code and use it in
 `restoptr`, you need a Java Development Kit (JDK) version 8 or higher
-(see [Oracle
-JDK](https://www.oracle.com/java/technologies/javase-downloads.html),
+(see [Oracle JDK](https://www.oracle.com/java/technologies/downloads/),
 [OpenJDK](https://openjdk.java.net/install/), or
 [GraalVM](https://www.graalvm.org/downloads/)). You also need to install
 [Maven](https://maven.apache.org/).
@@ -132,11 +131,11 @@ higher. Below we provide platform-specific instructions to install it.
 #### *Windows*
 
 Please install the latest Java Runtime Environment from
-[Oracle](www.oracle.com) website. To achieve this, navigate to the
-[downloads section of the
-website](https://www.oracle.com/java/technologies/javase-downloads.html),
-select the tab for the Windows operating system, and then download the
-x64 Installer file. After downloading the file, please run installer to
+[Oracle](https://www.oracle.com) website. To achieve this, navigate to
+the [downloads section of the
+website](https://www.oracle.com/java/technologies/downloads/), select
+the tab for the Windows operating system, and then download the x64
+Installer file. After downloading the file, please run installer to
 install Java on your system. You will also need to ensure that the
 `PATH` environmental variable if configured so that *R* can access Java.
 *restoptr* relies on *rJava* for the communication between *R* and
@@ -156,14 +155,14 @@ sudo apt-get install default-jdk
 
 If you want to install a specific JRE version, please follow
 instructions from
-[Oracle](https://www.oracle.com/java/technologies/javase-downloads.html),
+[Oracle](https://www.oracle.com/java/technologies/downloads/),
 [OpenJDK](https://openjdk.java.net/install/), or
 [GraalVM](https://www.graalvm.org/downloads/).
 
 #### *Linux*
 
 Please follow instructions from
-[Oracle](https://www.oracle.com/java/technologies/javase-downloads.html),
+[Oracle](https://www.oracle.com/java/technologies/downloads/),
 [OpenJDK](https://openjdk.java.net/install/), or
 [GraalVM](https://www.graalvm.org/downloads/).
 
@@ -241,9 +240,8 @@ instantiated with consistent information, and to facilitate the
 automation of workflows. For more details on the aggregation method,
 please refer to `prepare_inputs()` function documentation.
 
-Example data, from the use case presented in [this
-study](https://www.researchgate.net/publication/346597935_Constrained_optimization_of_landscape_indices_in_conservation_planning_to_support_ecological_restoration_in_New_Caledonia)
-is included in the package:
+Example data, from the use case presented in Justeau-Allaire et
+al. (2021) is included in the package:
 
 ``` r
 habitat_data <- rast(
@@ -327,9 +325,8 @@ p <- p %>% set_max_mesh_objective()
 
 *Note* The effective mesh size is a measure of landscape fragmentation
 based on the probability that two randomly chosen points are located in
-the same patch [Jaeger, 2000](https://doi.org/10.1023/A:1008129329289).
-Maximizing it in the context of restoration favours fewer and larger
-patches.
+the same patch (Jaeger, 2000). Maximizing it in the context of
+restoration favours fewer and larger patches.
 
 We can get a summary of the restoration problem:
 
@@ -367,7 +364,7 @@ objective.
 s <- solve(p)
 ```
 
-    ## Good news: the solver found 1 solution statisfying the constraints that was proven optimal ! (solving time = 0.96 s)
+    ## Good news: the solver found 1 solution statisfying the constraints that was proven optimal ! (solving time = 0.9 s)
 
 ``` r
 plot(
@@ -390,7 +387,7 @@ get_metadata(s, area_unit = "ha")
     ##     min_restore total_restorable nb_planning_units nb_components     diameter
     ## 1 219.3772 [ha]    219.3772 [ha]                15             3 2280.175 [m]
     ##   optimality_proven search_state solving_time  mesh_initial     mesh_best
-    ## 1              TRUE   TERMINATED        0.943 53.38999 [ha] 55.59634 [ha]
+    ## 1              TRUE   TERMINATED        0.888 53.38999 [ha] 55.59634 [ha]
 
 ## Getting help <a name="help"></a>
 
@@ -408,7 +405,7 @@ Conservation Prioritization in R. R package version 7.1.1. Available at
 
 Jaeger, J. A. G. (2000). Landscape division, splitting index, and
 effective mesh size: New measures of landscape fragmentation. Landscape
-Ecology, 15(2), 115‑130. <https://doi.org/10.1023/A:1008129329289>
+Ecology, 15(2), 115‑130.
 
 Justeau-Allaire, D., Vieilledent, G., Rinck, N., Vismara, P., Lorca, X.,
 & Birnbaum, P. (2021). Constrained optimization of landscape indices in
@@ -418,6 +415,6 @@ Caledonia. Journal of Applied Ecology, 58(4), 744‑754.
 Pascual-Hortal, L., & Saura, S. (2006). Comparison and development of
 new graph-based landscape connectivity indices: Towards the priorization
 of habitat patches and corridors for conservation. Landscape Ecology,
-21(7), 959‑967. <https://doi.org/10.1007/s10980-006-0013-z>
+21(7), 959‑967.
 
 Prud’homme, C., Fages, J.-G., & Lorca, X. (2017). Choco documentation.
