@@ -70,8 +70,7 @@ source code themselves.
 
 However, if you want to compile `restopt` Java source code and use it in
 `restoptr`, you need a Java Development Kit (JDK) version 8 or higher
-(see [Oracle JDK](https://www.oracle.com/java/technologies/downloads/),
-[OpenJDK](https://openjdk.java.net/install/), or
+(see Oracle JDK, [OpenJDK](https://openjdk.java.net/install/), or
 [GraalVM](https://www.graalvm.org/downloads/)). You also need to install
 [Maven](https://maven.apache.org/).
 
@@ -130,17 +129,15 @@ higher. Below we provide platform-specific instructions to install it.
 
 #### *Windows*
 
-Please install the latest Java Runtime Environment from
-[Oracle](https://www.oracle.com) website. To achieve this, navigate to
-the [downloads section of the
-website](https://www.oracle.com/java/technologies/downloads/), select
-the tab for the Windows operating system, and then download the x64
-Installer file. After downloading the file, please run installer to
-install Java on your system. You will also need to ensure that the
-`PATH` environmental variable if configured so that *R* can access Java.
-*restoptr* relies on *rJava* for the communication between *R* and
-*Java*. If you have any trouble during the installation of *restopt* due
-to *rJava*, please refer to *rJava*’s documentation:
+Please install the latest Java Runtime Environment for Windows (see
+Oracle JDK, [OpenJDK](https://openjdk.java.net/install/), or
+[GraalVM](https://www.graalvm.org/downloads/)). You also need to install
+[Maven](https://maven.apache.org/). After downloading the file, please
+run installer to install Java on your system. You will also need to
+ensure that the `PATH` environmental variable if configured so that *R*
+can access Java. *restoptr* relies on *rJava* for the communication
+between *R* and *Java*. If you have any trouble during the installation
+of *restopt* due to *rJava*, please refer to *rJava*’s documentation:
 <https://rforge.net/rJava/index.html>.
 
 #### *Ubuntu*
@@ -154,15 +151,12 @@ sudo apt-get install default-jdk
 ```
 
 If you want to install a specific JRE version, please follow
-instructions from
-[Oracle](https://www.oracle.com/java/technologies/downloads/),
-[OpenJDK](https://openjdk.java.net/install/), or
-[GraalVM](https://www.graalvm.org/downloads/).
+instructions from Oracle, [OpenJDK](https://openjdk.java.net/install/),
+or [GraalVM](https://www.graalvm.org/downloads/).
 
 #### *Linux*
 
-Please follow instructions from
-[Oracle](https://www.oracle.com/java/technologies/downloads/),
+Please follow instructions from Oracle,
 [OpenJDK](https://openjdk.java.net/install/), or
 [GraalVM](https://www.graalvm.org/downloads/).
 
@@ -364,7 +358,7 @@ objective.
 s <- solve(p)
 ```
 
-    ## Good news: the solver found 1 solution statisfying the constraints that was proven optimal ! (solving time = 0.9 s)
+    ## Good news: the solver found 1 solution statisfying the constraints that was proven optimal ! (solving time = 0.91 s)
 
 ``` r
 plot(
@@ -387,7 +381,7 @@ get_metadata(s, area_unit = "ha")
     ##     min_restore total_restorable nb_planning_units nb_components     diameter
     ## 1 219.3772 [ha]    219.3772 [ha]                15             3 2280.175 [m]
     ##   optimality_proven search_state solving_time  mesh_initial     mesh_best
-    ## 1              TRUE   TERMINATED        0.888 53.38999 [ha] 55.59634 [ha]
+    ## 1              TRUE   TERMINATED        0.877 53.38999 [ha] 55.59634 [ha]
 
 ## Getting help <a name="help"></a>
 
