@@ -76,6 +76,7 @@ add_compactness_constraint <- function(problem, max_diameter, unit = "m") {
     inherits(problem, "RestoptProblem"),
     assertthat::is.number(max_diameter),
     assertthat::noNA(max_diameter),
+    isTRUE(max_diameter > 0),
     (unit == "cells" || units::ud_are_convertible(unit, "m"))
   )
   max_diameter_unitless <- max_diameter

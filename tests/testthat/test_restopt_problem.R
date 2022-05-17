@@ -1,57 +1,103 @@
 context("restopt_problem")
 
-test_that("restopt_problem", {
-
-  ## Test valid inputs
-  habitat <- terra::rast(system.file("extdata", "habitat_hi_res.tif", package = "restoptr"))
-  accessible <- terra::vect(system.file("extdata", "accessible_areas.gpkg", package = "restoptr"))
-  locked_out <- invert_vector(accessible, extent = ext(habitat))
-  problem <- restopt_problem(habitat, aggregation_factor = 16, habitat_threshold = 0.7) %>%
-    add_locked_out_constraint(locked_out) %>%
+test_that("expect results", {
+  # import data
+  habitat_data <- terra::rast(
+    system.file("extdata", "habitat_hi_res.tif", package = "restoptr"
+  ))
+  accessible_data <- terra::vect(system.file(
+    "extdata", "accessible_areas.gpkg", package = "restoptr"
+  ))
+  # prepare locked out data
+  locked_out_data <- invert_vector(
+    accessible_data,
+    extent = terra::ext(habitat_data),
+    filter = accessible_data$ID == 1
+  )
+  # build problem
+  problem <-
+    restopt_problem(habitat_data, 0.7, 16) %>%
+    add_locked_out_constraint(locked_out_data) %>%
     add_components_constraint(min_nb_components = 1, max_nb_components = 1) %>%
     add_compactness_constraint(max_diameter = 6, unit = "cells") %>%
-    add_restorable_constraint(min_restore = 90, max_restore = 110, unit = "ha", min_proportion = 0.7) %>%
-    set_max_mesh_objective()
-
-  problem <- add_settings(problem, time_limit = 30, nb_solutions = 5)
-
-  # Test print problem (just run to ensure there is no error)
-  print(problem)
-
-  # Retrieve problem data
-  testthat::expect_equal(class(problem), "RestoptProblem")
-  testthat::expect_equal(length(get_constraints(problem)), 4)
-  testthat::expect_true(inherits(get_objective(problem), "MaxMeshObjective"))
-  testthat::expect_equal(get_settings(problem)$time_limit, 30)
-  testthat::expect_equal(get_aggregation_factor(problem), 16)
-  testthat::expect_equal(get_habitat_threshold(problem), 0.7)
-  testthat::expect_true(inherits(get_original_habitat(problem), "SpatRaster"))
-  testthat::expect_true(inherits(get_existing_habitat(problem), "SpatRaster"))
-  testthat::expect_true(inherits(get_restorable_habitat(problem), "SpatRaster"))
-  testthat::expect_true(inherits(get_locked_out_areas(problem), "SpatRaster"))
-  testthat::expect_true(inherits(get_cell_area(problem), "SpatRaster"))
-  testthat::expect_equal(
+    add_restorable_constraint(
+      min_restore = 90, max_restore = 110, unit = "ha", min_proportion = 0.7
+    ) %>%
+    set_max_mesh_objective() %>%
+    add_settings(time_limit = 30, nb_solutions = 5)
+  # tests
+  expect_output(print(problem))
+  expect_equal(class(problem), "RestoptProblem")
+  expect_equal(length(get_constraints(problem)), 4)
+  expect_true(inherits(get_objective(problem), "MaxMeshObjective"))
+  expect_equal(get_settings(problem)$time_limit, 30)
+  expect_equal(get_aggregation_factor(problem), 16)
+  expect_equal(get_habitat_threshold(problem), 0.7)
+  expect_true(inherits(get_original_habitat(problem), "SpatRaster"))
+  expect_true(inherits(get_existing_habitat(problem), "SpatRaster"))
+  expect_true(inherits(get_restorable_habitat(problem), "SpatRaster"))
+  expect_true(inherits(get_locked_out_areas(problem), "SpatRaster"))
+  expect_true(inherits(get_cell_area(problem), "SpatRaster"))
+  expect_equal(
     max(as.vector(get_cell_area(problem)), na.rm = TRUE),
     get_aggregation_factor(problem)^2
   )
+})
 
-  # Test overwrite constraint
-  testthat::expect_warning(problem <- problem %>% add_compactness_constraint(5, unit = "cells"))
-  i <- which(vapply(
-    problem$constraints, inherits, logical(1), "CompactnessConstraint"
+test_that("expected warnings when overwriting constraints", {
+  # import data
+  habitat_data <- terra::rast(
+    system.file("extdata", "habitat_hi_res.tif", package = "restoptr"
   ))
-  testthat::expect_equal(problem$constraints[[i]]$name, "compactness (max_diameter = 5, unit = cells)")
+  # build problem
+  problem <-
+    restopt_problem(habitat_data, 0.7, 16) %>%
+    add_components_constraint(min_nb_components = 1, max_nb_components = 1)
+  # tests
+  expect_warning(
+    problem <-
+      problem %>%
+      add_components_constraint(min_nb_components = 5, max_nb_components = 5)
+  )
+  expect_length(problem$constraints, 1)
+  expect_equal(
+    problem$constraints[[1]]$name,
+    "components (min_nb_components = 5, max_nb_components = 5)"
+  )
+})
 
-  # Test overwrite objective
-  testthat::expect_warning(problem <- problem %>% set_max_iic_objective())
-  testthat::expect_true(inherits(problem$objective, "MaxIicObjective"))
+test_that("expected warnings when overwriting objective", {
+  # import data
+  habitat_data <- terra::rast(
+    system.file("extdata", "habitat_hi_res.tif", package = "restoptr"
+  ))
+  # build problem
+  problem <-
+    restopt_problem(habitat_data, 0.7, 16) %>%
+    set_max_mesh_objective()
+  # tests
+  expect_warning(
+    problem <-
+      problem %>%
+      set_max_iic_objective()
+  )
+  expect_is(problem$objective, "MaxIicObjective")
+})
 
-  ## Test invalid inputs
-  testthat::expect_error(restopt_problem(1))
-  resized_habitat <- aggregate(habitat, 4)
-  testthat::expect_error(restopt_problem(resized_habitat, restorable))
-  multi_layer <- c(habitat, habitat)
-  testthat::expect_error(restopt_problem(multi_layer, aggregation_factor = 16))
-  testthat::expect_error(restopt_problem(habitat, aggregation_factor = -1))
-  testthat::expect_error(restopt_problem(habitat, aggregation_factor = 2, habitat_threshold = 1.7))
+test_that("invalid inputs", {
+  # import data
+  habitat_data <- terra::rast(
+    system.file("extdata", "habitat_hi_res.tif", package = "restoptr"
+  ))
+  resized_habitat_data <- aggregate(habitat_data, 4)
+  multi_layer_data <- c(habitat_data, habitat_data)
+  # tests
+  expect_error(restopt_problem(1))
+  expect_error(restopt_problem(multi_layer_data, aggregation_factor = 16))
+  expect_error(restopt_problem(habitat_data, aggregation_factor = -1))
+  expect_error(
+    restopt_problem(
+      habitat_data, aggregation_factor = 2, habitat_threshold = 1.7
+    )
+  )
 })
