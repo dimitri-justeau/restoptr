@@ -124,7 +124,7 @@ restopt_problem <- function(existing_habitat, habitat_threshold = 1, aggregation
         ),
         constraints = list(),
         objective = NULL,
-        settings = list(precision = 4L, time_limit = 0L, nb_solutions = 1L)
+        settings = list(precision = 4L, time_limit = 0L, nb_solutions = 1L, optimality_gap = 0)
       ),
       class = "RestoptProblem"
     )

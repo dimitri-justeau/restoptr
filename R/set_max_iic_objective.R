@@ -108,10 +108,11 @@ set_max_iic_objective <- function(problem, distance_threshold = -1, unit = "m") 
     objective = restopt_component(
       name = "Maximize integral index of connectivity",
       class = c("MaxIicObjective", "RestoptObjectve"),
-      post = function(jproblem, nb_solutions, precision, time_limit, verbose=FALSE) {
+      post = function(jproblem, nb_solutions, precision, time_limit, optimality_gap,
+                      verbose=FALSE) {
         rJava::.jcall(
           jproblem, "Ljava/util/List;", "maximizeIIC", nb_solutions, precision,
-          distance_threshold_unitless, time_limit, verbose
+          distance_threshold_unitless, time_limit, optimality_gap, verbose
         )
       }
     )

@@ -8,7 +8,7 @@ NULL
 #'
 #' @inheritParams set_max_mesh_objective
 #'
-#' @param precision `numeric` Precision for calculations.
+#' @param precision `integer` Precision for calculations.
 #' Defaults to 4.
 #'
 #' @param time_limit `integer` Maximum permitted run time for optimization
@@ -16,6 +16,8 @@ NULL
 #' Defaults to 0.
 #'
 #' @param nb_solutions `integer` Number of desired solutions. Defaults to 1.
+#'
+#' @param optimality_gap `numeric` Optimality gap (between 0 and 1). Defaults to 0.
 #'
 #' @examples
 #' \dontrun{
@@ -35,23 +37,29 @@ NULL
 #' print(p)
 #' }
 #' @export
-add_settings <- function(problem, precision = 4, time_limit = 0, nb_solutions = 1) {
+add_settings <- function(problem, precision = 4, time_limit = 0, nb_solutions = 1,
+                         optimality_gap = 0) {
   # assert argument is valid
   assertthat::assert_that(
     inherits(problem, "RestoptProblem"),
-    assertthat::is.number(precision),
+    assertthat::is.count(precision),
     assertthat::noNA(precision),
     assertthat::is.count(time_limit + 1),
     assertthat::noNA(time_limit),
     assertthat::is.count(nb_solutions),
-    assertthat::noNA(nb_solutions)
+    assertthat::noNA(nb_solutions),
+    assertthat::is.number(optimality_gap),
+    assertthat::noNA(optimality_gap),
+    optimality_gap >= 0,
+    optimality_gap <= 1
   )
 
   # add settings
   problem$settings <- list(
     precision = as.integer(precision),
     time_limit = as.integer(time_limit),
-    nb_solutions = as.integer(nb_solutions)
+    nb_solutions = as.integer(nb_solutions),
+    optimality_gap = optimality_gap
   )
 
   # return updated problem

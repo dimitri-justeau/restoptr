@@ -109,6 +109,7 @@ solve.RestoptProblem <- function(a, b, ...) {
       a$settings$nb_solutions,
       a$settings$precision,
       a$settings$time_limit,
+      a$settings$optimality_gap,
       verbose
     ),
     silent = TRUE
