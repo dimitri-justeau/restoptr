@@ -41,7 +41,7 @@ test_that("interval amount of restoration area", {
   expect_gte(terra::global(result == 3, "sum", na.rm = TRUE), 1)
   rest_cells <- which(result[,] == 3)
   val <- nb_cell_to_area(
-    habitat,
+    habitat_data,
     sum(round(get_restorable_habitat(problem))[rest_cells]),
     unit = "ha"
   )
