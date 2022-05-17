@@ -1,38 +1,114 @@
 context("add_components_constraint")
 
-test_that("add_components_constraint", {
-  # Create problem with 1 component
-  habitat <- terra::rast(system.file("extdata", "habitat_hi_res.tif", package = "restoptr"))
-  problem <- restopt_problem(habitat, aggregation_factor = 16, habitat_threshold = 0.7) %>%
-    add_components_constraint(min_nb_components = 1, max_nb_components = 1)
-  result <- solve(problem)
-  if (require(landscapemetrics)) {
-    np <- landscapemetrics::lsm_c_np(result, directions = 4)
-    testthat::expect_equal(np[np$class == 3,]$value, 1)
-  }
-  # Create problem with 2 components
-  problem <- restopt_problem(habitat, aggregation_factor = 16, habitat_threshold = 0.7) %>%
-    add_components_constraint(min_nb_components = 2, max_nb_components = 2)
-  result <- solve(problem)
-  if (require(landscapemetrics)) {
-    np <- landscapemetrics::lsm_c_np(result, directions = 4)
-    testthat::expect_equal(np[np$class == 3,]$value, 2)
-  }
-  # Create problem with 5 components
-  problem <- restopt_problem(habitat, aggregation_factor = 16, habitat_threshold = 0.7) %>%
-    add_components_constraint(min_nb_components = 5, max_nb_components = 5)
-  result <- solve(problem)
-  if (require(landscapemetrics)) {
-    np <- landscapemetrics::lsm_c_np(result, directions = 4)
-    testthat::expect_equal(np[np$class == 3,]$value, 5)
-  }
-  # Create problem with between 6 and 10 components
-  problem <- restopt_problem(habitat, aggregation_factor = 16, habitat_threshold = 0.7) %>%
-    add_components_constraint(min_nb_components = 6, max_nb_components = 10)
-  result <- solve(problem)
-  if (require(landscapemetrics)) {
-    np <- landscapemetrics::lsm_c_np(result, directions = 4)
-    testthat::expect_gte(np[np$class == 3,]$value, 6)
-    testthat::expect_lte(np[np$class == 3,]$value, 10)
-  }
+test_that("one component", {
+  # import data
+  habitat_data <- terra::rast(
+    system.file("extdata", "habitat_hi_res.tif", package = "restoptr"
+  ))
+  # build and solve problem
+  problem <-
+    restopt_problem(habitat_data, 0.7, 16) %>%
+    add_components_constraint(
+      min_nb_components = 1, max_nb_components = 1
+    ) %>%
+    add_settings(time_limit = 30)
+  result <- solve(problem, verbose = TRUE)
+  # tests
+  expect_is(result, "SpatRaster")
+  expect_gte(terra::global(result == 3, "sum", na.rm = TRUE), 1)
+  skip_if_not_installed("landscapemetrics")
+  n_components <- landscapemetrics::lsm_c_np(result, directions = 4)
+  expect_equal(n_components$value[n_components$class == 3], 1)
+})
+
+test_that("two components", {
+  # import data
+  habitat_data <- terra::rast(
+    system.file("extdata", "habitat_hi_res.tif", package = "restoptr"
+  ))
+  # build and solve problem
+  problem <-
+    restopt_problem(habitat_data, 0.7, 16) %>%
+    add_components_constraint(
+      min_nb_components = 2, max_nb_components = 2
+    ) %>%
+    add_settings(time_limit = 30)
+  result <- solve(problem, verbose = TRUE)
+  # tests
+  expect_is(result, "SpatRaster")
+  expect_gte(terra::global(result == 3, "sum", na.rm = TRUE), 1)
+  skip_if_not_installed("landscapemetrics")
+  n_components <- landscapemetrics::lsm_c_np(result, directions = 4)
+  expect_equal(n_components$value[n_components$class == 3], 2)
+})
+
+test_that("five components", {
+  # import data
+  habitat_data <- terra::rast(
+    system.file("extdata", "habitat_hi_res.tif", package = "restoptr"
+  ))
+  # build and solve problem
+  problem <-
+    restopt_problem(habitat_data, 0.7, 16) %>%
+    add_components_constraint(
+      min_nb_components = 5, max_nb_components = 5
+    ) %>%
+    add_settings(time_limit = 30)
+  result <- solve(problem, verbose = TRUE)
+  # tests
+  expect_is(result, "SpatRaster")
+  expect_gte(terra::global(result == 3, "sum", na.rm = TRUE), 1)
+  skip_if_not_installed("landscapemetrics")
+  n_components <- landscapemetrics::lsm_c_np(result, directions = 4)
+  expect_equal(n_components$value[n_components$class == 3], 5)
+})
+
+test_that("six to ten components", {
+  # import data
+  habitat_data <- terra::rast(
+    system.file("extdata", "habitat_hi_res.tif", package = "restoptr"
+  ))
+  # build and solve problem
+  problem <-
+    restopt_problem(habitat_data, 0.7, 16) %>%
+    add_components_constraint(
+      min_nb_components = 6, max_nb_components = 10
+    ) %>%
+    add_settings(time_limit = 30)
+  result <- solve(problem, verbose = TRUE)
+  # tests
+  expect_is(result, "SpatRaster")
+  expect_gte(terra::global(result == 3, "sum", na.rm = TRUE), 1)
+  skip_if_not_installed("landscapemetrics")
+  n_components <- landscapemetrics::lsm_c_np(result, directions = 4)
+  expect_gte(n_components$value[n_components$class == 3], 6)
+  expect_lte(n_components$value[n_components$class == 3], 10)
+})
+
+test_that("invalid inputs", {
+  # import data
+  habitat_data <- terra::rast(
+    system.file("extdata", "habitat_hi_res.tif", package = "restoptr"
+  ))
+  # tests
+  expect_error(
+    restopt_problem(habitat_data, 0.7, 16) %>%
+    add_components_constraint(0, 5)
+  )
+  expect_error(
+    restopt_problem(habitat_data, 0.7, 16) %>%
+    add_components_constraint(NA, 5)
+  )
+  expect_error(
+    restopt_problem(habitat_data, 0.7, 16) %>%
+    add_components_constraint(5, 0)
+  )
+  expect_error(
+    restopt_problem(habitat_data, 0.7, 16) %>%
+    add_components_constraint(5, NA)
+  )
+  expect_error(
+    restopt_problem(habitat_data, 0.7, 16) %>%
+    add_components_constraint(5, 1)
+  )
 })

@@ -74,7 +74,8 @@ add_components_constraint <- function(problem,
     assertthat::is.count(min_nb_components),
     assertthat::noNA(min_nb_components),
     assertthat::is.count(max_nb_components),
-    assertthat::noNA(max_nb_components)
+    assertthat::noNA(max_nb_components),
+    isTRUE(max_nb_components >= min_nb_components)
   )
 
   # coerce arguments to integer

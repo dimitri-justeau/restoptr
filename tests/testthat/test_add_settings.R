@@ -1,30 +1,73 @@
 context("add_settings")
 
-test_that("add_settings", {
-  # Create problem
-  habitat <- terra::rast(system.file("extdata", "habitat_hi_res.tif", package = "restoptr"))
-  accessible <- terra::vect(system.file("extdata", "accessible_areas.gpkg", package = "restoptr"))
-  locked_out <- invert_vector(accessible, extent = ext(habitat))
-  problem <- restopt_problem(habitat, aggregation_factor = 16, habitat_threshold = 0.7)
-  # Check default parameters
-  testthat::expect_equal(problem$settings$precision, 4L)
-  testthat::expect_equal(problem$settings$time_limit, 0L)
-  # Change parameters
-  problem <- problem %>% add_settings(precision = 2, time_limit = 1)
-  testthat::expect_equal(problem$settings$precision, 2L)
-  testthat::expect_equal(problem$settings$time_limit, 1L)
-  # Check that parameter are well injected to the Java solver
-  problem <- problem %>%
-    add_locked_out_constraint(locked_out) %>%
+test_that("time_limit", {
+  # import data
+  habitat_data <- terra::rast(
+    system.file("extdata", "habitat_hi_res.tif", package = "restoptr"
+  ))
+  # build and solve problem
+  problem <-
+    restopt_problem(habitat_data, 0.7, 16) %>%
+    add_compactness_constraint(4.4, unit = "km") %>%
+    set_max_mesh_objective() %>%
+    add_settings(time_limit = 1)
+  result <- solve(problem, verbose = TRUE)
+  md <- get_metadata(result)
+  # tests
+  expect_lte(md$solving_time, 1.1)
+})
+
+test_that("precision", {
+  # import data
+  habitat_data <- terra::rast(
+    system.file("extdata", "habitat_hi_res.tif", package = "restoptr"
+  ))
+  accessible_data <- terra::vect(system.file(
+    "extdata", "accessible_areas.gpkg", package = "restoptr"
+  ))
+  locked_out_data <- invert_vector(accessible_data, extent = ext(habitat_data))
+  # build and solve problem
+  problem <-
+    restopt_problem(habitat_data, 0.7, 16) %>%
+    add_locked_out_constraint(locked_out_data) %>%
     add_components_constraint(min_nb_components = 1, max_nb_components = 1) %>%
     add_compactness_constraint(max_diameter = 6, unit = "cells") %>%
-    add_restorable_constraint(min_restore = 90, max_restore = 110, unit = "ha", min_proportion = 0.7) %>%
-    set_max_mesh_objective()
-  result <- solve(problem)
-  metadata <- get_metadata(result, area_unit = "cells")
-  # Assert that the solving time is less than 1s (more or less 10%, thus 1.1s)
-  testthat::expect_true(metadata$solving_time < 1.1)
-  # Assert that the precision is correct
-  optimal_value <- metadata$mesh_best
-  testthat::expect_equal(round(optimal_value, 2), optimal_value)
+    add_restorable_constraint(
+      min_restore = 90, max_restore = 110, unit = "ha", min_proportion = 0.7
+    ) %>%
+    set_max_mesh_objective() %>%
+    add_settings(precision = 2)
+  result <- solve(problem, verbose = TRUE)
+  md <- get_metadata(result, area_unit = "cells")
+  # tests
+  expect_is(result, "SpatRaster")
+  expect_gte(terra::global(result == 3, "sum", na.rm = TRUE), 1)
+  expect_equal(round(md$mesh, 2), md$mesh)
+})
+
+test_that("nb_solutions", {
+  # import data
+  habitat_data <- terra::rast(
+    system.file("extdata", "habitat_hi_res.tif", package = "restoptr"
+  ))
+  accessible_data <- terra::vect(system.file(
+    "extdata", "accessible_areas.gpkg", package = "restoptr"
+  ))
+  locked_out_data <- invert_vector(accessible_data, extent = ext(habitat_data))
+  # build and solve problem
+  problem <-
+    restopt_problem(habitat_data, 0.7, 16) %>%
+    add_compactness_constraint(4.4, unit = "km") %>%
+    add_locked_out_constraint(locked_out_data) %>%
+    add_components_constraint(min_nb_components = 1, max_nb_components = 1) %>%
+    set_no_objective() %>%
+    add_settings(time_limit = 5, nb_solutions = 2)
+  result <- solve(problem, verbose = TRUE)
+  # tests
+  expect_is(result, "list")
+  expect_is(result[[1]], "RestoptSolution")
+  expect_is(result[[2]], "RestoptSolution")
+  expect_length(result, 2)
+  expect_gte(terra::global(result[[1]] == 3, "sum", na.rm = TRUE), 1)
+  expect_gte(terra::global(result[[2]] == 3, "sum", na.rm = TRUE), 1)
 })
