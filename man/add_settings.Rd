@@ -4,12 +4,18 @@
 \alias{add_settings}
 \title{Add settings}
 \usage{
-add_settings(problem, precision = 4, time_limit = 0, nb_solutions = 1)
+add_settings(
+  problem,
+  precision = 4,
+  time_limit = 0,
+  nb_solutions = 1,
+  optimality_gap = 0
+)
 }
 \arguments{
 \item{problem}{\code{\link[=restopt_problem]{restopt_problem()}} Restoration problem object.}
 
-\item{precision}{\code{numeric} Precision for calculations.
+\item{precision}{\code{integer} Precision for calculations.
 Defaults to 4.}
 
 \item{time_limit}{\code{integer} Maximum permitted run time for optimization
@@ -17,6 +23,8 @@ Defaults to 4.}
 Defaults to 0.}
 
 \item{nb_solutions}{\code{integer} Number of desired solutions. Defaults to 1.}
+
+\item{optimality_gap}{\code{numeric} Optimality gap (between 0 and 1). Defaults to 0.}
 }
 \description{
 Add settings to a restoration problem (\code{\link[=restopt_problem]{restopt_problem()}}) object
