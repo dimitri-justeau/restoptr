@@ -165,7 +165,7 @@ test_that("invalid inputs", {
     )
   )
   expect_error(
-    restopt_problem(round(terra::project(habitat, "epsg:4326")), 0.7, 16) %>%
+    restopt_problem(round(terra::project(habitat_data, "epsg:4326")), 0.7, 16) %>%
     add_restorable_constraint(
       min_restore = 50, max_restore = 60, unit = "ha",
       min_proportion = 0.8

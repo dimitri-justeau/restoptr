@@ -26,6 +26,7 @@ test_that("expect results", {
     set_max_mesh_objective() %>%
     add_settings(time_limit = 30, nb_solutions = 5)
   # tests
+  expect_output(print(problem))
   expect_equal(class(problem), "RestoptProblem")
   expect_equal(length(get_constraints(problem)), 4)
   expect_true(inherits(get_objective(problem), "MaxMeshObjective"))
