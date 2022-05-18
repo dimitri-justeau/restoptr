@@ -9,103 +9,31 @@
 [![R-CMD-check-MacOS](https://img.shields.io/github/workflow/status/dimitri-justeau/restoptr/macOS/master.svg?label=macOS)](https://github.com/dimitri-justeau/restoptr/actions)
 [![Coverage
 Status](https://codecov.io/github/dimitri-justeau/restoptr/coverage.svg?branch=master)](https://app.codecov.io/gh/dimitri-justeau/restoptr)
-[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/restoptr)](https://github.com/dimitri-justeau/restoptr)
+[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/restoptr)](https://github.com/dimitri-justeau/restoptr)
 
--   [Overview](#overview)
--   [Installation](#installation)
-    -   [Optional - Building `restopt` (Java core library) from
-        source](#java_sources)
-    -   [Package installation](#package_install)
-    -   [System dependencies](#system_deps)
--   [Citation](#citation)
--   [Usage](#usage)
--   [Getting help](#help)
--   [References](#ref)
+## Overview
 
-## Overview <a name="overview"></a>
+The `restoptr` R package provides a flexible framework for ecological
+restoration planning. It aims to identify priority areas for restoration
+efforts using optimization algorithms (based on [Justeau-Allaire *et
+al.* 2021](https://doi.org/10.1111/1365-2664.13803)). Priority areas can
+be identified by maximizing landscape indices, such as the effective
+mesh size ([Jaeger 2000](https://doi.org/10.1023/A:1008129329289)), or
+the integral index of connectivity ([Pascual-Hortal & Saura
+2006](https://doi.org/10.1007/s10980-006-0013-z)). Additionally,
+constraints can be used to ensure that priority areas exhibit particular
+characteristics (e.g., ensure that particular places are not selected
+for restoration, ensure that priority areas form a single contiguous
+network). Furthermore, multiple near-optimal solutions can be generated
+to explore multiple options in restoration planning. The package
+leverages the [Choco-solver](https://choco-solver.org/) software to
+perform optimization using constraint programming (CP) techniques
+([Prud’homme *et al.*
+2017](https://ufrsciencestech.u-bourgogne.fr/m2bdia/UE7%20Outils%20de%20l'IA/PPC/CHOCO/CHOCO-4/user_guide-4.0.0.pdf)).
 
-The `restoptr` R package is a flexible ecological restoration planning
-framework with many ideas inspired from the
-[`prioritizr`](https://prioritizr.net/) conservation planning package
-(Hanson et al., 2022). In `restoptr`, a restoration planning problem
-starts from an existing habitat (typically a binary raster), where the
-aim is to identify optimal areas that are suitable for restoration.
-Several constraints are available to define what is expected for a
-suitable area for (e.g. it must be connected, compact, must respect a
-budget, etc). Several optimization objective are also available to
-define what is a good restoration area (e.g. it must reduce
-fragmentation, increase ecological connectivity, minimize costs, etc.).
-`restoptr` relies on advanced landscape indices such as the effective
-mesh size (Jaeger, 2000), or the integral index of connectivity
-(Pascual-Hortal & Saura, 2006) to address complex restoration planning
-problems.
+## Installation
 
-`restoptr` extends the methodology originally described in
-Justeau-Allaire et al. (2021), and is based on Constraint Programming
-(CP), which is a constrained optimization solving technique based on
-automated reasoning. Specifically, `restoptr` relies on
-[Choco-solver](https://choco-solver.org/), an open-source Java CP solver
-(Prud’homme et al., 2017). The computationally intensive solving part is
-thus delegated to Java (see `restopt`,
-<https://github.com/dimitri-justeau/restopt>), and the communication
-between R and Java is handled with the
-[`rJava`](https://rforge.net/rJava/index.html) package.
-
-**Note:** If you feel like something is missing from `restoptr`
-(e.g. landscape indices, constraints, optimization objectives), feel
-free to [open an issue](#help) and/or contribute. The framework was
-designed to be extensible and we will be happy to integrate new features
-to our roadmap if they are motivated by users’ needs.
-
-## Installation <a name="installation"></a>
-
-### Optional - Building `restopt` (Java core library) from source <a name="java_sources"></a>
-
-`restoptr` relies on a core Java library called
-[`restopt`](https://github.com/dimitri-justeau/restopt), which handle
-the constrained optimization process with
-[Choco-solver](https://choco-solver.org/). We included a compiled
-`restopt` jar file in `restoptr` to spare users from compiling the Java
-source code themselves.
-
-However, if you want to compile `restopt` Java source code and use it in
-`restoptr`, you need a Java Development Kit (JDK) version 8 or higher
-(see Oracle JDK, [OpenJDK](https://openjdk.java.net/install/), or
-[GraalVM](https://www.graalvm.org/downloads/)). You also need to install
-[Maven](https://maven.apache.org/).
-
-Once these dependencies are installed, from the `restoptr` folder
-execute the following command lines from a terminal to build `restopt`:
-
-First clone the repository and update the source code:
-
-``` bash
-git clone https://github.com/dimitri-justeau/restoptr.git
-cd restoptr
-git submodule update --init --recursive
-```
-
-Then build the Java source code with Maven:
-
-``` bash
-cd restopt
-mvn clean package -DskipTests
-```
-
-Finally, copy the generated jar file into `restoptr` java directory:
-
-``` bash
-cp target/restopt-*.jar ../java/
-```
-
-To update `restopt` and `restoptr` with the latest source code, execute
-the following command (from the restoptr folder):
-
-``` bash
-git pull --recurse-submodules
-```
-
-### Package installation <a name="package_install"></a>
+### Package installation
 
 The latest developmental version of the *restoptr R* package can be
 installed using the following *R* code.
@@ -115,14 +43,7 @@ if (!require(remotes)) install.packages("remotes")
 remotes::install_github("dimitri-justeau/restoptr")
 ```
 
-Or with *devtools*:
-
-``` r
-if (!require(devtools)) install.packages("devtools")
-devtools::install_github("dimitri-justeau/rflsgen")
-```
-
-### System dependencies <a name="system_deps"></a>
+### System dependencies
 
 The packages requires a Java Runtime Environment (JRE), version 8 or
 higher. Below we provide platform-specific instructions to install it.
@@ -173,159 +94,173 @@ brew install openjdk
 Please note that you might also need to ensure that the `PATH`
 environmental variable if configured so that *R* can access Java.
 
-## Citation <a name="citation"></a>
+### Building the Java core library from source (optional)
 
-Please cite *restoptr* when using it in publications.
+The package relies on a core Java library called
+[`restopt`](https://github.com/dimitri-justeau/restopt). This Java
+library handles the constrained optimization process via the
+[Choco-solver](https://choco-solver.org/) software. Although this
+library is automatically included with the package, it can be manually
+compile from source if needed. **Please note that this step is entirely
+optional, and is not needed to install the package.** To compile the
+Java library, a the [Maven](https://maven.apache.org/) software needs to
+be installed as well as a Java Development Kit (JDK) (version 8+) is
+required (e.g., see Oracle JDK,
+[OpenJDK](https://openjdk.java.net/install/), or
+[GraalVM](https://www.graalvm.org/downloads/)). After installing these
+dependencies, the following procedures can be used to compile the Java
+library and it along with the package.
 
-> Justeau-Allaire, D., Vieilledent, G., Rinck, N., Vismara, P., Lorca,
-> X., & Birnbaum, P. (2021). Constrained optimization of landscape
-> indices in conservation planning to support ecological restoration in
-> New Caledonia. Journal of Applied Ecology, 58(4), 744‑754.
+First clone the repository and update the source code.
 
-This article describes the methodology. We will provide a specific
-citation for ressource the R package soon.
+``` bash
+git clone https://github.com/dimitri-justeau/restoptr.git
+cd restoptr
+git submodule update --init --recursive
+git pull --recurse-submodules
+```
 
-## Usage <a name="usage"></a>
+Next, compile the core Java library with Maven.
 
-The first thing to do to use *restoptr* is to load the package:
+``` bash
+cd restopt
+mvn clean package -DskipTests
+```
+
+Next, copy the resulting Java library (.jar) file into `java` directory.
+
+``` bash
+cp target/restopt-*.jar ../java/
+```
+
+Finally, the package can be installed with the newly compiled Java
+library using the following *R* command.
 
 ``` r
+if (!require(remotes)) install.packages("remotes")
+remotes::install_local(".")
+```
+
+## Usage
+
+Here we will provide a short tutorial on using the *restoptr R* package
+to identify priority areas for restoration. If you haven’t already,
+please install the package (see previous section for installation
+instructions). We will begin by loading the package.
+
+``` r
+# load package
 library(restoptr)
 ```
 
-We will now create and solve a restoration optimization problem. One
-input raster are necessary, the *existing_habitat* raster, which is a
-binary raster indicating the habitat areas (raster value 1), the
-non-habitat areas (raster value 0), and areas that are not part of the
-landscape (raster value NA, or NODATA, e.g. ocean if the landscape is
-terrestrial). Note that the resolution can be high, as the down sampling
-of the input data to ensure a tractable optimization problem is part of
-the restoration optimization problem construction (see the next
-paragraph).
-
-Along with this *existing_habitat* input raster, it is necessary to
-provide two parameters that inform `restoptr` how to eventually reduce
-the resolution to ensure a tractable optimization problem: the
-*aggregation_factor* and the *habitat_threshold* :
-
--   *aggregation_factor*: if the resolution of the *existing_habitat* is
-    high, it can be unsuited to use as is into the constrained
-    optimization engine, which will either be limited by the system’s
-    available RAM, or have a very long computation time. The
-    *aggregation_factor* indicates how to reduce the resolution of the
-    aggregating cells (see `terra::aggregate()`). The amount of habitat
-    and restorable area within each aggregated cell will be
-    automatically computed.
-
--   *habitat_threshold*: as the lower resolution habitat raster that
-    will be used into the constrained optimization engine must be
-    binary, it is necessary to define a condition which indicates
-    whether an aggregated is considered as habitat or not. This
-    condition is defined by the *habitat_threshold*, which indicates how
-    much proportion of habitat is needed into an aggregated cell to
-    consider it as habitat.
-
-**Note:** In the following, we will also refer to the aggregated cells
-as **planning units**.
-
-**Note:** we implemented this data pre processing step as a new feature
-in `restoptr` to facilitate its usage, to ensure that problems are
-instantiated with consistent information, and to facilitate the
-automation of workflows. For more details on the aggregation method,
-please refer to `prepare_inputs()` function documentation.
-
-Example data, from the use case presented in Justeau-Allaire et
-al. (2021) is included in the package:
+To identify priorities for restoration, we require information on the
+spatial location of places that do and do not currently contain suitable
+habitat. We will now import an example dataset to specify such
+information (imported as the `habitat_data` object). Specifically, this
+object is a spatial grid (i.e., raster layer). Each grid cell
+corresponds to a candidate place for restoration (termed planning unit),
+and their values indicate the absence or presence of habitat within each
+planning unit (using values of zero and one, respectively).
 
 ``` r
+# import data
 habitat_data <- rast(
   system.file("extdata", "habitat_hi_res.tif", package = "restoptr")
 )
-plot(habitat_data, plg=list(x="topright"))
+
+# preview data
+print(habitat_data)
 ```
 
-<img src="man/figures/README-unnamed-chunk-12-1.png" width="100%" style="display: block; margin: auto;" />
-
-To instantiate a base restoration optimization problem from such an
-input raster, use the `restopt_problem()` function:
+    ## class       : SpatRaster 
+    ## dimensions  : 1867, 2713, 1  (nrow, ncol, nlyr)
+    ## resolution  : 27.9487, 29.74339  (x, y)
+    ## extent      : 419768.2, 495593.1, 227538.9, 283069.8  (xmin, xmax, ymin, ymax)
+    ## coord. ref. : RGNC91-93 / Lambert New Caledonia (EPSG:3163) 
+    ## source      : habitat_hi_res.tif 
+    ## name        : habitat_hi_res
 
 ``` r
-p <- restopt_problem(
-  existing_habitat = habitat_data, 
-  aggregation_factor = 16,
-  habitat_threshold = 0.7
-) 
+# visualize data
+plot(habitat_data, plg = list(x = "topright"))
 ```
 
-Input data and preprocessed aggregated rasters can be accessed with:
+<img src="man/figures/README-habitat_data-1.png" width="100%" style="display: block; margin: auto;" />
 
--   `get_original_habiata(p)` is the input, high resolution habitat
-    raster.
--   `get_existing_habitat(p)` is the aggregated habitat raster.
--   `get_restorable_habitat(p)` is the aggregated restorable area
-    raster.
--   `get_cell_area(p)` is the area of each planning, in number of cells
-    from the original raster. Note that this area is not necessarily the
-    same for all planning units, as if there are NA cells in the input
-    raster some planning units can partially cover NA and non-NA cells.
-
-We can plot the aggregated data:
+Restoration efforts are often limited in terms of the places where they
+can be implemented. For instance, restoration efforts may not be
+feasible in dense cities. To specify which planning units are not
+feasible for restoration, we will import another example dataset
+(imported as the `locked_out_data` object). The grid cell values in this
+raster layer indicate which planning units should be considered
+available for restoration or not (using values of zero and one,
+respectively).
 
 ``` r
-plot(rast(list(p$data$existing_habitat, p$data$restorable_habitat)), nc = 2,  plg=list(x="topright"))
-```
-
-<img src="man/figures/README-unnamed-chunk-14-1.png" width="100%" style="display: block; margin: auto;" />
-
-Then, we can add constraints to this base problem. For instance, lets
-add a locked-out constraint, to restrict the number of planning units
-that can be selected for restoration. Such a constraint can be used to
-account for existing land-use practices, feasibility of restoration
-activities, and stakeholder preferences.
-
-``` r
+# import data
 locked_out_data <- rast(
- system.file("extdata", "locked_out.tif", package = "restoptr")
+  system.file("extdata", "locked_out.tif", package = "restoptr")
 )
-p <- p %>% add_locked_out_constraint(data = locked_out_data)
+
+# preview data
+print(locked_out_data)
 ```
 
-We can also add a constraint on the amount of restored area that is
-allowed by the project:
+    ## class       : SpatRaster 
+    ## dimensions  : 1867, 2713, 1  (nrow, ncol, nlyr)
+    ## resolution  : 27.9487, 29.74339  (x, y)
+    ## extent      : 419768.2, 495593.1, 227538.9, 283069.8  (xmin, xmax, ymin, ymax)
+    ## coord. ref. : RGNC91-93 / Lambert New Caledonia (EPSG:3163) 
+    ## source      : locked_out.tif 
+    ## name        : layer 
+    ## min value   :     1 
+    ## max value   :     1
 
 ``` r
-p <- p %>% add_restorable_constraint(90, 220, unit = "ha")
+# visualize data
+plot(locked_out_data, plg = list(x = "topright"))
 ```
 
-And finally a compactness constraint, which limits the spatial extent of
-the selected restoration area:
+<img src="man/figures/README-locked_out_data-1.png" width="100%" style="display: block; margin: auto;" />
+
+We will build a restoration optimization problem. This object will
+specify all the data, settings, and optimization criteria needed to
+identify priority areas. Specifically, we will initialize the problem
+with the `habitat_data` object to specify which planning units already
+contain suitable habitat (with the `restopt_problem()` function). To
+reduce run time, we will also initialize it with parameters to aggregate
+the spatial data. Next, we will specify that the objective function for
+the optimization process is to maximize connectivity based on the
+effective mesh size metric (with the `set_max_mesh_objective()`
+function). We will then specify constraints to ensure that the priority
+areas exhibit particular characteristics. These constraints will be used
+to ensure that certain planning units are not selected for restoration
+(with the `add_locked_out_constraint()` function), ensure that the total
+amount of restored area should range between 90 and 220 ha (with the
+`add_restorable_constraint()` function), and limit the spatial extent of
+the priority areas to 2.4 km (with the `add_compactness_constraint()`
+function).
 
 ``` r
-p <- p %>% add_compactness_constraint(2.4, unit = "km")
-```
+# build restoration optimization problem
+problem <-
+  ## initialize problem with habitat data
+  restopt_problem(
+    existing_habitat = habitat_data,
+    aggregation_factor = 16,
+    habitat_threshold = 0.7
+  ) %>%
+  ## set objective function is to maximize effective mesh size
+  set_max_mesh_objective() %>%
+  ## add constraint to ensure that certain places are not selected
+  add_locked_out_constraint(locked_out_data) %>%
+  ## add constraint to limit total amount of restored area
+  add_restorable_constraint(90, 220, unit = "ha") %>%
+  ## add constraint to limit spatial extent of priority areas
+  add_compactness_constraint(2.4, unit = "km")
 
-**Note:** units conversions are handled by the
-[units](https://r-quantities.github.io/units/) package, thus feel free
-to use any surface or length unit when defining your constraints.
-
-Once we have added constraints to the problem, we need to define an
-optimization objective. For example, lets configure `restopr` to
-identify, under the previous constraints, which restoration areas
-maximizes the effective mesh size (MESH).
-
-``` r
-p <- p %>% set_max_mesh_objective()
-```
-
-*Note* The effective mesh size is a measure of landscape fragmentation
-based on the probability that two randomly chosen points are located in
-the same patch (Jaeger, 2000). Maximizing it in the context of
-restoration favours fewer and larger patches.
-
-We can get a summary of the restoration problem:
-
-``` r
-p
+# preview problem
+print(problem)
 ```
 
     ## ----------------------------------------------------------------- 
@@ -347,68 +282,86 @@ p
     ## settings: 
     ##   - precision = 4
     ##   - time_limit = 0
-    ##   - nb_solutions = 1 
+    ##   - nb_solutions = 1
+    ##   - optimality_gap = 0 
     ## -----------------------------------------------------------------
 
-Finally, we use the `solve()` function to identify the optimal
-restoration area, according to the constraints and the optimization
-objective.
+After building the problem, we can solve it to identify priority areas
+for restoration (with the `solve()` function). The solution is a raster
+layer containing values that indicate if planning units: (`0`) were
+locked out, (`1`) do not contain existing habitat, (`2`) contain
+existing habitat, or (`3`) selected as a priority area for restoration.
 
 ``` r
-s <- solve(p)
+# solve problem to identify priority areas
+solution <- solve(problem)
 ```
 
-    ## Good news: the solver found 1 solution statisfying the constraints that was proven optimal ! (solving time = 0.91 s)
+    ## Good news: the solver found 1 solution statisfying the constraints that was proven optimal ! (solving time = 0.29 s)
 
 ``` r
+# preview solution
+print(solution)
+```
+
+    ## class       : RestoptSolution 
+    ## dimensions  : 117, 170, 1  (nrow, ncol, nlyr)
+    ## resolution  : 447.1792, 475.8943  (x, y)
+    ## extent      : 419768.2, 495788.7, 227390.1, 283069.8  (xmin, xmax, ymin, ymax)
+    ## coord. ref. : RGNC91-93 / Lambert New Caledonia (EPSG:3163) 
+    ## source      : memory 
+    ## name        :  Solution 1 
+    ## min value   :   Available 
+    ## max value   : Restoration
+
+``` r
+# visualize solution
 plot(
-  s,
+  solution,
   main = "Solution",
   col = c("#E5E5E5", "#fff1d6", "#b2df8a", "#1f78b4"),
-  plg = list(x="topright")
+  plg = list(x = "topright")
 )
 ```
 
-<img src="man/figures/README-unnamed-chunk-20-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="man/figures/README-solution-1.png" width="100%" style="display: block; margin: auto;" />
 
-You can retrieve the attributes of the solution using the
-`get_metadata()` function:
+Finally, we can access additional information on the solution (with the
+`get_metadata()` function).
 
 ``` r
-get_metadata(s, area_unit = "ha")
+# access information on the solution
+## N.B. spatial units are expressed as hectares
+get_metadata(solution, area_unit = "ha")
 ```
 
     ##     min_restore total_restorable nb_planning_units nb_components     diameter
     ## 1 219.3772 [ha]    219.3772 [ha]                15             3 2280.175 [m]
-    ##   optimality_proven search_state solving_time  mesh_initial     mesh_best
-    ## 1              TRUE   TERMINATED        0.877 53.38999 [ha] 55.59634 [ha]
+    ##   optimality_proven search_state solving_time  mesh_initial     mesh
+    ## 1              TRUE   TERMINATED        0.283 53.38999 [ha] 668.7967
+    ##       mesh_best
+    ## 1 55.59634 [ha]
 
-## Getting help <a name="help"></a>
+This has just been a short taster of the package. For an extended
+tutorial on using the package, please refer to the vignette.
 
-If you have any questions about *restoptr*, improvement suggestions, or
-if you detect a bug, please [open an
-issue](https://github.com/dimitri-justeau/restoptr/issues/new/choose) in
-this GitHub repository.
+## Citation
 
-## References <a name="ref"></a>
+Please cite the *restoptr R* package when using it in publications.
+Although a new publication describing the package is in preparation; in
+the meantime, please use the following citation which outlines the
+methodology.
 
-Hanson JO, Schuster R, Morrell N, Strimas-Mackey M, Edwards BPM, Watts
-ME, Arcese P, Bennett J, Possingham HP (2022). prioritizr: Systematic
-Conservation Prioritization in R. R package version 7.1.1. Available at
-<https://CRAN.R-project.org/package=prioritizr>.
+> Justeau-Allaire, D., Vieilledent, G., Rinck, N., Vismara, P., Lorca,
+> X., & Birnbaum, P. (2021). Constrained optimization of landscape
+> indices in conservation planning to support ecological restoration in
+> New Caledonia. Journal of Applied Ecology, 58(4), 744‑754.
 
-Jaeger, J. A. G. (2000). Landscape division, splitting index, and
-effective mesh size: New measures of landscape fragmentation. Landscape
-Ecology, 15(2), 115‑130.
+## Getting help
 
-Justeau-Allaire, D., Vieilledent, G., Rinck, N., Vismara, P., Lorca, X.,
-& Birnbaum, P. (2021). Constrained optimization of landscape indices in
-conservation planning to support ecological restoration in New
-Caledonia. Journal of Applied Ecology, 58(4), 744‑754.
-
-Pascual-Hortal, L., & Saura, S. (2006). Comparison and development of
-new graph-based landscape connectivity indices: Towards the priorization
-of habitat patches and corridors for conservation. Landscape Ecology,
-21(7), 959‑967.
-
-Prud’homme, C., Fages, J.-G., & Lorca, X. (2017). Choco documentation.
+If you have any questions about using the package, suggestions for
+improvements, or if you detect a bug, please [open an issue in online
+code
+repository](https://github.com/dimitri-justeau/restoptr/issues/new/choose).
+We designed the package to make it relatively easy to add new
+functionality, and would be delighted to hear from you.
