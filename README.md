@@ -15,21 +15,18 @@ Status](https://codecov.io/github/dimitri-justeau/restoptr/coverage.svg?branch=m
 
 The `restoptr` R package provides a flexible framework for ecological
 restoration planning. It aims to identify priority areas for restoration
-efforts using optimization algorithms (based on [Justeau-Allaire *et
-al.* 2021](https://doi.org/10.1111/1365-2664.13803)). Priority areas can
-be identified by maximizing landscape indices, such as the effective
-mesh size ([Jaeger 2000](https://doi.org/10.1023/A:1008129329289)), or
-the integral index of connectivity ([Pascual-Hortal & Saura
-2006](https://doi.org/10.1007/s10980-006-0013-z)). Additionally,
-constraints can be used to ensure that priority areas exhibit particular
+efforts using optimization algorithms (based on Justeau-Allaire *et al.*
+2021). Priority areas can be identified by maximizing landscape indices,
+such as the effective mesh size (Jaeger 2000), or the integral index of
+connectivity (Pascual-Hortal & Saura 2006). Additionally, constraints
+can be used to ensure that priority areas exhibit particular
 characteristics (e.g., ensure that particular places are not selected
 for restoration, ensure that priority areas form a single contiguous
 network). Furthermore, multiple near-optimal solutions can be generated
 to explore multiple options in restoration planning. The package
 leverages the [Choco-solver](https://choco-solver.org/) software to
 perform optimization using constraint programming (CP) techniques
-([Prud’homme *et al.*
-2017](https://ufrsciencestech.u-bourgogne.fr/m2bdia/UE7%20Outils%20de%20l'IA/PPC/CHOCO/CHOCO-4/user_guide-4.0.0.pdf)).
+(Prud’homme *et al.* 2017).
 
 ## Installation
 
@@ -297,7 +294,7 @@ existing habitat, or (`3`) selected as a priority area for restoration.
 solution <- solve(problem)
 ```
 
-    ## Good news: the solver found 1 solution statisfying the constraints that was proven optimal ! (solving time = 0.29 s)
+    ## Good news: the solver found 1 solution statisfying the constraints that was proven optimal ! (solving time = 0.32 s)
 
 ``` r
 # preview solution
@@ -338,7 +335,7 @@ get_metadata(solution, area_unit = "ha")
     ##     min_restore total_restorable nb_planning_units nb_components     diameter
     ## 1 219.3772 [ha]    219.3772 [ha]                15             3 2280.175 [m]
     ##   optimality_proven search_state solving_time  mesh_initial     mesh
-    ## 1              TRUE   TERMINATED        0.283 53.38999 [ha] 668.7967
+    ## 1              TRUE   TERMINATED        0.312 53.38999 [ha] 668.7967
     ##       mesh_best
     ## 1 55.59634 [ha]
 
