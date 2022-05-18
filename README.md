@@ -15,18 +15,21 @@ Status](https://codecov.io/github/dimitri-justeau/restoptr/coverage.svg?branch=m
 
 The `restoptr` R package provides a flexible framework for ecological
 restoration planning. It aims to identify priority areas for restoration
-efforts using optimization algorithms (based on Justeau-Allaire *et al.*
-2021). Priority areas can be identified by maximizing landscape indices,
-such as the effective mesh size (Jaeger 2000), or the integral index of
-connectivity (Pascual-Hortal & Saura 2006). Additionally, constraints
-can be used to ensure that priority areas exhibit particular
+efforts using optimization algorithms (based on [Justeau-Allaire *et
+al.* 2021](https://doi.org/10.1111/1365-2664.13803)). Priority areas can
+be identified by maximizing landscape indices, such as the effective
+mesh size ([Jaeger 2000](https://doi.org/10.1023/A:1008129329289)), or
+the integral index of connectivity ([Pascual-Hortal & Saura
+2006](https://doi.org/10.1007/s10980-006-0013-z)). Additionally,
+constraints can be used to ensure that priority areas exhibit particular
 characteristics (e.g., ensure that particular places are not selected
 for restoration, ensure that priority areas form a single contiguous
 network). Furthermore, multiple near-optimal solutions can be generated
 to explore multiple options in restoration planning. The package
 leverages the [Choco-solver](https://choco-solver.org/) software to
 perform optimization using constraint programming (CP) techniques
-(Prud’homme *et al.* 2017).
+([Prud’homme *et al.*
+20202](https://buildmedia.readthedocs.org/media/pdf/choco-solver/latest/choco-solver.pdf)).
 
 ## Installation
 
@@ -141,9 +144,14 @@ remotes::install_local(".")
 ## Usage
 
 Here we will provide a short tutorial on using the *restoptr R* package
-to identify priority areas for restoration. If you haven’t already,
-please install the package (see previous section for installation
-instructions). We will begin by loading the package.
+to identify priority areas for restoration. As part of this tutorial, we
+will use an example dataset that is distributed with the package
+(obtained from [Justeau-Allaire *et al.*
+2021](https://doi.org/10.1111/1365-2664.13803)). This example dataset
+contains data for prioritizing forest restoration efforts within a
+protected area in New Caledonia. We will begin the tutorial by loading
+the package. If you haven’t already, please install the package (see
+above for installation instructions).
 
 ``` r
 # load package
@@ -151,13 +159,14 @@ library(restoptr)
 ```
 
 To identify priorities for restoration, we require information on the
-spatial location of places that do and do not currently contain suitable
-habitat. We will now import an example dataset to specify such
-information (imported as the `habitat_data` object). Specifically, this
-object is a spatial grid (i.e., raster layer). Each grid cell
-corresponds to a candidate place for restoration (termed planning unit),
-and their values indicate the absence or presence of habitat within each
-planning unit (using values of zero and one, respectively).
+location of places that do and do not currently contain suitable
+habitat. We will now import data to describe which places within the
+protected area contain forest habitat (imported as the `habitat_data`
+object). Specifically, this object is a spatial grid (i.e., raster
+layer). Each grid cell corresponds to a candidate place for restoration
+(termed planning unit), and their values indicate the absence or
+presence of forest within each planning unit (using values of zero and
+one, respectively).
 
 ``` r
 # import data
@@ -185,13 +194,15 @@ plot(habitat_data, plg = list(x = "topright"))
 <img src="man/figures/README-habitat_data-1.png" width="100%" style="display: block; margin: auto;" />
 
 Restoration efforts are often limited in terms of the places where they
-can be implemented. For instance, restoration efforts may not be
-feasible in dense cities. To specify which planning units are not
-feasible for restoration, we will import another example dataset
-(imported as the `locked_out_data` object). The grid cell values in this
-raster layer indicate which planning units should be considered
-available for restoration or not (using values of zero and one,
-respectively).
+can be implemented. For example, restoration efforts may not be feasible
+in dense cities. In our example, some places are not feasible for
+restoration because they cannot be accessed by existing tracks within
+the protected area. We will now import data to describe which places are
+not feasible for restoration (imported as the `locked_out_data` object).
+This object – similar to the habitat data – is a spatial grid. The grid
+cell values in this object indicate which planning units should be
+considered available for restoration or not (using values of zero and
+one, respectively).
 
 ``` r
 # import data
@@ -220,23 +231,24 @@ plot(locked_out_data, plg = list(x = "topright"))
 
 <img src="man/figures/README-locked_out_data-1.png" width="100%" style="display: block; margin: auto;" />
 
-We will build a restoration optimization problem. This object will
-specify all the data, settings, and optimization criteria needed to
-identify priority areas. Specifically, we will initialize the problem
-with the `habitat_data` object to specify which planning units already
-contain suitable habitat (with the `restopt_problem()` function). To
-reduce run time, we will also initialize it with parameters to aggregate
-the spatial data. Next, we will specify that the objective function for
-the optimization process is to maximize connectivity based on the
-effective mesh size metric (with the `set_max_mesh_objective()`
-function). We will then specify constraints to ensure that the priority
-areas exhibit particular characteristics. These constraints will be used
-to ensure that certain planning units are not selected for restoration
-(with the `add_locked_out_constraint()` function), ensure that the total
-amount of restored area should range between 90 and 220 ha (with the
-`add_restorable_constraint()` function), and limit the spatial extent of
-the priority areas to 2.4 km (with the `add_compactness_constraint()`
-function).
+We now will build a restoration optimization problem (stored in the
+`problem` object). This object will specify all the data, settings, and
+optimization criteria for identifying priority areas. Specifically, we
+will initialize the problem with the `habitat_data` object to specify
+which planning units already contain suitable habitat (with the
+`restopt_problem()` function). To reduce run time, we will also
+initialize it with parameters to aggregate the spatial data (i.e.,
+`aggregation_factor` and `habitat_threshold`). Next, we will specify
+that the objective function for the optimization process is to maximize
+connectivity based on the effective mesh size metric (with the
+`set_max_mesh_objective()` function). We will then specify constraints
+to ensure that the priority areas exhibit particular characteristics.
+These constraints will be used to ensure that (i) certain planning units
+are not selected for restoration (with the `add_locked_out_constraint()`
+function), (ii) the total amount of restored area should range between
+90 and 220 ha (with the `add_restorable_constraint()` function), and
+(iii) limit the spatial extent of the priority areas to be within 2.4 km
+(with the `add_compactness_constraint()` function).
 
 ``` r
 # build restoration optimization problem
@@ -294,7 +306,7 @@ existing habitat, or (`3`) selected as a priority area for restoration.
 solution <- solve(problem)
 ```
 
-    ## Good news: the solver found 1 solution statisfying the constraints that was proven optimal ! (solving time = 0.32 s)
+    ## Good news: the solver found 1 solution statisfying the constraints that was proven optimal ! (solving time = 0.33 s)
 
 ``` r
 # preview solution
@@ -335,7 +347,7 @@ get_metadata(solution, area_unit = "ha")
     ##     min_restore total_restorable nb_planning_units nb_components     diameter
     ## 1 219.3772 [ha]    219.3772 [ha]                15             3 2280.175 [m]
     ##   optimality_proven search_state solving_time  mesh_initial     mesh
-    ## 1              TRUE   TERMINATED        0.312 53.38999 [ha] 668.7967
+    ## 1              TRUE   TERMINATED        0.324 53.38999 [ha] 668.7967
     ##       mesh_best
     ## 1 55.59634 [ha]
 
