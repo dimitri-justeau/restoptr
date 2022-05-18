@@ -1,12 +1,14 @@
 #' @include internal.R
 NULL
 
-#' Set an objective to maximize the integral index of connectivity
+#' Add constraint to enforce a minimum integral index of connectivity (IIC) value
 #'
-#' Specify that a restoration problem ([restopt_problem()]) should
-#' the integral index of connectivity (IIC).
+#' Add constraint to a restoration problem ([restopt_problem()]) object
+#' to specify the minimum integral index of connectivity of a solution.
 #'
 #' @inheritParams set_max_mesh_objective
+#'
+#' @param min_iic `numeric` Minimum IIC value (between 0 and 1).
 #'
 #' @param distance_threshold `numeric` greater than 0. Minimum distance (in
 #' `unit`) between two patches to consider them connected in the computation of
@@ -20,6 +22,9 @@ NULL
 #' available. Meters by default, expected if `distance_threshold` is set to its
 #' default value (-1), which causes the function to use 1 cell by default.
 #'
+#' @param precision `integer` Precision for calculations.
+#' Defaults to 4.
+#'
 #' @details The integral index of connectivity (IIC) is a graph-based inter-patch
 #' connectivity index based on a binary connection model (Pascual-Hortal &
 #' Saura, 2006). Its maximization in the context of restoration favours
@@ -32,7 +37,15 @@ NULL
 #' with a different unit than "cells", it will be rounded to the closest
 #' corresponding number of cells.
 #'
-#' @return An updated restoration problem ([restopt_problem()] object.
+#' @details The effective mesh size (MESH) is a measure of landscape fragmentation
+#' based on the probability that two randomly chosen points are located in the
+#' same patch (Jaeger, 2000). Maximizing it in the context of restoration
+#' favours fewer and larger patches.
+#'
+#' Also see \link{set_max_iic_objective}.
+#'
+#' @seealso
+#' \link{set_max_iic_objective}
 #'
 #' @references
 #' Pascual-Hortal, L., & Saura, S. (2006).
@@ -57,10 +70,10 @@ NULL
 #'     aggregation_factor = 16,
 #'     habitat_threshold = 0.7
 #'   ) %>%
-#'   set_max_iic_objective() %>%
+#'   add_min_iic_constraint(0.2) %>%
 #'   add_restorable_constraint(
-#'     min_restore = 5,
-#'     max_restore = 5,
+#'     min_restore = 200,
+#'     max_restore = 300,
 #'   ) %>%
 #'   add_locked_out_constraint(data = locked_out_data) %>%
 #'   add_settings(time_limit = 1)
@@ -79,15 +92,20 @@ NULL
 #' }
 #'
 #' @export
-set_max_iic_objective <- function(problem, distance_threshold = -1, unit = "m") {
-  # assert argument is valid
-  assertthat::assert_that(inherits(problem, "RestoptProblem"))
+add_min_iic_constraint <- function(problem, min_iic, distance_threshold = -1,
+                                   unit = "m", precision = 4) {
   if (distance_threshold < 0) {
     distance_threshold <- 1
     unit <- "cells"
   }
+  # assert argument is valid
   assertthat::assert_that(
-    assertthat::is.number(distance_threshold),
+    inherits(problem, "RestoptProblem"),
+    assertthat::is.number(min_iic),
+    min_iic >= 0 && min_iic <= 1,
+    assertthat::is.count(precision),
+    assertthat::noNA(precision),
+    assertthat::is.count(distance_threshold),
     assertthat::noNA(distance_threshold),
     (unit == "cells" || units::ud_are_convertible(unit, "m"))
   )
@@ -102,18 +120,17 @@ set_max_iic_objective <- function(problem, distance_threshold = -1, unit = "m") 
                    width, ") because it was less than this minimum value"))
     distance_threshold_unitless <- 1L
   }
-  # set objective
-  set_restopt_objective(
+
+  # add constraint
+  add_restopt_constraint(
     problem = problem,
-    objective = restopt_component(
-      name = "Maximize integral index of connectivity",
-      class = c("MaxIicObjective", "RestoptObjectve"),
-      post = function(jproblem, nb_solutions, precision, time_limit, optimality_gap,
-                      verbose=FALSE) {
-        rJava::.jcall(
-          jproblem, "Ljava/util/List;", "maximizeIIC", nb_solutions, precision,
-          distance_threshold_unitless, time_limit, optimality_gap, verbose
-        )
+    constraint = restopt_component(
+      name = paste0("min IIC (min_iic = ", min_iic, ", distance_threshold = ",
+                    distance_threshold, ", unit = ", unit, ", precision = ",
+                    precision, ")"),
+      class = c("MinIICConstraint", "RestoptConstraint"),
+      post = function(jproblem) {
+        rJava::.jcall(jproblem, "V", "postMinIICConstraint", min_iic, distance_threshold_unitless, as.integer(precision))
       }
     )
   )
