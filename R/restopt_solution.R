@@ -95,6 +95,9 @@ get_metadata <- function(restopt_solution, area_unit = "ha", distance_unit = "m"
       metadata$mesh_initial <- nb_cell_to_area(original_habitat, metadata$mesh_initial, area_unit)
       metadata$mesh_best <- nb_cell_to_area(original_habitat, metadata$mesh_best, area_unit)
     }
+    if ("mesh" %in% names(metadata)) {
+      metadata$mesh <- nb_cell_to_area(original_habitat, metadata$mesh, area_unit)
+    }
   }
   if (distance_unit != "cells") {
     existing_habitat <- get_existing_habitat(restopt_solution@problem)

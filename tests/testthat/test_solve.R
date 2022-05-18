@@ -184,3 +184,30 @@ test_that("number of solutions found is less than desired (no objective)", {
   expect_is(result[[1]], "RestoptSolution")
   expect_true(length(result) < 1000)
 })
+
+test_that("multiple solutions found with IIC optimization and optimality gap", {
+  # import data
+  habitat_data <- terra::rast(
+    system.file("extdata", "habitat_hi_res.tif", package = "restoptr"
+    ))
+  # build and solve problem
+  problem <-
+    restopt_problem(habitat_data, 0.7, 16) %>%
+    add_restorable_constraint(
+      min_restore = 90, max_restore = 110, unit = "ha", min_proportion = 1
+    ) %>%
+    add_compactness_constraint(4, unit = "cells") %>%
+    set_max_iic_objective() %>%
+    add_settings(time_limit = 10, nb_solutions = 20, optimality_gap = 0.05)
+  result <- solve(problem)
+  # tests
+  expect_length(result, 20)
+  iic_best <- get_metadata(result[[1]])$iic_best
+  for (i in seq(1, 20)) {
+    r <- result[[i]]
+    expect_true(inherits(r, "RestoptSolution"))
+    expect_equal(names(r), paste("Solution", i))
+    a <- get_metadata(r)
+    expect_true(a$iic >= iic_best * 0.95)
+  }
+})
