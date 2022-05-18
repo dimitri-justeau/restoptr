@@ -51,7 +51,7 @@ NULL
 #'     min_restore = 200,
 #'     max_restore = 300,
 #'   ) %>%
-#'   add_min_mesh_constraint(min_mesh = 54, unit = "ha")
+#'   add_min_mesh_constraint(min_mesh = 14000, unit = "ha")
 #'
 #' # plot preprocessed data
 #' plot(rast(list(p$data$existing_habitat, p$data$restorable_habitat)), nc = 2)
@@ -83,7 +83,7 @@ add_min_mesh_constraint <- function(problem, min_mesh, precision = 4, unit = "ha
   min_mesh_unitless <- min_mesh
   if (unit != "cells") {
     min_mesh_unitless <- area_to_nb_cells(
-      get_original_habitat(problem),
+      get_existing_habitat(problem),
       area = min_mesh,
       unit = unit
     )

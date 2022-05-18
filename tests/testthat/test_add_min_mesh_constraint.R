@@ -23,7 +23,7 @@ test_that("expected_result", {
     add_restorable_constraint(
       min_restore = 90, max_restore = 110, unit = "ha", min_proportion = 0.7
     ) %>%
-    add_min_mesh_constraint(min_mesh = 54, precision = 4, unit = "ha") %>%
+    add_min_mesh_constraint(min_mesh = 14000, precision = 4, unit = "ha") %>%
     add_settings(time_limit = 10)
   result <- solve(problem, verbose = TRUE)
   md <- get_metadata(result, area_unit = "ha")
@@ -58,7 +58,7 @@ test_that("expect_no_solution", {
     add_restorable_constraint(
       min_restore = 90, max_restore = 110, unit = "ha", min_proportion = 0.7
     ) %>%
-    add_min_mesh_constraint(min_mesh = 100, precision = 4, unit = "ha") %>%
+    add_min_mesh_constraint(min_mesh = 16000, precision = 4, unit = "ha") %>%
     add_settings(time_limit = 10)
   expect_error(solve(problem))
 })

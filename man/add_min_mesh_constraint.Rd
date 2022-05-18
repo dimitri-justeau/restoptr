@@ -49,7 +49,7 @@ p <- restopt_problem(
     min_restore = 200,
     max_restore = 300,
   ) \%>\%
-  add_min_mesh_constraint(min_mesh = 54, unit = "ha")
+  add_min_mesh_constraint(min_mesh = 14000, unit = "ha")
 
 # plot preprocessed data
 plot(rast(list(p$data$existing_habitat, p$data$restorable_habitat)), nc = 2)

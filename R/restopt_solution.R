@@ -89,14 +89,15 @@ get_metadata <- function(restopt_solution, area_unit = "ha", distance_unit = "m"
     min_rest <- as.numeric(metadata$min_restore)
     max_rest <- as.numeric(metadata$total_restorable)
     original_habitat <- get_original_habitat(restopt_solution@problem)
+    existing_habitat <- get_existing_habitat(restopt_solution@problem)
     metadata$min_restore <- nb_cell_to_area(original_habitat, min_rest, area_unit)
     metadata$total_restorable <- nb_cell_to_area(original_habitat, max_rest, area_unit)
     if ("mesh_initial" %in% names(metadata)) {
-      metadata$mesh_initial <- nb_cell_to_area(original_habitat, metadata$mesh_initial, area_unit)
-      metadata$mesh_best <- nb_cell_to_area(original_habitat, metadata$mesh_best, area_unit)
+      metadata$mesh_initial <- nb_cell_to_area(existing_habitat, metadata$mesh_initial, area_unit)
+      metadata$mesh_best <- nb_cell_to_area(existing_habitat, metadata$mesh_best, area_unit)
     }
     if ("mesh" %in% names(metadata)) {
-      metadata$mesh <- nb_cell_to_area(original_habitat, metadata$mesh, area_unit)
+      metadata$mesh <- nb_cell_to_area(existing_habitat, metadata$mesh, area_unit)
     }
   }
   if (distance_unit != "cells") {
