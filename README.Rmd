@@ -213,4 +213,4 @@ Justeau-Allaire, D., Vieilledent, G., Rinck, N., Vismara, P., Lorca, X., & Birnb
 
 Pascual-Hortal, L., & Saura, S. (2006). Comparison and development of new graph-based landscape connectivity indices: Towards the priorization of habitat patches and corridors for conservation. _Landscape Ecology_, 21(7), 959-‑967.
 
-Prud'homme, C., Fages, J.-G., & Lorca, X. (2016). Choco Solver Documentation. {TASC, INRIA Rennes, LINA CNRS UMR 6241, COSLING S.A.S. Available at <http://www.choco-solver.org>.
+Prud'homme, C., Fages, J.-G., & Lorca, X. (2016). Choco Solver Documentation. {TASC, INRIA Rennes, LINA CNRS UMR 6241, COSLING S.A.S. Available at <https://choco-solver.org/>.

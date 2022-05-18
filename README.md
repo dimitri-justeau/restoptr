@@ -303,7 +303,7 @@ existing habitat, or (`3`) selected as a priority area for restoration.
 solution <- solve(problem)
 ```
 
-    ## Good news: the solver found 1 solution statisfying the constraints that was proven optimal ! (solving time = 0.34 s)
+    ## Good news: the solver found 1 solution statisfying the constraints that was proven optimal ! (solving time = 0.32 s)
 
 ``` r
 # preview solution
@@ -344,7 +344,7 @@ get_metadata(solution, area_unit = "ha")
     ##     min_restore total_restorable nb_planning_units nb_components     diameter
     ## 1 219.3772 [ha]    219.3772 [ha]                15             3 2280.175 [m]
     ##   optimality_proven search_state solving_time  mesh_initial     mesh
-    ## 1              TRUE   TERMINATED        0.327 53.38999 [ha] 668.7967
+    ## 1              TRUE   TERMINATED        0.312 53.38999 [ha] 668.7967
     ##       mesh_best
     ## 1 55.59634 [ha]
 
@@ -390,4 +390,4 @@ of habitat patches and corridors for conservation. *Landscape Ecology*,
 
 Prud’homme, C., Fages, J.-G., & Lorca, X. (2016). Choco Solver
 Documentation. {TASC, INRIA Rennes, LINA CNRS UMR 6241, COSLING S.A.S.
-Available at <http://www.choco-solver.org>.
+Available at <https://choco-solver.org/>.
