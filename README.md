@@ -15,21 +15,18 @@ Status](https://codecov.io/github/dimitri-justeau/restoptr/coverage.svg?branch=m
 
 The `restoptr` R package provides a flexible framework for ecological
 restoration planning. It aims to identify priority areas for restoration
-efforts using optimization algorithms (based on [Justeau-Allaire *et
-al.* 2021](https://doi.org/10.1111/1365-2664.13803)). Priority areas can
-be identified by maximizing landscape indices, such as the effective
-mesh size ([Jaeger 2000](https://doi.org/10.1023/A:1008129329289)), or
-the integral index of connectivity ([Pascual-Hortal & Saura
-2006](https://doi.org/10.1007/s10980-006-0013-z)). Additionally,
-constraints can be used to ensure that priority areas exhibit particular
+efforts using optimization algorithms (based on Justeau-Allaire *et al.*
+2021). Priority areas can be identified by maximizing landscape indices,
+such as the effective mesh size (Jaeger 2000), or the integral index of
+connectivity (Pascual-Hortal & Saura 2006). Additionally, constraints
+can be used to ensure that priority areas exhibit particular
 characteristics (e.g., ensure that particular places are not selected
 for restoration, ensure that priority areas form a single contiguous
 network). Furthermore, multiple near-optimal solutions can be generated
 to explore multiple options in restoration planning. The package
 leverages the [Choco-solver](https://choco-solver.org/) software to
 perform optimization using constraint programming (CP) techniques
-([Prud’homme *et al.*
-20202](https://buildmedia.readthedocs.org/media/pdf/choco-solver/latest/choco-solver.pdf)).
+(Prud’homme *et al.* 2016).
 
 ## Installation
 
@@ -306,7 +303,7 @@ existing habitat, or (`3`) selected as a priority area for restoration.
 solution <- solve(problem)
 ```
 
-    ## Good news: the solver found 1 solution statisfying the constraints that was proven optimal ! (solving time = 0.33 s)
+    ## Good news: the solver found 1 solution statisfying the constraints that was proven optimal ! (solving time = 0.34 s)
 
 ``` r
 # preview solution
@@ -347,7 +344,7 @@ get_metadata(solution, area_unit = "ha")
     ##     min_restore total_restorable nb_planning_units nb_components     diameter
     ## 1 219.3772 [ha]    219.3772 [ha]                15             3 2280.175 [m]
     ##   optimality_proven search_state solving_time  mesh_initial     mesh
-    ## 1              TRUE   TERMINATED        0.324 53.38999 [ha] 668.7967
+    ## 1              TRUE   TERMINATED        0.327 53.38999 [ha] 668.7967
     ##       mesh_best
     ## 1 55.59634 [ha]
 
@@ -374,3 +371,23 @@ code
 repository](https://github.com/dimitri-justeau/restoptr/issues/new/choose).
 We designed the package to make it relatively easy to add new
 functionality, and would be delighted to hear from you.
+
+## References
+
+Jaeger, J. A. G. (2000). Landscape division, splitting index, and
+effective mesh size: New measures of landscape fragmentation. *Landscape
+Ecology*, 15(2), 115-‑130.
+
+Justeau-Allaire, D., Vieilledent, G., Rinck, N., Vismara, P., Lorca, X.,
+& Birnbaum, P. (2021). Constrained optimization of landscape indices in
+conservation planning to support ecological restoration in New
+Caledonia. *Journal of Applied Ecology*, 58(4), 744‑-754.
+
+Pascual-Hortal, L., & Saura, S. (2006). Comparison and development of
+new graph-based landscape connectivity indices: Towards the priorization
+of habitat patches and corridors for conservation. *Landscape Ecology*,
+21(7), 959-‑967.
+
+Prud’homme, C., Fages, J.-G., & Lorca, X. (2016). Choco Solver
+Documentation. {TASC, INRIA Rennes, LINA CNRS UMR 6241, COSLING S.A.S.
+Available at <http://www.choco-solver.org>.

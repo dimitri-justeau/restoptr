@@ -26,7 +26,7 @@ devtools::load_all()
 
 ## Overview
 
-The `restoptr` R package provides a flexible framework for ecological restoration planning. It aims to identify priority areas for restoration efforts using optimization algorithms (based on [Justeau-Allaire _et al._ 2021](https://doi.org/10.1111/1365-2664.13803)). Priority areas can be identified by maximizing landscape indices, such as the effective mesh size ([Jaeger 2000](https://doi.org/10.1023/A:1008129329289)), or the integral index of connectivity ([Pascual-Hortal & Saura 2006](https://doi.org/10.1007/s10980-006-0013-z)). Additionally, constraints can be used to ensure that priority areas exhibit particular characteristics (e.g., ensure that particular places are not selected for restoration, ensure that priority areas form a single contiguous network). Furthermore, multiple near-optimal solutions can be generated to explore multiple options in restoration planning. The package leverages the [Choco-solver](https://choco-solver.org/) software to perform optimization using constraint programming (CP) techniques ([Prud'homme _et al._ 20202](https://buildmedia.readthedocs.org/media/pdf/choco-solver/latest/choco-solver.pdf)).
+The `restoptr` R package provides a flexible framework for ecological restoration planning. It aims to identify priority areas for restoration efforts using optimization algorithms (based on Justeau-Allaire _et al._ 2021). Priority areas can be identified by maximizing landscape indices, such as the effective mesh size (Jaeger 2000), or the integral index of connectivity (Pascual-Hortal & Saura 2006). Additionally, constraints can be used to ensure that priority areas exhibit particular characteristics (e.g., ensure that particular places are not selected for restoration, ensure that priority areas form a single contiguous network). Furthermore, multiple near-optimal solutions can be generated to explore multiple options in restoration planning. The package leverages the [Choco-solver](https://choco-solver.org/) software to perform optimization using constraint programming (CP) techniques (Prud'homme _et al._ 2016).
 
 ## Installation
 
@@ -204,3 +204,13 @@ Please cite the _restoptr R_ package when using it in publications. Although a n
 ## Getting help
 
 If you have any questions about using the package, suggestions for improvements, or if you detect a bug, please [open an issue in online code repository](https://github.com/dimitri-justeau/restoptr/issues/new/choose). We designed the package to make it relatively easy to add new functionality, and would be delighted to hear from you.
+
+## References
+
+Jaeger, J. A. G. (2000). Landscape division, splitting index, and effective mesh size: New measures of landscape fragmentation. _Landscape Ecology_, 15(2), 115-‑130.
+
+Justeau-Allaire, D., Vieilledent, G., Rinck, N., Vismara, P., Lorca, X., & Birnbaum, P. (2021). Constrained optimization of landscape indices in conservation planning to support ecological restoration in New Caledonia. _Journal of Applied Ecology_, 58(4), 744‑-754.
+
+Pascual-Hortal, L., & Saura, S. (2006). Comparison and development of new graph-based landscape connectivity indices: Towards the priorization of habitat patches and corridors for conservation. _Landscape Ecology_, 21(7), 959-‑967.
+
+Prud'homme, C., Fages, J.-G., & Lorca, X. (2016). Choco Solver Documentation. {TASC, INRIA Rennes, LINA CNRS UMR 6241, COSLING S.A.S. Available at <http://www.choco-solver.org>.
