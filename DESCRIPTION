@@ -84,6 +84,7 @@ Collate:
     'restopt_solution.R'
     'set_max_iic_objective.R'
     'set_max_mesh_objective.R'
+    'set_max_nb_pus_objective.R'
     'set_min_nb_pus_objective.R'
     'set_no_objective.R'
     'solve.R'
