@@ -30,13 +30,13 @@ knitr::opts_chunk$set(fig.align = "center", eval = !is_check)
 
 ## Introduction
 
-Habitat restoration is urgently need to prevent further declines in biodiversity]. Since the resources available for restoring habitat are limited, plans for restoring habitat (hereafter, "restoration prioritizations") need to achieve conservation objectives for minimal cost. Indeed, restoration prioritizations need to strategically site restoration actions in places that will enhance connectivity among remaining habitats. They also need to account for existing land-use constraints that prevent such actions for being implemented in particular places (e.g., places that are too heavily modified for conservation activities). As a consequence, there has been increasing interest in developing decision support tools to help inform restoration efforts.
+Habitat restoration is urgently need to prevent further declines in biodiversity. Since the resources available for restoring habitat are limited, plans for restoring habitat (hereafter, "restoration prioritizations") need to achieve conservation objectives for minimal cost. Indeed, restoration prioritizations need to strategically site restoration actions in places that will enhance connectivity among remaining habitats. They also need to account for existing land-use constraints that prevent such actions for being implemented in particular places (e.g., places that are too heavily modified for conservation activities). As a consequence, there has been increasing interest in developing decision support tools to help inform restoration efforts.
 
 Here we provide a tutorial for using the _restoptr R_ package for ecological restoration planning. Briefly, this decision support tool identifies cost-effective restoration prioritizations for promoting connectivity, whilst also accounting for economic and land-use constraints. It uses constraint programming techniques to identify optimal restoration prioritizations [@r5]. After generating restoration prioritizations, they can be evaluated to explore trade-offs between total cost and the ability for restoration actions to promote connectivity. By using decision support tools to identify priority areas for habitat restoration, restoration efforts stand a far greater chance at reversing declines in biodiversity.
 
 ## Setup
 
-Let's setup our _R_ session for the tutorial. Here, we will load the _restoptr R_ package, as well as the _terra_, _vegan_ and the _ggplot2 R_ packages.
+Let's setup our _R_ session for the tutorial. Here, we will load the _restoptr R_ package. We will also load the _terra R_ package for working with raster data, _ggplot2 R_ package for data visualization, and the _vegan_ and _cluster R_ packages for comparing results.
 
 ```{r, echo = FALSE, results = "hide"}
 # load packages
@@ -46,7 +46,7 @@ library(vegan)
 library(cluster)
 ```
 
-Also, since Java needs to be installed to generate restoration prioritizations using the _restoptr R_ package, let's verify that Java is installed correctly.
+Since the package depends on Java, let's verify that Java is installed correctly.
 
 ```{r}
 # check if Java is available for usage
@@ -57,7 +57,7 @@ If the previous code returns a `TRUE`, then this means that Java is installed on
 
 ## Data
 
-Let's import data for generating restoration prioritizations. Specifically, we use data that was originally obtained from Justeau-Allaire *et al.* [-@r1]. To begin with, let's import a raster layer to describe the spatial distribution of existing habitat across the study area. This raster layer (i.e., `habitat_data`) contains binary values (zeros and ones) indicating places that  (0) do not contain existing habitat and (1) currently contain existing habitat. This raster layer also contains places with missing (`NA`) values, which represent places that should not be considered as part of the prioritization exercise (e.g., places located outside the study area, or over marine areas).
+Let's import data for generating restoration prioritizations. Specifically, we will use a dataset that was obtained from Justeau-Allaire *et al.* [-@r1]. To begin with, let's import a raster layer to describe the spatial distribution of existing habitat across the study area. This raster layer (i.e., `habitat_data`) contains binary values (zeros and ones) indicating places that  (0) do not contain existing habitat and (1) currently contain existing habitat. This raster layer also contains places with missing (`NA`) values, which represent places that should not be considered as part of the prioritization exercise (e.g., places located outside the study area).
 
 ```{r, echo = FALSE, results = "hide"}
 # load habitat data
