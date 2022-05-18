@@ -106,7 +106,7 @@ remotes::install_local(".")
 
 ## Usage
 
-Here we will provide a short tutorial on using the _restoptr R_ package to identify priority areas for restoration. As part of this tutorial, we will use an example dataset that is distributed with the package (obtained from [Justeau-Allaire _et al._ 2021](https://doi.org/10.1111/1365-2664.13803)). This example dataset contains data for prioritizing forest restoration efforts within a protected area in New Caledonia. We will begin the tutorial by loading the package. If you haven't already, please install the package (see above for installation instructions).
+Here we will provide a short tutorial on using the _restoptr R_ package to identify priority areas for restoration. As part of this tutorial, we will use an example dataset that is distributed with the package (obtained from Justeau-Allaire _et al._ 2021). This example dataset contains data for prioritizing forest restoration efforts within a protected area in New Caledonia. We will begin the tutorial by loading the package. If you haven't already, please install the package (see above for installation instructions).
 
 ```{r "load_package"}
 # load package

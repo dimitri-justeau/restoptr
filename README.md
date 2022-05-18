@@ -143,8 +143,7 @@ remotes::install_local(".")
 Here we will provide a short tutorial on using the *restoptr R* package
 to identify priority areas for restoration. As part of this tutorial, we
 will use an example dataset that is distributed with the package
-(obtained from [Justeau-Allaire *et al.*
-2021](https://doi.org/10.1111/1365-2664.13803)). This example dataset
+(obtained from Justeau-Allaire *et al.* 2021). This example dataset
 contains data for prioritizing forest restoration efforts within a
 protected area in New Caledonia. We will begin the tutorial by loading
 the package. If you haven’t already, please install the package (see
@@ -303,7 +302,7 @@ existing habitat, or (`3`) selected as a priority area for restoration.
 solution <- solve(problem)
 ```
 
-    ## Good news: the solver found 1 solution statisfying the constraints that was proven optimal ! (solving time = 0.32 s)
+    ## Good news: the solver found 1 solution statisfying the constraints that was proven optimal ! (solving time = 0.35 s)
 
 ``` r
 # preview solution
@@ -344,7 +343,7 @@ get_metadata(solution, area_unit = "ha")
     ##     min_restore total_restorable nb_planning_units nb_components     diameter
     ## 1 219.3772 [ha]    219.3772 [ha]                15             3 2280.175 [m]
     ##   optimality_proven search_state solving_time  mesh_initial     mesh
-    ## 1              TRUE   TERMINATED        0.312 53.38999 [ha] 668.7967
+    ## 1              TRUE   TERMINATED        0.342 53.38999 [ha] 668.7967
     ##       mesh_best
     ## 1 55.59634 [ha]
 
