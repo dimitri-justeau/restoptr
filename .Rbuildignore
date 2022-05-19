@@ -22,3 +22,4 @@ inst/WORDLIST
 ^\.github$
 .covrignore
 ^data-raw$
+^restopt$
