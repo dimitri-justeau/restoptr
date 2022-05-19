@@ -7,8 +7,8 @@
 is_java_available()
 }
 \value{
-A \code{logical} (\code{TRUE} or \code{FALSE}) value indicating if Java is
-installed correctly.
+A \code{logical} (\code{TRUE} or \code{FALSE}) value indicating if Java is available
+for usage.
 }
 \description{
 The \pkg{restoptr} package uses Java to perform optimization procedures.

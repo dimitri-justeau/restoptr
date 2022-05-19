@@ -24,7 +24,10 @@ Defaults to 0.}
 
 \item{nb_solutions}{\code{integer} Number of desired solutions. Defaults to 1.}
 
-\item{optimality_gap}{\code{numeric} Optimality gap (between 0 and 1). Defaults to 0.}
+\item{optimality_gap}{\code{numeric} Optimality gap (between 0 and 1).
+For example, an argument of 0.1 means that solutions should be within 10\%
+of optimality.
+Defaults to 0, such that optimal solutions are returned.}
 }
 \description{
 Add settings to a restoration problem (\code{\link[=restopt_problem]{restopt_problem()}}) object

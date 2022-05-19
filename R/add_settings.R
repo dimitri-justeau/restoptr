@@ -17,7 +17,11 @@ NULL
 #'
 #' @param nb_solutions `integer` Number of desired solutions. Defaults to 1.
 #'
-#' @param optimality_gap `numeric` Optimality gap (between 0 and 1). Defaults to 0.
+#' @param optimality_gap `numeric` Optimality gap (between 0 and 1).
+#' For example, an argument of 0.1 means that solutions should be within 10%
+#' of optimality.
+#' Defaults to 0, such that optimal solutions are returned.
+#
 #'
 #' @examples
 #' \dontrun{
@@ -37,8 +41,8 @@ NULL
 #' print(p)
 #' }
 #' @export
-add_settings <- function(problem, precision = 4, time_limit = 0, nb_solutions = 1,
-                         optimality_gap = 0) {
+add_settings <- function(problem, precision = 4, time_limit = 0,
+                         nb_solutions = 1, optimality_gap = 0) {
   # assert argument is valid
   assertthat::assert_that(
     inherits(problem, "RestoptProblem"),
