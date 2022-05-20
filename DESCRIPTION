@@ -3,7 +3,7 @@ Type: Package
 Title: 'restoptr' Ecological Restoration Planning
 Version: 0.0.0.99999
 Description:
-    `restoptr` is a flexible ecological restoration planning framework. In 
+    `restoptr` is a flexible ecological restoration planning framework. In
     `restoptr`, a restoration planning problem starts from an existing habitat
     (typically a binary raster), where the aim is to identify optimal areas that
     are suitable for restoration. Several constraints are available to define
