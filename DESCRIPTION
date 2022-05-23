@@ -3,7 +3,7 @@ Type: Package
 Title: 'restoptr' Ecological Restoration Planning
 Version: 0.0.0.99999
 Description:
-    `restoptr` is a flexible ecological restoration planning framework. In 
+    `restoptr` is a flexible ecological restoration planning framework. In
     `restoptr`, a restoration planning problem starts from an existing habitat
     (typically a binary raster), where the aim is to identify optimal areas that
     are suitable for restoration. Several constraints are available to define
@@ -64,7 +64,9 @@ Suggests:
     rmarkdown (>= 1.10),
     landscapemetrics (>= 1.5.4),
     raster (>= 3.5),
-    rgdal
+    rgdal,
+    vegan (>= 2.5.7),
+    cluster (>= 2.1.2)
 Roxygen: list(markdown = TRUE)
 Collate:
     'internal.R'
@@ -77,6 +79,7 @@ Collate:
     'add_min_mesh_constraint.R'
     'add_restorable_constraint.R'
     'add_settings.R'
+    'is_java_available.R'
     'package.R'
     'preprocessing.R'
     'restopt_component.R'
