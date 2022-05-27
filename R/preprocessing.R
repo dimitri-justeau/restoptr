@@ -82,20 +82,26 @@ prepare_inputs <- function(habitat, habitat_threshold = 1, aggregation_factor = 
     is_binary_raster(habitat),
     msg = "argument to \"habitat\" must have binary values"
   )
-  all_ones <- habitat >= 0
-  cell_area <- terra::aggregate(
-    all_ones,
-    fact = aggregation_factor,
-    fun = "sum",
-    na.rm = TRUE
-  )
-  down_sum <- terra::aggregate(
-    habitat,
-    fact = aggregation_factor,
-    fun = "sum",
-    na.rm = TRUE
-  )
-  downsampled_habitat <- (down_sum / cell_area) >= habitat_threshold
-  restorable_habitat <- cell_area - down_sum
+  if (aggregation_factor > 1) {
+    all_ones <- habitat >= 0
+    cell_area <- terra::aggregate(
+      all_ones,
+      fact = aggregation_factor,
+      fun = "sum",
+      na.rm = TRUE
+    )
+    down_sum <- terra::aggregate(
+      habitat,
+      fact = aggregation_factor,
+      fun = "sum",
+      na.rm = TRUE
+    )
+    downsampled_habitat <- (down_sum / cell_area) >= habitat_threshold
+    restorable_habitat <- cell_area - down_sum
+  } else {
+    downsampled_habitat <- habitat
+    restorable_habitat <- habitat >= 0 - habitat
+    cell_area <- habitat >= 0
+  }
   return(c(downsampled_habitat, restorable_habitat, cell_area))
 }
