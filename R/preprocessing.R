@@ -99,8 +99,12 @@ prepare_inputs <- function(habitat, habitat_threshold = 1, aggregation_factor = 
     downsampled_habitat <- (down_sum / cell_area) >= habitat_threshold
     restorable_habitat <- cell_area - down_sum
   } else {
+    if (habitat_threshold < 1) {
+      warning(paste("The habitat threshold parameter has no effect when the",
+                    "aggregation factor is 1"))
+    }
     downsampled_habitat <- habitat
-    restorable_habitat <- habitat >= 0 - habitat
+    restorable_habitat <- habitat == 0 * 1
     cell_area <- habitat >= 0
   }
   return(c(downsampled_habitat, restorable_habitat, cell_area))

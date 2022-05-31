@@ -94,6 +94,11 @@ restopt_problem <- function(existing_habitat, habitat_threshold = 1, aggregation
   assertthat::assert_that(
     inherits(existing_habitat, "SpatRaster")
   )
+  if (aggregation_factor == 1 && habitat_threshold < 1) {
+    warning(paste("The habitat threshold parameter was automatically set to 1,",
+                  "as the aggregation factor is 1"))
+    habitat_threshold <- 1
+  }
   preprocessed <- prepare_inputs(
      habitat = existing_habitat,
      habitat_threshold = habitat_threshold,

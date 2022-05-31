@@ -101,3 +101,50 @@ test_that("invalid inputs", {
     )
   )
 })
+
+test_that("aggregation_factor_1", {
+  # import data
+  habitat_data <- terra::rast(
+    system.file("extdata", "habitat_hi_res.tif", package = "restoptr"
+    ))
+  accessible_data <- terra::vect(system.file(
+    "extdata", "accessible_areas.gpkg", package = "restoptr"
+  ))
+  # prepare locked out data
+  locked_out_data <- invert_vector(
+    accessible_data,
+    extent = terra::ext(habitat_data),
+    filter = accessible_data$ID == 1
+  )
+  # build problem
+  expect_warning(
+    restopt_problem(habitat_data, habitat_threshold = 0.7, aggregation_factor = 1)
+  )
+  expect_warning(
+    problem <-
+      restopt_problem(habitat_data, 1, 1) %>%
+      add_restorable_constraint(
+        min_restore = 90, max_restore = 110, unit = "ha", min_proportion = 0.7
+      )
+  )
+  problem <-
+    restopt_problem(habitat_data, 1, 1) %>%
+    add_locked_out_constraint(locked_out_data) %>%
+    add_components_constraint(min_nb_components = 1, max_nb_components = 1) %>%
+    add_compactness_constraint(max_diameter = 6, unit = "cells") %>%
+    add_restorable_constraint(
+      min_restore = 90, max_restore = 110, unit = "ha", min_proportion = 1
+    ) %>%
+    set_max_mesh_objective() %>%
+    add_settings(time_limit = 30, nb_solutions = 5)
+
+    # test
+    or <- get_original_habitat(problem)
+    ag <- get_existing_habitat(problem)
+    expect_equal(nrow(or), nrow(ag))
+    expect_equal(ncol(or), ncol(ag))
+    expect_equal(minmax(or == ag)[[1]], 1)
+    expect_equal(minmax(or == ag)[[2]], 1)
+    re <- get_restorable_habitat(problem)
+    expect_equal(length(which(re[which(or[,] == 1)] == 1)), 0)
+})

@@ -120,6 +120,12 @@ add_restorable_constraint <- function(problem,
     converted_area_max <- max_restore
   }
 
+  if (get_aggregation_factor(problem) == 1 && min_proportion < 1) {
+    warning(paste("The min proportion parameter was automatically set to 1,",
+                  "as the aggregation factor is 1"))
+    min_proportion <- 1
+  }
+
   # add constraint
   add_restopt_constraint(
     problem = problem,
@@ -127,7 +133,9 @@ add_restorable_constraint <- function(problem,
       name = paste0(
         "restorable (",
         "min_restore = ", as.integer(min_restore),
-        ", max_restore = ", max_restore, ", unit = ", unit, ")"
+        ", max_restore = ", max_restore,
+        ", min_proportion = ", min_proportion,
+        ", unit = ", unit, ")"
       ),
       class = c("RestorableConstraint", "RestoptConstraint"),
       post = function(jproblem) {
