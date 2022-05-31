@@ -68,9 +68,10 @@ set_max_restore_objective <- function(problem) {
       name = "Maximize restoration area",
       class = c("MaxRestoreObjective", "RestoptObjectve"),
       post = function(jproblem, nb_solutions, precision, time_limit, optimality_gap,
-                      verbose=FALSE) {
+                      verbose=FALSE, search_strategy="") {
         rJava::.jcall(
-          jproblem, "Ljava/util/List;", "maximizeMinRestore", nb_solutions, time_limit, optimality_gap, verbose
+          jproblem, "Ljava/util/List;", "maximizeMinRestore", nb_solutions,
+          time_limit, optimality_gap, verbose, search_strategy
         )
       }
     )

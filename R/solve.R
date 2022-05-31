@@ -79,6 +79,13 @@ solve.RestoptProblem <- function(a, b, ...) {
     verbose <- FALSE
   }
 
+  if ("search_strategy" %in% names(args)) {
+    assertthat::is.string(args$search_strategy)
+    search_strategy <- args$verbose
+  } else {
+    search_strategy <- ""
+  }
+
   jdata <- rJava::.jnew(
     "org.restopt.DataLoader",
     .jarray(as.integer(as.vector(a$data$existing_habitat))),

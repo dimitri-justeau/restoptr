@@ -68,9 +68,10 @@ set_max_nb_pus_objective <- function(problem) {
       name = "Maximize number of planning units",
       class = c("MaxNbPusObjective", "RestoptObjectve"),
       post = function(jproblem, nb_solutions, precision, time_limit, optimality_gap,
-                      verbose=FALSE) {
+                      verbose=FALSE, search_strategy="") {
         rJava::.jcall(
-          jproblem, "Ljava/util/List;", "maximizeNbPUS", nb_solutions, time_limit, optimality_gap, verbose
+          jproblem, "Ljava/util/List;", "maximizeNbPUS", nb_solutions, time_limit,
+          optimality_gap, verbose, search_strategy
         )
       }
     )
