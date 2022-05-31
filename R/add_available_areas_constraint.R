@@ -37,6 +37,7 @@ NULL
 #' `add_locked_out_constraint()`. This is why if you print a restopt problem
 #' with an available areas constraint, you will see a locked out constraint.
 #'
+#' @family constraints
 #'
 #' @examples
 #' \dontrun{

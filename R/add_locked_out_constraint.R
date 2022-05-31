@@ -34,6 +34,8 @@ NULL
 #' See `add_available_areas_constraint()`, which achieve the same as the locked
 #' out constraint by defining areas that ARE available for restoration.
 #'
+#' @family constraints
+#'
 #' @examples
 #' \dontrun{
 #' # load data

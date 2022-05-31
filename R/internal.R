@@ -5,6 +5,8 @@
 #' @param x [terra::rast()] Raster object.
 #'
 #' @return `logical` value indicating if raster contains binary values.
+#'
+#' @noRd
 is_binary_raster <- function(x) {
   assertthat::assert_that(inherits(x, "SpatRaster"))
   terra::global(x, function(x) {

@@ -30,10 +30,7 @@ NULL
 #' restoration sites are not too far away from each other (e.g. lower travel costs
 #' between sites, less areas to monitor, etc.).
 #'
-#' Also see \link{add_components_constraint}.
-#'
-#' @seealso
-#' \link{add_components_constraint}
+#' @family constraints
 #'
 #' @examples
 #' \dontrun{

@@ -31,7 +31,6 @@ costs between sites, less areas to monitor, etc.). On the other hand,
 it can be useful to enforce several disconnected restoration areas to
 ensure that hazards (e.g. fire) do not strike all planning units at the
 same time.
-Also see \link{add_compactness_constraint}.
 }
 \examples{
 \dontrun{
@@ -69,5 +68,13 @@ plot(
 
 }
 \seealso{
-\link{add_compactness_constraint}
+Other constraints: 
+\code{\link{add_available_areas_constraint}()},
+\code{\link{add_compactness_constraint}()},
+\code{\link{add_connected_constraint}()},
+\code{\link{add_locked_out_constraint}()},
+\code{\link{add_min_iic_constraint}()},
+\code{\link{add_min_mesh_constraint}()},
+\code{\link{add_restorable_constraint}()}
 }
+\concept{constraints}

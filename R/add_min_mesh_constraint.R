@@ -24,7 +24,7 @@ NULL
 #' same patch (Jaeger, 2000). Maximizing it in the context of restoration
 #' favours fewer and larger patches.
 #'
-#' Also see \link{set_max_mesh_objective}.
+#' @family constraints
 #'
 #' @seealso
 #' \link{set_max_mesh_objective}
@@ -51,7 +51,7 @@ NULL
 #'     min_restore = 200,
 #'     max_restore = 300,
 #'   ) %>%
-#'   add_min_mesh_constraint(min_mesh = 14000, unit = "ha")
+#'   add_min_mesh_constraint(min_mesh = 2500, unit = "ha")
 #'
 #' # plot preprocessed data
 #' plot(rast(list(p$data$existing_habitat, p$data$restorable_habitat)), nc = 2)

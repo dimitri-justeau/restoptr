@@ -20,6 +20,8 @@ NULL
 #' mesh size: New measures of landscape fragmentation. Landscape Ecology, 15(2),
 #' 115‑130. https://doi.org/10.1023/A:1008129329289
 #'
+#' @family objectives
+#'
 #' @examples
 #' \dontrun{
 #' # load data

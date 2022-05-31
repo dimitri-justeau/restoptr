@@ -64,7 +64,7 @@ NULL
 #' )
 #' }
 #'
-#' @export
+#' @noRd
 prepare_inputs <- function(habitat, habitat_threshold = 1, aggregation_factor = 1) {
   ## initial checks
   assertthat::assert_that(

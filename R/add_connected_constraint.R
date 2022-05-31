@@ -22,8 +22,7 @@ NULL
 #' exactly one connected component. Also see \link{add_components_constraint}
 #' and \link{add_compactness_constraint}.
 #'
-#' @seealso
-#' \link{add_compactness_constraint}, \link{add_components_constraint}
+#' @family constraints
 #'
 #' @examples
 #' \dontrun{

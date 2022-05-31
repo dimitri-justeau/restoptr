@@ -53,8 +53,6 @@ The effective mesh size (MESH) is a measure of landscape fragmentation
 based on the probability that two randomly chosen points are located in the
 same patch (Jaeger, 2000). Maximizing it in the context of restoration
 favours fewer and larger patches.
-
-Also see \link{set_max_iic_objective}.
 }
 \examples{
 \dontrun{
@@ -103,4 +101,14 @@ Landscape Ecology, 21(7), 959‑967. https://doi.org/10.1007/s10980-006-0013-z
 }
 \seealso{
 \link{set_max_iic_objective}
+
+Other constraints: 
+\code{\link{add_available_areas_constraint}()},
+\code{\link{add_compactness_constraint}()},
+\code{\link{add_components_constraint}()},
+\code{\link{add_connected_constraint}()},
+\code{\link{add_locked_out_constraint}()},
+\code{\link{add_min_mesh_constraint}()},
+\code{\link{add_restorable_constraint}()}
 }
+\concept{constraints}

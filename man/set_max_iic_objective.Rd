@@ -86,3 +86,13 @@ Comparison and development of new graph-based landscape connectivity indices:
 Towards the priorization of habitat patches and corridors for conservation.
 Landscape Ecology, 21(7), 959‑967. https://doi.org/10.1007/s10980-006-0013-z
 }
+\seealso{
+Other objectives: 
+\code{\link{set_max_mesh_objective}()},
+\code{\link{set_max_nb_pus_objective}()},
+\code{\link{set_max_restore_objective}()},
+\code{\link{set_min_nb_pus_objective}()},
+\code{\link{set_min_restore_objective}()},
+\code{\link{set_no_objective}()}
+}
+\concept{objectives}

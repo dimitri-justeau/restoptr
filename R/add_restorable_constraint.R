@@ -43,6 +43,8 @@ NULL
 #' that needs to be restored to reach the `min_proportion` of habitat in every
 #' selected planning units.
 #'
+#' @family constraints
+#'
 #' @examples
 #' \dontrun{
 #' # load data
