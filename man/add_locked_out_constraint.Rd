@@ -80,3 +80,14 @@ plot(
 )
 }
 }
+\seealso{
+Other constraints: 
+\code{\link{add_available_areas_constraint}()},
+\code{\link{add_compactness_constraint}()},
+\code{\link{add_components_constraint}()},
+\code{\link{add_connected_constraint}()},
+\code{\link{add_min_iic_constraint}()},
+\code{\link{add_min_mesh_constraint}()},
+\code{\link{add_restorable_constraint}()}
+}
+\concept{constraints}

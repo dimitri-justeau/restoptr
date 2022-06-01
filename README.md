@@ -1,9 +1,9 @@
 
 <!--- README.md is generated from README.Rmd. Please edit that file -->
 
-## restopr: Ecological Restoration Planning
+# restopr: Ecological Restoration Planning
 
-[![lifecycle](https://img.shields.io/badge/Lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html)
+[![lifecycle](https://img.shields.io/badge/Lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html)
 [![R-CMD-check-Ubuntu](https://img.shields.io/github/workflow/status/dimitri-justeau/restoptr/Ubuntu/master.svg?label=Ubuntu)](https://github.com/dimitri-justeau/restoptr/actions)
 [![R-CMD-check-Windows](https://img.shields.io/github/workflow/status/dimitri-justeau/restoptr/Windows/master.svg?label=Windows)](https://github.com/dimitri-justeau/restoptr/actions)
 [![R-CMD-check-MacOS](https://img.shields.io/github/workflow/status/dimitri-justeau/restoptr/macOS/master.svg?label=macOS)](https://github.com/dimitri-justeau/restoptr/actions)
@@ -32,8 +32,18 @@ perform optimization using constraint programming (CP) techniques
 
 ### Package installation
 
-The latest developmental version of the *restoptr R* package can be
-installed using the following *R* code.
+The latest official version of the *restoptr R* package can be installed
+from the [Comprehensive R Archive Network
+(CRAN)](https://cran.r-project.org/) using the following *R* code.
+
+``` r
+install.packages("restoptr", repos = "https://cran.rstudio.com/")
+```
+
+Alternatively, the latest developmental version can be installed using
+the following *R* code. Please note that while developmental versions
+may contain additional features not present in the official version,
+they may also contain coding errors.
 
 ``` r
 if (!require(remotes)) install.packages("remotes")
@@ -281,7 +291,7 @@ print(problem)
     ## ----------------------------------------------------------------- 
     ## constraints:          
     ##   -  locked out (data = in memory) 
-    ##   -  restorable (min_restore = 90, max_restore = 220, unit = ha) 
+    ##   -  restorable (min_restore = 90, max_restore = 220, min_proportion = 1, unit = ha) 
     ##   -  compactness (max_diameter = 2.4, unit = km) 
     ## ----------------------------------------------------------------- 
     ## settings: 
@@ -302,7 +312,7 @@ existing habitat, or (`3`) selected as a priority area for restoration.
 solution <- solve(problem)
 ```
 
-    ## Good news: the solver found 1 solution statisfying the constraints that was proven optimal ! (solving time = 0.35 s)
+    ## Good news: the solver found 1 solution statisfying the constraints that was proven optimal ! (solving time = 0.27 s)
 
 ``` r
 # preview solution
@@ -342,10 +352,10 @@ get_metadata(solution, area_unit = "ha")
 
     ##     min_restore total_restorable nb_planning_units nb_components     diameter
     ## 1 219.3772 [ha]    219.3772 [ha]                15             3 2280.175 [m]
-    ##   optimality_proven search_state solving_time  mesh_initial     mesh
-    ## 1              TRUE   TERMINATED        0.342 53.38999 [ha] 668.7967
+    ##   optimality_proven search_state solving_time  mesh_initial          mesh
+    ## 1              TRUE   TERMINATED        0.267 13667.84 [ha] 14232.66 [ha]
     ##       mesh_best
-    ## 1 55.59634 [ha]
+    ## 1 14232.66 [ha]
 
 This has just been a short taster of the package. For an extended
 tutorial on using the package, please refer to the vignette.

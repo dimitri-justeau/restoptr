@@ -19,8 +19,7 @@ with the value \code{1} must correspond to existing habitat. Cells with the valu
 This raster can have a high resolution, the \code{aggregation_factor} and the
 \code{habitat_threshold} parameters, described below, will be used to down sample
 the habitat raster to a tractable resolution for the optimization engine, and
-automatically derive the restorable habitat raster (see \link{prepare_inputs}
-for more details on the method).}
+automatically derive the restorable habitat raster.}
 
 \item{habitat_threshold}{\code{numeric} number between 0 and 1, which corresponds to the
 minimum proportion of habitat that must be present within an aggregated pixel
@@ -54,8 +53,16 @@ during the solving procedure (\code{NA} or \code{NO_DATA}). The \code{aggregatio
 parameter is used to down sample the \code{existing_habitat} to a resolution that
 will be tractable for the optimization engine, and the \code{habitat_threshold}
 parameter indicates the minimum proportion of habitat required in aggregated
-habitat pixels to consider them as habitat (see \link{prepare_inputs}
-for more details on the method).
+habitat pixels to consider them as habitat. Note that An aggregated pixel
+will contain at most \code{aggregation_factor^2} pixels from the input \code{habitat}
+raster (\code{cell_area} raster in this function outputs). If an aggregated pixel
+is close to the spatial boundaries of the problem (i.e. NA cells), it can
+contain less than \code{aggregation_factor^2} fine grained pixel. You can get
+the results of this preprocessing phase using the following methods:
+\code{get_original_habitat()} (original habitat), \code{get_existing_habitat()}
+(aggregated habitat), \code{get_cell_area()} (number of pixels in each aggregated
+cells), and \code{get_restorable_area()} (amount of restorable area -- in number
+of original raster pixels).
 }
 \examples{
 \dontrun{

@@ -69,3 +69,13 @@ Jaeger, J. A. G. (2000). Landscape division, splitting index, and effective
 mesh size: New measures of landscape fragmentation. Landscape Ecology, 15(2),
 115‑130. https://doi.org/10.1023/A:1008129329289
 }
+\seealso{
+Other objectives: 
+\code{\link{set_max_iic_objective}()},
+\code{\link{set_max_nb_pus_objective}()},
+\code{\link{set_max_restore_objective}()},
+\code{\link{set_min_nb_pus_objective}()},
+\code{\link{set_min_restore_objective}()},
+\code{\link{set_no_objective}()}
+}
+\concept{objectives}

@@ -42,7 +42,7 @@ NULL
 #' same patch (Jaeger, 2000). Maximizing it in the context of restoration
 #' favours fewer and larger patches.
 #'
-#' Also see \link{set_max_iic_objective}.
+#' @family constraints
 #'
 #' @seealso
 #' \link{set_max_iic_objective}

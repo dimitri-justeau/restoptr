@@ -15,6 +15,8 @@ NULL
 #'
 #' @return An updated restoration problem ([restopt_problem()]) object.
 #'
+#' @family objectives
+#'
 #' @examples
 #' \dontrun{
 #' # load data

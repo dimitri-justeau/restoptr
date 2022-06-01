@@ -29,8 +29,6 @@ The effective mesh size (MESH) is a measure of landscape fragmentation
 based on the probability that two randomly chosen points are located in the
 same patch (Jaeger, 2000). Maximizing it in the context of restoration
 favours fewer and larger patches.
-
-Also see \link{set_max_mesh_objective}.
 }
 \examples{
 \dontrun{
@@ -49,7 +47,7 @@ p <- restopt_problem(
     min_restore = 200,
     max_restore = 300,
   ) \%>\%
-  add_min_mesh_constraint(min_mesh = 14000, unit = "ha")
+  add_min_mesh_constraint(min_mesh = 2500, unit = "ha")
 
 # plot preprocessed data
 plot(rast(list(p$data$existing_habitat, p$data$restorable_habitat)), nc = 2)
@@ -74,4 +72,14 @@ mesh size: New measures of landscape fragmentation. Landscape Ecology, 15(2),
 }
 \seealso{
 \link{set_max_mesh_objective}
+
+Other constraints: 
+\code{\link{add_available_areas_constraint}()},
+\code{\link{add_compactness_constraint}()},
+\code{\link{add_components_constraint}()},
+\code{\link{add_connected_constraint}()},
+\code{\link{add_locked_out_constraint}()},
+\code{\link{add_min_iic_constraint}()},
+\code{\link{add_restorable_constraint}()}
 }
+\concept{constraints}

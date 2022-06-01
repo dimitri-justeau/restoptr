@@ -1,0 +1,59 @@
+url: https://dimitri-justeau.github.io/restoptr
+
+authors:
+  Dimitri Justeau-Allaire:
+    href: https://dimitri-justeau.github.io/
+  Jeffrey O Hanson:
+    href: https://jeffrey-hanson.com
+  Ghislain Vieilledent:
+    href: https://ecology.ghislainv.fr/
+  Philippe Vismara:
+    href: https://www.lirmm.fr/~vismara/home.php
+  Xavier Lorca:
+    href: https://scholar.google.fr/citations?user=bJTn9u8AAAAJ&hl=fr
+  Philippe Birnbaum:
+    href: https://scholar.google.com/citations?user=00W5veEAAAAJ&hl=fr=
+
+template:
+  bootstrap: 5
+  bootswatch: sandstone
+
+reference:
+  - title: Overview
+    desc: Overview of the package.
+    contents:
+      - restoptr
+
+  - title: Create and solve problems
+    desc: >
+      Functions for creating new problems and solving them.
+    contents:
+      - restopt_problem
+      - add_settings
+      - solve.RestoptProblem
+      - get_metadata
+
+  - title: Objectives
+    desc: Functions for setting an objective to a problem.
+    contents:
+      - has_concept("objectives")
+
+  - title: Constraints
+    desc: Functions for adding constraints to a problem.
+    contents:
+      - has_concept("constraints")
+
+  - title: Miscellaneous functions
+    desc: Assorted functions distributed with the package.
+    contents:
+      - is_java_available
+      - invert_vector
+
+  - title: Class definitions and methods
+    desc: >
+      Documentation for data structures and functions to interact with them.
+    contents:
+      - restopt_problem
+      - restopt_solution
+      - print.RestoptProblem
+      - starts_with("get_")

@@ -35,8 +35,6 @@ and to integrate economies of scale. Compact restoration areas are usually
 associated with lower costs and easier management, because it ensures that
 restoration sites are not too far away from each other (e.g. lower travel costs
 between sites, less areas to monitor, etc.).
-
-Also see \link{add_components_constraint}.
 }
 \examples{
 \dontrun{
@@ -74,5 +72,13 @@ plot(
 
 }
 \seealso{
-\link{add_components_constraint}
+Other constraints: 
+\code{\link{add_available_areas_constraint}()},
+\code{\link{add_components_constraint}()},
+\code{\link{add_connected_constraint}()},
+\code{\link{add_locked_out_constraint}()},
+\code{\link{add_min_iic_constraint}()},
+\code{\link{add_min_mesh_constraint}()},
+\code{\link{add_restorable_constraint}()}
 }
+\concept{constraints}

@@ -40,6 +40,8 @@ NULL
 #' Towards the priorization of habitat patches and corridors for conservation.
 #' Landscape Ecology, 21(7), 959‑967. https://doi.org/10.1007/s10980-006-0013-z
 #'
+#' @family objectives
+#'
 #' @examples
 #' \dontrun{
 #' # load data

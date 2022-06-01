@@ -39,8 +39,7 @@ NULL
 #' This raster can have a high resolution, the `aggregation_factor` and the
 #' `habitat_threshold` parameters, described below, will be used to down sample
 #' the habitat raster to a tractable resolution for the optimization engine, and
-#' automatically derive the restorable habitat raster (see \link{prepare_inputs}
-#' for more details on the method).
+#' automatically derive the restorable habitat raster.
 #'
 #' @param habitat_threshold `numeric` number between 0 and 1, which corresponds to the
 #' minimum proportion of habitat that must be present within an aggregated pixel
@@ -63,8 +62,16 @@ NULL
 #' parameter is used to down sample the `existing_habitat` to a resolution that
 #' will be tractable for the optimization engine, and the `habitat_threshold`
 #' parameter indicates the minimum proportion of habitat required in aggregated
-#' habitat pixels to consider them as habitat (see \link{prepare_inputs}
-#' for more details on the method).
+#' habitat pixels to consider them as habitat. Note that An aggregated pixel
+#' will contain at most `aggregation_factor^2` pixels from the input `habitat`
+#' raster (`cell_area` raster in this function outputs). If an aggregated pixel
+#' is close to the spatial boundaries of the problem (i.e. NA cells), it can
+#' contain less than `aggregation_factor^2` fine grained pixel. You can get
+#' the results of this preprocessing phase using the following methods:
+#' `get_original_habitat()` (original habitat), `get_existing_habitat()`
+#' (aggregated habitat), `get_cell_area()` (number of pixels in each aggregated
+#' cells), and `get_restorable_area()` (amount of restorable area -- in number
+#' of original raster pixels).
 #'
 #' @examples
 #' \dontrun{

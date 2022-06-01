@@ -25,10 +25,8 @@ NULL
 #' it can be useful to enforce several disconnected restoration areas to
 #' ensure that hazards (e.g. fire) do not strike all planning units at the
 #' same time.
-#' Also see \link{add_compactness_constraint}.
 #'
-#' @seealso
-#' \link{add_compactness_constraint}
+#' @family constraints
 #'
 #' @examples
 #' \dontrun{

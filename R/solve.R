@@ -152,7 +152,7 @@ solve.RestoptProblem <- function(a, b, ...) {
     r[r == 1 & a$data$locked_out == 1] <- 0
     r[pus] <- 3
     m <- sol$getCharacteristicsAsCsv()
-    metadata <- read.csv(text = .jstrVal(m))
+    metadata <- utils::read.csv(text = .jstrVal(m))
     metadata$optimality_proven <- ifelse(
       metadata$optimality_proven == "true",
       TRUE,
