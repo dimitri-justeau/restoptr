@@ -39,8 +39,7 @@ NULL
 #' This raster can have a high resolution, the `aggregation_factor` and the
 #' `habitat_threshold` parameters, described below, will be used to down sample
 #' the habitat raster to a tractable resolution for the optimization engine, and
-#' automatically derive the restorable habitat raster (see \link{prepare_inputs}
-#' for more details on the method).
+#' automatically derive the restorable habitat raster.
 #'
 #' @param habitat_threshold `numeric` number between 0 and 1, which corresponds to the
 #' minimum proportion of habitat that must be present within an aggregated pixel
