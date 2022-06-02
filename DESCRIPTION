@@ -34,7 +34,7 @@ License: GPL-3
 Encoding: UTF-8
 LazyData: true
 Language: en-US
-URL: https://dimitri-justeau.github.io/restoptr
+URL: https://dimitri-justeau.github.io/restoptr/
 BugReports: https://github.com/dimitri-justeau/restoptr/issues
 SystemRequirements: Java (>= 11.0.12)
 VignetteBuilder: knitr
