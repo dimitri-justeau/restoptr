@@ -7,6 +7,7 @@ NULL
 #' to customize the optimization procedure.
 #'
 #' @inheritParams set_max_mesh_objective
+#' @inherit set_max_mesh_objective return
 #'
 #' @param precision `integer` Precision for calculations.
 #' Defaults to 4.
@@ -24,7 +25,7 @@ NULL
 #
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # load data
 #' habitat_data <- rast(
 #'   system.file("extdata", "habitat_hi_res.tif", package = "restoptr")

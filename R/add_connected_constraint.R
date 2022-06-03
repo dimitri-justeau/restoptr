@@ -8,6 +8,7 @@ NULL
 #' to specify the selected planning units are connected
 #'
 #' @inheritParams set_max_mesh_objective
+#' @inherit set_max_mesh_objective return
 #'
 #'
 #' @details A connected area is such that there is a path between any to
@@ -25,7 +26,7 @@ NULL
 #' @family constraints
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # load data
 #' habitat_data <- rast(
 #'   system.file("extdata", "habitat_hi_res.tif", package = "restoptr")

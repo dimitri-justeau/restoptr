@@ -27,6 +27,9 @@ unit (see \code{unit} package), or "cells" for number of cells from the original
 habitat raster). If the input habitat raster does not use a projected
 coordinate system, only "cells" is available.}
 }
+\value{
+An updated restoration problem (\code{\link[=restopt_problem]{restopt_problem()}}) object.
+}
 \description{
 Add constraint to a restoration problem (\code{\link[=restopt_problem]{restopt_problem()}}) object
 to specify specify the available amount of surface for restoration
@@ -56,7 +59,7 @@ that needs to be restored to reach the \code{min_proportion} of habitat in every
 selected planning units.
 }
 \examples{
-\dontrun{
+\donttest{
 # load data
 habitat_data <- rast(
   system.file("extdata", "habitat_hi_res.tif", package = "restoptr")

@@ -7,6 +7,7 @@ NULL
 #' the integral index of connectivity (IIC).
 #'
 #' @inheritParams set_max_mesh_objective
+#' @inherit set_max_mesh_objective return
 #'
 #' @param distance_threshold `numeric` greater than 0. Minimum distance (in
 #' `unit`) between two patches to consider them connected in the computation of
@@ -43,7 +44,7 @@ NULL
 #' @family objectives
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # load data
 #' habitat_data <- rast(
 #'   system.file("extdata", "habitat_hi_res.tif", package = "restoptr")

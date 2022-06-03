@@ -16,6 +16,9 @@ the solution), or a vector object whose features correspond to the locked
 out areas. See the function \code{add_available_areas_constraint()} to get a locked
 out constraint from allowed restoration areas.}
 }
+\value{
+An updated restoration problem (\code{\link[=restopt_problem]{restopt_problem()}}) object.
+}
 \description{
 Add constraint to a restoration problem (\code{\link[=restopt_problem]{restopt_problem()}}) object
 to specify that certain planning units cannot be selected
@@ -40,7 +43,7 @@ See \code{add_available_areas_constraint()}, which achieve the same as the locke
 out constraint by defining areas that ARE available for restoration.
 }
 \examples{
-\dontrun{
+\donttest{
 # load data
 habitat_data <- rast(
   system.file("extdata", "habitat_hi_res.tif", package = "restoptr")

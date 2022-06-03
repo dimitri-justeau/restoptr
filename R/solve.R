@@ -30,7 +30,7 @@ NULL
 #' @return A [restopt_solution()] object.
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # load data
 #' habitat_data <- rast(
 #'   system.file("extdata", "habitat_hi_res.tif", package = "restoptr")

@@ -7,6 +7,7 @@ NULL
 #' to specify the minimum effective mesh size of a solution.
 #'
 #' @inheritParams set_max_mesh_objective
+#' @inherit set_max_mesh_objective return
 #'
 #' @param min_mesh `numeric` Minimum MESH value.
 #'
@@ -35,7 +36,7 @@ NULL
 #' 115‑130. https://doi.org/10.1023/A:1008129329289
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # load data
 #' habitat_data <- rast(
 #'   system.file("extdata", "habitat_hi_res.tif", package = "restoptr")

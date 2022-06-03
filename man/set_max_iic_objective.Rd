@@ -42,7 +42,7 @@ with a different unit than "cells", it will be rounded to the closest
 corresponding number of cells.
 }
 \examples{
-\dontrun{
+\donttest{
 # load data
 habitat_data <- rast(
   system.file("extdata", "habitat_hi_res.tif", package = "restoptr")

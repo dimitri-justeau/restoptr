@@ -7,6 +7,7 @@ NULL
 #' to specify the minimum integral index of connectivity of a solution.
 #'
 #' @inheritParams set_max_mesh_objective
+#' @inherit set_max_mesh_objective return
 #'
 #' @param min_iic `numeric` Minimum IIC value (between 0 and 1).
 #'
@@ -54,7 +55,7 @@ NULL
 #' Landscape Ecology, 21(7), 959‑967. https://doi.org/10.1007/s10980-006-0013-z
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # load data
 #' habitat_data <- rast(
 #'   system.file("extdata", "habitat_hi_res.tif", package = "restoptr")

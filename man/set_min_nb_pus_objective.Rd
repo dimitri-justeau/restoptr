@@ -22,7 +22,7 @@ dataset. Minimizing the number of planning units reduces the spatial extent
 of the restoration area.
 }
 \examples{
-\dontrun{
+\donttest{
 # load data
 habitat_data <- rast(
   system.file("extdata", "habitat_hi_res.tif", package = "restoptr")

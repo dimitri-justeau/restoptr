@@ -7,6 +7,7 @@ NULL
 #' to specify specify the available amount of surface for restoration
 #'
 #' @inheritParams set_max_mesh_objective
+#' @inherit set_max_mesh_objective return
 #'
 #' @param min_restore `integer` Minimum allowed area to restore in the solution.
 #'
@@ -46,7 +47,7 @@ NULL
 #' @family constraints
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # load data
 #' habitat_data <- rast(
 #'   system.file("extdata", "habitat_hi_res.tif", package = "restoptr")

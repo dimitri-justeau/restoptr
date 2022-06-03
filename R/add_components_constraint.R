@@ -8,6 +8,7 @@ NULL
 #' present within a solution.
 #'
 #' @inheritParams set_max_mesh_objective
+#' @inherit set_max_mesh_objective return
 #'
 #' @param min_nb_components `integer` Minimum number of connected components.
 #'
@@ -29,7 +30,7 @@ NULL
 #' @family constraints
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # load data
 #' habitat_data <- rast(
 #'   system.file("extdata", "habitat_hi_res.tif", package = "restoptr")

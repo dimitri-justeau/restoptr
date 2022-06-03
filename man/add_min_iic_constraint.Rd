@@ -32,6 +32,9 @@ default value (-1), which causes the function to use 1 cell by default.}
 \item{precision}{\code{integer} Precision for calculations.
 Defaults to 4.}
 }
+\value{
+An updated restoration problem (\code{\link[=restopt_problem]{restopt_problem()}}) object.
+}
 \description{
 Add constraint to a restoration problem (\code{\link[=restopt_problem]{restopt_problem()}}) object
 to specify the minimum integral index of connectivity of a solution.
@@ -55,7 +58,7 @@ same patch (Jaeger, 2000). Maximizing it in the context of restoration
 favours fewer and larger patches.
 }
 \examples{
-\dontrun{
+\donttest{
 # load data
 habitat_data <- rast(
   system.file("extdata", "habitat_hi_res.tif", package = "restoptr")

@@ -26,7 +26,7 @@ This function is useful to derive locked out areas from accessible areas,
 e.g. buffer around tracks.
 }
 \examples{
-\dontrun{
+\donttest{
 habitat_data <- rast(
   system.file("extdata", "habitat_hi_res.tif", package = "restoptr")
 )

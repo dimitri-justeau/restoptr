@@ -17,6 +17,9 @@ habitat raster. Corresponds to the unit of the maximum diameter. If the
 input habitat raster does not use a projected coordinate system, only "cells"
 is available.}
 }
+\value{
+An updated restoration problem (\code{\link[=restopt_problem]{restopt_problem()}}) object.
+}
 \description{
 Add constraint to a restoration problem (\code{\link[=restopt_problem]{restopt_problem()}}) object
 to specify the compactness of a solution.
@@ -37,7 +40,7 @@ restoration sites are not too far away from each other (e.g. lower travel costs
 between sites, less areas to monitor, etc.).
 }
 \examples{
-\dontrun{
+\donttest{
 # load data
 habitat_data <- rast(
   system.file("extdata", "habitat_hi_res.tif", package = "restoptr")

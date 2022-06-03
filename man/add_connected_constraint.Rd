@@ -10,6 +10,9 @@ add_connected_constraint(problem)
 \arguments{
 \item{problem}{\code{\link[=restopt_problem]{restopt_problem()}} Restoration problem object.}
 }
+\value{
+An updated restoration problem (\code{\link[=restopt_problem]{restopt_problem()}}) object.
+}
 \description{
 Add constraint to a restoration problem (\code{\link[=restopt_problem]{restopt_problem()}}) object
 to specify the selected planning units are connected
@@ -28,7 +31,7 @@ exactly one connected component. Also see \link{add_components_constraint}
 and \link{add_compactness_constraint}.
 }
 \examples{
-\dontrun{
+\donttest{
 # load data
 habitat_data <- rast(
   system.file("extdata", "habitat_hi_res.tif", package = "restoptr")

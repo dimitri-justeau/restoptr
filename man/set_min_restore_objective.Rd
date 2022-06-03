@@ -23,7 +23,7 @@ must be restored in the selected planning units to reach the minimum habitat
 proportion threshold specified in the problem description,
 }
 \examples{
-\dontrun{
+\donttest{
 # load data
 habitat_data <- rast(
   system.file("extdata", "habitat_hi_res.tif", package = "restoptr")

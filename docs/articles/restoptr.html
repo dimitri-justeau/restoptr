@@ -121,7 +121,7 @@ we will set the seed for the random number generator to help ensure
 consistent results.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># load packages</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dimitri-justeau.github.io/restoptr">restoptr</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dimitri-justeau.github.io/restoptr/">restoptr</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rspatial.org/terra/" class="external-link">terra</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://cran.r-project.org" class="external-link">vegan</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://svn.r-project.org/R-packages/trunk/cluster/" class="external-link">cluster</a></span><span class="op">)</span>
@@ -291,7 +291,7 @@ object (i.e., <code>rp</code>).</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># solve problem to generate prioritization</span>
 <span class="va">rs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/solve.html" class="external-link">solve</a></span><span class="op">(</span><span class="va">rp</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## <span style="color: #00BB00;">Good news: the solver found 1 solution statisfying the constraints that was proven optimal ! (solving time = 2.6 s)</span></span></code></pre>
+<pre><code><span class="co">## <span style="color: #00BB00;">Good news: the solver found 1 solution statisfying the constraints that was proven optimal ! (solving time = 1.96 s)</span></span></code></pre>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># preview prioritization</span>
 <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">rs</span><span class="op">)</span></code></pre></div>
@@ -310,7 +310,7 @@ object (i.e., <code>rp</code>).</p>
 <pre><code><span class="co">##     min_restore total_restorable nb_planning_units nb_components     diameter</span>
 <span class="co">## 1 219.2941 [ha]    219.2941 [ha]                16             3 2499.808 [m]</span>
 <span class="co">##   optimality_proven search_state solving_time  mesh_initial          mesh</span>
-<span class="co">## 1              TRUE   TERMINATED        2.577 13667.84 [ha] 14248.14 [ha]</span>
+<span class="co">## 1              TRUE   TERMINATED         1.94 13667.84 [ha] 14248.14 [ha]</span>
 <span class="co">##       mesh_best</span>
 <span class="co">## 1 14248.14 [ha]</span></code></pre>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
@@ -343,7 +343,7 @@ various metrics.</p>
 <pre><code><span class="co">##     min_restore total_restorable nb_planning_units nb_components     diameter</span>
 <span class="co">## 1 219.2941 [ha]    219.2941 [ha]                16             3 2499.808 [m]</span>
 <span class="co">##   optimality_proven search_state solving_time  mesh_initial          mesh</span>
-<span class="co">## 1              TRUE   TERMINATED        2.577 13667.84 [ha] 14248.14 [ha]</span>
+<span class="co">## 1              TRUE   TERMINATED         1.94 13667.84 [ha] 14248.14 [ha]</span>
 <span class="co">##       mesh_best</span>
 <span class="co">## 1 14248.14 [ha]</span></code></pre>
 <p>Although this prioritization identifies a set of places that – in
@@ -610,42 +610,42 @@ optimality gap of 0%.</p>
 <span class="co">## 35 336.67209 [ha]   336.67209 [ha]                22             2 2499.808 [m]</span>
 <span class="co">## 36 336.67209 [ha]   336.67209 [ha]                22             2 2499.808 [m]</span>
 <span class="co">##    optimality_proven search_state solving_time  mesh_initial          mesh</span>
-<span class="co">## 1               TRUE   TERMINATED        7.245 13667.84 [ha] 14124.59 [ha]</span>
-<span class="co">## 2               TRUE   TERMINATED        6.920 13667.84 [ha] 14124.59 [ha]</span>
-<span class="co">## 3               TRUE   TERMINATED        7.574 13667.84 [ha] 14140.00 [ha]</span>
-<span class="co">## 4               TRUE   TERMINATED        4.726 13667.84 [ha] 14155.43 [ha]</span>
-<span class="co">## 5               TRUE   TERMINATED        4.405 13667.84 [ha] 14155.43 [ha]</span>
-<span class="co">## 6               TRUE   TERMINATED        3.125 13667.84 [ha] 14170.86 [ha]</span>
-<span class="co">## 7               TRUE   TERMINATED        3.951 13667.84 [ha] 14186.29 [ha]</span>
-<span class="co">## 8               TRUE   TERMINATED        2.574 13667.84 [ha] 14201.74 [ha]</span>
-<span class="co">## 9               TRUE   TERMINATED        2.289 13667.84 [ha] 14201.74 [ha]</span>
-<span class="co">## 10              TRUE   TERMINATED        2.099 13667.84 [ha] 14217.20 [ha]</span>
-<span class="co">## 11              TRUE   TERMINATED        2.477 13667.84 [ha] 14217.20 [ha]</span>
-<span class="co">## 12              TRUE   TERMINATED        1.762 13667.84 [ha] 14232.66 [ha]</span>
-<span class="co">## 13              TRUE   TERMINATED        1.345 13667.84 [ha] 14248.14 [ha]</span>
-<span class="co">## 14              TRUE   TERMINATED        1.137 13667.84 [ha] 14248.14 [ha]</span>
-<span class="co">## 15              TRUE   TERMINATED        0.937 13667.84 [ha] 14263.62 [ha]</span>
-<span class="co">## 16              TRUE   TERMINATED        0.646 13667.84 [ha] 14263.62 [ha]</span>
-<span class="co">## 17              TRUE   TERMINATED        0.398 13667.84 [ha] 14279.12 [ha]</span>
-<span class="co">## 18              TRUE   TERMINATED        0.791 13667.84 [ha] 14279.12 [ha]</span>
-<span class="co">## 19              TRUE   TERMINATED        0.628 13667.84 [ha] 14294.62 [ha]</span>
-<span class="co">## 20              TRUE   TERMINATED        0.645 13667.84 [ha] 14294.62 [ha]</span>
-<span class="co">## 21              TRUE   TERMINATED        0.504 13667.84 [ha] 14310.13 [ha]</span>
-<span class="co">## 22              TRUE   TERMINATED        0.502 13667.84 [ha] 14310.13 [ha]</span>
-<span class="co">## 23              TRUE   TERMINATED        0.805 13667.84 [ha] 14325.65 [ha]</span>
-<span class="co">## 24              TRUE   TERMINATED        0.709 13667.84 [ha] 14325.65 [ha]</span>
-<span class="co">## 25              TRUE   TERMINATED        0.478 13667.84 [ha] 14341.18 [ha]</span>
-<span class="co">## 26              TRUE   TERMINATED        0.474 13667.84 [ha] 14341.18 [ha]</span>
-<span class="co">## 27              TRUE   TERMINATED        0.521 13667.84 [ha] 14341.18 [ha]</span>
-<span class="co">## 28              TRUE   TERMINATED        0.419 13667.84 [ha] 14341.18 [ha]</span>
-<span class="co">## 29              TRUE   TERMINATED        0.421 13667.84 [ha] 14341.18 [ha]</span>
-<span class="co">## 30              TRUE   TERMINATED        0.401 13667.84 [ha] 14341.18 [ha]</span>
-<span class="co">## 31              TRUE   TERMINATED        0.419 13667.84 [ha] 14341.18 [ha]</span>
-<span class="co">## 32              TRUE   TERMINATED        0.439 13667.84 [ha] 14341.18 [ha]</span>
-<span class="co">## 33              TRUE   TERMINATED        0.399 13667.84 [ha] 14341.18 [ha]</span>
-<span class="co">## 34              TRUE   TERMINATED        0.433 13667.84 [ha] 14341.18 [ha]</span>
-<span class="co">## 35              TRUE   TERMINATED        0.524 13667.84 [ha] 14341.18 [ha]</span>
-<span class="co">## 36              TRUE   TERMINATED        0.515 13667.84 [ha] 14341.18 [ha]</span>
+<span class="co">## 1               TRUE   TERMINATED        5.430 13667.84 [ha] 14124.59 [ha]</span>
+<span class="co">## 2               TRUE   TERMINATED        6.068 13667.84 [ha] 14124.59 [ha]</span>
+<span class="co">## 3               TRUE   TERMINATED        5.664 13667.84 [ha] 14140.00 [ha]</span>
+<span class="co">## 4               TRUE   TERMINATED        4.424 13667.84 [ha] 14155.43 [ha]</span>
+<span class="co">## 5               TRUE   TERMINATED        4.187 13667.84 [ha] 14155.43 [ha]</span>
+<span class="co">## 6               TRUE   TERMINATED        3.064 13667.84 [ha] 14170.86 [ha]</span>
+<span class="co">## 7               TRUE   TERMINATED        3.275 13667.84 [ha] 14186.29 [ha]</span>
+<span class="co">## 8               TRUE   TERMINATED        2.372 13667.84 [ha] 14201.74 [ha]</span>
+<span class="co">## 9               TRUE   TERMINATED        2.259 13667.84 [ha] 14201.74 [ha]</span>
+<span class="co">## 10              TRUE   TERMINATED        2.004 13667.84 [ha] 14217.20 [ha]</span>
+<span class="co">## 11              TRUE   TERMINATED        1.827 13667.84 [ha] 14217.20 [ha]</span>
+<span class="co">## 12              TRUE   TERMINATED        1.574 13667.84 [ha] 14232.66 [ha]</span>
+<span class="co">## 13              TRUE   TERMINATED        1.052 13667.84 [ha] 14248.14 [ha]</span>
+<span class="co">## 14              TRUE   TERMINATED        0.904 13667.84 [ha] 14248.14 [ha]</span>
+<span class="co">## 15              TRUE   TERMINATED        0.764 13667.84 [ha] 14263.62 [ha]</span>
+<span class="co">## 16              TRUE   TERMINATED        0.594 13667.84 [ha] 14263.62 [ha]</span>
+<span class="co">## 17              TRUE   TERMINATED        0.371 13667.84 [ha] 14279.12 [ha]</span>
+<span class="co">## 18              TRUE   TERMINATED        0.619 13667.84 [ha] 14279.12 [ha]</span>
+<span class="co">## 19              TRUE   TERMINATED        0.511 13667.84 [ha] 14294.62 [ha]</span>
+<span class="co">## 20              TRUE   TERMINATED        0.513 13667.84 [ha] 14294.62 [ha]</span>
+<span class="co">## 21              TRUE   TERMINATED        0.394 13667.84 [ha] 14310.13 [ha]</span>
+<span class="co">## 22              TRUE   TERMINATED        0.435 13667.84 [ha] 14310.13 [ha]</span>
+<span class="co">## 23              TRUE   TERMINATED        0.625 13667.84 [ha] 14325.65 [ha]</span>
+<span class="co">## 24              TRUE   TERMINATED        0.644 13667.84 [ha] 14325.65 [ha]</span>
+<span class="co">## 25              TRUE   TERMINATED        0.390 13667.84 [ha] 14341.18 [ha]</span>
+<span class="co">## 26              TRUE   TERMINATED        0.369 13667.84 [ha] 14341.18 [ha]</span>
+<span class="co">## 27              TRUE   TERMINATED        0.430 13667.84 [ha] 14341.18 [ha]</span>
+<span class="co">## 28              TRUE   TERMINATED        0.375 13667.84 [ha] 14341.18 [ha]</span>
+<span class="co">## 29              TRUE   TERMINATED        0.398 13667.84 [ha] 14341.18 [ha]</span>
+<span class="co">## 30              TRUE   TERMINATED        0.366 13667.84 [ha] 14341.18 [ha]</span>
+<span class="co">## 31              TRUE   TERMINATED        0.375 13667.84 [ha] 14341.18 [ha]</span>
+<span class="co">## 32              TRUE   TERMINATED        0.410 13667.84 [ha] 14341.18 [ha]</span>
+<span class="co">## 33              TRUE   TERMINATED        0.364 13667.84 [ha] 14341.18 [ha]</span>
+<span class="co">## 34              TRUE   TERMINATED        0.399 13667.84 [ha] 14341.18 [ha]</span>
+<span class="co">## 35              TRUE   TERMINATED        0.374 13667.84 [ha] 14341.18 [ha]</span>
+<span class="co">## 36              TRUE   TERMINATED        0.385 13667.84 [ha] 14341.18 [ha]</span>
 <span class="co">##        mesh_best max_restore</span>
 <span class="co">## 1  14124.59 [ha]         100</span>
 <span class="co">## 2  14124.59 [ha]         110</span>

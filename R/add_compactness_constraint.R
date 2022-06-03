@@ -7,6 +7,7 @@ NULL
 #' to specify the compactness of a solution.
 #'
 #' @inheritParams set_max_mesh_objective
+#' @inherit set_max_mesh_objective return
 #'
 #' @param max_diameter `numeric` Maximum diameter value.
 #'
@@ -33,7 +34,7 @@ NULL
 #' @family constraints
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # load data
 #' habitat_data <- rast(
 #'   system.file("extdata", "habitat_hi_res.tif", package = "restoptr")

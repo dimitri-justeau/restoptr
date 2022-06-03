@@ -74,7 +74,7 @@ NULL
 #' of original raster pixels).
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # load data
 #' habitat_data <- rast(
 #'   system.file("extdata", "habitat_hi_res.tif", package = "restoptr")
@@ -152,7 +152,7 @@ restopt_problem <- function(existing_habitat, habitat_threshold = 1, aggregation
 #' @param ... Arguments not used.
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' #' # load data
 #' habitat_data <- rast(
 #'   system.file("extdata", "habitat_hi_res.tif", package = "restoptr")
@@ -270,6 +270,7 @@ print.RestoptProblem <- function(x, ...) {
 #' For internal use only.
 #'
 #' @inheritParams set_max_mesh_objective
+#' @inherit set_max_mesh_objective return
 #'
 #' @param constraint `RestoptConstraint` Constraint object.
 #'
@@ -305,6 +306,7 @@ add_restopt_constraint <- function(problem, constraint) {
 #' For internal use only.
 #'
 #' @inheritParams set_max_mesh_objective
+#' @inherit set_max_mesh_objective return
 #'
 #' @param objective `RestoptObjective` Objective object.
 #'
@@ -338,7 +340,7 @@ set_restopt_objective <- function(problem, objective) {
 #' @return [terra::rast()] The original (i.e. not aggregated) habitat data.
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' #' # load data
 #' habitat_data <- rast(
 #'   system.file("extdata", "habitat_hi_res.tif", package = "restoptr")
@@ -370,7 +372,7 @@ get_original_habitat <- function(problem) {
 #' @return [terra::rast()] The existing (aggregated) habitat data.
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' #' # load data
 #' habitat_data <- rast(
 #'   system.file("extdata", "habitat_hi_res.tif", package = "restoptr")
@@ -402,7 +404,7 @@ get_existing_habitat <- function(problem) {
 #' @return [terra::rast()] The restorable habitat (aggregated) data.
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' #' # load data
 #' habitat_data <- rast(
 #'   system.file("extdata", "habitat_hi_res.tif", package = "restoptr")
@@ -434,7 +436,7 @@ get_restorable_habitat <- function(problem) {
 #' @return `numeric` The aggregation factor of the restopt problem.
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' #' # load data
 #' habitat_data <- rast(
 #'   system.file("extdata", "habitat_hi_res.tif", package = "restoptr")
@@ -466,7 +468,7 @@ get_aggregation_factor <- function(problem) {
 #' @return `numeric` The habitat threshold parameter of the restopt problem.
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' #' # load data
 #' habitat_data <- rast(
 #'   system.file("extdata", "habitat_hi_res.tif", package = "restoptr")
@@ -498,7 +500,7 @@ get_habitat_threshold <- function(problem) {
 #' @return [terra::rast()] The locked out areas of the restopt problem.
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' #' # load data
 #' habitat_data <- rast(
 #'   system.file("extdata", "habitat_hi_res.tif", package = "restoptr")
@@ -530,7 +532,7 @@ get_locked_out_areas <- function(problem) {
 #' @return [terra::rast()] The aggregated cell area of the restopt problem.
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' #' # load data
 #' habitat_data <- rast(
 #'   system.file("extdata", "habitat_hi_res.tif", package = "restoptr")
@@ -562,7 +564,7 @@ get_cell_area <- function(problem) {
 #' @return `list` The constraints of the restopt problem.
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' #' # load data
 #' habitat_data <- rast(
 #'   system.file("extdata", "habitat_hi_res.tif", package = "restoptr")
@@ -594,7 +596,7 @@ get_constraints <- function(problem) {
 #' @return `RestoptObjectve` The optimization objective of the restopt problem.
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' #' # load data
 #' habitat_data <- rast(
 #'   system.file("extdata", "habitat_hi_res.tif", package = "restoptr")
@@ -626,7 +628,7 @@ get_objective <- function(problem) {
 #' @return `list` The settings associated with the restopt problem.
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' #' # load data
 #' habitat_data <- rast(
 #'   system.file("extdata", "habitat_hi_res.tif", package = "restoptr")

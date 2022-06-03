@@ -14,6 +14,9 @@ containing binary values hat indicate which planning units can be selected
 for restoration (i.e., only cells with a value equal one are available),
 or a vector object whose features correspond to the available areas.}
 }
+\value{
+An updated restoration problem (\code{\link[=restopt_problem]{restopt_problem()}}) object.
+}
 \description{
 Add constraint to a restoration problem (\code{\link[=restopt_problem]{restopt_problem()}}) object
 to specify that only certain planning units can be selected for restoration
@@ -43,7 +46,7 @@ with a different input data. Thus, from a modelling perspective,
 with an available areas constraint, you will see a locked out constraint.
 }
 \examples{
-\dontrun{
+\donttest{
 # load data
 habitat_data <- rast(
   system.file("extdata", "habitat_hi_res.tif", package = "restoptr")

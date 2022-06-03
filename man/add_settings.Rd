@@ -29,12 +29,15 @@ For example, an argument of 0.1 means that solutions should be within 10\%
 of optimality.
 Defaults to 0, such that optimal solutions are returned.}
 }
+\value{
+An updated restoration problem (\code{\link[=restopt_problem]{restopt_problem()}}) object.
+}
 \description{
 Add settings to a restoration problem (\code{\link[=restopt_problem]{restopt_problem()}}) object
 to customize the optimization procedure.
 }
 \examples{
-\dontrun{
+\donttest{
 # load data
 habitat_data <- rast(
   system.file("extdata", "habitat_hi_res.tif", package = "restoptr")

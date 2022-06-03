@@ -1,8 +1,4 @@
 .onLoad <- function(libname, pkgname) {
-  # set Java parameters if none specified
-  if (is.null(getOption("java.parameters"))) {
-    options(java.parameters = "-Xmx4g")
-  }
 
   # initialize java
   rJava::.jinit()

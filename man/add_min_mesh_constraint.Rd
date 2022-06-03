@@ -20,6 +20,9 @@ habitat raster. Corresponds to the unit of the minimum mesh value If the
 input habitat raster does not use a projected coordinate system, only "cells"
 is available. Defaults to "ha".}
 }
+\value{
+An updated restoration problem (\code{\link[=restopt_problem]{restopt_problem()}}) object.
+}
 \description{
 Add constraint to a restoration problem (\code{\link[=restopt_problem]{restopt_problem()}}) object
 to specify the minimum effective mesh size of a solution.
@@ -31,7 +34,7 @@ same patch (Jaeger, 2000). Maximizing it in the context of restoration
 favours fewer and larger patches.
 }
 \examples{
-\dontrun{
+\donttest{
 # load data
 habitat_data <- rast(
   system.file("extdata", "habitat_hi_res.tif", package = "restoptr")

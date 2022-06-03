@@ -74,6 +74,10 @@ for restoration (i.e., only cells with a value equal one are available),
 or a vector object whose features correspond to the available areas.</p></dd>
 </dl></div>
     <div class="section level2">
+    <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
+    <p>An updated restoration problem (<code><a href="restopt_problem.html">restopt_problem()</a></code>) object.</p>
+    </div>
+    <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>Available areas constraints can be used to incorporate a wide range of
 criteria into restoration planning problems.
@@ -111,7 +115,7 @@ with an available areas constraint, you will see a locked out constraint.</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># \donttest{</span></span>
 <span class="r-in"><span class="co"># load data</span></span>
 <span class="r-in"><span class="va">habitat_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/rast.html" class="external-link">rast</a></span><span class="op">(</span></span>
 <span class="r-in">  <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"habitat_hi_res.tif"</span>, package <span class="op">=</span> <span class="st">"restoptr"</span><span class="op">)</span></span>
@@ -124,6 +128,7 @@ with an available areas constraint, you will see a locked out constraint.</p>
 <span class="r-in"><span class="co"># plot data</span></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">habitat_data</span><span class="op">)</span></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">available</span>, add<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span class="r-plt img"><img src="add_available_areas_constraint-1.png" alt="" width="700" height="433"></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># create problem with available areas constraints</span></span>
 <span class="r-in"><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="restopt_problem.html">restopt_problem</a></span><span class="op">(</span></span>
@@ -141,16 +146,39 @@ with an available areas constraint, you will see a locked out constraint.</p>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># print problem</span></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00; font-weight: bold;">-----------------------------------------------------------------</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00; font-weight: bold;">                         Restopt                         </span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00; font-weight: bold;">-----------------------------------------------------------------</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BBBBBB; font-weight: bold;">original habitat:    </span> <span style="color: #00BBBB;">habitat_hi_res.tif</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BBBBBB; font-weight: bold;">aggregation factor:  </span> <span style="color: #00BBBB;">16</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BBBBBB; font-weight: bold;">habitat threshold:   </span> <span style="color: #00BBBB;">0.7</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BBBBBB; font-weight: bold;">existing habitat:    </span> <span style="color: #00BBBB;">in memory</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BBBBBB; font-weight: bold;">restorable habitat:  </span> <span style="color: #00BBBB;">in memory</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">-----------------------------------------------------------------</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BBBBBB; font-weight: bold;">objective:           </span> <span style="color: #0000BB;">Maximize integral index of connectivity</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">-----------------------------------------------------------------</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BBBBBB; font-weight: bold;">constraints:        </span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB;">  -  restorable (min_restore = 5, max_restore = 5, min_proportion = 1, unit = ha)</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB;">  -  locked out (data = in memory)</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">-----------------------------------------------------------------</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BBBBBB; font-weight: bold;">settings:</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BB00BB;">  - precision = 4</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BB00BB;">  - time_limit = 1</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BB00BB;">  - nb_solutions = 1</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BB00BB;">  - optimality_gap = 0</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00; font-weight: bold;">-----------------------------------------------------------------</span> </span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># solve problem</span></span>
 <span class="r-in"><span class="va">s</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/solve.html" class="external-link">solve</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">Note: The current solution is the best that the solver could find within the time limit. However, the solver had not enough to prove whether it is optimal or not. Consider increasing the time limit if you need a better solution (solving time = 1.11 s)</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># plot solution</span></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html" class="external-link">plot</a></span><span class="op">(</span></span>
 <span class="r-in">  x <span class="op">=</span> <span class="va">s</span>, main <span class="op">=</span> <span class="st">"solution"</span>,</span>
 <span class="r-in">  col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#E5E5E5"</span>, <span class="st">"#fff1d6"</span>, <span class="st">"#b2df8a"</span>, <span class="st">"#1f78b4"</span><span class="op">)</span></span>
 <span class="r-in"><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
+<span class="r-plt img"><img src="add_available_areas_constraint-2.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span class="co"># }</span></span>
 <span class="r-in"></span>
 </code></pre></div>
     </div>

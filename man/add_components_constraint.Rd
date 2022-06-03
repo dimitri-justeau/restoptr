@@ -13,6 +13,9 @@ add_components_constraint(problem, min_nb_components, max_nb_components)
 
 \item{max_nb_components}{\code{integer} Maximum number of connected components.}
 }
+\value{
+An updated restoration problem (\code{\link[=restopt_problem]{restopt_problem()}}) object.
+}
 \description{
 Add constraint to a restoration problem (\code{\link[=restopt_problem]{restopt_problem()}}) object
 to specify the number of connected components that can be
@@ -33,7 +36,7 @@ ensure that hazards (e.g. fire) do not strike all planning units at the
 same time.
 }
 \examples{
-\dontrun{
+\donttest{
 # load data
 habitat_data <- rast(
   system.file("extdata", "habitat_hi_res.tif", package = "restoptr")
