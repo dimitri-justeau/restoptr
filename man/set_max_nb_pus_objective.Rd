@@ -34,7 +34,7 @@ locked_out_data <- rast(
 )
 
 # plot data
-plot(rast(list(habitat_data, restorable_data, locked_out_data)), nc = 3)
+plot(rast(list(habitat_data, locked_out_data)), nc = 2)
 
 # create problem with locked out constraints
 p <- restopt_problem(

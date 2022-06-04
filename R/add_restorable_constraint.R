@@ -70,7 +70,9 @@ NULL
 #' print(p)
 #'
 #' # plot preprocessed data
-#' plot(rast(list(p$data$existing_habitat, p$data$restorable_habitat, p$data$locked_out)), nc = 3)
+#' plot(rast(list(get_existing_habitat(p),
+#'                get_restorable_habitat(p),
+#'                get_locked_out_areas(p))), nc = 3)
 #'
 #' # Solve problem
 #' s <- solve(p)

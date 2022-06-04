@@ -81,7 +81,7 @@ NULL
 #' )
 #'
 #' # create problem
-#' p <- restopt_problem_2(
+#' p <- restopt_problem(
 #'        existing_habitat = habitat_data,
 #'        aggregation_factor = 4,
 #'        habitat_threshold = 0.7
@@ -159,7 +159,7 @@ restopt_problem <- function(existing_habitat, habitat_threshold = 1, aggregation
 #' )
 #'
 #' # create problem
-#' p <- restopt_problem_2(
+#' p <- restopt_problem(
 #'        existing_habitat = habitat_data,
 #'        aggregation_factor = 4,
 #'        habitat_threshold = 0.7
@@ -347,7 +347,7 @@ set_restopt_objective <- function(problem, objective) {
 #' )
 #'
 #' # create problem
-#' p <- restopt_problem_2(
+#' problem <- restopt_problem(
 #'        existing_habitat = habitat_data,
 #'        aggregation_factor = 4,
 #'        habitat_threshold = 0.7
@@ -379,7 +379,7 @@ get_original_habitat <- function(problem) {
 #' )
 #'
 #' # create problem
-#' p <- restopt_problem_2(
+#' problem <- restopt_problem(
 #'        existing_habitat = habitat_data,
 #'        aggregation_factor = 4,
 #'        habitat_threshold = 0.7
@@ -411,7 +411,7 @@ get_existing_habitat <- function(problem) {
 #' )
 #'
 #' # create problem
-#' p <- restopt_problem_2(
+#' problem <- restopt_problem(
 #'        existing_habitat = habitat_data,
 #'        aggregation_factor = 4,
 #'        habitat_threshold = 0.7
@@ -443,7 +443,7 @@ get_restorable_habitat <- function(problem) {
 #' )
 #'
 #' # create problem
-#' p <- restopt_problem_2(
+#' problem <- restopt_problem(
 #'        existing_habitat = habitat_data,
 #'        aggregation_factor = 4,
 #'        habitat_threshold = 0.7
@@ -475,7 +475,7 @@ get_aggregation_factor <- function(problem) {
 #' )
 #'
 #' # create problem
-#' p <- restopt_problem_2(
+#' problem <- restopt_problem(
 #'        existing_habitat = habitat_data,
 #'        aggregation_factor = 4,
 #'        habitat_threshold = 0.7
@@ -507,13 +507,13 @@ get_habitat_threshold <- function(problem) {
 #' )
 #'
 #' # create problem
-#' p <- restopt_problem_2(
+#' problem <- restopt_problem(
 #'        existing_habitat = habitat_data,
 #'        aggregation_factor = 4,
 #'        habitat_threshold = 0.7
 #' )
 #'
-#' get_habitat_threshold(problem)
+#' get_locked_out_areas(problem)
 #' }
 #'
 #' @export
@@ -539,7 +539,7 @@ get_locked_out_areas <- function(problem) {
 #' )
 #'
 #' # create problem
-#' p <- restopt_problem_2(
+#' problem <- restopt_problem(
 #'        existing_habitat = habitat_data,
 #'        aggregation_factor = 4,
 #'        habitat_threshold = 0.7
@@ -571,7 +571,7 @@ get_cell_area <- function(problem) {
 #' )
 #'
 #' # create problem
-#' p <- restopt_problem_2(
+#' problem <- restopt_problem(
 #'        existing_habitat = habitat_data,
 #'        aggregation_factor = 4,
 #'        habitat_threshold = 0.7
@@ -603,7 +603,7 @@ get_constraints <- function(problem) {
 #' )
 #'
 #' # create problem
-#' p <- restopt_problem_2(
+#' problem <- restopt_problem(
 #'        existing_habitat = habitat_data,
 #'        aggregation_factor = 4,
 #'        habitat_threshold = 0.7
@@ -635,7 +635,7 @@ get_objective <- function(problem) {
 #' )
 #'
 #' # create problem
-#' p <- restopt_problem_2(
+#' problem <- restopt_problem(
 #'        existing_habitat = habitat_data,
 #'        aggregation_factor = 4,
 #'        habitat_threshold = 0.7

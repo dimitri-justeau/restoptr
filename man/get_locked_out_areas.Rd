@@ -23,13 +23,13 @@ habitat_data <- rast(
 )
 
 # create problem
-p <- restopt_problem_2(
+problem <- restopt_problem(
        existing_habitat = habitat_data,
        aggregation_factor = 4,
        habitat_threshold = 0.7
 )
 
-get_habitat_threshold(problem)
+get_locked_out_areas(problem)
 }
 
 }
