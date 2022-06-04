@@ -76,15 +76,14 @@
 <span class="r-in"><span class="op">)</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># create problem</span></span>
-<span class="r-in"><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu">restopt_problem_2</span><span class="op">(</span></span>
+<span class="r-in"><span class="va">problem</span> <span class="op">&lt;-</span> <span class="fu"><a href="restopt_problem.html">restopt_problem</a></span><span class="op">(</span></span>
 <span class="r-in">       existing_habitat <span class="op">=</span> <span class="va">habitat_data</span>,</span>
 <span class="r-in">       aggregation_factor <span class="op">=</span> <span class="fl">4</span>,</span>
 <span class="r-in">       habitat_threshold <span class="op">=</span> <span class="fl">0.7</span></span>
 <span class="r-in"><span class="op">)</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in restopt_problem_2(existing_habitat = habitat_data, aggregation_factor = 4,     habitat_threshold = 0.7):</span> could not find function "restopt_problem_2"</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu">get_original_habitat</span><span class="op">(</span><span class="va">problem</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in h(simpleError(msg, call)):</span> error in evaluating the argument 'x' in selecting a method for function 'plot': object 'problem' not found</span>
+<span class="r-plt img"><img src="get_original_habitat-1.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span class="co"># }</span></span>
 <span class="r-in"></span>
 </code></pre></div>

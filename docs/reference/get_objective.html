@@ -76,15 +76,28 @@
 <span class="r-in"><span class="op">)</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># create problem</span></span>
-<span class="r-in"><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu">restopt_problem_2</span><span class="op">(</span></span>
+<span class="r-in"><span class="va">problem</span> <span class="op">&lt;-</span> <span class="fu"><a href="restopt_problem.html">restopt_problem</a></span><span class="op">(</span></span>
 <span class="r-in">       existing_habitat <span class="op">=</span> <span class="va">habitat_data</span>,</span>
 <span class="r-in">       aggregation_factor <span class="op">=</span> <span class="fl">4</span>,</span>
 <span class="r-in">       habitat_threshold <span class="op">=</span> <span class="fl">0.7</span></span>
 <span class="r-in"><span class="op">)</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in restopt_problem_2(existing_habitat = habitat_data, aggregation_factor = 4,     habitat_threshold = 0.7):</span> could not find function "restopt_problem_2"</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="fu">get_objective</span><span class="op">(</span><span class="va">problem</span><span class="op">)</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in inherits(problem, "RestoptProblem"):</span> object 'problem' not found</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $name</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "No optimization objective"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $post</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> function (jproblem, nb_solutions, precision, time_limit, optimality_gap, </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     verbose = FALSE) </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     rJava::.jcall(jproblem, "Ljava/util/List;", "findSolutions", </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         nb_solutions, time_limit, verbose)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;bytecode: 0x560a380f36b0&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: 0x560a3a67d0a0&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"class")</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "NoObjective"      "RestoptObjectve"  "RestoptComponent"</span>
 <span class="r-in"><span class="co"># }</span></span>
 <span class="r-in"></span>
 </code></pre></div>

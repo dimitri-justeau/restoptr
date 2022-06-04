@@ -76,15 +76,22 @@
 <span class="r-in"><span class="op">)</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># create problem</span></span>
-<span class="r-in"><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu">restopt_problem_2</span><span class="op">(</span></span>
+<span class="r-in"><span class="va">problem</span> <span class="op">&lt;-</span> <span class="fu"><a href="restopt_problem.html">restopt_problem</a></span><span class="op">(</span></span>
 <span class="r-in">       existing_habitat <span class="op">=</span> <span class="va">habitat_data</span>,</span>
 <span class="r-in">       aggregation_factor <span class="op">=</span> <span class="fl">4</span>,</span>
 <span class="r-in">       habitat_threshold <span class="op">=</span> <span class="fl">0.7</span></span>
 <span class="r-in"><span class="op">)</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in restopt_problem_2(existing_habitat = habitat_data, aggregation_factor = 4,     habitat_threshold = 0.7):</span> could not find function "restopt_problem_2"</span>
 <span class="r-in"></span>
-<span class="r-in"><span class="fu"><a href="get_habitat_threshold.html">get_habitat_threshold</a></span><span class="op">(</span><span class="va">problem</span><span class="op">)</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in inherits(problem, "RestoptProblem"):</span> object 'problem' not found</span>
+<span class="r-in"><span class="fu">get_locked_out_areas</span><span class="op">(</span><span class="va">problem</span><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> class       : SpatRaster </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> dimensions  : 467, 679, 1  (nrow, ncol, nlyr)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> resolution  : 111.7948, 118.9736  (x, y)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> extent      : 419768.2, 495676.9, 227509.1, 283069.8  (xmin, xmax, ymin, ymax)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> coord. ref. : RGNC91-93 / Lambert New Caledonia (EPSG:3163) </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> source      : memory </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> name        : Restorable habitat (aggregated) </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> min value   :                               0 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> max value   :                               1 </span>
 <span class="r-in"><span class="co"># }</span></span>
 <span class="r-in"></span>
 </code></pre></div>
