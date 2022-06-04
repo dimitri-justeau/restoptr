@@ -77,6 +77,7 @@ NULL
 #'     max_restore = 300,
 #'   ) %>%
 #'   add_locked_out_constraint(data = locked_out_data) %>%
+#'   add_compactness_constraint(2500, unit = "m") %>%
 #'   add_settings(time_limit = 1)
 #'
 #' # print problem
