@@ -32,6 +32,8 @@ See \code{terra::aggregate()} for more details.}
 }
 \value{
 A new restoration problem (\code{RestoptProblem}) object.
+
+None.
 }
 \description{
 Create a new restoration optimization problem (\code{RestoptProblem}) using data

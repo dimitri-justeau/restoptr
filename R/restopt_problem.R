@@ -73,6 +73,8 @@ NULL
 #' cells), and `get_restorable_area()` (amount of restorable area -- in number
 #' of original raster pixels).
 #'
+#'@return None.
+#'
 #' @examples
 #' \donttest{
 #' # load data

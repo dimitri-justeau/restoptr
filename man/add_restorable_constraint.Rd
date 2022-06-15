@@ -89,10 +89,7 @@ plot(rast(list(get_existing_habitat(p),
 # Solve problem
 s <- solve(p)
 # plot solution
-plot(
-  x = s, main = "solution",
-  col = c("#E5E5E5", "#fff1d6", "#b2df8a", "#1f78b4")
-)
+plot(s)
 }
 
 }
