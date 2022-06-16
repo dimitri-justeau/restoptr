@@ -311,7 +311,7 @@ existing habitat, or (`3`) selected as a priority area for restoration.
 solution <- solve(problem)
 ```
 
-    ## Good news: the solver found 1 solution statisfying the constraints that was proven optimal ! (solving time = 2.69 s)
+    ## Good news: the solver found 1 solution statisfying the constraints that was proven optimal ! (solving time = 0.93 s)
 
 ``` r
 # preview solution
@@ -352,7 +352,7 @@ get_metadata(solution, area_unit = "ha")
     ##     min_restore total_restorable nb_planning_units nb_components     diameter
     ## 1 219.3772 [ha]    219.3772 [ha]                15             3 2280.175 [m]
     ##   optimality_proven search_state solving_time  mesh_initial          mesh
-    ## 1              TRUE   TERMINATED        2.649 13667.84 [ha] 14232.66 [ha]
+    ## 1              TRUE   TERMINATED        0.916 13667.84 [ha] 14232.66 [ha]
     ##       mesh_best
     ## 1 14232.66 [ha]
 

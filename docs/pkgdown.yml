@@ -3,7 +3,7 @@ pkgdown: 2.0.3
 pkgdown_sha: ~
 articles:
   restoptr: restoptr.html
-last_built: 2022-06-16T13:03Z
+last_built: 2022-06-16T14:33Z
 urls:
   reference: https://dimitri-justeau.github.io/restoptr/reference
   article: https://dimitri-justeau.github.io/restoptr/articles

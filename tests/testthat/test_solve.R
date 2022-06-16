@@ -151,7 +151,7 @@ test_that("multiple solutions found with IIC optimization", {
     ) %>%
     add_compactness_constraint(4, unit = "cells") %>%
     set_max_iic_objective() %>%
-    add_settings(time_limit = 10, nb_solutions = 10)
+    add_settings(nb_solutions = 10)
   result <- solve(problem)
   # tests
   expect_length(result, 10)
@@ -177,7 +177,7 @@ test_that("number of solutions found is less than desired (no objective)", {
     ) %>%
     add_compactness_constraint(3, unit = "cells") %>%
     set_no_objective() %>%
-    add_settings(time_limit = 2, nb_solutions = 1000)
+    add_settings(nb_solutions = 1000)
   result <- solve(problem)
   # tests
   expect_is(result, "list")
@@ -198,7 +198,7 @@ test_that("multiple solutions found with IIC optimization and optimality gap", {
     ) %>%
     add_compactness_constraint(4, unit = "cells") %>%
     set_max_iic_objective() %>%
-    add_settings(time_limit = 10, nb_solutions = 20, optimality_gap = 0.05)
+    add_settings(nb_solutions = 20, optimality_gap = 0.05)
   result <- solve(problem)
   # tests
   expect_length(result, 20)
