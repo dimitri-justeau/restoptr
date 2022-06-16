@@ -58,7 +58,7 @@ higher. Below we provide platform-specific instructions to install it.
 #### *Windows*
 
 Please install the latest Java Runtime Environment for Windows (see
-Oracle JDK, [OpenJDK](https://openjdk.java.net/install/), or
+Oracle JDK, [OpenJDK](https://openjdk.org/install/), or
 [GraalVM](https://www.graalvm.org/downloads/)). You also need to install
 [Maven](https://maven.apache.org/). After downloading the file, please
 run installer to install Java on your system. You will also need to
@@ -79,13 +79,13 @@ sudo apt-get install default-jdk
 ```
 
 If you want to install a specific JRE version, please follow
-instructions from Oracle, [OpenJDK](https://openjdk.java.net/install/),
-or [GraalVM](https://www.graalvm.org/downloads/).
+instructions from Oracle, [OpenJDK](https://openjdk.org/install/), or
+[GraalVM](https://www.graalvm.org/downloads/).
 
 #### *Linux*
 
 Please follow instructions from Oracle,
-[OpenJDK](https://openjdk.java.net/install/), or
+[OpenJDK](https://openjdk.org/install/), or
 [GraalVM](https://www.graalvm.org/downloads/).
 
 #### *MacOS*
@@ -112,11 +112,10 @@ compile from source if needed. **Please note that this step is entirely
 optional, and is not needed to install the package.** To compile the
 Java library, a the [Maven](https://maven.apache.org/) software needs to
 be installed as well as a Java Development Kit (JDK) (version 8+) is
-required (e.g., see Oracle JDK,
-[OpenJDK](https://openjdk.java.net/install/), or
-[GraalVM](https://www.graalvm.org/downloads/)). After installing these
-dependencies, the following procedures can be used to compile the Java
-library and it along with the package.
+required (e.g., see Oracle JDK, [OpenJDK](https://openjdk.org/install/),
+or [GraalVM](https://www.graalvm.org/downloads/)). After installing
+these dependencies, the following procedures can be used to compile the
+Java library and it along with the package.
 
 First clone the repository and update the source code.
 
@@ -312,7 +311,7 @@ existing habitat, or (`3`) selected as a priority area for restoration.
 solution <- solve(problem)
 ```
 
-    ## Good news: the solver found 1 solution statisfying the constraints that was proven optimal ! (solving time = 1.05 s)
+    ## Good news: the solver found 1 solution statisfying the constraints that was proven optimal ! (solving time = 2.69 s)
 
 ``` r
 # preview solution
@@ -326,7 +325,7 @@ print(solution)
     ## coord. ref. : RGNC91-93 / Lambert New Caledonia (EPSG:3163) 
     ## source      : memory 
     ## name        :  Solution 1 
-    ## min value   :   Available 
+    ## min value   :  Locked out 
     ## max value   : Restoration
 
 ``` r
@@ -353,7 +352,7 @@ get_metadata(solution, area_unit = "ha")
     ##     min_restore total_restorable nb_planning_units nb_components     diameter
     ## 1 219.3772 [ha]    219.3772 [ha]                15             3 2280.175 [m]
     ##   optimality_proven search_state solving_time  mesh_initial          mesh
-    ## 1              TRUE   TERMINATED        1.032 13667.84 [ha] 14232.66 [ha]
+    ## 1              TRUE   TERMINATED        2.649 13667.84 [ha] 14232.66 [ha]
     ##       mesh_best
     ## 1 14232.66 [ha]
 
