@@ -1,0 +1,20 @@
+.page-header {
+  border-bottom: none !important;
+  padding-bottom: 0px !important;
+  min-height: 0px !important;
+}
+
+#ecological-restoration-planning {
+  margin-bottom: 49px;
+  font-style: italic;
+}
+
+.template-home img.logo {
+  width: 140px;
+}
+
+#logo-credit{
+  text-align: right;
+  font-size: 10px;
+  margin-bottom: -25px;
+}

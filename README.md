@@ -1,7 +1,9 @@
 
 <!--- README.md is generated from README.Rmd. Please edit that file -->
 
-# restopr: Ecological Restoration Planning
+# restopr <img src="man/figures/logo.png" align="right" width="140px"/>
+
+## Ecological Restoration Planning
 
 [![lifecycle](https://img.shields.io/badge/Lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html)
 [![R-CMD-check-Ubuntu](https://img.shields.io/github/workflow/status/dimitri-justeau/restoptr/Ubuntu/master.svg?label=Ubuntu)](https://github.com/dimitri-justeau/restoptr/actions)
@@ -10,6 +12,10 @@
 [![Coverage
 Status](https://codecov.io/github/dimitri-justeau/restoptr/coverage.svg?branch=master)](https://app.codecov.io/gh/dimitri-justeau/restoptr)
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/restoptr)](https://github.com/dimitri-justeau/restoptr)
+
+<p id="logo-credit" style="text-align: right; font-size: 10px;">
+Logo by Camille Salmon
+</p>
 
 ## Overview
 
@@ -311,7 +317,7 @@ existing habitat, or (`3`) selected as a priority area for restoration.
 solution <- solve(problem)
 ```
 
-    ## Good news: the solver found 1 solution statisfying the constraints that was proven optimal ! (solving time = 0.93 s)
+    ## Good news: the solver found 1 solution statisfying the constraints that was proven optimal ! (solving time = 1.18 s)
 
 ``` r
 # preview solution
@@ -352,7 +358,7 @@ get_metadata(solution, area_unit = "ha")
     ##     min_restore total_restorable nb_planning_units nb_components     diameter
     ## 1 219.3772 [ha]    219.3772 [ha]                15             3 2280.175 [m]
     ##   optimality_proven search_state solving_time  mesh_initial          mesh
-    ## 1              TRUE   TERMINATED        0.916 13667.84 [ha] 14232.66 [ha]
+    ## 1              TRUE   TERMINATED        1.156 13667.84 [ha] 14232.66 [ha]
     ##       mesh_best
     ## 1 14232.66 [ha]
 
