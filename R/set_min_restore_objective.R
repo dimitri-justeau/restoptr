@@ -70,7 +70,7 @@ set_min_restore_objective <- function(problem) {
                       verbose=FALSE, search_strategy="") {
         rJava::.jcall(
           jproblem, "Ljava/util/List;", "minimizeMinRestore", nb_solutions,
-          time_limit, optimality_gap, verbose, search_strategy=""
+          time_limit, optimality_gap, verbose, search_strategy
         )
       }
     )
