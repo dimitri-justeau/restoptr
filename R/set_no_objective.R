@@ -51,9 +51,11 @@ set_no_objective <- function(problem) {
     objective = restopt_component(
       name = "No optimization objective",
       class = c("NoObjective", "RestoptObjectve"),
-      post = function(jproblem, nb_solutions, precision, time_limit, optimality_gap, verbose=FALSE) {
+      post = function(jproblem, nb_solutions, precision, time_limit, optimality_gap,
+                      verbose=FALSE, search_strategy="") {
         rJava::.jcall(
-          jproblem, "Ljava/util/List;", "findSolutions", nb_solutions, time_limit, verbose
+          jproblem, "Ljava/util/List;", "findSolutions", nb_solutions, time_limit,
+          verbose, search_strategy
         )
       }
     )
