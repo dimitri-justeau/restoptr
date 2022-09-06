@@ -5,17 +5,23 @@ NULL
 #' Restopr input preprocessing function.
 #'
 #' From a binary, possibly high resolution, habitat raster, this function
-#' produces two input rasters for restopot:
+#' produces three input rasters for restopt:
 #'
-#' - The binary habitat raster, which can be the same as the input
-#'   (aggregation factor = 1), but most often is a downsampled version of it,
-#'   to ensure the tractability of the problem.
+#' - The binary habitat raster (existing_habitat), which can be the same as
+#'   the input (aggregation factor = 1), but most often is a downsampled
+#'   version of it, to ensure the tractability of the problem.
 #'
-#' - The restorable habitat raster, which is a raster indicating how much
-#'   habitat can be restored. If the aggregation factor = 1, the the restorable
-#'   habitat raster is binary and the inverse of the habitat raster. Else, the
-#'   surface of habitat is computed according to the spatial resolution, and the
-#'   number of habitat pixel present in one larger aggregated cell.
+#' - The restorable habitat raster (restorable_habitat), which is a raster
+#'   indicating how much habitat can be restored. If the aggregation factor = 1,
+#'   the the restorable habitat raster is binary and the inverse of the habitat
+#'   raster. Else, the surface of habitat is computed according to the spatial
+#'   resolution, and the number of habitat pixel present in one larger
+#'   aggregated cell.
+#'
+#'  - The cell area raster (cell_area), which correspond for each aggregated
+#'    cell to the number of number of cells in the input raster. This is
+#'    necessary because the cell area can be less than expected if the
+#'    aggregated cell lies in the boundary of study area.
 #'
 #' @param habitat [terra::rast()] Raster object containing binary
 #' values that indicate if each planning unit contains habitat or not. Cells
@@ -32,7 +38,11 @@ NULL
 #' downsampling that will be applied to the habitat. This parameter is
 #' important to ensure the tractability of a problem.
 #'
-#' @return A vector : c(downsampled_habitat, restorable_area, cell_area)
+#' @return A list : list(
+#'   existing_habitat=downsampled_habitat,
+#'   restorable_habitat=restorable_habitat,
+#'   cell_area=cell_area
+#' )
 #'
 #' @details This preprocessing function produces the necessary inputs of a
 #' restopt problem from a single binary habitat raster (`habitat`), which can
@@ -57,15 +67,15 @@ NULL
 #' # load data
 #' habitat_data <- rast(
 #'   system.file("extdata", "habitat_hi_res.tif", package = "restoptr")
-#' data <- prepare_inputs(
+#' data <- preprocess_input(
 #'     habitat = habitat_data,
 #'     habitat_threshold = 0.7,
 #'     aggregation_factor = 16
 #' )
 #' }
 #'
-#' @noRd
-prepare_inputs <- function(habitat, habitat_threshold = 1, aggregation_factor = 1) {
+#' @export
+preprocess_input <- function(habitat, habitat_threshold = 1, aggregation_factor = 1) {
   ## initial checks
   assertthat::assert_that(
     inherits(habitat, "SpatRaster"),
@@ -107,5 +117,10 @@ prepare_inputs <- function(habitat, habitat_threshold = 1, aggregation_factor = 
     restorable_habitat <- habitat == 0 * 1
     cell_area <- habitat >= 0
   }
-  return(c(downsampled_habitat, restorable_habitat, cell_area))
+  return(list(
+    existing_habitat = downsampled_habitat,
+    restorable_habitat = restorable_habitat,
+    cell_area = cell_area
+    )
+  )
 }

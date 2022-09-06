@@ -1,0 +1,133 @@
+---
+title: "Case study: using historical data to set ecological restoration targets"
+output:
+  rmarkdown::html_vignette:
+    toc: true
+    fig_caption: true
+    self_contained: yes
+fontsize: 11pt
+documentclass: article
+bibliography: references.bib
+csl: reference-style.csl
+vignette: >
+  %\VignetteIndexEntry{Getting started}
+  %\VignetteEngine{knitr::rmarkdown_notangle}
+---
+
+```{r, include = FALSE}
+# define dummy variables so that vignette passes package checks
+##add variables here as needed
+prt_tradeoffs_metedata <- data.frame(total_restorable = NA)
+```
+
+```{r, include = FALSE}
+# define variables for vignette figures and code execution
+h <- 3.5
+w <- 3.5
+is_check <- ("CheckExEnv" %in% search()) || any(c("_R_CHECK_TIMINGS_",
+             "_R_CHECK_LICENSE_") %in% names(Sys.getenv()))
+knitr::opts_chunk$set(fig.align = "center", eval = !is_check)
+```
+
+Historical landscape data is useful to assess habitat loss, increase in habitat fragmentation, or decrease in ecological connectivity. Using _restoptr_, it is possible to take advantage of such historical data to define ecological restoration targets based on the past state of a landscape. In New Caledonia, many vegetation areas are threatened by mining activity, which is the pillar of the archipelago's economy. In this case study, we specifically focused on a mining area located in the north of the main island of New Caledonia, the Mount Kaala. In this area, aerial images from 1976 and 2021 are freely distributed by the Government of New Caledonia. Forest areas in 1976 were digitized manually, and forest areas in 2021 were digitized using an automated method based on the historical analysis of temporal series from Landsat data [@r14], both at a resolution of 30 m x 30 m. This data is included as an example dataset in the _restoptr_ package.
+
+```{r, message = FALSE, results = "hide"}
+# load packages
+library(restoptr)
+library(terra)
+
+# load habitat data
+forest_1976 <- rast(system.file(
+  "extdata", "case_study", "forest_1976.tif", package = "restoptr"
+))
+forest_2021 <- rast(system.file(
+  "extdata", "case_study", "forest_2021.tif", package = "restoptr"
+))
+
+# visualize habitat data
+plot(rast(list(forest_1976, forest_2021)), main=c("Forest 1976", "Forest 2021"), nc=2)
+```
+
+In this case study, we will use an aggregation factor of 3, which corresponds to planning units of 90 m x 90 m according to our input maps. This aggregation factor will ensure a good trade-off between spatial resolution and computational tractability. The habitat threshold parameter, set to 0.75 in this case study, indicates that a planning unit is considered as habitat if it contains at least 75% of habitat. To define restoration targets based on the evolution of the landscape between 1976 and 2021, we need to produce the aggregated rasters and evaluate their landscape metrics. To do so, we use _restoptr_'s preprocessing toolchain.
+
+```{r, message = FALSE, results = "hide"}
+# produce aggregated data
+forest_1976_aggr <- preprocess_input(forest_1976, aggregation_factor = 3, habitat_threshold = 0.75)$existing_habitat
+forest_2021_aggr <- preprocess_input(forest_2021, aggregation_factor = 3, habitat_threshold = 0.75)$existing_habitat
+
+# visualize aggregated data
+plot(rast(list(forest_1976_aggr, forest_2021_aggr)), main=c("Forest 1976 (aggr.)", "Forest 2021 (aggr."), nc=2)
+```
+
+Now, we use the __landscapemetrics__ package to assess the habitat loss and the increase in fragmentation between 1976 and 2021. The habitat loss is measured using the input 30 m x 30 m raster, because _restoptr_ preprocessing toolchain preserves the habitat area. However, the fragmentation is measured at the aggregated level with the effective mesh size index [@r2], which value is impacted by the aggregation factor and the habitat threshold.
+
+```{r, message = FALSE}
+library(landscapemetrics)
+
+forest_area_1976 <- lsm_c_ca(forest_1976)
+forest_area_1976 <- forest_area_1976[forest_area_1976$class == 1, ]$value
+forest_area_2021 <- lsm_c_ca(forest_2021)
+forest_area_2021 <- forest_area_2021[forest_area_2021$class == 1, ]$value
+
+cat("Forest area 1976 = ", forest_area_1976, "ha")
+cat("Forest area 2021 = ", forest_area_2021, "ha")
+
+mesh_1976 <- lsm_c_mesh(forest_1976_aggr, directions = 4)
+mesh_1976 <- mesh_1976[mesh_1976$class == 1, ]$value
+mesh_2021 <- lsm_c_mesh(forest_2021_aggr, directions = 4)
+mesh_2021 <- mesh_2021[mesh_2021$class == 1, ]$value
+
+cat("MESH 1976 = ", mesh_1976, "ha")
+cat("MESH 2021 = ", mesh_2021, "ha")
+```
+
+As we can see, the forest area decreased and the fragmentation increased between 1976 and 2021 (the higher MESH is, the lower the fragmentation is). Our objective is thus to identify restoration plans that (i) is located in accessible areas (150 m buffer around tracks); (ii) is connected and compact (does not exceed a diameter of 900 m); (iii) restores the fragmentation level measured in 1976; and (iv) is at minimal cost (measured in surface units to restore).
+
+First, we create a restopt problem with our input data:
+
+```{r, message = FALSE, results = "hide"}
+problem <- restopt_problem(
+  existing_habitat = forest_2021,
+  habitat_threshold = 0.75,
+  aggregation_factor = 3
+)
+```
+
+(i) We add a constraint to this problem which specifies which planning units are available for restoration actions. The available areas are defined as a 150 m buffer around tracks, which is included in the package example dataset. 
+
+```{r, message = FALSE, results = "hide"}
+available <- vect(system.file(
+  "extdata", "case_study", "available.gpkg", package = "restoptr"
+))
+problem <- problem %>%
+  add_available_areas_constraint(available)
+```
+
+(ii) We add a connected and a compactness constraint. The connected constraint ensures that the restoration plan is spatially continuous. The compactness constraint ensures that the restoration area is within an enclosing circle whose maximum diameter is 900 m (in our case), thus the maximum geographic distance between any two planning units in the solution cannot exceed 900 m.
+
+```{r, message = FALSE, results = "hide"}
+problem <- problem %>%
+  add_connected_constraint() %>%
+  add_compactness_constraint(max_diameter = 900, unit = "m")
+```
+
+(iii) We add a minimum mesh constraint to ensures that the restoration plan will restore, at least, the fragmentation level observed in 1976.
+
+
+```{r, message = FALSE, results = "hide"}
+problem <- problem %>%
+  add_min_mesh_constraint(min_mesh = mesh_1976, unit = "ha")
+```
+
+(iv) We set a min restore objective to identify the minimum cost restoration plans, with the cost measured as the area restored.
+
+```{r, message = FALSE, results = "hide"}
+problem <- problem %>%
+  set_min_restore_objective()
+```
+
+Finally we solve the problem:
+
+```{r, message = FALSE, results = "hide"}
+solution <- solve(problem)
+```

@@ -108,14 +108,14 @@ restopt_problem <- function(existing_habitat, habitat_threshold = 1, aggregation
                   "as the aggregation factor is 1"))
     habitat_threshold <- 1
   }
-  preprocessed <- prepare_inputs(
+  preprocessed <- preprocess_input(
      habitat = existing_habitat,
      habitat_threshold = habitat_threshold,
      aggregation_factor = aggregation_factor
   )
-  habitat_down <- preprocessed[[1]]
-  restorable_down <- preprocessed[[2]]
-  cell_area <- preprocessed[[3]]
+  habitat_down <- preprocessed$existing_habitat
+  restorable_down <- preprocessed$restorable_habitat
+  cell_area <- preprocessed$cell_area
   names(habitat_down) <- "Existing habitat (aggregated)"
   levels(habitat_down) <- c(
     paste("< ", habitat_threshold * 100,  "% habitat"),
