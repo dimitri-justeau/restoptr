@@ -69,8 +69,9 @@ set_min_restore_objective <- function(problem) {
       post = function(jproblem, nb_solutions, precision, time_limit, optimality_gap,
                       verbose=FALSE, search_strategy="") {
         rJava::.jcall(
-          jproblem, "Ljava/util/List;", "minimizeMinRestore", nb_solutions,
-          time_limit, optimality_gap, verbose, search_strategy
+          jproblem, "Ljava/util/List;", "minimizeMinRestore",
+          get_habitat_threshold(problem), nb_solutions, time_limit, optimality_gap,
+          verbose, search_strategy
         )
       }
     )

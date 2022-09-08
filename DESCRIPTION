@@ -59,7 +59,9 @@ Suggests:
     raster (>= 3.5),
     rgdal,
     vegan (>= 2.5.7),
-    cluster (>= 2.1.2)
+    cluster (>= 2.1.2),
+    ggthemes,
+    paletteer
 Roxygen: list(markdown = TRUE)
 Collate:
     'internal.R'

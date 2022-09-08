@@ -10,7 +10,7 @@ documentclass: article
 bibliography: references.bib
 csl: reference-style.csl
 vignette: >
-  %\VignetteIndexEntry{Getting started}
+  %\VignetteIndexEntry{Case study: using historical data to set ecological restoration targets}
   %\VignetteEngine{knitr::rmarkdown_notangle}
 ---
 
@@ -38,25 +38,35 @@ library(terra)
 
 # load habitat data
 forest_1976 <- rast(system.file(
-  "extdata", "case_study", "forest_1976.tif", package = "restoptr"
+  "extdata", "case_study", "forest_1976.tif",
+  package = "restoptr"
 ))
 forest_2021 <- rast(system.file(
-  "extdata", "case_study", "forest_2021.tif", package = "restoptr"
+  "extdata", "case_study", "forest_2021.tif",
+  package = "restoptr"
 ))
 
 # visualize habitat data
-plot(rast(list(forest_1976, forest_2021)), main=c("Forest 1976", "Forest 2021"), nc=2)
+plot(rast(list(forest_1976, forest_2021)),
+     main=c("Forest 1976", "Forest 2021"),
+     nc=2)
 ```
 
 In this case study, we will use an aggregation factor of 3, which corresponds to planning units of 90 m x 90 m according to our input maps. This aggregation factor will ensure a good trade-off between spatial resolution and computational tractability. The habitat threshold parameter, set to 0.75 in this case study, indicates that a planning unit is considered as habitat if it contains at least 75% of habitat. To define restoration targets based on the evolution of the landscape between 1976 and 2021, we need to produce the aggregated rasters and evaluate their landscape metrics. To do so, we use _restoptr_'s preprocessing toolchain.
 
 ```{r, message = FALSE, results = "hide"}
 # produce aggregated data
-forest_1976_aggr <- preprocess_input(forest_1976, aggregation_factor = 3, habitat_threshold = 0.75)$existing_habitat
-forest_2021_aggr <- preprocess_input(forest_2021, aggregation_factor = 3, habitat_threshold = 0.75)$existing_habitat
+forest_1976_aggr <- preprocess_input(forest_1976,
+                                     aggregation_factor = 3,
+                                     habitat_threshold = 0.75)$existing_habitat
+forest_2021_aggr <- preprocess_input(forest_2021,
+                                     aggregation_factor = 3,
+                                     habitat_threshold = 0.75)$existing_habitat
 
 # visualize aggregated data
-plot(rast(list(forest_1976_aggr, forest_2021_aggr)), main=c("Forest 1976 (aggr.)", "Forest 2021 (aggr."), nc=2)
+plot(rast(list(forest_1976_aggr, forest_2021_aggr)),
+     main=c("Forest 1976 (aggr.)", "Forest 2021 (aggr."),
+     nc=2)
 ```
 
 Now, we use the __landscapemetrics__ package to assess the habitat loss and the increase in fragmentation between 1976 and 2021. The habitat loss is measured using the input 30 m x 30 m raster, because _restoptr_ preprocessing toolchain preserves the habitat area. However, the fragmentation is measured at the aggregated level with the effective mesh size index [@r2], which value is impacted by the aggregation factor and the habitat threshold.
@@ -69,28 +79,25 @@ forest_area_1976 <- forest_area_1976[forest_area_1976$class == 1, ]$value
 forest_area_2021 <- lsm_c_ca(forest_2021)
 forest_area_2021 <- forest_area_2021[forest_area_2021$class == 1, ]$value
 
-cat("Forest area 1976 = ", forest_area_1976, "ha")
-cat("Forest area 2021 = ", forest_area_2021, "ha")
+cat("Evolution of forest area between 1976 and 2021 : ",
+    forest_area_2021 - forest_area_1976, "ha")
 
 mesh_1976 <- lsm_c_mesh(forest_1976_aggr, directions = 4)
 mesh_1976 <- mesh_1976[mesh_1976$class == 1, ]$value
 mesh_2021 <- lsm_c_mesh(forest_2021_aggr, directions = 4)
 mesh_2021 <- mesh_2021[mesh_2021$class == 1, ]$value
 
-cat("MESH 1976 = ", mesh_1976, "ha")
-cat("MESH 2021 = ", mesh_2021, "ha")
+cat("Evolution of MESH betwee 1976 and 2021 : ", mesh_2021 - mesh_1976, "ha")
 ```
 
-As we can see, the forest area decreased and the fragmentation increased between 1976 and 2021 (the higher MESH is, the lower the fragmentation is). Our objective is thus to identify restoration plans that (i) is located in accessible areas (150 m buffer around tracks); (ii) is connected and compact (does not exceed a diameter of 900 m); (iii) restores the fragmentation level measured in 1976; and (iv) is at minimal cost (measured in surface units to restore).
+As we can see, the forest area decreased and the fragmentation increased between 1976 and 2021 (the higher MESH is, the lower the fragmentation is). Our objective is thus to identify restoration plans that (i) is located in accessible areas (150 m buffer around tracks); (ii) is connected and compact (does not exceed a diameter of 920 m); (iii) restores the fragmentation level measured in 1976; and (iv) is at minimal cost (measured in surface units to restore).
 
 First, we create a restopt problem with our input data:
 
 ```{r, message = FALSE, results = "hide"}
-problem <- restopt_problem(
-  existing_habitat = forest_2021,
-  habitat_threshold = 0.75,
-  aggregation_factor = 3
-)
+problem <- restopt_problem(existing_habitat = forest_2021,
+                           habitat_threshold = 0.75,
+                           aggregation_factor = 3)
 ```
 
 (i) We add a constraint to this problem which specifies which planning units are available for restoration actions. The available areas are defined as a 150 m buffer around tracks, which is included in the package example dataset. 
@@ -103,12 +110,12 @@ problem <- problem %>%
   add_available_areas_constraint(available)
 ```
 
-(ii) We add a connected and a compactness constraint. The connected constraint ensures that the restoration plan is spatially continuous. The compactness constraint ensures that the restoration area is within an enclosing circle whose maximum diameter is 900 m (in our case), thus the maximum geographic distance between any two planning units in the solution cannot exceed 900 m.
+(ii) We add a connected and a compactness constraint. The connected constraint ensures that the restoration plan is spatially continuous. The compactness constraint ensures that the restoration area is within an enclosing circle whose maximum diameter is 920 m (in our case), thus the maximum geographic distance between any two planning units in the solution cannot exceed 920 m.
 
 ```{r, message = FALSE, results = "hide"}
 problem <- problem %>%
   add_connected_constraint() %>%
-  add_compactness_constraint(max_diameter = 900, unit = "m")
+  add_compactness_constraint(max_diameter = 920, unit = "m")
 ```
 
 (iii) We add a minimum mesh constraint to ensures that the restoration plan will restore, at least, the fragmentation level observed in 1976.
@@ -126,8 +133,43 @@ problem <- problem %>%
   set_min_restore_objective()
 ```
 
-Finally we solve the problem:
+We can get a summary of the restopt problem by printing it.
+
+```{r, message = FALSE}
+print(problem)
+```
+
+
+Finally we solve the problem, plot the solution, and print the solution's metadata.
+
+```{r, message = FALSE}
+solution <- solve(problem)
+plot(solution)
+get_metadata(solution)
+```
+
+Looking at the characteristics of this restoration plan, we can notice that a strategic restoration plan can restore the fragmentation level of 1976 with a relatively small cost (~36 ha), compared to the forest cover loss that occurred between 1976 and 2021 (~165 ha).
+
+Now, a typical question that may arise is whether alternative restoration plans of similar quality exist. It is possible to answer this question by configuring __restoptr__ to output several solutions and setting an optimality gap. First, we reuse the problem to set an optimality gap of 10%, and ask for 1000 near-optimal solutions.
+
+```{r, message = FALSE}
+problem <- problem %>%
+  add_settings(nb_solutions = 1000, optimality_gap = 0.1)
+solutions <- solve(problem)
+```
+
+Then, we compute the selection frequency of each planning unit, and plot it.
 
 ```{r, message = FALSE, results = "hide"}
-solution <- solve(problem)
+s <- rast(solutions)
+selfreq = sum(s == 3) / 1000
+selfreq[selfreq == 0] <- NA
+plot(selfreq, col=paletteer::paletteer_c("ggthemes::Blue", 30),
+     main = "Selection frequency")
 ```
+
+What emerges from this analysis is that, under the current constraints, all near-optimal solutions occur in the same area, which indicates a strong potential of this particular area for curbing fragmentation at minimal cost in the Mount Kaala.
+
+
+# References
+

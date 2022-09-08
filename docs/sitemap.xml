@@ -4,6 +4,9 @@
     <loc>https://dimitri-justeau.github.io/restoptr/404.html</loc>
   </url>
   <url>
+    <loc>https://dimitri-justeau.github.io/restoptr/articles/case_study.html</loc>
+  </url>
+  <url>
     <loc>https://dimitri-justeau.github.io/restoptr/articles/index.html</loc>
   </url>
   <url>
@@ -89,6 +92,9 @@
   </url>
   <url>
     <loc>https://dimitri-justeau.github.io/restoptr/reference/pipe.html</loc>
+  </url>
+  <url>
+    <loc>https://dimitri-justeau.github.io/restoptr/reference/preprocess_input.html</loc>
   </url>
   <url>
     <loc>https://dimitri-justeau.github.io/restoptr/reference/print.RestoptProblem.html</loc>

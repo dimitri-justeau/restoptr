@@ -49,6 +49,12 @@
 <li class="nav-item">
   <a class="nav-link" href="../reference/index.html">Reference</a>
 </li>
+<li class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-articles">
+    <a class="dropdown-item" href="../articles/case_study.html">Case study: using historical data to set ecological restoration targets</a>
+  </div>
+</li>
 <li class="nav-item">
   <a class="nav-link" href="../news/index.html">Changelog</a>
 </li>
@@ -73,7 +79,8 @@
 
 
 
-<script src="restoptr_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+
+<div class="row">
   <main id="main"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Getting started</h1>
             
@@ -87,13 +94,45 @@
 <div class="section level2">
 <h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h2>
-<p>Habitat restoration is urgently need to prevent further declines in biodiversity <span class="citation">(Chazdon <em>et al.</em> 2017; Strassburg <em>et al.</em> 2020)</span>. Since the resources available for restoring habitat are limited, plans for restoring habitat (hereafter, “restoration prioritizations”) need to achieve conservation objectives for minimal cost <span class="citation">(Strassburg <em>et al.</em> 2019)</span>. Indeed, restoration prioritizations need to strategically site restoration actions in places that will enhance connectivity among remaining habitats <span class="citation">(Correa Ayram <em>et al.</em> 2016)</span>. They also need to account for existing land-use constraints that prevent such actions for being implemented in particular places (e.g., places that are too heavily modified for conservation activities) <span class="citation">(Margules &amp; Pressey 2000)</span>. Since accounting for these considerations and exploring trade-offs between them can be difficult, decision support tools can play an important role in conservation decision making <span class="citation">(Flower <em>et al.</em> 2020; Janßen <em>et al.</em> 2019; Jumin <em>et al.</em> 2018)</span>.</p>
-<p>Here we provide a tutorial for using the <em>restoptr R</em> package for ecological restoration planning. Briefly, it it uses optimization algorithms to generate restoration prioritizations <span class="citation">(based on Justeau-Allaire <em>et al.</em> 2021)</span>. They can be identified by maximizing landscape indices, such as the effective mesh size (Jaeger 2000), or the integral index of connectivity (Pascual-Hortal &amp; Saura 2006). Additionally, constraints can be used to ensure that priority areas exhibit particular characteristics (e.g., ensure that particular places are not selected for restoration, ensure that priority areas form a single contiguous network). Furthermore, multiple near-optimal solutions can be generated to explore multiple options in restoration planning. The package leverages the <a href="https://choco-solver.org/" class="external-link">Choco-solver</a> software to perform optimization using constraint programming (CP) techniques <span class="citation">(Prud’homme <em>et al.</em> 2016)</span>.</p>
+<p>Habitat restoration is urgently need to prevent further declines in
+biodiversity <span class="citation">(Chazdon <em>et al.</em> 2017;
+Strassburg <em>et al.</em> 2020)</span>. Since the resources available
+for restoring habitat are limited, plans for restoring habitat
+(hereafter, “restoration prioritizations”) need to achieve conservation
+objectives for minimal cost <span class="citation">(Strassburg <em>et
+al.</em> 2019)</span>. Indeed, restoration prioritizations need to
+strategically site restoration actions in places that will enhance
+connectivity among remaining habitats <span class="citation">(Correa
+Ayram <em>et al.</em> 2016)</span>. They also need to account for
+existing land-use constraints that prevent such actions for being
+implemented in particular places (e.g., places that are too heavily
+modified for conservation activities) <span class="citation">(Margules
+&amp; Pressey 2000)</span>. Since accounting for these considerations
+and exploring trade-offs between them can be difficult, decision support
+tools can play an important role in conservation decision making <span class="citation">(Flower <em>et al.</em> 2020; Janßen <em>et al.</em>
+2019; Jumin <em>et al.</em> 2018)</span>.</p>
+<p>Here we provide a tutorial for using the <em>restoptr R</em> package
+for ecological restoration planning. Briefly, it it uses optimization
+algorithms to generate restoration prioritizations <span class="citation">(based on Justeau-Allaire <em>et al.</em> 2021)</span>.
+They can be identified by maximizing landscape indices, such as the
+effective mesh size (Jaeger 2000), or the integral index of connectivity
+(Pascual-Hortal &amp; Saura 2006). Additionally, constraints can be used
+to ensure that priority areas exhibit particular characteristics (e.g.,
+ensure that particular places are not selected for restoration, ensure
+that priority areas form a single contiguous network). Furthermore,
+multiple near-optimal solutions can be generated to explore multiple
+options in restoration planning. The package leverages the <a href="https://choco-solver.org/" class="external-link">Choco-solver</a> software to perform
+optimization using constraint programming (CP) techniques <span class="citation">(Prud’homme <em>et al.</em> 2016)</span>.</p>
 </div>
 <div class="section level2">
 <h2 id="setup">Setup<a class="anchor" aria-label="anchor" href="#setup"></a>
 </h2>
-<p>Let’s setup our <em>R</em> session for the tutorial. Here, we will load the <em>restoptr R</em> package. We will also load the <em>terra R</em> package for working with raster data, and the <em>vegan</em> and <em>cluster R</em> packages for comparing prioritizations. Additionally, we will set the seed for the random number generator to help ensure consistent results.</p>
+<p>Let’s setup our <em>R</em> session for the tutorial. Here, we will
+load the <em>restoptr R</em> package. We will also load the <em>terra
+R</em> package for working with raster data, and the <em>vegan</em> and
+<em>cluster R</em> packages for comparing prioritizations. Additionally,
+we will set the seed for the random number generator to help ensure
+consistent results.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># load packages</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dimitri-justeau.github.io/restoptr/">restoptr</a></span><span class="op">)</span>
@@ -103,17 +142,35 @@
 
 <span class="co"># set seed for reproducibility</span>
 <span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">500</span><span class="op">)</span></code></pre></div>
-<p>Since the package needs Java to work, let’s verify that Java is installed.</p>
+<p>Since the package needs Java to work, let’s verify that Java is
+installed.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># check if Java is available for usage</span>
 <span class="fu"><a href="../reference/is_java_available.html">is_java_available</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">## [1] TRUE</span></code></pre>
-<p>If the previous code returns a <code>TRUE</code>, then this means that Java is installed on your computer and ready to use. If not, please see the package README documentation for instructions on installing and setting up Java (see <a href="https://github.com/dimitri-justeau/restoptr" class="external-link uri">https://github.com/dimitri-justeau/restoptr</a>). Assuming that Java is installed correctly, we can then proceed with the tutorial.</p>
+<p>If the previous code returns a <code>TRUE</code>, then this means
+that Java is installed on your computer and ready to use. If not, please
+see the package README documentation for instructions on installing and
+setting up Java (see <a href="https://github.com/dimitri-justeau/restoptr" class="external-link uri">https://github.com/dimitri-justeau/restoptr</a>). Assuming
+that Java is installed correctly, we can then proceed with the
+tutorial.</p>
 </div>
 <div class="section level2">
 <h2 id="data">Data<a class="anchor" aria-label="anchor" href="#data"></a>
 </h2>
-<p>Let’s import data for generating restoration prioritizations. Specifically, we will use an example dataset distributed with the package <span class="citation">(obtained from Justeau-Allaire <em>et al.</em> 2021)</span>. This dataset contains data for prioritizing forest restoration efforts within a protected area in New Caledonia. To begin with, let’s import a raster layer to describe the spatial distribution of existing habitat across the study area. This raster layer (i.e., <code>habitat_data</code>) contains binary values (zeros and ones) indicating places that (0) do not contain existing habitat and (1) currently contain existing habitat. This raster layer also contains places with missing (<code>NA</code>) values, which represent places that should not be considered as part of the prioritization exercise (e.g., places located outside the study area).</p>
+<p>Let’s import data for generating restoration prioritizations.
+Specifically, we will use an example dataset distributed with the
+package <span class="citation">(obtained from Justeau-Allaire <em>et
+al.</em> 2021)</span>. This dataset contains data for prioritizing
+forest restoration efforts within a protected area in New Caledonia. To
+begin with, let’s import a raster layer to describe the spatial
+distribution of existing habitat across the study area. This raster
+layer (i.e., <code>habitat_data</code>) contains binary values (zeros
+and ones) indicating places that (0) do not contain existing habitat and
+(1) currently contain existing habitat. This raster layer also contains
+places with missing (<code>NA</code>) values, which represent places
+that should not be considered as part of the prioritization exercise
+(e.g., places located outside the study area).</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># load habitat data</span>
 <span class="va">habitat_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/rast.html" class="external-link">rast</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span>
@@ -133,7 +190,18 @@
 <code class="sourceCode R"><span class="co"># visualize habitat data</span>
 <span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">habitat_data</span>, main <span class="op">=</span> <span class="st">"Existing habitat"</span>,  plg <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"topright"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="restoptr_files/figure-html/unnamed-chunk-5-1.png" width="90%" style="display: block; margin: auto;"></p>
-<p>Next, let’s import a raster layer to describe the spatial distribution of places inside the study area that are not available for restoration activities. For example, these places could include places where restoration efforts would be too costly to implement, or places where restoration is not possible because they are needed for other land-uses (e.g., places needed for urban development). Similar to the previous raster layer, this raster layer (i.e., <code>locked_out_data</code>) contains binary values (zeros and ones) indicating places that (0) are suitable for restoration actions and (1) not suitable for restoration actions. This raster layer also contains missing (<code>NA</code>) values in the same places as the previous layer.</p>
+<p>Next, let’s import a raster layer to describe the spatial
+distribution of places inside the study area that are not available for
+restoration activities. For example, these places could include places
+where restoration efforts would be too costly to implement, or places
+where restoration is not possible because they are needed for other
+land-uses (e.g., places needed for urban development). Similar to the
+previous raster layer, this raster layer (i.e.,
+<code>locked_out_data</code>) contains binary values (zeros and ones)
+indicating places that (0) are suitable for restoration actions and (1)
+not suitable for restoration actions. This raster layer also contains
+missing (<code>NA</code>) values in the same places as the previous
+layer.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># load locked out data</span>
 <span class="va">locked_out_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/rast.html" class="external-link">rast</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span>
@@ -155,12 +223,38 @@
 <code class="sourceCode R"><span class="co"># visualize locked out data</span>
 <span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">locked_out_data</span>, main <span class="op">=</span> <span class="st">"Locked out areas"</span>, plg <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"topright"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="restoptr_files/figure-html/unnamed-chunk-6-1.png" width="90%" style="display: block; margin: auto;"></p>
-<p>After loading in the data, we can begin formulating an optimization problem.</p>
+<p>After loading in the data, we can begin formulating an optimization
+problem.</p>
 </div>
 <div class="section level2">
 <h2 id="problem-formulation">Problem formulation<a class="anchor" aria-label="anchor" href="#problem-formulation"></a>
 </h2>
-<p>Now let’s formulate a restoration optimization problem. To achieve this, we will build an object that contains the data and settings needed to perform the optimization process. First, we will create an object for the underlying data (using the <code><a href="../reference/restopt_problem.html">restopt_problem()</a></code> function). Here, we will specify that we are using the <code>habitat_data</code> raster layer to specify the spatial distribution of existing habitat (via the <code>existing_habitat</code> parameter). We will also specify that the data should be internally aggregated (using a factor of 16) to reduce computational processing (via the <code>aggregation_factor</code> parameter). Additionally, we will specify that – following data aggregation – places must contain at least 70% of habitat to be considered adequately managed for biodiversity (via the <code>habitat_threshold</code> parameter). Second, we will specify that the objective function – the metric used to compare competing solutions – will be a connectivity metric known as the effective mesh size statistic (via the <code><a href="../reference/set_max_mesh_objective.html">set_max_mesh_objective()</a></code> function) <span class="citation">(Jaeger 2000)</span>. Third, we will specify that the total amount of land selected for restoration should not exceed 220 ha (via the <code><a href="../reference/add_restorable_constraint.html">add_restorable_constraint()</a></code> function). Fourth, we will specify that the spatial extent of the priority areas must not exceed 2.5 km (via the <code><a href="../reference/add_compactness_constraint.html">add_compactness_constraint()</a></code> function). Fifth, we will specify that particular places – per the <code>locked_out_data</code> raster layer – should not be selected for restoration activities (via the <code><a href="../reference/add_locked_out_constraint.html">add_locked_out_constraint()</a></code> function). Finally, we will specify that we wish to generate a single optimal prioritization (via the <code><a href="../reference/add_settings.html">add_settings()</a></code> function).</p>
+<p>Now let’s formulate a restoration optimization problem. To achieve
+this, we will build an object that contains the data and settings needed
+to perform the optimization process. First, we will create an object for
+the underlying data (using the <code><a href="../reference/restopt_problem.html">restopt_problem()</a></code> function).
+Here, we will specify that we are using the <code>habitat_data</code>
+raster layer to specify the spatial distribution of existing habitat
+(via the <code>existing_habitat</code> parameter). We will also specify
+that the data should be internally aggregated (using a factor of 16) to
+reduce computational processing (via the <code>aggregation_factor</code>
+parameter). Additionally, we will specify that – following data
+aggregation – places must contain at least 70% of habitat to be
+considered adequately managed for biodiversity (via the
+<code>habitat_threshold</code> parameter). Second, we will specify that
+the objective function – the metric used to compare competing solutions
+– will be a connectivity metric known as the effective mesh size
+statistic (via the <code><a href="../reference/set_max_mesh_objective.html">set_max_mesh_objective()</a></code> function) <span class="citation">(Jaeger 2000)</span>. Third, we will specify that the
+total amount of land selected for restoration should not exceed 220 ha
+(via the <code><a href="../reference/add_restorable_constraint.html">add_restorable_constraint()</a></code> function). Fourth, we
+will specify that the spatial extent of the priority areas must not
+exceed 2.5 km (via the <code><a href="../reference/add_compactness_constraint.html">add_compactness_constraint()</a></code>
+function). Fifth, we will specify that particular places – per the
+<code>locked_out_data</code> raster layer – should not be selected for
+restoration activities (via the <code><a href="../reference/add_locked_out_constraint.html">add_locked_out_constraint()</a></code>
+function). Finally, we will specify that we wish to generate a single
+optimal prioritization (via the <code><a href="../reference/add_settings.html">add_settings()</a></code>
+function).</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># build problem</span>
 <span class="va">rp</span> <span class="op">&lt;-</span>
@@ -206,11 +300,12 @@
 <div class="section level2">
 <h2 id="generating-a-prioritization">Generating a prioritization<a class="anchor" aria-label="anchor" href="#generating-a-prioritization"></a>
 </h2>
-<p>We can generate a prioritization by solving the restoration problem object (i.e., <code>rp</code>).</p>
+<p>We can generate a prioritization by solving the restoration problem
+object (i.e., <code>rp</code>).</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># solve problem to generate prioritization</span>
 <span class="va">rs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/solve.html" class="external-link">solve</a></span><span class="op">(</span><span class="va">rp</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## <span style="color: #00BB00;">Good news: the solver found 1 solution statisfying the constraints that was proven optimal ! (solving time = 3.38 s)</span></span></code></pre>
+<pre><code><span class="co">## <span style="color: #00BB00;">Good news: the solver found 1 solution statisfying the constraints that was proven optimal ! (solving time = 2.91 s)</span></span></code></pre>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># preview prioritization</span>
 <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">rs</span><span class="op">)</span></code></pre></div>
@@ -229,7 +324,7 @@
 <pre><code><span class="co">##     min_restore total_restorable nb_planning_units nb_components     diameter</span>
 <span class="co">## 1 219.2941 [ha]    219.2941 [ha]                16             3 2499.808 [m]</span>
 <span class="co">##   optimality_proven search_state solving_time  mesh_initial          mesh</span>
-<span class="co">## 1              TRUE   TERMINATED        3.357 13667.84 [ha] 14248.14 [ha]</span>
+<span class="co">## 1              TRUE   TERMINATED        2.883 13667.84 [ha] 14248.14 [ha]</span>
 <span class="co">##       mesh_best</span>
 <span class="co">## 1 14248.14 [ha]</span></code></pre>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
@@ -245,22 +340,43 @@
   plg <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"topright"</span><span class="op">)</span>
 <span class="op">)</span></code></pre></div>
 <p><img src="restoptr_files/figure-html/unnamed-chunk-8-1.png" width="90%" style="display: block; margin: auto;"></p>
-<p>We can see that the prioritization selected planning units for restoration in the southern region of the study area (shown in blue). By restoring the habitat inside these planning units, restoration efforts could link up two large patches of existing habitat (shown in green, located north and south of the prioritization). Thus the prioritization has identified a set of priority areas that could produce a single extremely large patch of habitat—substantially improving connectivity within the study area. After generating a prioritization, we can also extract metadata for it. These metadata describe the spatial extent of priority areas, and their ability to promote connectivity according to various metrics.</p>
+<p>We can see that the prioritization selected planning units for
+restoration in the southern region of the study area (shown in blue). By
+restoring the habitat inside these planning units, restoration efforts
+could link up two large patches of existing habitat (shown in green,
+located north and south of the prioritization). Thus the prioritization
+has identified a set of priority areas that could produce a single
+extremely large patch of habitat—substantially improving connectivity
+within the study area. After generating a prioritization, we can also
+extract metadata for it. These metadata describe the spatial extent of
+priority areas, and their ability to promote connectivity according to
+various metrics.</p>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># extract metadata</span>
 <span class="fu"><a href="../reference/get_metadata.html">get_metadata</a></span><span class="op">(</span><span class="va">rs</span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">##     min_restore total_restorable nb_planning_units nb_components     diameter</span>
 <span class="co">## 1 219.2941 [ha]    219.2941 [ha]                16             3 2499.808 [m]</span>
 <span class="co">##   optimality_proven search_state solving_time  mesh_initial          mesh</span>
-<span class="co">## 1              TRUE   TERMINATED        3.357 13667.84 [ha] 14248.14 [ha]</span>
+<span class="co">## 1              TRUE   TERMINATED        2.883 13667.84 [ha] 14248.14 [ha]</span>
 <span class="co">##       mesh_best</span>
 <span class="co">## 1 14248.14 [ha]</span></code></pre>
-<p>Although this prioritization identifies a set of places that – in combination – can help promote connectivity, it does not necessarily tell us which of these places are more (or less) important for achieving this objective.</p>
+<p>Although this prioritization identifies a set of places that – in
+combination – can help promote connectivity, it does not necessarily
+tell us which of these places are more (or less) important for achieving
+this objective.</p>
 </div>
 <div class="section level2">
 <h2 id="relative-importance">Relative importance<a class="anchor" aria-label="anchor" href="#relative-importance"></a>
 </h2>
-<p>We can assess the relative importance of places for restoring connectivity. This information is useful to help facilitate stakeholder discussions and determine which places in the prioritization should scheduled immediately for restoration. To assess relative importance, we will generate a portfolio of optimal prioritizations and calculate the number of times that each planning unit is selected for prioritization. This approach is similar to the selection frequency statistics provided by the <em>Marxan</em> decision support tool for conservation planning <span class="citation">(Ball <em>et al.</em> 2009)</span>.</p>
+<p>We can assess the relative importance of places for restoring
+connectivity. This information is useful to help facilitate stakeholder
+discussions and determine which places in the prioritization should
+scheduled immediately for restoration. To assess relative importance, we
+will generate a portfolio of optimal prioritizations and calculate the
+number of times that each planning unit is selected for prioritization.
+This approach is similar to the selection frequency statistics provided
+by the <em>Marxan</em> decision support tool for conservation planning
+<span class="citation">(Ball <em>et al.</em> 2009)</span>.</p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># generate multiple prioritizations for assessing relative importance</span>
 <span class="va">prt_imp</span> <span class="op">&lt;-</span>
@@ -302,12 +418,30 @@
 <code class="sourceCode R"><span class="co"># visualize selection frequencies</span>
 <span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">selfreq</span>, main <span class="op">=</span> <span class="st">"Selection frequencies"</span>, type <span class="op">=</span> <span class="st">"continuous"</span><span class="op">)</span></code></pre></div>
 <p><img src="restoptr_files/figure-html/unnamed-chunk-11-1.png" width="90%" style="display: block; margin: auto;"></p>
-<p>We can see that some planning units are critical for implementing an optimal prioritization (shown in dark green) and there are other planning units which are not so important (shown in yellow or pink). In addition to evaluating relative importance, we can also generate portfolios to explore alternative options for restoration.</p>
+<p>We can see that some planning units are critical for implementing an
+optimal prioritization (shown in dark green) and there are other
+planning units which are not so important (shown in yellow or pink). In
+addition to evaluating relative importance, we can also generate
+portfolios to explore alternative options for restoration.</p>
 </div>
 <div class="section level2">
 <h2 id="exploring-alternatives">Exploring alternatives<a class="anchor" aria-label="anchor" href="#exploring-alternatives"></a>
 </h2>
-<p>Spatial conservation planning exercises can help facilitate stakeholder discussions by presenting a range of alternate prioritizations. This is because stakeholders might have additional objectives that were not previously communicated (e.g., conservation of a particular charismatic species), or because existing data may be insufficient to fully parametrize all of their objectives (e.g., although a stakeholder might value a particular ecosystem service, data may not exist to incorporate the ecosystem service into the prioritization process). As such, it can be useful to generate a set of multiple prioritizations that have (roughly) similar performance and exhibit different spatial configurations. So, let’s generate a second portfolio of prioritizations. Since our aim is to identify alternate spatial configurations with relatively similar performance, we will generate prioritizations under a range of different optimality gaps (i.e., ranging from 0% to 15%).</p>
+<p>Spatial conservation planning exercises can help facilitate
+stakeholder discussions by presenting a range of alternate
+prioritizations. This is because stakeholders might have additional
+objectives that were not previously communicated (e.g., conservation of
+a particular charismatic species), or because existing data may be
+insufficient to fully parametrize all of their objectives (e.g.,
+although a stakeholder might value a particular ecosystem service, data
+may not exist to incorporate the ecosystem service into the
+prioritization process). As such, it can be useful to generate a set of
+multiple prioritizations that have (roughly) similar performance and
+exhibit different spatial configurations. So, let’s generate a second
+portfolio of prioritizations. Since our aim is to identify alternate
+spatial configurations with relatively similar performance, we will
+generate prioritizations under a range of different optimality gaps
+(i.e., ranging from 0% to 15%).</p>
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># define optimality gaps</span>
 <span class="va">gap_values</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0.15</span>, <span class="fl">0.1</span><span class="op">)</span>
@@ -339,7 +473,14 @@
 <span class="co">## names       :  Solution 1,  Solution 2,  Solution 3,  Solution 4,  Solution 5,  Solution 6, ... </span>
 <span class="co">## min values  :  Locked out,  Locked out,  Locked out,  Locked out,  Locked out,  Locked out, ... </span>
 <span class="co">## max values  : Restoration, Restoration, Restoration, Restoration, Restoration, Restoration, ...</span></code></pre>
-<p>Although we generated a portfolio of different prioritizations, it’s difficult to tell which exactly which prioritizations are different to each other. Although we could try viewing the prioritizations one by one, this isn’t really practical. So, let’s conduct a statistical analysis to visualize differences among the planning units – based on which planning units they selected – using a hierarchical cluster analysis <span class="citation">(Harris <em>et al.</em> 2014)</span>.</p>
+<p>Although we generated a portfolio of different prioritizations, it’s
+difficult to tell which exactly which prioritizations are different to
+each other. Although we could try viewing the prioritizations one by
+one, this isn’t really practical. So, let’s conduct a statistical
+analysis to visualize differences among the planning units – based on
+which planning units they selected – using a hierarchical cluster
+analysis <span class="citation">(Harris <em>et al.</em>
+2014)</span>.</p>
 <div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># extract prioritization values</span>
 <span class="va">prt_values</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">prt_alt</span> <span class="op">==</span> <span class="fl">3</span><span class="op">)</span>
@@ -359,7 +500,10 @@
   <span class="op">)</span>
 <span class="op">)</span></code></pre></div>
 <p><img src="restoptr_files/figure-html/unnamed-chunk-13-1.png" width="90%" style="display: block; margin: auto;"></p>
-<p>We can see that there are two main groups of prioritizations in the portfolio. To identify prioritizations within each of these groups, let’s conduct a k-medoids cluster analysis to extract the most typical prioritization within each group.</p>
+<p>We can see that there are two main groups of prioritizations in the
+portfolio. To identify prioritizations within each of these groups,
+let’s conduct a k-medoids cluster analysis to extract the most typical
+prioritization within each group.</p>
 <div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># run k-medoids analysis</span>
 <span class="va">prt_med</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/cluster/man/pam.html" class="external-link">pam</a></span><span class="op">(</span><span class="va">prt_dists</span>, k <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
@@ -383,12 +527,35 @@
   plg <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"topright"</span><span class="op">)</span>, nc <span class="op">=</span> <span class="fl">1</span>
 <span class="op">)</span></code></pre></div>
 <p><img src="restoptr_files/figure-html/unnamed-chunk-14-1.png" width="90%" style="display: block; margin: auto;"></p>
-<p>We can see that the first prioritization (shown on the top) is very similar to the optimal solution we generated previously. Indeed – similar to the optimal prioritization – this prioritization selected a set of planning units to link up the two patches of existing habitat in the southern region of the study area. However, the second prioritizations (shown on the bottom) selected a set of planning units in the central region of the study area. This prioritization identified a different set of planning units to link up other patches of existing habitat. Since both prioritizations are within 15% of optimality (per the greatest optimality gap used to generate the portfolio), they both have roughly the same performance.</p>
+<p>We can see that the first prioritization (shown on the top) is very
+similar to the optimal solution we generated previously. Indeed –
+similar to the optimal prioritization – this prioritization selected a
+set of planning units to link up the two patches of existing habitat in
+the southern region of the study area. However, the second
+prioritizations (shown on the bottom) selected a set of planning units
+in the central region of the study area. This prioritization identified
+a different set of planning units to link up other patches of existing
+habitat. Since both prioritizations are within 15% of optimality (per
+the greatest optimality gap used to generate the portfolio), they both
+have roughly the same performance.</p>
 </div>
 <div class="section level2">
 <h2 id="evaluating-trade-offs">Evaluating trade-offs<a class="anchor" aria-label="anchor" href="#evaluating-trade-offs"></a>
 </h2>
-<p>Conservation decision making fundamentally involves making trade-offs between multiple objectives. Here, the main trade-off is between (i) maximizing the level of connectivity that can be promoted by restoring habitats and (ii) minimizing the total cost of restoration actions. Specifically, we consider total cost to be reflected by the total area of the planning units selected for restoration. This trade-off can be particularly acute, wherein large gains in connectivity can be achieved through only a minor increase in cost. As such, it can be very useful to understand how the increasing the maximum amount of land available for restoration can influence the connectivity. To explore this, we will generate a portfolio of prioritizations using different constraints and measure their performance. Since we are interested in exploring trade-offs – rather than alternate prioritizations – we will specify an optimality gap of 0%.</p>
+<p>Conservation decision making fundamentally involves making trade-offs
+between multiple objectives. Here, the main trade-off is between (i)
+maximizing the level of connectivity that can be promoted by restoring
+habitats and (ii) minimizing the total cost of restoration actions.
+Specifically, we consider total cost to be reflected by the total area
+of the planning units selected for restoration. This trade-off can be
+particularly acute, wherein large gains in connectivity can be achieved
+through only a minor increase in cost. As such, it can be very useful to
+understand how the increasing the maximum amount of land available for
+restoration can influence the connectivity. To explore this, we will
+generate a portfolio of prioritizations using different constraints and
+measure their performance. Since we are interested in exploring
+trade-offs – rather than alternate prioritizations – we will specify an
+optimality gap of 0%.</p>
 <div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># define a set of different maximum area values for generating prioritizations</span>
 <span class="co">## N.B. these values are in hectares</span>
@@ -457,42 +624,42 @@
 <span class="co">## 35 336.67209 [ha]   336.67209 [ha]                22             2 2499.808 [m]</span>
 <span class="co">## 36 336.67209 [ha]   336.67209 [ha]                22             2 2499.808 [m]</span>
 <span class="co">##    optimality_proven search_state solving_time  mesh_initial          mesh</span>
-<span class="co">## 1               TRUE   TERMINATED        7.042 13667.84 [ha] 14124.59 [ha]</span>
-<span class="co">## 2               TRUE   TERMINATED        7.777 13667.84 [ha] 14124.59 [ha]</span>
-<span class="co">## 3               TRUE   TERMINATED        6.680 13667.84 [ha] 14140.00 [ha]</span>
-<span class="co">## 4               TRUE   TERMINATED        4.307 13667.84 [ha] 14155.43 [ha]</span>
-<span class="co">## 5               TRUE   TERMINATED        3.986 13667.84 [ha] 14155.43 [ha]</span>
-<span class="co">## 6               TRUE   TERMINATED        3.048 13667.84 [ha] 14170.86 [ha]</span>
-<span class="co">## 7               TRUE   TERMINATED        2.952 13667.84 [ha] 14186.29 [ha]</span>
-<span class="co">## 8               TRUE   TERMINATED        2.388 13667.84 [ha] 14201.74 [ha]</span>
-<span class="co">## 9               TRUE   TERMINATED        2.443 13667.84 [ha] 14201.74 [ha]</span>
-<span class="co">## 10              TRUE   TERMINATED        2.024 13667.84 [ha] 14217.20 [ha]</span>
-<span class="co">## 11              TRUE   TERMINATED        1.784 13667.84 [ha] 14217.20 [ha]</span>
-<span class="co">## 12              TRUE   TERMINATED        1.563 13667.84 [ha] 14232.66 [ha]</span>
-<span class="co">## 13              TRUE   TERMINATED        1.463 13667.84 [ha] 14248.14 [ha]</span>
-<span class="co">## 14              TRUE   TERMINATED        1.325 13667.84 [ha] 14248.14 [ha]</span>
-<span class="co">## 15              TRUE   TERMINATED        1.059 13667.84 [ha] 14263.62 [ha]</span>
-<span class="co">## 16              TRUE   TERMINATED        0.604 13667.84 [ha] 14263.62 [ha]</span>
-<span class="co">## 17              TRUE   TERMINATED        0.463 13667.84 [ha] 14279.12 [ha]</span>
-<span class="co">## 18              TRUE   TERMINATED        1.006 13667.84 [ha] 14279.12 [ha]</span>
-<span class="co">## 19              TRUE   TERMINATED        0.995 13667.84 [ha] 14294.62 [ha]</span>
-<span class="co">## 20              TRUE   TERMINATED        1.104 13667.84 [ha] 14294.62 [ha]</span>
-<span class="co">## 21              TRUE   TERMINATED        0.790 13667.84 [ha] 14310.13 [ha]</span>
-<span class="co">## 22              TRUE   TERMINATED        0.670 13667.84 [ha] 14310.13 [ha]</span>
-<span class="co">## 23              TRUE   TERMINATED        1.342 13667.84 [ha] 14325.65 [ha]</span>
-<span class="co">## 24              TRUE   TERMINATED        1.375 13667.84 [ha] 14325.65 [ha]</span>
-<span class="co">## 25              TRUE   TERMINATED        0.988 13667.84 [ha] 14341.18 [ha]</span>
-<span class="co">## 26              TRUE   TERMINATED        1.046 13667.84 [ha] 14341.18 [ha]</span>
-<span class="co">## 27              TRUE   TERMINATED        1.092 13667.84 [ha] 14341.18 [ha]</span>
-<span class="co">## 28              TRUE   TERMINATED        0.829 13667.84 [ha] 14341.18 [ha]</span>
-<span class="co">## 29              TRUE   TERMINATED        0.571 13667.84 [ha] 14341.18 [ha]</span>
-<span class="co">## 30              TRUE   TERMINATED        0.575 13667.84 [ha] 14341.18 [ha]</span>
-<span class="co">## 31              TRUE   TERMINATED        0.574 13667.84 [ha] 14341.18 [ha]</span>
-<span class="co">## 32              TRUE   TERMINATED        0.612 13667.84 [ha] 14341.18 [ha]</span>
-<span class="co">## 33              TRUE   TERMINATED        0.455 13667.84 [ha] 14341.18 [ha]</span>
-<span class="co">## 34              TRUE   TERMINATED        0.425 13667.84 [ha] 14341.18 [ha]</span>
-<span class="co">## 35              TRUE   TERMINATED        0.462 13667.84 [ha] 14341.18 [ha]</span>
-<span class="co">## 36              TRUE   TERMINATED        0.411 13667.84 [ha] 14341.18 [ha]</span>
+<span class="co">## 1               TRUE   TERMINATED       12.365 13667.84 [ha] 14124.59 [ha]</span>
+<span class="co">## 2               TRUE   TERMINATED        7.421 13667.84 [ha] 14124.59 [ha]</span>
+<span class="co">## 3               TRUE   TERMINATED        6.470 13667.84 [ha] 14140.00 [ha]</span>
+<span class="co">## 4               TRUE   TERMINATED        4.695 13667.84 [ha] 14155.43 [ha]</span>
+<span class="co">## 5               TRUE   TERMINATED        5.166 13667.84 [ha] 14155.43 [ha]</span>
+<span class="co">## 6               TRUE   TERMINATED        3.985 13667.84 [ha] 14170.86 [ha]</span>
+<span class="co">## 7               TRUE   TERMINATED        4.930 13667.84 [ha] 14186.29 [ha]</span>
+<span class="co">## 8               TRUE   TERMINATED        3.567 13667.84 [ha] 14201.74 [ha]</span>
+<span class="co">## 9               TRUE   TERMINATED        3.077 13667.84 [ha] 14201.74 [ha]</span>
+<span class="co">## 10              TRUE   TERMINATED        2.492 13667.84 [ha] 14217.20 [ha]</span>
+<span class="co">## 11              TRUE   TERMINATED        1.986 13667.84 [ha] 14217.20 [ha]</span>
+<span class="co">## 12              TRUE   TERMINATED        1.720 13667.84 [ha] 14232.66 [ha]</span>
+<span class="co">## 13              TRUE   TERMINATED        1.122 13667.84 [ha] 14248.14 [ha]</span>
+<span class="co">## 14              TRUE   TERMINATED        1.007 13667.84 [ha] 14248.14 [ha]</span>
+<span class="co">## 15              TRUE   TERMINATED        0.904 13667.84 [ha] 14263.62 [ha]</span>
+<span class="co">## 16              TRUE   TERMINATED        0.820 13667.84 [ha] 14263.62 [ha]</span>
+<span class="co">## 17              TRUE   TERMINATED        0.600 13667.84 [ha] 14279.12 [ha]</span>
+<span class="co">## 18              TRUE   TERMINATED        0.930 13667.84 [ha] 14279.12 [ha]</span>
+<span class="co">## 19              TRUE   TERMINATED        0.596 13667.84 [ha] 14294.62 [ha]</span>
+<span class="co">## 20              TRUE   TERMINATED        0.563 13667.84 [ha] 14294.62 [ha]</span>
+<span class="co">## 21              TRUE   TERMINATED        0.424 13667.84 [ha] 14310.13 [ha]</span>
+<span class="co">## 22              TRUE   TERMINATED        0.469 13667.84 [ha] 14310.13 [ha]</span>
+<span class="co">## 23              TRUE   TERMINATED        0.680 13667.84 [ha] 14325.65 [ha]</span>
+<span class="co">## 24              TRUE   TERMINATED        0.707 13667.84 [ha] 14325.65 [ha]</span>
+<span class="co">## 25              TRUE   TERMINATED        0.427 13667.84 [ha] 14341.18 [ha]</span>
+<span class="co">## 26              TRUE   TERMINATED        0.393 13667.84 [ha] 14341.18 [ha]</span>
+<span class="co">## 27              TRUE   TERMINATED        0.448 13667.84 [ha] 14341.18 [ha]</span>
+<span class="co">## 28              TRUE   TERMINATED        0.439 13667.84 [ha] 14341.18 [ha]</span>
+<span class="co">## 29              TRUE   TERMINATED        0.431 13667.84 [ha] 14341.18 [ha]</span>
+<span class="co">## 30              TRUE   TERMINATED        0.405 13667.84 [ha] 14341.18 [ha]</span>
+<span class="co">## 31              TRUE   TERMINATED        0.421 13667.84 [ha] 14341.18 [ha]</span>
+<span class="co">## 32              TRUE   TERMINATED        0.450 13667.84 [ha] 14341.18 [ha]</span>
+<span class="co">## 33              TRUE   TERMINATED        0.401 13667.84 [ha] 14341.18 [ha]</span>
+<span class="co">## 34              TRUE   TERMINATED        0.414 13667.84 [ha] 14341.18 [ha]</span>
+<span class="co">## 35              TRUE   TERMINATED        0.518 13667.84 [ha] 14341.18 [ha]</span>
+<span class="co">## 36              TRUE   TERMINATED        0.407 13667.84 [ha] 14341.18 [ha]</span>
 <span class="co">##        mesh_best max_restore</span>
 <span class="co">## 1  14124.59 [ha]         100</span>
 <span class="co">## 2  14124.59 [ha]         110</span>
@@ -563,7 +730,16 @@
   plg <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"topright"</span><span class="op">)</span>
 <span class="op">)</span></code></pre></div>
 <p><img src="restoptr_files/figure-html/unnamed-chunk-16-1.png" width="90%" style="display: block; margin: auto;"></p>
-<p>We can see that all of the prioritizations within this portfolio are similar to the first optimal prioritization that we generated at the start of this tutorial. Indeed, they all focus restoration efforts on connecting the two large patches of existing habitat in the southern region of the study area. They mainly differ in terms of the number of planning units selected for restoration, with prioritizations generated with a higher maximum amount of land (e.g., <code>max_restore = 450</code>) restoring a larger contiguous block of land between the two patches of existing habitat. To help understand this relationship better, let’s create a plot.</p>
+<p>We can see that all of the prioritizations within this portfolio are
+similar to the first optimal prioritization that we generated at the
+start of this tutorial. Indeed, they all focus restoration efforts on
+connecting the two large patches of existing habitat in the southern
+region of the study area. They mainly differ in terms of the number of
+planning units selected for restoration, with prioritizations generated
+with a higher maximum amount of land (e.g.,
+<code>max_restore = 450</code>) restoring a larger contiguous block of
+land between the two patches of existing habitat. To help understand
+this relationship better, let’s create a plot.</p>
 <div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># create plot showing relationship between restorable area and connectivity</span>
 <span class="co">## N.B. the prioritization corresponding to a maximum restorable area of 220</span>
@@ -577,55 +753,108 @@
   col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">prt_tradeoffs_metedata</span><span class="op">$</span><span class="va">max_restore</span> <span class="op">==</span> <span class="fl">200</span>, <span class="st">"red"</span>, <span class="st">"black"</span><span class="op">)</span>
 <span class="op">)</span></code></pre></div>
 <p><img src="restoptr_files/figure-html/unnamed-chunk-17-1.png" width="576" style="display: block; margin: auto;"></p>
-<p>We can see that there is a steady increase in connectivity (as measured by the effective mesh size metric) and the maximum amount of land that can be restored. This means that restoring more land can result in more connectivity. Interestingly, we also see that the level of connectivity reaches a plateau at approximately 350 ha of land. This is because – when looking at <code>prt_tradeoffs_metedata</code> – we can see that the largest amount of land restored in any prioritization is 336.67 ha. Although some of the prioritizations were generated using a higher maximum restoreable area constraint (e.g., 450 ha), the compactness and locked out constraints combined to prevent an larger amount of land from being selected for restoration. Thus we can see that multiple constraints can, in combination, affect the ability for restoration efforts to achieve conservation objectives.</p>
+<p>We can see that there is a steady increase in connectivity (as
+measured by the effective mesh size metric) and the maximum amount of
+land that can be restored. This means that restoring more land can
+result in more connectivity. Interestingly, we also see that the level
+of connectivity reaches a plateau at approximately 350 ha of land. This
+is because – when looking at <code>prt_tradeoffs_metedata</code> – we
+can see that the largest amount of land restored in any prioritization
+is 336.67 ha. Although some of the prioritizations were generated using
+a higher maximum restoreable area constraint (e.g., 450 ha), the
+compactness and locked out constraints combined to prevent an larger
+amount of land from being selected for restoration. Thus we can see that
+multiple constraints can, in combination, affect the ability for
+restoration efforts to achieve conservation objectives.</p>
 </div>
 <div class="section level2">
 <h2 id="conclusion">Conclusion<a class="anchor" aria-label="anchor" href="#conclusion"></a>
 </h2>
-<p>Hopefully, this tutorial has provided a useful introduction to the <em>restoptr R</em> package. For more information on using the package, please consult the package documentation which provides examples for each of the functions. If you have any questions about using the package, suggestions for improving it, or encounter any bugs, please <a href="https://github.com/dimitri-justeau/restoptr/issues/new/choose" class="external-link">open an issue</a> on the online code repository.</p>
+<p>Hopefully, this tutorial has provided a useful introduction to the
+<em>restoptr R</em> package. For more information on using the package,
+please consult the package documentation which provides examples for
+each of the functions. If you have any questions about using the
+package, suggestions for improving it, or encounter any bugs, please <a href="https://github.com/dimitri-justeau/restoptr/issues/new/choose" class="external-link">open
+an issue</a> on the online code repository.</p>
 </div>
 <div class="section level2 unnumbered">
 <h2 class="unnumbered" id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
 </h2>
-<div id="refs" class="references hanging-indent">
-<div id="ref-r4">
-<p>Ball, I.R., Possingham, H.P. &amp; Watts, M. (2009). Marxan and relatives: Software for spatial conservation prioritisation. <em>Spatial conservation prioritisation: Quantitative methods and computational tools</em>, 185–195.</p>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-r4" class="csl-entry">
+Ball, I.R., Possingham, H.P. &amp; Watts, M. (2009). Marxan and
+relatives: Software for spatial conservation prioritisation. <em>Spatial
+conservation prioritisation: Quantitative methods and computational
+tools</em>, 185–195.
 </div>
-<div id="ref-r6">
-<p>Chazdon, R.L., Brancalion, P.H., Lamb, D., Laestadius, L., Calmon, M. &amp; Kumar, C. (2017). A policy-driven knowledge agenda for global forest and landscape restoration. <em>Conservation Letters</em>, <em>10</em>, 125–132.</p>
+<div id="ref-r6" class="csl-entry">
+Chazdon, R.L., Brancalion, P.H., Lamb, D., Laestadius, L., Calmon, M.
+&amp; Kumar, C. (2017). A policy-driven knowledge agenda for global
+forest and landscape restoration. <em>Conservation Letters</em>,
+<em>10</em>, 125–132.
 </div>
-<div id="ref-r9">
-<p>Correa Ayram, C.A., Mendoza, M.E., Etter, A. &amp; Salicrup, D.R.P. (2016). Habitat connectivity in biodiversity conservation: A review of recent studies and applications. <em>Progress in Physical Geography</em>, <em>40</em>, 7–37.</p>
+<div id="ref-r9" class="csl-entry">
+Correa Ayram, C.A., Mendoza, M.E., Etter, A. &amp; Salicrup, D.R.P.
+(2016). Habitat connectivity in biodiversity conservation: A review of
+recent studies and applications. <em>Progress in Physical
+Geography</em>, <em>40</em>, 7–37.
 </div>
-<div id="ref-r11">
-<p>Flower, J., Ramdeen, R., Estep, A., Thomas, L.R., Francis, S., Goldberg, G., Johnson, A.E., McClintock, W., Mendes, S.R., Mengerink, K. &amp; others. (2020). Marine spatial planning on the caribbean island of montserrat: Lessons for data-limited small islands. <em>Conservation Science and Practice</em>, <em>2</em>, e158.</p>
+<div id="ref-r11" class="csl-entry">
+Flower, J., Ramdeen, R., Estep, A., Thomas, L.R., Francis, S., Goldberg,
+G., Johnson, A.E., McClintock, W., Mendes, S.R., Mengerink, K. &amp;
+others. (2020). Marine spatial planning on the caribbean island of
+montserrat: Lessons for data-limited small islands. <em>Conservation
+Science and Practice</em>, <em>2</em>, e158.
 </div>
-<div id="ref-r5">
-<p>Harris, L.R., Watts, M.E., Nel, R., Schoeman, D.S. &amp; Possingham, H.P. (2014). Using multivariate statistics to explore trade-offs among spatial planning scenarios. <em>Journal of applied ecology</em>, <em>51</em>, 1504–1514.</p>
+<div id="ref-r5" class="csl-entry">
+Harris, L.R., Watts, M.E., Nel, R., Schoeman, D.S. &amp; Possingham,
+H.P. (2014). Using multivariate statistics to explore trade-offs among
+spatial planning scenarios. <em>Journal of applied ecology</em>,
+<em>51</em>, 1504–1514.
 </div>
-<div id="ref-r2">
-<p>Jaeger, J.A. (2000). Landscape division, splitting index, and effective mesh size: New measures of landscape fragmentation. <em>Landscape Ecology</em>, <em>15</em>, 115–130.</p>
+<div id="ref-r2" class="csl-entry">
+Jaeger, J.A. (2000). Landscape division, splitting index, and effective
+mesh size: New measures of landscape fragmentation. <em>Landscape
+Ecology</em>, <em>15</em>, 115–130.
 </div>
-<div id="ref-r12">
-<p>Janßen, H., Göke, C. &amp; Luttmann, A. (2019). Knowledge integration in Marine Spatial Planning: a practitioners’ view on decision support tools with special focus on Marxan. <em>Ocean &amp; Coastal Management</em>, <em>168</em>, 130–138.</p>
+<div id="ref-r12" class="csl-entry">
+Janßen, H., Göke, C. &amp; Luttmann, A. (2019). <span class="nocase">Knowledge integration in Marine Spatial Planning: a
+practitioners’ view on decision support tools with special focus on
+Marxan</span>. <em>Ocean &amp; Coastal Management</em>, <em>168</em>,
+130–138.
 </div>
-<div id="ref-r13">
-<p>Jumin, R., Binson, A., McGowan, J., Magupin, S., Beger, M., Brown, C.J., Possingham, H.P. &amp; Klein, C. (2018). From marxan to management: Ocean zoning with stakeholders for tun mustapha park in sabah, malaysia. <em>Oryx</em>, <em>52</em>, 775–786.</p>
+<div id="ref-r13" class="csl-entry">
+Jumin, R., Binson, A., McGowan, J., Magupin, S., Beger, M., Brown, C.J.,
+Possingham, H.P. &amp; Klein, C. (2018). From marxan to management:
+Ocean zoning with stakeholders for tun mustapha park in sabah, malaysia.
+<em>Oryx</em>, <em>52</em>, 775–786.
 </div>
-<div id="ref-r1">
-<p>Justeau-Allaire, D., Vieilledent, G., Rinck, N., Vismara, P., Lorca, X. &amp; Birnbaum, P. (2021). Constrained optimization of landscape indices in conservation planning to support ecological restoration in new caledonia. <em>Journal of Applied Ecology</em>, <em>58</em>, 744–754.</p>
+<div id="ref-r1" class="csl-entry">
+Justeau-Allaire, D., Vieilledent, G., Rinck, N., Vismara, P., Lorca, X.
+&amp; Birnbaum, P. (2021). Constrained optimization of landscape indices
+in conservation planning to support ecological restoration in new
+caledonia. <em>Journal of Applied Ecology</em>, <em>58</em>, 744–754.
 </div>
-<div id="ref-r10">
-<p>Margules, C.R. &amp; Pressey, R.L. (2000). Systematic conservation planning. <em>Nature</em>, <em>405</em>, 243–253.</p>
+<div id="ref-r10" class="csl-entry">
+Margules, C.R. &amp; Pressey, R.L. (2000). Systematic conservation
+planning. <em>Nature</em>, <em>405</em>, 243–253.
 </div>
-<div id="ref-r3">
-<p>Prud’homme, C., Fages, J.-G. &amp; Lorca, X. (2016). <em>Choco solver documentation</em>. TASC, INRIA Rennes, LINA CNRS UMR, <a href="https://choco-solver.org" class="external-link">https://choco-solver.org</a>.</p>
+<div id="ref-r3" class="csl-entry">
+Prud’homme, C., Fages, J.-G. &amp; Lorca, X. (2016). <em>Choco solver
+documentation</em>. TASC, INRIA Rennes, LINA CNRS UMR, <a href="https://choco-solver.org" class="external-link">https://choco-solver.org</a>.
 </div>
-<div id="ref-r8">
-<p>Strassburg, B.B., Beyer, H.L., Crouzeilles, R., Iribarrem, A., Barros, F., Siqueira, M.F. de, Sánchez-Tapia, A., Balmford, A., Sansevero, J.B.B., Brancalion, P.H.S. &amp; others. (2019). Strategic approaches to restoring ecosystems can triple conservation gains and halve costs. <em>Nature Ecology &amp; Evolution</em>, <em>3</em>, 62–70.</p>
+<div id="ref-r8" class="csl-entry">
+Strassburg, B.B., Beyer, H.L., Crouzeilles, R., Iribarrem, A., Barros,
+F., Siqueira, M.F. de, Sánchez-Tapia, A., Balmford, A., Sansevero,
+J.B.B., Brancalion, P.H.S. &amp; others. (2019). Strategic approaches to
+restoring ecosystems can triple conservation gains and halve costs.
+<em>Nature Ecology &amp; Evolution</em>, <em>3</em>, 62–70.
 </div>
-<div id="ref-r7">
-<p>Strassburg, B.B., Iribarrem, A., Beyer, H.L., Cordeiro, C.L., Crouzeilles, R., Jakovac, C.C., Braga Junqueira, A., Lacerda, E., Latawiec, A.E., Balmford, A. &amp; others. (2020). Global priority areas for ecosystem restoration. <em>Nature</em>, <em>586</em>, 724–729.</p>
+<div id="ref-r7" class="csl-entry">
+Strassburg, B.B., Iribarrem, A., Beyer, H.L., Cordeiro, C.L.,
+Crouzeilles, R., Jakovac, C.C., Braga Junqueira, A., Lacerda, E.,
+Latawiec, A.E., Balmford, A. &amp; others. (2020). Global priority areas
+for ecosystem restoration. <em>Nature</em>, <em>586</em>, 724–729.
 </div>
 </div>
 </div>

@@ -66,7 +66,7 @@ NULL
 #' \donttest{
 #' # load data
 #' habitat_data <- rast(
-#'   system.file("extdata", "habitat_hi_res.tif", package = "restoptr")
+#'   system.file("extdata", "habitat_hi_res.tif", package = "restoptr"))
 #' data <- preprocess_input(
 #'     habitat = habitat_data,
 #'     habitat_threshold = 0.7,

@@ -51,6 +51,12 @@
 <li class="nav-item">
   <a class="nav-link" href="reference/index.html">Reference</a>
 </li>
+<li class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-articles">
+    <a class="dropdown-item" href="articles/case_study.html">Case study: using historical data to set ecological restoration targets</a>
+  </div>
+</li>
 <li class="nav-item">
   <a class="nav-link" href="news/index.html">Changelog</a>
 </li>
@@ -82,7 +88,7 @@
 <h2 id="ecological-restoration-planning">Ecological Restoration Planning<a class="anchor" aria-label="anchor" href="#ecological-restoration-planning"></a>
 </h2>
 
-<p id="logo-credit" style="text-align: right; font-size: 10px;">
+<p id="logo-credit" align="right">
 Logo by Camille Salmon
 </p>
 </div>
@@ -254,7 +260,7 @@ Logo by Camille Salmon
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># solve problem to identify priority areas</span>
 <span class="va">solution</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/solve.html" class="external-link">solve</a></span><span class="op">(</span><span class="va">problem</span><span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb19"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Good news: the solver found 1 solution statisfying the constraints that was proven optimal ! (solving time = 1.18 s)</span></span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Good news: the solver found 1 solution statisfying the constraints that was proven optimal ! (solving time = 1.12 s)</span></span></code></pre></div>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># preview solution</span>
 <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">solution</span><span class="op">)</span></code></pre></div>
@@ -284,7 +290,7 @@ Logo by Camille Salmon
 <div class="sourceCode" id="cb24"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="do">##     min_restore total_restorable nb_planning_units nb_components     diameter</span></span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="do">## 1 219.3772 [ha]    219.3772 [ha]                15             3 2280.175 [m]</span></span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="do">##   optimality_proven search_state solving_time  mesh_initial          mesh</span></span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="do">## 1              TRUE   TERMINATED        1.156 13667.84 [ha] 14232.66 [ha]</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="do">## 1              TRUE   TERMINATED        1.091 13667.84 [ha] 14232.66 [ha]</span></span>
 <span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="do">##       mesh_best</span></span>
 <span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="do">## 1 14232.66 [ha]</span></span></code></pre></div>
 <p>This has just been a short taster of the package. For an extended tutorial on using the package, please refer to the vignette.</p>

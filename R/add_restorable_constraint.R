@@ -89,7 +89,7 @@ add_restorable_constraint <- function(problem,
   # assert argument is valid
   assertthat::assert_that(
     inherits(problem, "RestoptProblem"),
-    assertthat::is.count(min_restore),
+    #assertthat::is.count(min_restore),
     assertthat::noNA(min_restore),
     assertthat::is.count(max_restore),
     assertthat::noNA(max_restore),
