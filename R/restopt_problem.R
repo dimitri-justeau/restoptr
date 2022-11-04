@@ -116,11 +116,14 @@ restopt_problem <- function(existing_habitat, habitat_threshold = 1, aggregation
   habitat_down <- preprocessed$existing_habitat
   restorable_down <- preprocessed$restorable_habitat
   cell_area <- preprocessed$cell_area
-  names(habitat_down) <- "Existing habitat (aggregated)"
-  levels(habitat_down) <- c(
-    paste("< ", habitat_threshold * 100,  "% habitat"),
-    paste("\u2265 ", habitat_threshold * 100,  "% habitat")
+  levels(habitat_down) <- data.frame(
+    id = c(0, 1),
+    label = c(
+        paste("< ", habitat_threshold * 100,  "% habitat"),
+        paste("\u2265 ", habitat_threshold * 100,  "% habitat")
+    )
   )
+  names(habitat_down) <- "Existing habitat (aggregated)"
   names(restorable_down) <- "Restorable habitat (aggregated)"
   names(cell_area) <- "Cell area (aggregated)"
   # return object

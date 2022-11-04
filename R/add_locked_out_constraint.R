@@ -18,6 +18,10 @@ NULL
 #' out areas. See the function `add_available_areas_constraint()` to get a locked
 #' out constraint from allowed restoration areas.
 #'
+#' @param touches `logical` If the locked out data is a vector, define wether
+#' the rasterization must include all pixels touching the polygons.
+#' (see `terra::rasterize()`). Useless if the data is raster data.
+#'
 #' @details
 #' Locked out constraints can be used to incorporate a wide range of
 #' criteria into restoration planning problems.
@@ -76,7 +80,7 @@ NULL
 #' plot(s)
 #' }
 #' @export
-add_locked_out_constraint <- function(problem, data) {
+add_locked_out_constraint <- function(problem, data, touches = FALSE) {
   # assert argument is valid
   assertthat::assert_that(
     inherits(problem, "RestoptProblem"),
@@ -111,7 +115,7 @@ add_locked_out_constraint <- function(problem, data) {
       )
     }
   } else {
-    data <- rasterize(data, problem$data$existing_habitat, background = 0, touches = TRUE)
+    data <- rasterize(data, problem$data$existing_habitat, field = 1, background = 0, touches = touches)
   }
   data[is.na(data) & !is.na(problem$data$existing_habitat)] <- 0
   problem$data$locked_out <- data

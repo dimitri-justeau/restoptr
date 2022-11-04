@@ -15,6 +15,10 @@ NULL
 #' for restoration (i.e., only cells with a value equal one are available),
 #' or a vector object whose features correspond to the available areas.
 #'
+#'@param touches `logical` If the available area data is a vector, define wether
+#' the rasterization must include all pixels touching the polygons.
+#' (see `terra::rasterize()`). Useless if the data is raster data.
+#'
 #' @details
 #' Available areas constraints can be used to incorporate a wide range of
 #' criteria into restoration planning problems.
@@ -80,7 +84,7 @@ NULL
 #' }
 #'
 #' @export
-add_available_areas_constraint <- function(problem, data) {
+add_available_areas_constraint <- function(problem, data, touches = FALSE) {
   # assert argument is valid
   assertthat::assert_that(
     inherits(problem, "RestoptProblem"),
@@ -91,7 +95,7 @@ add_available_areas_constraint <- function(problem, data) {
     data <- round(data!=1)
     add_locked_out_constraint(problem, data)
   } else {
-    data <- invert_vector(data, extent = ext(problem$data$existing_habitat))
+    data <- rasterize(data, problem$data$existing_habitat, field = 0, background = 1, touches = touches)
     add_locked_out_constraint(
       problem,
       data
