@@ -48,6 +48,7 @@ reference:
     contents:
       - is_java_available
       - invert_vector
+      - preprocess_input
 
   - title: Class definitions and methods
     desc: >

@@ -22,7 +22,9 @@ NULL
 #' For example, an argument of 0.1 means that solutions should be within 10%
 #' of optimality.
 #' Defaults to 0, such that optimal solutions are returned.
-#
+#'
+#' @param solution_name_prefix `character` Prefix for the name of solutions.
+#' Defaults to "Solution "
 #'
 #' @examples
 #' \donttest{
@@ -43,7 +45,7 @@ NULL
 #' }
 #' @export
 add_settings <- function(problem, precision = 4, time_limit = 0,
-                         nb_solutions = 1, optimality_gap = 0) {
+                         nb_solutions = 1, optimality_gap = 0, solution_name_prefix = "Solution ") {
   # assert argument is valid
   assertthat::assert_that(
     inherits(problem, "RestoptProblem"),
@@ -56,7 +58,8 @@ add_settings <- function(problem, precision = 4, time_limit = 0,
     assertthat::is.number(optimality_gap),
     assertthat::noNA(optimality_gap),
     optimality_gap >= 0,
-    optimality_gap <= 1
+    optimality_gap <= 1,
+    assertthat::is.string(solution_name_prefix)
   )
 
   # add settings
@@ -64,7 +67,8 @@ add_settings <- function(problem, precision = 4, time_limit = 0,
     precision = as.integer(precision),
     time_limit = as.integer(time_limit),
     nb_solutions = as.integer(nb_solutions),
-    optimality_gap = optimality_gap
+    optimality_gap = optimality_gap,
+    solution_name_prefix = solution_name_prefix
   )
 
   # return updated problem

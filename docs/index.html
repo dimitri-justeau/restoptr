@@ -36,7 +36,7 @@
     
     <a class="navbar-brand me-2" href="index.html">restoptr</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.3</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -81,14 +81,16 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="section level1">
 <div class="page-header">
-<img src="logo.png" class="logo" alt=""><h1 id="restopr-">restopr <a class="anchor" aria-label="anchor" href="#restopr-"></a>
+<img src="logo.png" class="logo" alt=""><h1 id="restoptr-">restoptr <a class="anchor" aria-label="anchor" href="#restoptr-"></a>
 </h1>
 </div>
 <div class="section level2">
 <h2 id="ecological-restoration-planning">Ecological Restoration Planning<a class="anchor" aria-label="anchor" href="#ecological-restoration-planning"></a>
 </h2>
 
-<p id="logo-credit" align="right">Logo by Camille Salmon</p>
+<p id="logo-credit" align="right">
+Logo by Camille Salmon
+</p>
 </div>
 <div class="section level2">
 <h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
@@ -124,7 +126,7 @@
 <em>Ubuntu</em><a class="anchor" aria-label="anchor" href="#ubuntu"></a>
 </h4>
 <p>For recent versions of Ubuntu (18.04 and later), the Java libraries are available through official repositories. They can be installed using the following system commands.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">sudo</span> apt-get install default-jdk</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt-get install default-jdk</span></code></pre></div>
 <p>If you want to install a specific JRE version, please follow instructions from Oracle, <a href="https://openjdk.org/install/" class="external-link">OpenJDK</a>, or <a href="https://www.graalvm.org/downloads/" class="external-link">GraalVM</a>.</p>
 </div>
 <div class="section level4">
@@ -138,7 +140,7 @@
 <em>MacOS</em><a class="anchor" aria-label="anchor" href="#macos"></a>
 </h4>
 <p>The easiest way to install the Java libraries is using <a href="https://brew.sh/" class="external-link">HomeBrew</a>. After installing HomeBrew, the Java libraries can be installed using the following system commands.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1"></a><span class="ex">brew</span> install openjdk</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">brew</span> install openjdk</span></code></pre></div>
 <p>Please note that you might also need to ensure that the <code>PATH</code> environmental variable if configured so that <em>R</em> can access Java.</p>
 </div>
 </div>
@@ -147,15 +149,15 @@
 </h3>
 <p>The package relies on a core Java library called <a href="https://github.com/dimitri-justeau/restopt" class="external-link"><code>restopt</code></a>. This Java library handles the constrained optimization process via the <a href="https://choco-solver.org/" class="external-link">Choco-solver</a> software. Although this library is automatically included with the package, it can be manually compile from source if needed. <strong>Please note that this step is entirely optional, and is not needed to install the package.</strong> To compile the Java library, a the <a href="https://maven.apache.org/" class="external-link">Maven</a> software needs to be installed as well as a Java Development Kit (JDK) (version 8+) is required (e.g., see Oracle JDK, <a href="https://openjdk.org/install/" class="external-link">OpenJDK</a>, or <a href="https://www.graalvm.org/downloads/" class="external-link">GraalVM</a>). After installing these dependencies, the following procedures can be used to compile the Java library and it along with the package.</p>
 <p>First clone the repository and update the source code.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">git</span> clone https://github.com/dimitri-justeau/restoptr.git</span>
-<span id="cb5-2"><a href="#cb5-2"></a><span class="bu">cd</span> restoptr</span>
-<span id="cb5-3"><a href="#cb5-3"></a><span class="fu">git</span> submodule update --init --recursive</span>
-<span id="cb5-4"><a href="#cb5-4"></a><span class="fu">git</span> pull --recurse-submodules</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/dimitri-justeau/restoptr.git</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> restoptr</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> submodule update <span class="at">--init</span> <span class="at">--recursive</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> pull <span class="at">--recurse-submodules</span></span></code></pre></div>
 <p>Next, compile the core Java library with Maven.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1"></a><span class="bu">cd</span> restopt</span>
-<span id="cb6-2"><a href="#cb6-2"></a><span class="ex">mvn</span> clean package -DskipTests</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> restopt</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="ex">mvn</span> clean package <span class="at">-DskipTests</span></span></code></pre></div>
 <p>Next, copy the resulting Java library (.jar) file into <code>java</code> directory.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">cp</span> target/restopt-*.jar ../java/</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> target/restopt-<span class="pp">*</span>.jar ../java/</span></code></pre></div>
 <p>Finally, the package can be installed with the newly compiled Java library using the following <em>R</em> command.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="va"><a href="https://remotes.r-lib.org" class="external-link">remotes</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span>
@@ -178,13 +180,13 @@
 
 <span class="co"># preview data</span>
 <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">habitat_data</span><span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb11"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="co">## class       : SpatRaster </span></span>
-<span id="cb11-2"><a href="#cb11-2"></a><span class="co">## dimensions  : 1867, 2713, 1  (nrow, ncol, nlyr)</span></span>
-<span id="cb11-3"><a href="#cb11-3"></a><span class="co">## resolution  : 27.9487, 29.74339  (x, y)</span></span>
-<span id="cb11-4"><a href="#cb11-4"></a><span class="co">## extent      : 419768.2, 495593.1, 227538.9, 283069.8  (xmin, xmax, ymin, ymax)</span></span>
-<span id="cb11-5"><a href="#cb11-5"></a><span class="co">## coord. ref. : RGNC91-93 / Lambert New Caledonia (EPSG:3163) </span></span>
-<span id="cb11-6"><a href="#cb11-6"></a><span class="co">## source      : habitat_hi_res.tif </span></span>
-<span id="cb11-7"><a href="#cb11-7"></a><span class="co">## name        : habitat_hi_res</span></span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="do">## class       : SpatRaster </span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="do">## dimensions  : 1867, 2713, 1  (nrow, ncol, nlyr)</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="do">## resolution  : 27.9487, 29.74339  (x, y)</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="do">## extent      : 419768.2, 495593.1, 227538.9, 283069.8  (xmin, xmax, ymin, ymax)</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="do">## coord. ref. : RGNC91-93 / Lambert New Caledonia (EPSG:3163) </span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="do">## source      : habitat_hi_res.tif </span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="do">## name        : habitat_hi_res</span></span></code></pre></div>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># visualize data</span>
 <span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">habitat_data</span>, plg <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"topright"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
@@ -198,15 +200,15 @@
 
 <span class="co"># preview data</span>
 <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">locked_out_data</span><span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb14"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="co">## class       : SpatRaster </span></span>
-<span id="cb14-2"><a href="#cb14-2"></a><span class="co">## dimensions  : 1867, 2713, 1  (nrow, ncol, nlyr)</span></span>
-<span id="cb14-3"><a href="#cb14-3"></a><span class="co">## resolution  : 27.9487, 29.74339  (x, y)</span></span>
-<span id="cb14-4"><a href="#cb14-4"></a><span class="co">## extent      : 419768.2, 495593.1, 227538.9, 283069.8  (xmin, xmax, ymin, ymax)</span></span>
-<span id="cb14-5"><a href="#cb14-5"></a><span class="co">## coord. ref. : RGNC91-93 / Lambert New Caledonia (EPSG:3163) </span></span>
-<span id="cb14-6"><a href="#cb14-6"></a><span class="co">## source      : locked_out.tif </span></span>
-<span id="cb14-7"><a href="#cb14-7"></a><span class="co">## name        : layer </span></span>
-<span id="cb14-8"><a href="#cb14-8"></a><span class="co">## min value   :     1 </span></span>
-<span id="cb14-9"><a href="#cb14-9"></a><span class="co">## max value   :     1</span></span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="do">## class       : SpatRaster </span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="do">## dimensions  : 1867, 2713, 1  (nrow, ncol, nlyr)</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="do">## resolution  : 27.9487, 29.74339  (x, y)</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="do">## extent      : 419768.2, 495593.1, 227538.9, 283069.8  (xmin, xmax, ymin, ymax)</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="do">## coord. ref. : RGNC91-93 / Lambert New Caledonia (EPSG:3163) </span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="do">## source      : locked_out.tif </span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="do">## name        : layer </span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="do">## min value   :     1 </span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="do">## max value   :     1</span></span></code></pre></div>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># visualize data</span>
 <span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">locked_out_data</span>, plg <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"topright"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
@@ -232,45 +234,45 @@
 
 <span class="co"># preview problem</span>
 <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">problem</span><span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb17"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="co">## ----------------------------------------------------------------- </span></span>
-<span id="cb17-2"><a href="#cb17-2"></a><span class="co">##                          Restopt                          </span></span>
-<span id="cb17-3"><a href="#cb17-3"></a><span class="co">## ----------------------------------------------------------------- </span></span>
-<span id="cb17-4"><a href="#cb17-4"></a><span class="co">## original habitat:     habitat_hi_res.tif </span></span>
-<span id="cb17-5"><a href="#cb17-5"></a><span class="co">## aggregation factor:   16 </span></span>
-<span id="cb17-6"><a href="#cb17-6"></a><span class="co">## habitat threshold:    0.7 </span></span>
-<span id="cb17-7"><a href="#cb17-7"></a><span class="co">## existing habitat:     in memory </span></span>
-<span id="cb17-8"><a href="#cb17-8"></a><span class="co">## restorable habitat:   in memory </span></span>
-<span id="cb17-9"><a href="#cb17-9"></a><span class="co">## ----------------------------------------------------------------- </span></span>
-<span id="cb17-10"><a href="#cb17-10"></a><span class="co">## objective:            Maximize effective mesh size </span></span>
-<span id="cb17-11"><a href="#cb17-11"></a><span class="co">## ----------------------------------------------------------------- </span></span>
-<span id="cb17-12"><a href="#cb17-12"></a><span class="co">## constraints:          </span></span>
-<span id="cb17-13"><a href="#cb17-13"></a><span class="co">##   -  locked out (data = in memory) </span></span>
-<span id="cb17-14"><a href="#cb17-14"></a><span class="co">##   -  restorable (min_restore = 90, max_restore = 220, min_proportion = 1, unit = ha) </span></span>
-<span id="cb17-15"><a href="#cb17-15"></a><span class="co">##   -  compactness (max_diameter = 2.4, unit = km) </span></span>
-<span id="cb17-16"><a href="#cb17-16"></a><span class="co">## ----------------------------------------------------------------- </span></span>
-<span id="cb17-17"><a href="#cb17-17"></a><span class="co">## settings: </span></span>
-<span id="cb17-18"><a href="#cb17-18"></a><span class="co">##   - precision = 4</span></span>
-<span id="cb17-19"><a href="#cb17-19"></a><span class="co">##   - time_limit = 0</span></span>
-<span id="cb17-20"><a href="#cb17-20"></a><span class="co">##   - nb_solutions = 1</span></span>
-<span id="cb17-21"><a href="#cb17-21"></a><span class="co">##   - optimality_gap = 0 </span></span>
-<span id="cb17-22"><a href="#cb17-22"></a><span class="co">## -----------------------------------------------------------------</span></span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="do">## ----------------------------------------------------------------- </span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="do">##                          Restopt                          </span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="do">## ----------------------------------------------------------------- </span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="do">## original habitat:     habitat_hi_res.tif </span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="do">## aggregation factor:   16 </span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="do">## habitat threshold:    0.7 </span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="do">## existing habitat:     in memory </span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="do">## restorable habitat:   in memory </span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="do">## ----------------------------------------------------------------- </span></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="do">## objective:            Maximize effective mesh size </span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a><span class="do">## ----------------------------------------------------------------- </span></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a><span class="do">## constraints:          </span></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a><span class="do">##   -  locked out (data = in memory) </span></span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a><span class="do">##   -  restorable (min_restore = 90, max_restore = 220, min_proportion = 1, unit = ha) </span></span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a><span class="do">##   -  compactness (max_diameter = 2.4, unit = km) </span></span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a><span class="do">## ----------------------------------------------------------------- </span></span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a><span class="do">## settings: </span></span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a><span class="do">##   - precision = 4</span></span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a><span class="do">##   - time_limit = 0</span></span>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a><span class="do">##   - nb_solutions = 1</span></span>
+<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a><span class="do">##   - optimality_gap = 0 </span></span>
+<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a><span class="do">## -----------------------------------------------------------------</span></span></code></pre></div>
 <p>After building the problem, we can solve it to identify priority areas for restoration (with the <code><a href="https://rdrr.io/r/base/solve.html" class="external-link">solve()</a></code> function). The solution is a raster layer containing values that indicate if planning units: (<code>0</code>) were locked out, (<code>1</code>) do not contain existing habitat, (<code>2</code>) contain existing habitat, or (<code>3</code>) selected as a priority area for restoration.</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># solve problem to identify priority areas</span>
 <span class="va">solution</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/solve.html" class="external-link">solve</a></span><span class="op">(</span><span class="va">problem</span><span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb19"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="co">## Good news: the solver found 1 solution statisfying the constraints that was proven optimal ! (solving time = 1.12 s)</span></span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Good news: the solver found 1 solution statisfying the constraints that was proven optimal ! (solving time = 1.12 s)</span></span></code></pre></div>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># preview solution</span>
 <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">solution</span><span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb21"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="co">## class       : RestoptSolution </span></span>
-<span id="cb21-2"><a href="#cb21-2"></a><span class="co">## dimensions  : 117, 170, 1  (nrow, ncol, nlyr)</span></span>
-<span id="cb21-3"><a href="#cb21-3"></a><span class="co">## resolution  : 447.1792, 475.8943  (x, y)</span></span>
-<span id="cb21-4"><a href="#cb21-4"></a><span class="co">## extent      : 419768.2, 495788.7, 227390.1, 283069.8  (xmin, xmax, ymin, ymax)</span></span>
-<span id="cb21-5"><a href="#cb21-5"></a><span class="co">## coord. ref. : RGNC91-93 / Lambert New Caledonia (EPSG:3163) </span></span>
-<span id="cb21-6"><a href="#cb21-6"></a><span class="co">## source      : memory </span></span>
-<span id="cb21-7"><a href="#cb21-7"></a><span class="co">## name        :  Solution 1 </span></span>
-<span id="cb21-8"><a href="#cb21-8"></a><span class="co">## min value   :  Locked out </span></span>
-<span id="cb21-9"><a href="#cb21-9"></a><span class="co">## max value   : Restoration</span></span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="do">## class       : RestoptSolution </span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="do">## dimensions  : 117, 170, 1  (nrow, ncol, nlyr)</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="do">## resolution  : 447.1792, 475.8943  (x, y)</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="do">## extent      : 419768.2, 495788.7, 227390.1, 283069.8  (xmin, xmax, ymin, ymax)</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="do">## coord. ref. : RGNC91-93 / Lambert New Caledonia (EPSG:3163) </span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="do">## source      : memory </span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="do">## name        :  Solution 1 </span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="do">## min value   :  Locked out </span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a><span class="do">## max value   : Restoration</span></span></code></pre></div>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># visualize solution</span>
 <span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html" class="external-link">plot</a></span><span class="op">(</span>
@@ -285,19 +287,21 @@
 <code class="sourceCode R"><span class="co"># access information on the solution</span>
 <span class="co">## N.B. spatial units are expressed as hectares</span>
 <span class="fu"><a href="reference/get_metadata.html">get_metadata</a></span><span class="op">(</span><span class="va">solution</span>, area_unit <span class="op">=</span> <span class="st">"ha"</span><span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb24"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="co">##     min_restore total_restorable nb_planning_units nb_components     diameter</span></span>
-<span id="cb24-2"><a href="#cb24-2"></a><span class="co">## 1 219.3772 [ha]    219.3772 [ha]                15             3 2280.175 [m]</span></span>
-<span id="cb24-3"><a href="#cb24-3"></a><span class="co">##   optimality_proven search_state solving_time  mesh_initial          mesh</span></span>
-<span id="cb24-4"><a href="#cb24-4"></a><span class="co">## 1              TRUE   TERMINATED        1.091 13667.84 [ha] 14232.66 [ha]</span></span>
-<span id="cb24-5"><a href="#cb24-5"></a><span class="co">##       mesh_best</span></span>
-<span id="cb24-6"><a href="#cb24-6"></a><span class="co">## 1 14232.66 [ha]</span></span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="do">##     min_restore total_restorable nb_planning_units nb_components     diameter</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="do">## 1 219.3772 [ha]    219.3772 [ha]                15             3 2280.175 [m]</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="do">##   optimality_proven search_state solving_time  mesh_initial          mesh</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="do">## 1              TRUE   TERMINATED        1.091 13667.84 [ha] 14232.66 [ha]</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="do">##       mesh_best</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="do">## 1 14232.66 [ha]</span></span></code></pre></div>
 <p>This has just been a short taster of the package. For an extended tutorial on using the package, please refer to the vignette.</p>
 </div>
 <div class="section level2">
 <h2 id="citation">Citation<a class="anchor" aria-label="anchor" href="#citation"></a>
 </h2>
 <p>Please cite the <em>restoptr R</em> package when using it in publications. Although a new publication describing the package is in preparation; in the meantime, please use the following citation which outlines the methodology.</p>
-<blockquote><p>Justeau-Allaire, D., Vieilledent, G., Rinck, N., Vismara, P., Lorca, X., &amp; Birnbaum, P. (2021). Constrained optimization of landscape indices in conservation planning to support ecological restoration in New Caledonia. Journal of Applied Ecology, 58(4), 744‑754.</p></blockquote>
+<blockquote>
+<p>Justeau-Allaire, D., Vieilledent, G., Rinck, N., Vismara, P., Lorca, X., &amp; Birnbaum, P. (2021). Constrained optimization of landscape indices in conservation planning to support ecological restoration in New Caledonia. Journal of Applied Ecology, 58(4), 744‑754.</p>
+</blockquote>
 </div>
 <div class="section level2">
 <h2 id="getting-help">Getting help<a class="anchor" aria-label="anchor" href="#getting-help"></a>
@@ -325,7 +329,9 @@
 <div class="license">
 <h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
-<li><a href="https://www.r-project.org/Licenses/GPL-3" class="external-link">GPL-3</a></li>
+<li>
+<a href="https://www.r-project.org/Licenses/GPL-3" class="external-link">GPL-3</a> + file <a href="LICENSE-text.html">LICENSE</a>
+</li>
 </ul>
 </div>
 

@@ -30,7 +30,7 @@ Authors@R:
         'Philippe', 'Birnbaum', role = c('aut')
       )
     )
-License: GPL-3
+License: GPL-3 + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Language: en-US

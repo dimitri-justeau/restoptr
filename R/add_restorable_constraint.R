@@ -9,9 +9,9 @@ NULL
 #' @inheritParams set_max_mesh_objective
 #' @inherit set_max_mesh_objective return
 #'
-#' @param min_restore `integer` Minimum allowed area to restore in the solution.
+#' @param min_restore `numeric` Minimum allowed area to restore in the solution.
 #'
-#' @param max_restore `integer` Maximum allowed area to restore in the solution
+#' @param max_restore `numeric` Maximum allowed area to restore in the solution
 #'
 #' @param unit `unit` object or a `character` that can be coerced to an area
 #' unit (see `unit` package), or "cells" for number of cells from the original
@@ -89,8 +89,11 @@ add_restorable_constraint <- function(problem,
   # assert argument is valid
   assertthat::assert_that(
     inherits(problem, "RestoptProblem"),
-    assertthat::is.count(min_restore) | min_restore == 0,
-    assertthat::noNA(min_restore),
+    (assertthat::is.count(min_restore) & unit == "cells") |
+      (assertthat::is.number(min_restore) & min_restore >= 0 & unit != "cells") |
+      min_restore == 0,
+    (assertthat::is.count(max_restore) & unit == "cells") |
+      (assertthat::is.number(max_restore) & max_restore >= 0 & unit != "cells"),
     assertthat::is.count(max_restore),
     assertthat::noNA(max_restore),
     assertthat::is.number(min_proportion),

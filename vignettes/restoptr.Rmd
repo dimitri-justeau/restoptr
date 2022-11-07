@@ -88,7 +88,7 @@ locked_out_data <- rast(system.file(
 print(locked_out_data)
 
 # visualize locked out data
-plot(locked_out_data, main = "Locked out areas", plg = list(x = "topright"))
+plot(locked_out_data, main = "Locked out areas", plg = list(x = "topright"), col=c("darkorange"))
 ```
 
 After loading in the data, we can begin formulating an optimization problem.
@@ -198,7 +198,8 @@ prt_alt <-
     rp %>%
     add_settings(
       nb = 10,
-      optimality_gap = x
+      optimality_gap = x,
+      solution_name_prefix = paste0("opt_gap_", x, "__#")
     ) %>%
     solve(v, verbose = FALSE)
   }) %>%

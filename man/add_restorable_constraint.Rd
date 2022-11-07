@@ -15,9 +15,9 @@ add_restorable_constraint(
 \arguments{
 \item{problem}{\code{\link[=restopt_problem]{restopt_problem()}} Restoration problem object.}
 
-\item{min_restore}{\code{integer} Minimum allowed area to restore in the solution.}
+\item{min_restore}{\code{numeric} Minimum allowed area to restore in the solution.}
 
-\item{max_restore}{\code{integer} Maximum allowed area to restore in the solution}
+\item{max_restore}{\code{numeric} Maximum allowed area to restore in the solution}
 
 \item{min_proportion}{\code{float} Minimum habitat proportion to consider a cell
 as restored.}

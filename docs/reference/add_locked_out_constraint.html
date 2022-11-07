@@ -14,7 +14,7 @@ for restoration activities."><meta property="og:image" content="https://dimitri-
     
     <a class="navbar-brand me-2" href="../index.html">restoptr</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.3</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -66,7 +66,7 @@ for restoration activities.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">add_locked_out_constraint</span><span class="op">(</span><span class="va">problem</span>, <span class="va">data</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">add_locked_out_constraint</span><span class="op">(</span><span class="va">problem</span>, <span class="va">data</span>, touches <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -80,6 +80,10 @@ for any restoration (i.e., cells with a value equal one are locked out from
 the solution), or a vector object whose features correspond to the locked
 out areas. See the function <code><a href="add_available_areas_constraint.html">add_available_areas_constraint()</a></code> to get a locked
 out constraint from allowed restoration areas.</p></dd>
+<dt>touches</dt>
+<dd><p><code>logical</code> If the locked out data is a vector, define wether
+the rasterization must include all pixels touching the polygons.
+(see <code><a href="https://rdrr.io/pkg/terra/man/rasterize.html" class="external-link">terra::rasterize()</a></code>). Useless if the data is raster data.</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -167,12 +171,13 @@ out constraint by defining areas that ARE available for restoration.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BB00BB;">  - precision = 4</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BB00BB;">  - time_limit = 1</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BB00BB;">  - nb_solutions = 1</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BB00BB;">  - optimality_gap = 0</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BB00BB;">  - optimality_gap = 0</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BB00BB;">  - solution_name_prefix = Solution </span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00; font-weight: bold;">-----------------------------------------------------------------</span> </span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># solve problem</span></span>
 <span class="r-in"><span class="va">s</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/solve.html" class="external-link">solve</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">Note: The current solution is the best that the solver could find within the time limit. However, the solver had not enough to prove whether it is optimal or not. Consider increasing the time limit if you need a better solution (solving time = 1.03 s)</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">Note: The current solution is the best that the solver could find within the time limit. However, the solver had not enough to prove whether it is optimal or not. Consider increasing the time limit if you need a better solution (solving time = 1.04 s)</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># plot solution</span></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">s</span><span class="op">)</span></span>

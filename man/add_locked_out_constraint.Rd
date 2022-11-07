@@ -4,7 +4,7 @@
 \alias{add_locked_out_constraint}
 \title{Add locked out constraint}
 \usage{
-add_locked_out_constraint(problem, data)
+add_locked_out_constraint(problem, data, touches = FALSE)
 }
 \arguments{
 \item{problem}{\code{\link[=restopt_problem]{restopt_problem()}} Restoration problem object.}
@@ -15,6 +15,10 @@ for any restoration (i.e., cells with a value equal one are locked out from
 the solution), or a vector object whose features correspond to the locked
 out areas. See the function \code{add_available_areas_constraint()} to get a locked
 out constraint from allowed restoration areas.}
+
+\item{touches}{\code{logical} If the locked out data is a vector, define wether
+the rasterization must include all pixels touching the polygons.
+(see \code{terra::rasterize()}). Useless if the data is raster data.}
 }
 \value{
 An updated restoration problem (\code{\link[=restopt_problem]{restopt_problem()}}) object.

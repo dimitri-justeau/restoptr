@@ -4,7 +4,7 @@
 \alias{add_available_areas_constraint}
 \title{Add available areas constraint}
 \usage{
-add_available_areas_constraint(problem, data)
+add_available_areas_constraint(problem, data, touches = FALSE)
 }
 \arguments{
 \item{problem}{\code{\link[=restopt_problem]{restopt_problem()}} Restoration problem object.}
@@ -13,6 +13,10 @@ add_available_areas_constraint(problem, data)
 containing binary values hat indicate which planning units can be selected
 for restoration (i.e., only cells with a value equal one are available),
 or a vector object whose features correspond to the available areas.}
+
+\item{touches}{\code{logical} If the available area data is a vector, define wether
+the rasterization must include all pixels touching the polygons.
+(see \code{terra::rasterize()}). Useless if the data is raster data.}
 }
 \value{
 An updated restoration problem (\code{\link[=restopt_problem]{restopt_problem()}}) object.

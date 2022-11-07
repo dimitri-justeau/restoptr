@@ -9,7 +9,8 @@ add_settings(
   precision = 4,
   time_limit = 0,
   nb_solutions = 1,
-  optimality_gap = 0
+  optimality_gap = 0,
+  solution_name_prefix = "Solution "
 )
 }
 \arguments{
@@ -28,6 +29,9 @@ Defaults to 0.}
 For example, an argument of 0.1 means that solutions should be within 10\%
 of optimality.
 Defaults to 0, such that optimal solutions are returned.}
+
+\item{solution_name_prefix}{\code{character} Prefix for the name of solutions.
+Defaults to "Solution "}
 }
 \value{
 An updated restoration problem (\code{\link[=restopt_problem]{restopt_problem()}}) object.

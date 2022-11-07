@@ -87,7 +87,7 @@ mesh_1976 <- mesh_1976[mesh_1976$class == 1, ]$value
 mesh_2021 <- lsm_c_mesh(forest_2021_aggr, directions = 4)
 mesh_2021 <- mesh_2021[mesh_2021$class == 1, ]$value
 
-cat("Evolution of MESH betwee 1976 and 2021 : ", mesh_2021 - mesh_1976, "ha")
+cat("Evolution of MESH between 1976 and 2021 : ", mesh_2021 - mesh_1976, "ha")
 ```
 
 As we can see, the forest area decreased and the fragmentation increased between 1976 and 2021 (the higher MESH is, the lower the fragmentation is). Our objective is thus to identify restoration plans that (i) is located in accessible areas (150 m buffer around tracks); (ii) is connected and compact (does not exceed a diameter of 920 m); (iii) restores the fragmentation level measured in 1976; and (iv) is at minimal cost (measured in surface units to restore).

@@ -12,7 +12,7 @@ to customize the optimization procedure."><meta property="og:image" content="htt
     
     <a class="navbar-brand me-2" href="../index.html">restoptr</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.3</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -68,7 +68,8 @@ to customize the optimization procedure.</p>
   precision <span class="op">=</span> <span class="fl">4</span>,
   time_limit <span class="op">=</span> <span class="fl">0</span>,
   nb_solutions <span class="op">=</span> <span class="fl">1</span>,
-  optimality_gap <span class="op">=</span> <span class="fl">0</span>
+  optimality_gap <span class="op">=</span> <span class="fl">0</span>,
+  solution_name_prefix <span class="op">=</span> <span class="st">"Solution "</span>
 <span class="op">)</span></code></pre></div>
     </div>
 
@@ -90,6 +91,9 @@ Defaults to 0.</p></dd>
 For example, an argument of 0.1 means that solutions should be within 10%
 of optimality.
 Defaults to 0, such that optimal solutions are returned.</p></dd>
+<dt>solution_name_prefix</dt>
+<dd><p><code>character</code> Prefix for the name of solutions.
+Defaults to "Solution "</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -130,7 +134,8 @@ Defaults to 0, such that optimal solutions are returned.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BB00BB;">  - precision = 4</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BB00BB;">  - time_limit = 1</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BB00BB;">  - nb_solutions = 2</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BB00BB;">  - optimality_gap = 0</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BB00BB;">  - optimality_gap = 0</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BB00BB;">  - solution_name_prefix = Solution </span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00; font-weight: bold;">-----------------------------------------------------------------</span> </span>
 <span class="r-in"><span class="co"># }</span></span>
 </code></pre></div>
