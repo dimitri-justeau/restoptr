@@ -24,3 +24,4 @@ inst/WORDLIST
 ^data-raw$
 ^restopt$
 codecov.yml
+^LICENSE\.md$
