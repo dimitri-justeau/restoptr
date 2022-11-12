@@ -15,8 +15,8 @@
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="apple-touch-icon-76x76.png">
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="apple-touch-icon-60x60.png">
 <script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="deps/bootstrap-5.1.0/bootstrap.min.css" rel="stylesheet">
-<script src="deps/bootstrap-5.1.0/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<link href="deps/bootstrap-5.1.3/bootstrap.min.css" rel="stylesheet">
+<script src="deps/bootstrap-5.1.3/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="pkgdown.js"></script><link href="extra.css" rel="stylesheet">
 <meta property="og:title" content="Ecological Restoration Planning">
@@ -105,11 +105,11 @@ Logo by Camille Salmon
 </h3>
 <p>The latest official version of the <em>restoptr R</em> package can be installed from the <a href="https://cran.r-project.org/" class="external-link">Comprehensive R Archive Network (CRAN)</a> using the following <em>R</em> code.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"restoptr"</span>, repos <span class="op">=</span> <span class="st">"https://cran.rstudio.com/"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"restoptr"</span>, repos <span class="op">=</span> <span class="st">"https://cran.rstudio.com/"</span><span class="op">)</span></span></code></pre></div>
 <p>Alternatively, the latest developmental version can be installed using the following <em>R</em> code. Please note that while developmental versions may contain additional features not present in the official version, they may also contain coding errors.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="va"><a href="https://remotes.r-lib.org" class="external-link">remotes</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span>
-<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"dimitri-justeau/restoptr"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="va"><a href="https://remotes.r-lib.org" class="external-link">remotes</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span></span>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"dimitri-justeau/restoptr"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="system-dependencies">System dependencies<a class="anchor" aria-label="anchor" href="#system-dependencies"></a>
@@ -160,8 +160,8 @@ Logo by Camille Salmon
 <div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> target/restopt-<span class="pp">*</span>.jar ../java/</span></code></pre></div>
 <p>Finally, the package can be installed with the newly compiled Java library using the following <em>R</em> command.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="va"><a href="https://remotes.r-lib.org" class="external-link">remotes</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span>
-<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_local.html" class="external-link">install_local</a></span><span class="op">(</span><span class="st">"."</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="va"><a href="https://remotes.r-lib.org" class="external-link">remotes</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span></span>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_local.html" class="external-link">install_local</a></span><span class="op">(</span><span class="st">"."</span><span class="op">)</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
@@ -169,17 +169,17 @@ Logo by Camille Salmon
 </h2>
 <p>Here we will provide a short tutorial on using the <em>restoptr R</em> package to identify priority areas for restoration. As part of this tutorial, we will use an example dataset that is distributed with the package (obtained from Justeau-Allaire <em>et al.</em> 2021). This example dataset contains data for prioritizing forest restoration efforts within a protected area in New Caledonia. We will begin the tutorial by loading the package. If you haven’t already, please install the package (see above for installation instructions).</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># load package</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dimitri-justeau.github.io/restoptr/">restoptr</a></span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># load package</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dimitri-justeau.github.io/restoptr/">restoptr</a></span><span class="op">)</span></span></code></pre></div>
 <p>To identify priorities for restoration, we require information on the location of places that do and do not currently contain suitable habitat. We will now import data to describe which places within the protected area contain forest habitat (imported as the <code>habitat_data</code> object). Specifically, this object is a spatial grid (i.e., raster layer). Each grid cell corresponds to a candidate place for restoration (termed planning unit), and their values indicate the absence or presence of forest within each planning unit (using values of zero and one, respectively).</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># import data</span>
-<span class="va">habitat_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/rast.html" class="external-link">rast</a></span><span class="op">(</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"habitat_hi_res.tif"</span>, package <span class="op">=</span> <span class="st">"restoptr"</span><span class="op">)</span>
-<span class="op">)</span>
-
-<span class="co"># preview data</span>
-<span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">habitat_data</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># import data</span></span>
+<span><span class="va">habitat_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/rast.html" class="external-link">rast</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"habitat_hi_res.tif"</span>, package <span class="op">=</span> <span class="st">"restoptr"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># preview data</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">habitat_data</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb11"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="do">## class       : SpatRaster </span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="do">## dimensions  : 1867, 2713, 1  (nrow, ncol, nlyr)</span></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="do">## resolution  : 27.9487, 29.74339  (x, y)</span></span>
@@ -188,18 +188,18 @@ Logo by Camille Salmon
 <span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="do">## source      : habitat_hi_res.tif </span></span>
 <span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="do">## name        : habitat_hi_res</span></span></code></pre></div>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># visualize data</span>
-<span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">habitat_data</span>, plg <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"topright"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># visualize data</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">habitat_data</span>, plg <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"topright"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-habitat_data-1.png" width="100%" style="display: block; margin: auto;"></p>
 <p>Restoration efforts are often limited in terms of the places where they can be implemented. For example, restoration efforts may not be feasible in dense cities. In our example, some places are not feasible for restoration because they cannot be accessed by existing tracks within the protected area. We will now import data to describe which places are not feasible for restoration (imported as the <code>locked_out_data</code> object). This object – similar to the habitat data – is a spatial grid. The grid cell values in this object indicate which planning units should be considered available for restoration or not (using values of zero and one, respectively).</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># import data</span>
-<span class="va">locked_out_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/rast.html" class="external-link">rast</a></span><span class="op">(</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"locked_out.tif"</span>, package <span class="op">=</span> <span class="st">"restoptr"</span><span class="op">)</span>
-<span class="op">)</span>
-
-<span class="co"># preview data</span>
-<span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">locked_out_data</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># import data</span></span>
+<span><span class="va">locked_out_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/rast.html" class="external-link">rast</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"locked_out.tif"</span>, package <span class="op">=</span> <span class="st">"restoptr"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># preview data</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">locked_out_data</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb14"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="do">## class       : SpatRaster </span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="do">## dimensions  : 1867, 2713, 1  (nrow, ncol, nlyr)</span></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="do">## resolution  : 27.9487, 29.74339  (x, y)</span></span>
@@ -210,30 +210,30 @@ Logo by Camille Salmon
 <span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="do">## min value   :     1 </span></span>
 <span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="do">## max value   :     1</span></span></code></pre></div>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># visualize data</span>
-<span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">locked_out_data</span>, plg <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"topright"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># visualize data</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">locked_out_data</span>, plg <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"topright"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-locked_out_data-1.png" width="100%" style="display: block; margin: auto;"></p>
 <p>We now will build a restoration optimization problem (stored in the <code>problem</code> object). This object will specify all the data, settings, and optimization criteria for identifying priority areas. Specifically, we will initialize the problem with the <code>habitat_data</code> object to specify which planning units already contain suitable habitat (with the <code><a href="reference/restopt_problem.html">restopt_problem()</a></code> function). To reduce run time, we will also initialize it with parameters to aggregate the spatial data (i.e., <code>aggregation_factor</code> and <code>habitat_threshold</code>). Next, we will specify that the objective function for the optimization process is to maximize connectivity based on the effective mesh size metric (with the <code><a href="reference/set_max_mesh_objective.html">set_max_mesh_objective()</a></code> function). We will then specify constraints to ensure that the priority areas exhibit particular characteristics. These constraints will be used to ensure that (i) certain planning units are not selected for restoration (with the <code><a href="reference/add_locked_out_constraint.html">add_locked_out_constraint()</a></code> function), (ii) the total amount of restored area should range between 90 and 220 ha (with the <code><a href="reference/add_restorable_constraint.html">add_restorable_constraint()</a></code> function), and (iii) limit the spatial extent of the priority areas to be within 2.4 km (with the <code><a href="reference/add_compactness_constraint.html">add_compactness_constraint()</a></code> function).</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># build restoration optimization problem</span>
-<span class="va">problem</span> <span class="op">&lt;-</span>
-  <span class="co">## initialize problem with habitat data</span>
-  <span class="fu"><a href="reference/restopt_problem.html">restopt_problem</a></span><span class="op">(</span>
-    existing_habitat <span class="op">=</span> <span class="va">habitat_data</span>,
-    aggregation_factor <span class="op">=</span> <span class="fl">16</span>,
-    habitat_threshold <span class="op">=</span> <span class="fl">0.7</span>
-  <span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span>
-  <span class="co">## set objective function is to maximize effective mesh size</span>
-  <span class="fu"><a href="reference/set_max_mesh_objective.html">set_max_mesh_objective</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span>
-  <span class="co">## add constraint to ensure that certain places are not selected</span>
-  <span class="fu"><a href="reference/add_locked_out_constraint.html">add_locked_out_constraint</a></span><span class="op">(</span><span class="va">locked_out_data</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span>
-  <span class="co">## add constraint to limit total amount of restored area</span>
-  <span class="fu"><a href="reference/add_restorable_constraint.html">add_restorable_constraint</a></span><span class="op">(</span><span class="fl">90</span>, <span class="fl">220</span>, unit <span class="op">=</span> <span class="st">"ha"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span>
-  <span class="co">## add constraint to limit spatial extent of priority areas</span>
-  <span class="fu"><a href="reference/add_compactness_constraint.html">add_compactness_constraint</a></span><span class="op">(</span><span class="fl">2.4</span>, unit <span class="op">=</span> <span class="st">"km"</span><span class="op">)</span>
-
-<span class="co"># preview problem</span>
-<span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">problem</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># build restoration optimization problem</span></span>
+<span><span class="va">problem</span> <span class="op">&lt;-</span></span>
+<span>  <span class="co">## initialize problem with habitat data</span></span>
+<span>  <span class="fu"><a href="reference/restopt_problem.html">restopt_problem</a></span><span class="op">(</span></span>
+<span>    existing_habitat <span class="op">=</span> <span class="va">habitat_data</span>,</span>
+<span>    aggregation_factor <span class="op">=</span> <span class="fl">16</span>,</span>
+<span>    habitat_threshold <span class="op">=</span> <span class="fl">0.7</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="co">## set objective function is to maximize effective mesh size</span></span>
+<span>  <span class="fu"><a href="reference/set_max_mesh_objective.html">set_max_mesh_objective</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="co">## add constraint to ensure that certain places are not selected</span></span>
+<span>  <span class="fu"><a href="reference/add_locked_out_constraint.html">add_locked_out_constraint</a></span><span class="op">(</span><span class="va">locked_out_data</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="co">## add constraint to limit total amount of restored area</span></span>
+<span>  <span class="fu"><a href="reference/add_restorable_constraint.html">add_restorable_constraint</a></span><span class="op">(</span><span class="fl">90</span>, <span class="fl">220</span>, unit <span class="op">=</span> <span class="st">"ha"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="co">## add constraint to limit spatial extent of priority areas</span></span>
+<span>  <span class="fu"><a href="reference/add_compactness_constraint.html">add_compactness_constraint</a></span><span class="op">(</span><span class="fl">2.4</span>, unit <span class="op">=</span> <span class="st">"km"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># preview problem</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">problem</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb17"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="do">## ----------------------------------------------------------------- </span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="do">##                          Restopt                          </span></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="do">## ----------------------------------------------------------------- </span></span>
@@ -258,12 +258,12 @@ Logo by Camille Salmon
 <span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a><span class="do">## -----------------------------------------------------------------</span></span></code></pre></div>
 <p>After building the problem, we can solve it to identify priority areas for restoration (with the <code><a href="https://rdrr.io/r/base/solve.html" class="external-link">solve()</a></code> function). The solution is a raster layer containing values that indicate if planning units: (<code>0</code>) were locked out, (<code>1</code>) do not contain existing habitat, (<code>2</code>) contain existing habitat, or (<code>3</code>) selected as a priority area for restoration.</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># solve problem to identify priority areas</span>
-<span class="va">solution</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/solve.html" class="external-link">solve</a></span><span class="op">(</span><span class="va">problem</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># solve problem to identify priority areas</span></span>
+<span><span class="va">solution</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/solve.html" class="external-link">solve</a></span><span class="op">(</span><span class="va">problem</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb19"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Good news: the solver found 1 solution statisfying the constraints that was proven optimal ! (solving time = 1.12 s)</span></span></code></pre></div>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># preview solution</span>
-<span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">solution</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># preview solution</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">solution</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb21"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="do">## class       : RestoptSolution </span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="do">## dimensions  : 117, 170, 1  (nrow, ncol, nlyr)</span></span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="do">## resolution  : 447.1792, 475.8943  (x, y)</span></span>
@@ -274,19 +274,19 @@ Logo by Camille Salmon
 <span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="do">## min value   :  Locked out </span></span>
 <span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a><span class="do">## max value   : Restoration</span></span></code></pre></div>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># visualize solution</span>
-<span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html" class="external-link">plot</a></span><span class="op">(</span>
-  <span class="va">solution</span>,
-  main <span class="op">=</span> <span class="st">"Solution"</span>,
-  col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#E5E5E5"</span>, <span class="st">"#fff1d6"</span>, <span class="st">"#b2df8a"</span>, <span class="st">"#1f78b4"</span><span class="op">)</span>,
-  plg <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"topright"</span><span class="op">)</span>
-<span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># visualize solution</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html" class="external-link">plot</a></span><span class="op">(</span></span>
+<span>  <span class="va">solution</span>,</span>
+<span>  main <span class="op">=</span> <span class="st">"Solution"</span>,</span>
+<span>  col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#E5E5E5"</span>, <span class="st">"#fff1d6"</span>, <span class="st">"#b2df8a"</span>, <span class="st">"#1f78b4"</span><span class="op">)</span>,</span>
+<span>  plg <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"topright"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-solution-1.png" width="100%" style="display: block; margin: auto;"></p>
 <p>Finally, we can access additional information on the solution (with the <code><a href="reference/get_metadata.html">get_metadata()</a></code> function).</p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># access information on the solution</span>
-<span class="co">## N.B. spatial units are expressed as hectares</span>
-<span class="fu"><a href="reference/get_metadata.html">get_metadata</a></span><span class="op">(</span><span class="va">solution</span>, area_unit <span class="op">=</span> <span class="st">"ha"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># access information on the solution</span></span>
+<span><span class="co">## N.B. spatial units are expressed as hectares</span></span>
+<span><span class="fu"><a href="reference/get_metadata.html">get_metadata</a></span><span class="op">(</span><span class="va">solution</span>, area_unit <span class="op">=</span> <span class="st">"ha"</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb24"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="do">##     min_restore total_restorable nb_planning_units nb_components     diameter</span></span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="do">## 1 219.3772 [ha]    219.3772 [ha]                15             3 2280.175 [m]</span></span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="do">##   optimality_proven search_state solving_time  mesh_initial          mesh</span></span>
@@ -329,9 +329,8 @@ Logo by Camille Salmon
 <div class="license">
 <h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
-<li>
-<a href="https://www.r-project.org/Licenses/GPL-3" class="external-link">GPL-3</a> + file <a href="LICENSE-text.html">LICENSE</a>
-</li>
+<li><a href="LICENSE.html">Full license</a></li>
+<li><small>GPL (&gt;= 3)</small></li>
 </ul>
 </div>
 
@@ -384,7 +383,7 @@ Logo by Camille Salmon
 
 <div class="pkgdown-footer-right">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
     </footer>

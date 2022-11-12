@@ -113,10 +113,10 @@ test_that("number of solutions found is less than desired", {
     ) %>%
     add_compactness_constraint(6, unit = "cells") %>%
     set_max_mesh_objective() %>%
-    add_settings(time_limit = 5, nb_solutions = 10)
+    add_settings(time_limit = 10, nb_solutions = 1000)
   result <- solve(problem)
   # tests
-  expect_is(result, "RestoptSolution")
+  expect_is(result[[1]], "RestoptSolution")
 })
 
 test_that("only one optimal MESH solution exists, so it is returned", {

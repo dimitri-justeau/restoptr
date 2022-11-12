@@ -6,6 +6,7 @@
 - Add `solution_name_prefix` setting, that allows defining a custom prefix for solutions names.
 - Fix the `restoptr.Rmd` vignette, there was a bug due to the new `terra` version, not allowing to subset layers having not unique name. This was fixed using the newly introduced `solution_name_prefix` setting.
 - Allow numeric values for `min_restore` and `max_restore`, in `add_restorable_constraint()` when unit is not `cells`, as the conversion to integer is done during the conversion to unitless values.
+- Relies on `restopt-2.0.1`, which brings improved performances for the `compactness` constraint.
 
 # restoptr 1.0.2
 

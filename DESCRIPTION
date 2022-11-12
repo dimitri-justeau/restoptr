@@ -38,7 +38,7 @@ URL: https://dimitri-justeau.github.io/restoptr/
 BugReports: https://github.com/dimitri-justeau/restoptr/issues
 SystemRequirements: Java (>= 11.0.12)
 VignetteBuilder: knitr
-RoxygenNote: 7.2.0
+RoxygenNote: 7.2.1
 Imports:
     utils,
     assertthat (>= 0.2.1),

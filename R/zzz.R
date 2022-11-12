@@ -22,4 +22,4 @@
   rJava::J("java.lang.System")$setProperty("EPSG-HSQL.directory", tempdir())
 }
 
-restopt_jar_name <- "restopt-2.0.0.jar"
+restopt_jar_name <- "restopt-2.0.1.jar"

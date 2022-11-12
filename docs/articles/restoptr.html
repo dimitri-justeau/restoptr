@@ -14,8 +14,8 @@
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png">
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.1.0/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.1.0/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<link href="../deps/bootstrap-5.1.3/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.1.3/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
 <meta property="og:title" content="Getting started">
@@ -81,7 +81,7 @@
 
 
 <div class="row">
-  <main id="main"><div class="page-header">
+  <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Getting started</h1>
             
       
@@ -134,20 +134,20 @@ R</em> package for working with raster data, and the <em>vegan</em> and
 we will set the seed for the random number generator to help ensure
 consistent results.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># load packages</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dimitri-justeau.github.io/restoptr/">restoptr</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rspatial.org/terra/" class="external-link">terra</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/vegandevs/vegan" class="external-link">vegan</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://svn.r-project.org/R-packages/trunk/cluster/" class="external-link">cluster</a></span><span class="op">)</span>
-
-<span class="co"># set seed for reproducibility</span>
-<span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">500</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># load packages</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dimitri-justeau.github.io/restoptr/">restoptr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rspatial.org/terra/" class="external-link">terra</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/vegandevs/vegan" class="external-link">vegan</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://svn.r-project.org/R-packages/trunk/cluster/" class="external-link">cluster</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># set seed for reproducibility</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">500</span><span class="op">)</span></span></code></pre></div>
 <p>Since the package needs Java to work, let’s verify that Java is
 installed.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># check if Java is available for usage</span>
-<span class="fu"><a href="../reference/is_java_available.html">is_java_available</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## [1] TRUE</span></code></pre>
+<code class="sourceCode R"><span><span class="co"># check if Java is available for usage</span></span>
+<span><span class="fu"><a href="../reference/is_java_available.html">is_java_available</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## [1] TRUE</span></span></code></pre>
 <p>If the previous code returns a <code>TRUE</code>, then this means
 that Java is installed on your computer and ready to use. If not, please
 see the package README documentation for instructions on installing and
@@ -172,23 +172,23 @@ places with missing (<code>NA</code>) values, which represent places
 that should not be considered as part of the prioritization exercise
 (e.g., places located outside the study area).</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># load habitat data</span>
-<span class="va">habitat_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/rast.html" class="external-link">rast</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span>
-  <span class="st">"extdata"</span>, <span class="st">"habitat_hi_res.tif"</span>, package <span class="op">=</span> <span class="st">"restoptr"</span>
-<span class="op">)</span><span class="op">)</span>
-
-<span class="co"># preview habitat data</span>
-<span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">habitat_data</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## class       : SpatRaster </span>
-<span class="co">## dimensions  : 1867, 2713, 1  (nrow, ncol, nlyr)</span>
-<span class="co">## resolution  : 27.9487, 29.74339  (x, y)</span>
-<span class="co">## extent      : 419768.2, 495593.1, 227538.9, 283069.8  (xmin, xmax, ymin, ymax)</span>
-<span class="co">## coord. ref. : RGNC91-93 / Lambert New Caledonia (EPSG:3163) </span>
-<span class="co">## source      : habitat_hi_res.tif </span>
-<span class="co">## name        : habitat_hi_res</span></code></pre>
+<code class="sourceCode R"><span><span class="co"># load habitat data</span></span>
+<span><span class="va">habitat_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/rast.html" class="external-link">rast</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span></span>
+<span>  <span class="st">"extdata"</span>, <span class="st">"habitat_hi_res.tif"</span>, package <span class="op">=</span> <span class="st">"restoptr"</span></span>
+<span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># preview habitat data</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">habitat_data</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## class       : SpatRaster </span></span>
+<span><span class="co">## dimensions  : 1867, 2713, 1  (nrow, ncol, nlyr)</span></span>
+<span><span class="co">## resolution  : 27.9487, 29.74339  (x, y)</span></span>
+<span><span class="co">## extent      : 419768.2, 495593.1, 227538.9, 283069.8  (xmin, xmax, ymin, ymax)</span></span>
+<span><span class="co">## coord. ref. : RGNC91-93 / Lambert New Caledonia (EPSG:3163) </span></span>
+<span><span class="co">## source      : habitat_hi_res.tif </span></span>
+<span><span class="co">## name        : habitat_hi_res</span></span></code></pre>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># visualize habitat data</span>
-<span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">habitat_data</span>, main <span class="op">=</span> <span class="st">"Existing habitat"</span>,  plg <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"topright"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># visualize habitat data</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">habitat_data</span>, main <span class="op">=</span> <span class="st">"Existing habitat"</span>,  plg <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"topright"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="restoptr_files/figure-html/unnamed-chunk-5-1.png" width="90%" style="display: block; margin: auto;"></p>
 <p>Next, let’s import a raster layer to describe the spatial
 distribution of places inside the study area that are not available for
@@ -203,25 +203,25 @@ not suitable for restoration actions. This raster layer also contains
 missing (<code>NA</code>) values in the same places as the previous
 layer.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># load locked out data</span>
-<span class="va">locked_out_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/rast.html" class="external-link">rast</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span>
-  <span class="st">"extdata"</span>, <span class="st">"locked_out.tif"</span>, package <span class="op">=</span> <span class="st">"restoptr"</span>
-<span class="op">)</span><span class="op">)</span>
-
-<span class="co"># preview locked out data</span>
-<span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">locked_out_data</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## class       : SpatRaster </span>
-<span class="co">## dimensions  : 1867, 2713, 1  (nrow, ncol, nlyr)</span>
-<span class="co">## resolution  : 27.9487, 29.74339  (x, y)</span>
-<span class="co">## extent      : 419768.2, 495593.1, 227538.9, 283069.8  (xmin, xmax, ymin, ymax)</span>
-<span class="co">## coord. ref. : RGNC91-93 / Lambert New Caledonia (EPSG:3163) </span>
-<span class="co">## source      : locked_out.tif </span>
-<span class="co">## name        : layer </span>
-<span class="co">## min value   :     1 </span>
-<span class="co">## max value   :     1</span></code></pre>
+<code class="sourceCode R"><span><span class="co"># load locked out data</span></span>
+<span><span class="va">locked_out_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/rast.html" class="external-link">rast</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span></span>
+<span>  <span class="st">"extdata"</span>, <span class="st">"locked_out.tif"</span>, package <span class="op">=</span> <span class="st">"restoptr"</span></span>
+<span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># preview locked out data</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">locked_out_data</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## class       : SpatRaster </span></span>
+<span><span class="co">## dimensions  : 1867, 2713, 1  (nrow, ncol, nlyr)</span></span>
+<span><span class="co">## resolution  : 27.9487, 29.74339  (x, y)</span></span>
+<span><span class="co">## extent      : 419768.2, 495593.1, 227538.9, 283069.8  (xmin, xmax, ymin, ymax)</span></span>
+<span><span class="co">## coord. ref. : RGNC91-93 / Lambert New Caledonia (EPSG:3163) </span></span>
+<span><span class="co">## source      : locked_out.tif </span></span>
+<span><span class="co">## name        : layer </span></span>
+<span><span class="co">## min value   :     1 </span></span>
+<span><span class="co">## max value   :     1</span></span></code></pre>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># visualize locked out data</span>
-<span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">locked_out_data</span>, main <span class="op">=</span> <span class="st">"Locked out areas"</span>, plg <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"topright"</span><span class="op">)</span>, col<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"darkorange"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># visualize locked out data</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">locked_out_data</span>, main <span class="op">=</span> <span class="st">"Locked out areas"</span>, plg <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"topright"</span><span class="op">)</span>, col<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"darkorange"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="restoptr_files/figure-html/unnamed-chunk-6-1.png" width="90%" style="display: block; margin: auto;"></p>
 <p>After loading in the data, we can begin formulating an optimization
 problem.</p>
@@ -256,46 +256,46 @@ function). Finally, we will specify that we wish to generate a single
 optimal prioritization (via the <code><a href="../reference/add_settings.html">add_settings()</a></code>
 function).</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># build problem</span>
-<span class="va">rp</span> <span class="op">&lt;-</span>
-  <span class="fu"><a href="../reference/restopt_problem.html">restopt_problem</a></span><span class="op">(</span>
-    existing_habitat <span class="op">=</span> <span class="va">habitat_data</span>,
-    aggregation_factor <span class="op">=</span> <span class="fl">16</span>,
-    habitat_threshold <span class="op">=</span> <span class="fl">0.7</span>
-  <span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="../reference/set_max_mesh_objective.html">set_max_mesh_objective</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="../reference/add_restorable_constraint.html">add_restorable_constraint</a></span><span class="op">(</span>
-    min_restore <span class="op">=</span> <span class="fl">1</span>, max_restore <span class="op">=</span> <span class="fl">220</span>, unit <span class="op">=</span> <span class="st">"ha"</span>
-  <span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="../reference/add_compactness_constraint.html">add_compactness_constraint</a></span><span class="op">(</span><span class="fl">2.5</span>, unit <span class="op">=</span> <span class="st">"km"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="../reference/add_locked_out_constraint.html">add_locked_out_constraint</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">locked_out_data</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="../reference/add_settings.html">add_settings</a></span><span class="op">(</span>optimality_gap <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>
-
-<span class="co"># preview problem</span>
-<span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">rp</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## <span style="color: #00BB00; font-weight: bold;">-----------------------------------------------------------------</span> </span>
-<span class="co">## <span style="color: #00BB00; font-weight: bold;">                         Restopt                         </span> </span>
-<span class="co">## <span style="color: #00BB00; font-weight: bold;">-----------------------------------------------------------------</span> </span>
-<span class="co">## <span style="color: #BBBBBB; font-weight: bold;">original habitat:    </span> <span style="color: #00BBBB;">habitat_hi_res.tif</span> </span>
-<span class="co">## <span style="color: #BBBBBB; font-weight: bold;">aggregation factor:  </span> <span style="color: #00BBBB;">16</span> </span>
-<span class="co">## <span style="color: #BBBBBB; font-weight: bold;">habitat threshold:   </span> <span style="color: #00BBBB;">0.7</span> </span>
-<span class="co">## <span style="color: #BBBBBB; font-weight: bold;">existing habitat:    </span> <span style="color: #00BBBB;">in memory</span> </span>
-<span class="co">## <span style="color: #BBBBBB; font-weight: bold;">restorable habitat:  </span> <span style="color: #00BBBB;">in memory</span> </span>
-<span class="co">## <span style="color: #00BB00;">-----------------------------------------------------------------</span> </span>
-<span class="co">## <span style="color: #BBBBBB; font-weight: bold;">objective:           </span> <span style="color: #0000BB;">Maximize effective mesh size</span> </span>
-<span class="co">## <span style="color: #00BB00;">-----------------------------------------------------------------</span> </span>
-<span class="co">## <span style="color: #BBBBBB; font-weight: bold;">constraints:        </span>  </span>
-<span class="co">## <span style="color: #0000BB;">  -  restorable (min_restore = 1, max_restore = 220, min_proportion = 1, unit = ha)</span> </span>
-<span class="co">## <span style="color: #0000BB;">  -  compactness (max_diameter = 2.5, unit = km)</span> </span>
-<span class="co">## <span style="color: #0000BB;">  -  locked out (data = in memory)</span> </span>
-<span class="co">## <span style="color: #00BB00;">-----------------------------------------------------------------</span> </span>
-<span class="co">## <span style="color: #BBBBBB; font-weight: bold;">settings:</span> </span>
-<span class="co">## <span style="color: #BB00BB;">  - precision = 4</span></span>
-<span class="co">## <span style="color: #BB00BB;">  - time_limit = 0</span></span>
-<span class="co">## <span style="color: #BB00BB;">  - nb_solutions = 1</span></span>
-<span class="co">## <span style="color: #BB00BB;">  - optimality_gap = 0</span></span>
-<span class="co">## <span style="color: #BB00BB;">  - solution_name_prefix = Solution </span> </span>
-<span class="co">## <span style="color: #00BB00; font-weight: bold;">-----------------------------------------------------------------</span></span></code></pre>
+<code class="sourceCode R"><span><span class="co"># build problem</span></span>
+<span><span class="va">rp</span> <span class="op">&lt;-</span></span>
+<span>  <span class="fu"><a href="../reference/restopt_problem.html">restopt_problem</a></span><span class="op">(</span></span>
+<span>    existing_habitat <span class="op">=</span> <span class="va">habitat_data</span>,</span>
+<span>    aggregation_factor <span class="op">=</span> <span class="fl">16</span>,</span>
+<span>    habitat_threshold <span class="op">=</span> <span class="fl">0.7</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/set_max_mesh_objective.html">set_max_mesh_objective</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/add_restorable_constraint.html">add_restorable_constraint</a></span><span class="op">(</span></span>
+<span>    min_restore <span class="op">=</span> <span class="fl">1</span>, max_restore <span class="op">=</span> <span class="fl">220</span>, unit <span class="op">=</span> <span class="st">"ha"</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/add_compactness_constraint.html">add_compactness_constraint</a></span><span class="op">(</span><span class="fl">2.5</span>, unit <span class="op">=</span> <span class="st">"km"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/add_locked_out_constraint.html">add_locked_out_constraint</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">locked_out_data</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/add_settings.html">add_settings</a></span><span class="op">(</span>optimality_gap <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># preview problem</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">rp</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## <span style="color: #00BB00; font-weight: bold;">-----------------------------------------------------------------</span> </span></span>
+<span><span class="co">## <span style="color: #00BB00; font-weight: bold;">                         Restopt                         </span> </span></span>
+<span><span class="co">## <span style="color: #00BB00; font-weight: bold;">-----------------------------------------------------------------</span> </span></span>
+<span><span class="co">## <span style="color: #BBBBBB; font-weight: bold;">original habitat:    </span> <span style="color: #00BBBB;">habitat_hi_res.tif</span> </span></span>
+<span><span class="co">## <span style="color: #BBBBBB; font-weight: bold;">aggregation factor:  </span> <span style="color: #00BBBB;">16</span> </span></span>
+<span><span class="co">## <span style="color: #BBBBBB; font-weight: bold;">habitat threshold:   </span> <span style="color: #00BBBB;">0.7</span> </span></span>
+<span><span class="co">## <span style="color: #BBBBBB; font-weight: bold;">existing habitat:    </span> <span style="color: #00BBBB;">in memory</span> </span></span>
+<span><span class="co">## <span style="color: #BBBBBB; font-weight: bold;">restorable habitat:  </span> <span style="color: #00BBBB;">in memory</span> </span></span>
+<span><span class="co">## <span style="color: #00BB00;">-----------------------------------------------------------------</span> </span></span>
+<span><span class="co">## <span style="color: #BBBBBB; font-weight: bold;">objective:           </span> <span style="color: #0000BB;">Maximize effective mesh size</span> </span></span>
+<span><span class="co">## <span style="color: #00BB00;">-----------------------------------------------------------------</span> </span></span>
+<span><span class="co">## <span style="color: #BBBBBB; font-weight: bold;">constraints:        </span>  </span></span>
+<span><span class="co">## <span style="color: #0000BB;">  -  restorable (min_restore = 1, max_restore = 220, min_proportion = 1, unit = ha)</span> </span></span>
+<span><span class="co">## <span style="color: #0000BB;">  -  compactness (max_diameter = 2.5, unit = km)</span> </span></span>
+<span><span class="co">## <span style="color: #0000BB;">  -  locked out (data = in memory)</span> </span></span>
+<span><span class="co">## <span style="color: #00BB00;">-----------------------------------------------------------------</span> </span></span>
+<span><span class="co">## <span style="color: #BBBBBB; font-weight: bold;">settings:</span> </span></span>
+<span><span class="co">## <span style="color: #BB00BB;">  - precision = 4</span></span></span>
+<span><span class="co">## <span style="color: #BB00BB;">  - time_limit = 0</span></span></span>
+<span><span class="co">## <span style="color: #BB00BB;">  - nb_solutions = 1</span></span></span>
+<span><span class="co">## <span style="color: #BB00BB;">  - optimality_gap = 0</span></span></span>
+<span><span class="co">## <span style="color: #BB00BB;">  - solution_name_prefix = Solution </span> </span></span>
+<span><span class="co">## <span style="color: #00BB00; font-weight: bold;">-----------------------------------------------------------------</span></span></span></code></pre>
 <p>After building the problem formulation object, we can solve it.</p>
 </div>
 <div class="section level2">
@@ -304,43 +304,43 @@ function).</p>
 <p>We can generate a prioritization by solving the restoration problem
 object (i.e., <code>rp</code>).</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># solve problem to generate prioritization</span>
-<span class="va">rs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/solve.html" class="external-link">solve</a></span><span class="op">(</span><span class="va">rp</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## <span style="color: #00BB00;">Good news: the solver found 1 solution statisfying the constraints that was proven optimal ! (solving time = 1.75 s)</span></span></code></pre>
+<code class="sourceCode R"><span><span class="co"># solve problem to generate prioritization</span></span>
+<span><span class="va">rs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/solve.html" class="external-link">solve</a></span><span class="op">(</span><span class="va">rp</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## <span style="color: #00BB00;">Good news: the solver found 1 solution statisfying the constraints that was proven optimal ! (solving time = 0.3 s)</span></span></span></code></pre>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># preview prioritization</span>
-<span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">rs</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## class       : RestoptSolution </span>
-<span class="co">## dimensions  : 117, 170, 1  (nrow, ncol, nlyr)</span>
-<span class="co">## resolution  : 447.1792, 475.8943  (x, y)</span>
-<span class="co">## extent      : 419768.2, 495788.7, 227390.1, 283069.8  (xmin, xmax, ymin, ymax)</span>
-<span class="co">## coord. ref. : RGNC91-93 / Lambert New Caledonia (EPSG:3163) </span>
-<span class="co">## source      : memory </span>
-<span class="co">## categories  : label </span>
-<span class="co">## name        :  Solution 1 </span>
-<span class="co">## min value   :  Locked out </span>
-<span class="co">## max value   : Restoration</span></code></pre>
+<code class="sourceCode R"><span><span class="co"># preview prioritization</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">rs</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## class       : RestoptSolution </span></span>
+<span><span class="co">## dimensions  : 117, 170, 1  (nrow, ncol, nlyr)</span></span>
+<span><span class="co">## resolution  : 447.1792, 475.8943  (x, y)</span></span>
+<span><span class="co">## extent      : 419768.2, 495788.7, 227390.1, 283069.8  (xmin, xmax, ymin, ymax)</span></span>
+<span><span class="co">## coord. ref. : RGNC91-93 / Lambert New Caledonia (EPSG:3163) </span></span>
+<span><span class="co">## source      : memory </span></span>
+<span><span class="co">## categories  : label </span></span>
+<span><span class="co">## name        :  Solution 1 </span></span>
+<span><span class="co">## min value   :  Locked out </span></span>
+<span><span class="co">## max value   : Restoration</span></span></code></pre>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># display summary statistics for the prioritization</span>
-<span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="../reference/get_metadata.html">get_metadata</a></span><span class="op">(</span><span class="va">rs</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">##     min_restore total_restorable nb_planning_units nb_components     diameter</span>
-<span class="co">## 1 219.2941 [ha]    219.2941 [ha]                16             3 2499.808 [m]</span>
-<span class="co">##   optimality_proven search_state solving_time  mesh_initial          mesh</span>
-<span class="co">## 1              TRUE   TERMINATED        1.731 13667.84 [ha] 14248.14 [ha]</span>
-<span class="co">##       mesh_best</span>
-<span class="co">## 1 14248.14 [ha]</span></code></pre>
+<code class="sourceCode R"><span><span class="co"># display summary statistics for the prioritization</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="../reference/get_metadata.html">get_metadata</a></span><span class="op">(</span><span class="va">rs</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">##     min_restore total_restorable nb_planning_units nb_components     diameter</span></span>
+<span><span class="co">## 1 219.0447 [ha]    219.0447 [ha]                16             2 2499.808 [m]</span></span>
+<span><span class="co">##   optimality_proven search_state solving_time  mesh_initial          mesh</span></span>
+<span><span class="co">## 1              TRUE   TERMINATED        0.291 13667.84 [ha] 14248.14 [ha]</span></span>
+<span><span class="co">##       mesh_best</span></span>
+<span><span class="co">## 1 14248.14 [ha]</span></span></code></pre>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># visualize prioritization</span>
-<span class="co">## here, values indicate:</span>
-<span class="co">## 0 : places that were locked out.</span>
-<span class="co">## 1 : places that were potential candidates for restoration</span>
-<span class="co">## 2 : places that already contain existing habitat.</span>
-<span class="co">## 3 : places selected for restoration actions.</span>
-<span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html" class="external-link">plot</a></span><span class="op">(</span>
-  <span class="va">rs</span>, main <span class="op">=</span> <span class="st">"Optimal prioritization"</span>,
-  col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#E5E5E5"</span>, <span class="st">"#fff1d6"</span>, <span class="st">"#b2df8a"</span>, <span class="st">"#1f78b4"</span><span class="op">)</span>,
-  plg <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"topright"</span><span class="op">)</span>
-<span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># visualize prioritization</span></span>
+<span><span class="co">## here, values indicate:</span></span>
+<span><span class="co">## 0 : places that were locked out.</span></span>
+<span><span class="co">## 1 : places that were potential candidates for restoration</span></span>
+<span><span class="co">## 2 : places that already contain existing habitat.</span></span>
+<span><span class="co">## 3 : places selected for restoration actions.</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html" class="external-link">plot</a></span><span class="op">(</span></span>
+<span>  <span class="va">rs</span>, main <span class="op">=</span> <span class="st">"Optimal prioritization"</span>,</span>
+<span>  col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#E5E5E5"</span>, <span class="st">"#fff1d6"</span>, <span class="st">"#b2df8a"</span>, <span class="st">"#1f78b4"</span><span class="op">)</span>,</span>
+<span>  plg <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"topright"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <p><img src="restoptr_files/figure-html/unnamed-chunk-8-1.png" width="90%" style="display: block; margin: auto;"></p>
 <p>We can see that the prioritization selected planning units for
 restoration in the southern region of the study area (shown in blue). By
@@ -354,14 +354,14 @@ extract metadata for it. These metadata describe the spatial extent of
 priority areas, and their ability to promote connectivity according to
 various metrics.</p>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># extract metadata</span>
-<span class="fu"><a href="../reference/get_metadata.html">get_metadata</a></span><span class="op">(</span><span class="va">rs</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">##     min_restore total_restorable nb_planning_units nb_components     diameter</span>
-<span class="co">## 1 219.2941 [ha]    219.2941 [ha]                16             3 2499.808 [m]</span>
-<span class="co">##   optimality_proven search_state solving_time  mesh_initial          mesh</span>
-<span class="co">## 1              TRUE   TERMINATED        1.731 13667.84 [ha] 14248.14 [ha]</span>
-<span class="co">##       mesh_best</span>
-<span class="co">## 1 14248.14 [ha]</span></code></pre>
+<code class="sourceCode R"><span><span class="co"># extract metadata</span></span>
+<span><span class="fu"><a href="../reference/get_metadata.html">get_metadata</a></span><span class="op">(</span><span class="va">rs</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">##     min_restore total_restorable nb_planning_units nb_components     diameter</span></span>
+<span><span class="co">## 1 219.0447 [ha]    219.0447 [ha]                16             2 2499.808 [m]</span></span>
+<span><span class="co">##   optimality_proven search_state solving_time  mesh_initial          mesh</span></span>
+<span><span class="co">## 1              TRUE   TERMINATED        0.291 13667.84 [ha] 14248.14 [ha]</span></span>
+<span><span class="co">##       mesh_best</span></span>
+<span><span class="co">## 1 14248.14 [ha]</span></span></code></pre>
 <p>Although this prioritization identifies a set of places that – in
 combination – can help promote connectivity, it does not necessarily
 tell us which of these places are more (or less) important for achieving
@@ -380,45 +380,45 @@ This approach is similar to the selection frequency statistics provided
 by the <em>Marxan</em> decision support tool for conservation planning
 <span class="citation">(Ball <em>et al.</em> 2009)</span>.</p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># generate multiple prioritizations for assessing relative importance</span>
-<span class="va">prt_imp</span> <span class="op">&lt;-</span>
-  <span class="va">rp</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="../reference/add_settings.html">add_settings</a></span><span class="op">(</span>nb <span class="op">=</span> <span class="fl">100</span>, optimality_gap <span class="op">=</span> <span class="fl">0</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://rdrr.io/r/base/solve.html" class="external-link">solve</a></span><span class="op">(</span>verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://rdrr.io/pkg/terra/man/rast.html" class="external-link">rast</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># generate multiple prioritizations for assessing relative importance</span></span>
+<span><span class="va">prt_imp</span> <span class="op">&lt;-</span></span>
+<span>  <span class="va">rp</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/add_settings.html">add_settings</a></span><span class="op">(</span>nb <span class="op">=</span> <span class="fl">100</span>, optimality_gap <span class="op">=</span> <span class="fl">0</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/solve.html" class="external-link">solve</a></span><span class="op">(</span>verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/terra/man/rast.html" class="external-link">rast</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># preview portfolio prioritizations</span>
-<span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">prt_imp</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## class       : RestoptSolution </span>
-<span class="co">## dimensions  : 117, 170, 8  (nrow, ncol, nlyr)</span>
-<span class="co">## resolution  : 447.1792, 475.8943  (x, y)</span>
-<span class="co">## extent      : 419768.2, 495788.7, 227390.1, 283069.8  (xmin, xmax, ymin, ymax)</span>
-<span class="co">## coord. ref. : RGNC91-93 / Lambert New Caledonia (EPSG:3163) </span>
-<span class="co">## sources     : memory  </span>
-<span class="co">##               memory  </span>
-<span class="co">##               memory  </span>
-<span class="co">##               ... and 5 more source(s)</span>
-<span class="co">## names       :  Solution 1,  Solution 2,  Solution 3,  Solution 4,  Solution 5,  Solution 6, ... </span>
-<span class="co">## min values  :  Locked out,  Locked out,  Locked out,  Locked out,  Locked out,  Locked out, ... </span>
-<span class="co">## max values  : Restoration, Restoration, Restoration, Restoration, Restoration, Restoration, ...</span></code></pre>
+<code class="sourceCode R"><span><span class="co"># preview portfolio prioritizations</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">prt_imp</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## class       : RestoptSolution </span></span>
+<span><span class="co">## dimensions  : 117, 170, 8  (nrow, ncol, nlyr)</span></span>
+<span><span class="co">## resolution  : 447.1792, 475.8943  (x, y)</span></span>
+<span><span class="co">## extent      : 419768.2, 495788.7, 227390.1, 283069.8  (xmin, xmax, ymin, ymax)</span></span>
+<span><span class="co">## coord. ref. : RGNC91-93 / Lambert New Caledonia (EPSG:3163) </span></span>
+<span><span class="co">## sources     : memory  </span></span>
+<span><span class="co">##               memory  </span></span>
+<span><span class="co">##               memory  </span></span>
+<span><span class="co">##               ... and 5 more source(s)</span></span>
+<span><span class="co">## names       :  Solution 1,  Solution 2,  Solution 3,  Solution 4,  Solution 5,  Solution 6, ... </span></span>
+<span><span class="co">## min values  :  Locked out,  Locked out,  Locked out,  Locked out,  Locked out,  Locked out, ... </span></span>
+<span><span class="co">## max values  : Restoration, Restoration, Restoration, Restoration, Restoration, Restoration, ...</span></span></code></pre>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># calculate selection frequency of from portfolio</span>
-<span class="va">selfreq</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/summarize-generics.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">prt_imp</span> <span class="op">==</span> <span class="fl">3</span><span class="op">)</span>
-
-<span class="co"># preview selection frequency data</span>
-<span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">selfreq</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## class       : SpatRaster </span>
-<span class="co">## dimensions  : 117, 170, 1  (nrow, ncol, nlyr)</span>
-<span class="co">## resolution  : 447.1792, 475.8943  (x, y)</span>
-<span class="co">## extent      : 419768.2, 495788.7, 227390.1, 283069.8  (xmin, xmax, ymin, ymax)</span>
-<span class="co">## coord. ref. : RGNC91-93 / Lambert New Caledonia (EPSG:3163) </span>
-<span class="co">## source      : memory </span>
-<span class="co">## name        : sum </span>
-<span class="co">## min value   :   0 </span>
-<span class="co">## max value   :   8</span></code></pre>
+<code class="sourceCode R"><span><span class="co"># calculate selection frequency of from portfolio</span></span>
+<span><span class="va">selfreq</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">prt_imp</span> <span class="op">==</span> <span class="fl">3</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># preview selection frequency data</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">selfreq</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## class       : SpatRaster </span></span>
+<span><span class="co">## dimensions  : 117, 170, 1  (nrow, ncol, nlyr)</span></span>
+<span><span class="co">## resolution  : 447.1792, 475.8943  (x, y)</span></span>
+<span><span class="co">## extent      : 419768.2, 495788.7, 227390.1, 283069.8  (xmin, xmax, ymin, ymax)</span></span>
+<span><span class="co">## coord. ref. : RGNC91-93 / Lambert New Caledonia (EPSG:3163) </span></span>
+<span><span class="co">## source      : memory </span></span>
+<span><span class="co">## name        : sum </span></span>
+<span><span class="co">## min value   :   0 </span></span>
+<span><span class="co">## max value   :   8</span></span></code></pre>
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># visualize selection frequencies</span>
-<span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">selfreq</span>, main <span class="op">=</span> <span class="st">"Selection frequencies"</span>, type <span class="op">=</span> <span class="st">"continuous"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># visualize selection frequencies</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">selfreq</span>, main <span class="op">=</span> <span class="st">"Selection frequencies"</span>, type <span class="op">=</span> <span class="st">"continuous"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="restoptr_files/figure-html/unnamed-chunk-11-1.png" width="90%" style="display: block; margin: auto;"></p>
 <p>We can see that some planning units are critical for implementing an
 optimal prioritization (shown in dark green) and there are other
@@ -445,37 +445,37 @@ spatial configurations with relatively similar performance, we will
 generate prioritizations under a range of different optimality gaps
 (i.e., ranging from 0% to 15%).</p>
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># define optimality gaps</span>
-<span class="va">gap_values</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0.15</span>, <span class="fl">0.1</span><span class="op">)</span>
-
-<span class="co"># generate portfolio of prioritizations</span>
-<span class="va">prt_alt</span> <span class="op">&lt;-</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">gap_values</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span>
-    <span class="va">rp</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-    <span class="fu"><a href="../reference/add_settings.html">add_settings</a></span><span class="op">(</span>
-      nb <span class="op">=</span> <span class="fl">10</span>,
-      optimality_gap <span class="op">=</span> <span class="va">x</span>,
-      solution_name_prefix <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"opt_gap_"</span>, <span class="va">x</span>, <span class="st">"__#"</span><span class="op">)</span>
-    <span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-    <span class="fu"><a href="https://rdrr.io/r/base/solve.html" class="external-link">solve</a></span><span class="op">(</span><span class="va">v</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
-  <span class="op">}</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span>recursive <span class="op">=</span> <span class="cn">FALSE</span>, use.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://rdrr.io/pkg/terra/man/rast.html" class="external-link">rast</a></span><span class="op">(</span><span class="op">)</span>
-
-<span class="co"># preview portfolio</span>
-<span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">prt_alt</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## class       : RestoptSolution </span>
-<span class="co">## dimensions  : 117, 170, 18  (nrow, ncol, nlyr)</span>
-<span class="co">## resolution  : 447.1792, 475.8943  (x, y)</span>
-<span class="co">## extent      : 419768.2, 495788.7, 227390.1, 283069.8  (xmin, xmax, ymin, ymax)</span>
-<span class="co">## coord. ref. : RGNC91-93 / Lambert New Caledonia (EPSG:3163) </span>
-<span class="co">## sources     : memory  </span>
-<span class="co">##               memory  </span>
-<span class="co">##               memory  </span>
-<span class="co">##               ... and 15 more source(s)</span>
-<span class="co">## names       : opt_g~0__#1, opt_g~0__#2, opt_g~0__#3, opt_g~0__#4, opt_g~0__#5, opt_g~0__#6, ... </span>
-<span class="co">## min values  :  Locked out,  Locked out,  Locked out,  Locked out,  Locked out,  Locked out, ... </span>
-<span class="co">## max values  : Restoration, Restoration, Restoration, Restoration, Restoration, Restoration, ...</span></code></pre>
+<code class="sourceCode R"><span><span class="co"># define optimality gaps</span></span>
+<span><span class="va">gap_values</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0.15</span>, <span class="fl">0.1</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># generate portfolio of prioritizations</span></span>
+<span><span class="va">prt_alt</span> <span class="op">&lt;-</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">gap_values</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">rp</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="../reference/add_settings.html">add_settings</a></span><span class="op">(</span></span>
+<span>      nb <span class="op">=</span> <span class="fl">10</span>,</span>
+<span>      optimality_gap <span class="op">=</span> <span class="va">x</span>,</span>
+<span>      solution_name_prefix <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"opt_gap_"</span>, <span class="va">x</span>, <span class="st">"__#"</span><span class="op">)</span></span>
+<span>    <span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/solve.html" class="external-link">solve</a></span><span class="op">(</span><span class="va">v</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span>  <span class="op">}</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span>recursive <span class="op">=</span> <span class="cn">FALSE</span>, use.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/terra/man/rast.html" class="external-link">rast</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># preview portfolio</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">prt_alt</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## class       : RestoptSolution </span></span>
+<span><span class="co">## dimensions  : 117, 170, 18  (nrow, ncol, nlyr)</span></span>
+<span><span class="co">## resolution  : 447.1792, 475.8943  (x, y)</span></span>
+<span><span class="co">## extent      : 419768.2, 495788.7, 227390.1, 283069.8  (xmin, xmax, ymin, ymax)</span></span>
+<span><span class="co">## coord. ref. : RGNC91-93 / Lambert New Caledonia (EPSG:3163) </span></span>
+<span><span class="co">## sources     : memory  </span></span>
+<span><span class="co">##               memory  </span></span>
+<span><span class="co">##               memory  </span></span>
+<span><span class="co">##               ... and 15 more source(s)</span></span>
+<span><span class="co">## names       : opt_g~0__#1, opt_g~0__#2, opt_g~0__#3, opt_g~0__#4, opt_g~0__#5, opt_g~0__#6, ... </span></span>
+<span><span class="co">## min values  :  Locked out,  Locked out,  Locked out,  Locked out,  Locked out,  Locked out, ... </span></span>
+<span><span class="co">## max values  : Restoration, Restoration, Restoration, Restoration, Restoration, Restoration, ...</span></span></code></pre>
 <p>Although we generated a portfolio of different prioritizations, it’s
 difficult to tell which exactly which prioritizations are different to
 each other. Although we could try viewing the prioritizations one by
@@ -485,50 +485,50 @@ which planning units they selected – using a hierarchical cluster
 analysis <span class="citation">(Harris <em>et al.</em>
 2014)</span>.</p>
 <div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># extract prioritization values</span>
-<span class="va">prt_values</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">prt_alt</span> <span class="op">==</span> <span class="fl">3</span><span class="op">)</span>
-
-<span class="co"># calculate pair-wise distances between different prioritizations for analysis</span>
-<span class="va">prt_dists</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/vegan/man/vegdist.html" class="external-link">vegdist</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/transpose.html" class="external-link">t</a></span><span class="op">(</span><span class="va">prt_values</span><span class="op">)</span>, method <span class="op">=</span> <span class="st">"jaccard"</span>, binary <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-
-<span class="co"># run cluster analysis</span>
-<span class="va">prt_clust</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/hclust.html" class="external-link">hclust</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/dist.html" class="external-link">as.dist</a></span><span class="op">(</span><span class="va">prt_dists</span><span class="op">)</span>, method <span class="op">=</span> <span class="st">"average"</span><span class="op">)</span>
-
-<span class="co"># visualize clusters</span>
-<span class="fu">withr</span><span class="fu">::</span><span class="fu"><a href="https://withr.r-lib.org/reference/with_par.html" class="external-link">with_par</a></span><span class="op">(</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>oma <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span>, mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">4.1</span>, <span class="fl">1.5</span>, <span class="fl">2.1</span><span class="op">)</span><span class="op">)</span>,
-  <span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html" class="external-link">plot</a></span><span class="op">(</span>
-    <span class="va">prt_clust</span>, labels <span class="op">=</span> <span class="cn">FALSE</span>, sub <span class="op">=</span> <span class="cn">NA</span>, xlab <span class="op">=</span> <span class="st">""</span>,
-    main <span class="op">=</span> <span class="st">"Cluster analysis of prioritizations in portfolio"</span>
-  <span class="op">)</span>
-<span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># extract prioritization values</span></span>
+<span><span class="va">prt_values</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">prt_alt</span> <span class="op">==</span> <span class="fl">3</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># calculate pair-wise distances between different prioritizations for analysis</span></span>
+<span><span class="va">prt_dists</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/vegan/man/vegdist.html" class="external-link">vegdist</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/transpose.html" class="external-link">t</a></span><span class="op">(</span><span class="va">prt_values</span><span class="op">)</span>, method <span class="op">=</span> <span class="st">"jaccard"</span>, binary <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># run cluster analysis</span></span>
+<span><span class="va">prt_clust</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/hclust.html" class="external-link">hclust</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/dist.html" class="external-link">as.dist</a></span><span class="op">(</span><span class="va">prt_dists</span><span class="op">)</span>, method <span class="op">=</span> <span class="st">"average"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># visualize clusters</span></span>
+<span><span class="fu">withr</span><span class="fu">::</span><span class="fu"><a href="https://withr.r-lib.org/reference/with_par.html" class="external-link">with_par</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>oma <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span>, mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">4.1</span>, <span class="fl">1.5</span>, <span class="fl">2.1</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html" class="external-link">plot</a></span><span class="op">(</span></span>
+<span>    <span class="va">prt_clust</span>, labels <span class="op">=</span> <span class="cn">FALSE</span>, sub <span class="op">=</span> <span class="cn">NA</span>, xlab <span class="op">=</span> <span class="st">""</span>,</span>
+<span>    main <span class="op">=</span> <span class="st">"Cluster analysis of prioritizations in portfolio"</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <p><img src="restoptr_files/figure-html/unnamed-chunk-13-1.png" width="90%" style="display: block; margin: auto;"></p>
 <p>We can see that there are two main groups of prioritizations in the
 portfolio. To identify prioritizations within each of these groups,
 let’s conduct a k-medoids cluster analysis to extract the most typical
 prioritization within each group.</p>
 <div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># run k-medoids analysis</span>
-<span class="va">prt_med</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/cluster/man/pam.html" class="external-link">pam</a></span><span class="op">(</span><span class="va">prt_dists</span>, k <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
-
-<span class="co"># extract names of prioritizations that are most central for each group</span>
-<span class="va">prt_med_names</span> <span class="op">&lt;-</span> <span class="va">prt_med</span><span class="op">$</span><span class="va">medoids</span>
-<span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">prt_med_names</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## [1] "opt_gap_0__#7"    "opt_gap_0.1__#10"</span></code></pre>
+<code class="sourceCode R"><span><span class="co"># run k-medoids analysis</span></span>
+<span><span class="va">prt_med</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/cluster/man/pam.html" class="external-link">pam</a></span><span class="op">(</span><span class="va">prt_dists</span>, k <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># extract names of prioritizations that are most central for each group</span></span>
+<span><span class="va">prt_med_names</span> <span class="op">&lt;-</span> <span class="va">prt_med</span><span class="op">$</span><span class="va">medoids</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">prt_med_names</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## [1] "opt_gap_0__#5"   "opt_gap_0.1__#1"</span></span></code></pre>
 <div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># create a new portfolio based on these prioritizations</span>
-<span class="va">prt_cand</span> <span class="op">&lt;-</span> <span class="va">prt_alt</span><span class="op">[[</span><span class="va">prt_med_names</span><span class="op">]</span><span class="op">]</span>
-
-<span class="co"># visualize prioritizations in subset portfolio</span>
-<span class="co">## here, values indicate:</span>
-<span class="co">## 0 : places that were locked out.</span>
-<span class="co">## 1 : places that were potential candidates for restoration</span>
-<span class="co">## 2 : places that already contain existing habitat.</span>
-<span class="co">## 3 : places selected for restoration actions.</span>
-<span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html" class="external-link">plot</a></span><span class="op">(</span>
-  <span class="va">prt_cand</span>, col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#E5E5E5"</span>, <span class="st">"#fff1d6"</span>, <span class="st">"#b2df8a"</span>, <span class="st">"#1f78b4"</span><span class="op">)</span>,
-  plg <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"topright"</span><span class="op">)</span>, nc <span class="op">=</span> <span class="fl">1</span>
-<span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># create a new portfolio based on these prioritizations</span></span>
+<span><span class="va">prt_cand</span> <span class="op">&lt;-</span> <span class="va">prt_alt</span><span class="op">[[</span><span class="va">prt_med_names</span><span class="op">]</span><span class="op">]</span></span>
+<span></span>
+<span><span class="co"># visualize prioritizations in subset portfolio</span></span>
+<span><span class="co">## here, values indicate:</span></span>
+<span><span class="co">## 0 : places that were locked out.</span></span>
+<span><span class="co">## 1 : places that were potential candidates for restoration</span></span>
+<span><span class="co">## 2 : places that already contain existing habitat.</span></span>
+<span><span class="co">## 3 : places selected for restoration actions.</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html" class="external-link">plot</a></span><span class="op">(</span></span>
+<span>  <span class="va">prt_cand</span>, col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#E5E5E5"</span>, <span class="st">"#fff1d6"</span>, <span class="st">"#b2df8a"</span>, <span class="st">"#1f78b4"</span><span class="op">)</span>,</span>
+<span>  plg <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"topright"</span><span class="op">)</span>, nc <span class="op">=</span> <span class="fl">1</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <p><img src="restoptr_files/figure-html/unnamed-chunk-14-1.png" width="90%" style="display: block; margin: auto;"></p>
 <p>We can see that the first prioritization (shown on the top) is very
 similar to the optimal solution we generated previously. Indeed –
@@ -560,178 +560,178 @@ measure their performance. Since we are interested in exploring
 trade-offs – rather than alternate prioritizations – we will specify an
 optimality gap of 0%.</p>
 <div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># define a set of different maximum area values for generating prioritizations</span>
-<span class="co">## N.B. these values are in hectares</span>
-<span class="va">max_restore_values</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">450</span>, <span class="fl">10</span><span class="op">)</span>
-
-<span class="co"># build a baseline problem without restorable constraints</span>
-<span class="va">bp</span> <span class="op">&lt;-</span>
-  <span class="fu"><a href="../reference/restopt_problem.html">restopt_problem</a></span><span class="op">(</span>
-    existing_habitat <span class="op">=</span> <span class="va">habitat_data</span>,
-    aggregation_factor <span class="op">=</span> <span class="fl">16</span>,
-    habitat_threshold <span class="op">=</span> <span class="fl">0.7</span>
-  <span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="../reference/set_max_mesh_objective.html">set_max_mesh_objective</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="../reference/add_compactness_constraint.html">add_compactness_constraint</a></span><span class="op">(</span><span class="fl">2.5</span>, unit <span class="op">=</span> <span class="st">"km"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="../reference/add_locked_out_constraint.html">add_locked_out_constraint</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">locked_out_data</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="../reference/add_settings.html">add_settings</a></span><span class="op">(</span>optimality_gap <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>
-
-<span class="co"># generate a portfolio of prioritizations to explore trade-offs</span>
-<span class="va">prt_tradeoffs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">max_restore_values</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span>
-  <span class="va">bp</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="../reference/add_restorable_constraint.html">add_restorable_constraint</a></span><span class="op">(</span>min_restore <span class="op">=</span> <span class="fl">1</span>, max_restore <span class="op">=</span> <span class="va">x</span>, unit <span class="op">=</span> <span class="st">"ha"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://rdrr.io/r/base/solve.html" class="external-link">solve</a></span><span class="op">(</span>verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
-<span class="op">}</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># define a set of different maximum area values for generating prioritizations</span></span>
+<span><span class="co">## N.B. these values are in hectares</span></span>
+<span><span class="va">max_restore_values</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">450</span>, <span class="fl">10</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># build a baseline problem without restorable constraints</span></span>
+<span><span class="va">bp</span> <span class="op">&lt;-</span></span>
+<span>  <span class="fu"><a href="../reference/restopt_problem.html">restopt_problem</a></span><span class="op">(</span></span>
+<span>    existing_habitat <span class="op">=</span> <span class="va">habitat_data</span>,</span>
+<span>    aggregation_factor <span class="op">=</span> <span class="fl">16</span>,</span>
+<span>    habitat_threshold <span class="op">=</span> <span class="fl">0.7</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/set_max_mesh_objective.html">set_max_mesh_objective</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/add_compactness_constraint.html">add_compactness_constraint</a></span><span class="op">(</span><span class="fl">2.5</span>, unit <span class="op">=</span> <span class="st">"km"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/add_locked_out_constraint.html">add_locked_out_constraint</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">locked_out_data</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/add_settings.html">add_settings</a></span><span class="op">(</span>optimality_gap <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># generate a portfolio of prioritizations to explore trade-offs</span></span>
+<span><span class="va">prt_tradeoffs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">max_restore_values</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">bp</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/add_restorable_constraint.html">add_restorable_constraint</a></span><span class="op">(</span>min_restore <span class="op">=</span> <span class="fl">1</span>, max_restore <span class="op">=</span> <span class="va">x</span>, unit <span class="op">=</span> <span class="st">"ha"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/solve.html" class="external-link">solve</a></span><span class="op">(</span>verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="op">}</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># extract metadata for each prioritization</span>
-<span class="va">prt_tradeoffs_metedata</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/do.call.html" class="external-link">do.call</a></span><span class="op">(</span><span class="va">rbind</span>, <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">prt_tradeoffs</span>, <span class="va">get_metadata</span><span class="op">)</span><span class="op">)</span>
-<span class="va">prt_tradeoffs_metedata</span><span class="op">$</span><span class="va">max_restore</span> <span class="op">&lt;-</span> <span class="va">max_restore_values</span>
-
-<span class="co"># print metadata</span>
-<span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">prt_tradeoffs_metedata</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">##       min_restore total_restorable nb_planning_units nb_components     diameter</span>
-<span class="co">## 1   99.67156 [ha]    99.67156 [ha]                 9             5 2466.877 [m]</span>
-<span class="co">## 2  108.31697 [ha]   108.31697 [ha]                 9             5 2466.877 [m]</span>
-<span class="co">## 3  119.78876 [ha]   119.78876 [ha]                10             6 2466.877 [m]</span>
-<span class="co">## 4  129.09920 [ha]   129.09920 [ha]                11             5 2466.877 [m]</span>
-<span class="co">## 5  139.73970 [ha]   139.73970 [ha]                11             4 2474.054 [m]</span>
-<span class="co">## 6  149.21639 [ha]   149.21639 [ha]                12             5 2466.877 [m]</span>
-<span class="co">## 7  159.02561 [ha]   159.02561 [ha]                12             3 2499.808 [m]</span>
-<span class="co">## 8  169.74924 [ha]   169.74924 [ha]                13             4 2499.808 [m]</span>
-<span class="co">## 9  173.24065 [ha]   173.24065 [ha]                13             4 2474.054 [m]</span>
-<span class="co">## 10 189.86643 [ha]   189.86643 [ha]                14             3 2499.808 [m]</span>
-<span class="co">## 11 198.67810 [ha]   198.67810 [ha]                15             3 2499.808 [m]</span>
-<span class="co">## 12 209.98363 [ha]   209.98363 [ha]                15             2 2499.808 [m]</span>
-<span class="co">## 13 219.29407 [ha]   219.29407 [ha]                16             3 2499.808 [m]</span>
-<span class="co">## 14 227.52383 [ha]   227.52383 [ha]                16             2 2474.054 [m]</span>
-<span class="co">## 15 239.74378 [ha]   239.74378 [ha]                17             3 2474.054 [m]</span>
-<span class="co">## 16 248.97109 [ha]   248.97109 [ha]                17             3 2499.808 [m]</span>
-<span class="co">## 17 257.78275 [ha]   257.78275 [ha]                18             2 2474.054 [m]</span>
-<span class="co">## 18 268.58951 [ha]   268.58951 [ha]                18             2 2499.808 [m]</span>
-<span class="co">## 19 276.98553 [ha]   276.98553 [ha]                19             3 2499.808 [m]</span>
-<span class="co">## 20 288.70671 [ha]   288.70671 [ha]                19             2 2499.808 [m]</span>
-<span class="co">## 21 298.51592 [ha]   298.51592 [ha]                20             2 2474.054 [m]</span>
-<span class="co">## 22 300.51101 [ha]   300.51101 [ha]                20             2 2474.054 [m]</span>
-<span class="co">## 23 317.13679 [ha]   317.13679 [ha]                21             2 2499.808 [m]</span>
-<span class="co">## 24 317.13679 [ha]   317.13679 [ha]                21             2 2499.808 [m]</span>
-<span class="co">## 25 336.67209 [ha]   336.67209 [ha]                22             2 2499.808 [m]</span>
-<span class="co">## 26 336.67209 [ha]   336.67209 [ha]                22             2 2499.808 [m]</span>
-<span class="co">## 27 336.67209 [ha]   336.67209 [ha]                22             2 2499.808 [m]</span>
-<span class="co">## 28 336.67209 [ha]   336.67209 [ha]                22             2 2499.808 [m]</span>
-<span class="co">## 29 336.67209 [ha]   336.67209 [ha]                22             2 2499.808 [m]</span>
-<span class="co">## 30 336.67209 [ha]   336.67209 [ha]                22             2 2499.808 [m]</span>
-<span class="co">## 31 336.67209 [ha]   336.67209 [ha]                22             2 2499.808 [m]</span>
-<span class="co">## 32 336.67209 [ha]   336.67209 [ha]                22             2 2499.808 [m]</span>
-<span class="co">## 33 336.67209 [ha]   336.67209 [ha]                22             2 2499.808 [m]</span>
-<span class="co">## 34 336.67209 [ha]   336.67209 [ha]                22             2 2499.808 [m]</span>
-<span class="co">## 35 336.67209 [ha]   336.67209 [ha]                22             2 2499.808 [m]</span>
-<span class="co">## 36 336.67209 [ha]   336.67209 [ha]                22             2 2499.808 [m]</span>
-<span class="co">##    optimality_proven search_state solving_time  mesh_initial          mesh</span>
-<span class="co">## 1               TRUE   TERMINATED        6.386 13667.84 [ha] 14124.59 [ha]</span>
-<span class="co">## 2               TRUE   TERMINATED        6.260 13667.84 [ha] 14124.59 [ha]</span>
-<span class="co">## 3               TRUE   TERMINATED        5.589 13667.84 [ha] 14140.00 [ha]</span>
-<span class="co">## 4               TRUE   TERMINATED        4.283 13667.84 [ha] 14155.43 [ha]</span>
-<span class="co">## 5               TRUE   TERMINATED        3.795 13667.84 [ha] 14155.43 [ha]</span>
-<span class="co">## 6               TRUE   TERMINATED        2.925 13667.84 [ha] 14170.86 [ha]</span>
-<span class="co">## 7               TRUE   TERMINATED        3.615 13667.84 [ha] 14186.29 [ha]</span>
-<span class="co">## 8               TRUE   TERMINATED        2.501 13667.84 [ha] 14201.74 [ha]</span>
-<span class="co">## 9               TRUE   TERMINATED        2.385 13667.84 [ha] 14201.74 [ha]</span>
-<span class="co">## 10              TRUE   TERMINATED        2.255 13667.84 [ha] 14217.20 [ha]</span>
-<span class="co">## 11              TRUE   TERMINATED        2.150 13667.84 [ha] 14217.20 [ha]</span>
-<span class="co">## 12              TRUE   TERMINATED        2.020 13667.84 [ha] 14232.66 [ha]</span>
-<span class="co">## 13              TRUE   TERMINATED        1.172 13667.84 [ha] 14248.14 [ha]</span>
-<span class="co">## 14              TRUE   TERMINATED        1.169 13667.84 [ha] 14248.14 [ha]</span>
-<span class="co">## 15              TRUE   TERMINATED        0.916 13667.84 [ha] 14263.62 [ha]</span>
-<span class="co">## 16              TRUE   TERMINATED        0.726 13667.84 [ha] 14263.62 [ha]</span>
-<span class="co">## 17              TRUE   TERMINATED        0.487 13667.84 [ha] 14279.12 [ha]</span>
-<span class="co">## 18              TRUE   TERMINATED        0.713 13667.84 [ha] 14279.12 [ha]</span>
-<span class="co">## 19              TRUE   TERMINATED        0.514 13667.84 [ha] 14294.62 [ha]</span>
-<span class="co">## 20              TRUE   TERMINATED        0.535 13667.84 [ha] 14294.62 [ha]</span>
-<span class="co">## 21              TRUE   TERMINATED        0.419 13667.84 [ha] 14310.13 [ha]</span>
-<span class="co">## 22              TRUE   TERMINATED        0.438 13667.84 [ha] 14310.13 [ha]</span>
-<span class="co">## 23              TRUE   TERMINATED        0.611 13667.84 [ha] 14325.65 [ha]</span>
-<span class="co">## 24              TRUE   TERMINATED        0.749 13667.84 [ha] 14325.65 [ha]</span>
-<span class="co">## 25              TRUE   TERMINATED        0.502 13667.84 [ha] 14341.18 [ha]</span>
-<span class="co">## 26              TRUE   TERMINATED        0.522 13667.84 [ha] 14341.18 [ha]</span>
-<span class="co">## 27              TRUE   TERMINATED        0.517 13667.84 [ha] 14341.18 [ha]</span>
-<span class="co">## 28              TRUE   TERMINATED        0.517 13667.84 [ha] 14341.18 [ha]</span>
-<span class="co">## 29              TRUE   TERMINATED        0.524 13667.84 [ha] 14341.18 [ha]</span>
-<span class="co">## 30              TRUE   TERMINATED        0.497 13667.84 [ha] 14341.18 [ha]</span>
-<span class="co">## 31              TRUE   TERMINATED        0.542 13667.84 [ha] 14341.18 [ha]</span>
-<span class="co">## 32              TRUE   TERMINATED        0.436 13667.84 [ha] 14341.18 [ha]</span>
-<span class="co">## 33              TRUE   TERMINATED        0.406 13667.84 [ha] 14341.18 [ha]</span>
-<span class="co">## 34              TRUE   TERMINATED        0.440 13667.84 [ha] 14341.18 [ha]</span>
-<span class="co">## 35              TRUE   TERMINATED        0.430 13667.84 [ha] 14341.18 [ha]</span>
-<span class="co">## 36              TRUE   TERMINATED        0.447 13667.84 [ha] 14341.18 [ha]</span>
-<span class="co">##        mesh_best max_restore</span>
-<span class="co">## 1  14124.59 [ha]         100</span>
-<span class="co">## 2  14124.59 [ha]         110</span>
-<span class="co">## 3  14140.00 [ha]         120</span>
-<span class="co">## 4  14155.43 [ha]         130</span>
-<span class="co">## 5  14155.43 [ha]         140</span>
-<span class="co">## 6  14170.86 [ha]         150</span>
-<span class="co">## 7  14186.29 [ha]         160</span>
-<span class="co">## 8  14201.74 [ha]         170</span>
-<span class="co">## 9  14201.74 [ha]         180</span>
-<span class="co">## 10 14217.20 [ha]         190</span>
-<span class="co">## 11 14217.20 [ha]         200</span>
-<span class="co">## 12 14232.66 [ha]         210</span>
-<span class="co">## 13 14248.14 [ha]         220</span>
-<span class="co">## 14 14248.14 [ha]         230</span>
-<span class="co">## 15 14263.62 [ha]         240</span>
-<span class="co">## 16 14263.62 [ha]         250</span>
-<span class="co">## 17 14279.12 [ha]         260</span>
-<span class="co">## 18 14279.12 [ha]         270</span>
-<span class="co">## 19 14294.62 [ha]         280</span>
-<span class="co">## 20 14294.62 [ha]         290</span>
-<span class="co">## 21 14310.13 [ha]         300</span>
-<span class="co">## 22 14310.13 [ha]         310</span>
-<span class="co">## 23 14325.65 [ha]         320</span>
-<span class="co">## 24 14325.65 [ha]         330</span>
-<span class="co">## 25 14341.18 [ha]         340</span>
-<span class="co">## 26 14341.18 [ha]         350</span>
-<span class="co">## 27 14341.18 [ha]         360</span>
-<span class="co">## 28 14341.18 [ha]         370</span>
-<span class="co">## 29 14341.18 [ha]         380</span>
-<span class="co">## 30 14341.18 [ha]         390</span>
-<span class="co">## 31 14341.18 [ha]         400</span>
-<span class="co">## 32 14341.18 [ha]         410</span>
-<span class="co">## 33 14341.18 [ha]         420</span>
-<span class="co">## 34 14341.18 [ha]         430</span>
-<span class="co">## 35 14341.18 [ha]         440</span>
-<span class="co">## 36 14341.18 [ha]         450</span></code></pre>
+<code class="sourceCode R"><span><span class="co"># extract metadata for each prioritization</span></span>
+<span><span class="va">prt_tradeoffs_metedata</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/do.call.html" class="external-link">do.call</a></span><span class="op">(</span><span class="va">rbind</span>, <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">prt_tradeoffs</span>, <span class="va">get_metadata</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">prt_tradeoffs_metedata</span><span class="op">$</span><span class="va">max_restore</span> <span class="op">&lt;-</span> <span class="va">max_restore_values</span></span>
+<span></span>
+<span><span class="co"># print metadata</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">prt_tradeoffs_metedata</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">##       min_restore total_restorable nb_planning_units nb_components     diameter</span></span>
+<span><span class="co">## 1   99.67156 [ha]    99.67156 [ha]                 9             5 2466.877 [m]</span></span>
+<span><span class="co">## 2  109.73016 [ha]   109.73016 [ha]                 9             5 2455.824 [m]</span></span>
+<span><span class="co">## 3  115.05041 [ha]   115.05041 [ha]                10             4 2466.877 [m]</span></span>
+<span><span class="co">## 4  129.09920 [ha]   129.09920 [ha]                11             5 2466.877 [m]</span></span>
+<span><span class="co">## 5  138.16025 [ha]   138.16025 [ha]                11             4 2499.808 [m]</span></span>
+<span><span class="co">## 6  148.63449 [ha]   148.63449 [ha]                12             5 2466.877 [m]</span></span>
+<span><span class="co">## 7  159.02561 [ha]   159.02561 [ha]                12             3 2499.808 [m]</span></span>
+<span><span class="co">## 8  169.74924 [ha]   169.74924 [ha]                13             4 2499.808 [m]</span></span>
+<span><span class="co">## 9  177.56335 [ha]   177.56335 [ha]                13             4 2432.582 [m]</span></span>
+<span><span class="co">## 10 189.28453 [ha]   189.28453 [ha]                14             4 2499.808 [m]</span></span>
+<span><span class="co">## 11 198.67810 [ha]   198.67810 [ha]                15             3 2499.808 [m]</span></span>
+<span><span class="co">## 12 207.32350 [ha]   207.32350 [ha]                15             3 2474.054 [m]</span></span>
+<span><span class="co">## 13 219.04468 [ha]   219.04468 [ha]                16             2 2499.808 [m]</span></span>
+<span><span class="co">## 14 229.18641 [ha]   229.18641 [ha]                16             4 2474.054 [m]</span></span>
+<span><span class="co">## 15 237.33304 [ha]   237.33304 [ha]                17             3 2499.808 [m]</span></span>
+<span><span class="co">## 16 249.38673 [ha]   249.38673 [ha]                17             2 2499.808 [m]</span></span>
+<span><span class="co">## 17 259.36220 [ha]   259.36220 [ha]                18             2 2499.808 [m]</span></span>
+<span><span class="co">## 18 267.25945 [ha]   267.25945 [ha]                18             2 2474.054 [m]</span></span>
+<span><span class="co">## 19 276.98553 [ha]   276.98553 [ha]                19             3 2499.808 [m]</span></span>
+<span><span class="co">## 20 289.53800 [ha]   289.53800 [ha]                19             2 2466.877 [m]</span></span>
+<span><span class="co">## 21 296.02205 [ha]   296.02205 [ha]                20             2 2499.808 [m]</span></span>
+<span><span class="co">## 22 308.49139 [ha]   308.49139 [ha]                20             2 2499.808 [m]</span></span>
+<span><span class="co">## 23 316.55489 [ha]   316.55489 [ha]                21             2 2499.808 [m]</span></span>
+<span><span class="co">## 24 317.13679 [ha]   317.13679 [ha]                21             2 2499.808 [m]</span></span>
+<span><span class="co">## 25 336.67209 [ha]   336.67209 [ha]                22             2 2499.808 [m]</span></span>
+<span><span class="co">## 26 336.67209 [ha]   336.67209 [ha]                22             2 2499.808 [m]</span></span>
+<span><span class="co">## 27 336.67209 [ha]   336.67209 [ha]                22             2 2499.808 [m]</span></span>
+<span><span class="co">## 28 336.67209 [ha]   336.67209 [ha]                22             2 2499.808 [m]</span></span>
+<span><span class="co">## 29 336.67209 [ha]   336.67209 [ha]                22             2 2499.808 [m]</span></span>
+<span><span class="co">## 30 336.67209 [ha]   336.67209 [ha]                22             2 2499.808 [m]</span></span>
+<span><span class="co">## 31 336.67209 [ha]   336.67209 [ha]                22             2 2499.808 [m]</span></span>
+<span><span class="co">## 32 336.67209 [ha]   336.67209 [ha]                22             2 2499.808 [m]</span></span>
+<span><span class="co">## 33 336.67209 [ha]   336.67209 [ha]                22             2 2499.808 [m]</span></span>
+<span><span class="co">## 34 336.67209 [ha]   336.67209 [ha]                22             2 2499.808 [m]</span></span>
+<span><span class="co">## 35 336.67209 [ha]   336.67209 [ha]                22             2 2499.808 [m]</span></span>
+<span><span class="co">## 36 336.67209 [ha]   336.67209 [ha]                22             2 2499.808 [m]</span></span>
+<span><span class="co">##    optimality_proven search_state solving_time  mesh_initial          mesh</span></span>
+<span><span class="co">## 1               TRUE   TERMINATED        1.343 13667.84 [ha] 14124.59 [ha]</span></span>
+<span><span class="co">## 2               TRUE   TERMINATED        1.122 13667.84 [ha] 14124.59 [ha]</span></span>
+<span><span class="co">## 3               TRUE   TERMINATED        1.479 13667.84 [ha] 14140.00 [ha]</span></span>
+<span><span class="co">## 4               TRUE   TERMINATED        1.033 13667.84 [ha] 14155.43 [ha]</span></span>
+<span><span class="co">## 5               TRUE   TERMINATED        1.208 13667.84 [ha] 14155.43 [ha]</span></span>
+<span><span class="co">## 6               TRUE   TERMINATED        0.754 13667.84 [ha] 14170.86 [ha]</span></span>
+<span><span class="co">## 7               TRUE   TERMINATED        0.544 13667.84 [ha] 14186.29 [ha]</span></span>
+<span><span class="co">## 8               TRUE   TERMINATED        0.523 13667.84 [ha] 14201.74 [ha]</span></span>
+<span><span class="co">## 9               TRUE   TERMINATED        0.580 13667.84 [ha] 14201.74 [ha]</span></span>
+<span><span class="co">## 10              TRUE   TERMINATED        0.463 13667.84 [ha] 14217.20 [ha]</span></span>
+<span><span class="co">## 11              TRUE   TERMINATED        0.508 13667.84 [ha] 14217.20 [ha]</span></span>
+<span><span class="co">## 12              TRUE   TERMINATED        0.362 13667.84 [ha] 14232.66 [ha]</span></span>
+<span><span class="co">## 13              TRUE   TERMINATED        0.224 13667.84 [ha] 14248.14 [ha]</span></span>
+<span><span class="co">## 14              TRUE   TERMINATED        0.250 13667.84 [ha] 14248.14 [ha]</span></span>
+<span><span class="co">## 15              TRUE   TERMINATED        0.164 13667.84 [ha] 14263.62 [ha]</span></span>
+<span><span class="co">## 16              TRUE   TERMINATED        0.160 13667.84 [ha] 14263.62 [ha]</span></span>
+<span><span class="co">## 17              TRUE   TERMINATED        0.085 13667.84 [ha] 14279.12 [ha]</span></span>
+<span><span class="co">## 18              TRUE   TERMINATED        0.142 13667.84 [ha] 14279.12 [ha]</span></span>
+<span><span class="co">## 19              TRUE   TERMINATED        0.145 13667.84 [ha] 14294.62 [ha]</span></span>
+<span><span class="co">## 20              TRUE   TERMINATED        0.117 13667.84 [ha] 14294.62 [ha]</span></span>
+<span><span class="co">## 21              TRUE   TERMINATED        0.133 13667.84 [ha] 14310.13 [ha]</span></span>
+<span><span class="co">## 22              TRUE   TERMINATED        0.099 13667.84 [ha] 14310.13 [ha]</span></span>
+<span><span class="co">## 23              TRUE   TERMINATED        0.136 13667.84 [ha] 14325.65 [ha]</span></span>
+<span><span class="co">## 24              TRUE   TERMINATED        0.097 13667.84 [ha] 14325.65 [ha]</span></span>
+<span><span class="co">## 25              TRUE   TERMINATED        0.100 13667.84 [ha] 14341.18 [ha]</span></span>
+<span><span class="co">## 26              TRUE   TERMINATED        0.068 13667.84 [ha] 14341.18 [ha]</span></span>
+<span><span class="co">## 27              TRUE   TERMINATED        0.069 13667.84 [ha] 14341.18 [ha]</span></span>
+<span><span class="co">## 28              TRUE   TERMINATED        0.098 13667.84 [ha] 14341.18 [ha]</span></span>
+<span><span class="co">## 29              TRUE   TERMINATED        0.091 13667.84 [ha] 14341.18 [ha]</span></span>
+<span><span class="co">## 30              TRUE   TERMINATED        0.138 13667.84 [ha] 14341.18 [ha]</span></span>
+<span><span class="co">## 31              TRUE   TERMINATED        0.109 13667.84 [ha] 14341.18 [ha]</span></span>
+<span><span class="co">## 32              TRUE   TERMINATED        0.101 13667.84 [ha] 14341.18 [ha]</span></span>
+<span><span class="co">## 33              TRUE   TERMINATED        0.097 13667.84 [ha] 14341.18 [ha]</span></span>
+<span><span class="co">## 34              TRUE   TERMINATED        0.107 13667.84 [ha] 14341.18 [ha]</span></span>
+<span><span class="co">## 35              TRUE   TERMINATED        0.107 13667.84 [ha] 14341.18 [ha]</span></span>
+<span><span class="co">## 36              TRUE   TERMINATED        0.105 13667.84 [ha] 14341.18 [ha]</span></span>
+<span><span class="co">##        mesh_best max_restore</span></span>
+<span><span class="co">## 1  14124.59 [ha]         100</span></span>
+<span><span class="co">## 2  14124.59 [ha]         110</span></span>
+<span><span class="co">## 3  14140.00 [ha]         120</span></span>
+<span><span class="co">## 4  14155.43 [ha]         130</span></span>
+<span><span class="co">## 5  14155.43 [ha]         140</span></span>
+<span><span class="co">## 6  14170.86 [ha]         150</span></span>
+<span><span class="co">## 7  14186.29 [ha]         160</span></span>
+<span><span class="co">## 8  14201.74 [ha]         170</span></span>
+<span><span class="co">## 9  14201.74 [ha]         180</span></span>
+<span><span class="co">## 10 14217.20 [ha]         190</span></span>
+<span><span class="co">## 11 14217.20 [ha]         200</span></span>
+<span><span class="co">## 12 14232.66 [ha]         210</span></span>
+<span><span class="co">## 13 14248.14 [ha]         220</span></span>
+<span><span class="co">## 14 14248.14 [ha]         230</span></span>
+<span><span class="co">## 15 14263.62 [ha]         240</span></span>
+<span><span class="co">## 16 14263.62 [ha]         250</span></span>
+<span><span class="co">## 17 14279.12 [ha]         260</span></span>
+<span><span class="co">## 18 14279.12 [ha]         270</span></span>
+<span><span class="co">## 19 14294.62 [ha]         280</span></span>
+<span><span class="co">## 20 14294.62 [ha]         290</span></span>
+<span><span class="co">## 21 14310.13 [ha]         300</span></span>
+<span><span class="co">## 22 14310.13 [ha]         310</span></span>
+<span><span class="co">## 23 14325.65 [ha]         320</span></span>
+<span><span class="co">## 24 14325.65 [ha]         330</span></span>
+<span><span class="co">## 25 14341.18 [ha]         340</span></span>
+<span><span class="co">## 26 14341.18 [ha]         350</span></span>
+<span><span class="co">## 27 14341.18 [ha]         360</span></span>
+<span><span class="co">## 28 14341.18 [ha]         370</span></span>
+<span><span class="co">## 29 14341.18 [ha]         380</span></span>
+<span><span class="co">## 30 14341.18 [ha]         390</span></span>
+<span><span class="co">## 31 14341.18 [ha]         400</span></span>
+<span><span class="co">## 32 14341.18 [ha]         410</span></span>
+<span><span class="co">## 33 14341.18 [ha]         420</span></span>
+<span><span class="co">## 34 14341.18 [ha]         430</span></span>
+<span><span class="co">## 35 14341.18 [ha]         440</span></span>
+<span><span class="co">## 36 14341.18 [ha]         450</span></span></code></pre>
 <div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># convert portfolio into a stack of rasters</span>
-<span class="va">prt_tradeoffs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/rast.html" class="external-link">rast</a></span><span class="op">(</span><span class="va">prt_tradeoffs</span><span class="op">)</span>
-
-<span class="co"># preview portfolio</span>
-<span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">prt_tradeoffs</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## class       : RestoptSolution </span>
-<span class="co">## dimensions  : 117, 170, 36  (nrow, ncol, nlyr)</span>
-<span class="co">## resolution  : 447.1792, 475.8943  (x, y)</span>
-<span class="co">## extent      : 419768.2, 495788.7, 227390.1, 283069.8  (xmin, xmax, ymin, ymax)</span>
-<span class="co">## coord. ref. : RGNC91-93 / Lambert New Caledonia (EPSG:3163) </span>
-<span class="co">## sources     : memory  </span>
-<span class="co">##               memory  </span>
-<span class="co">##               memory  </span>
-<span class="co">##               ... and 33 more source(s)</span>
-<span class="co">## names       :  Solution 1,  Solution 1,  Solution 1,  Solution 1,  Solution 1,  Solution 1, ... </span>
-<span class="co">## min values  :  Locked out,  Locked out,  Locked out,  Locked out,  Locked out,  Locked out, ... </span>
-<span class="co">## max values  : Restoration, Restoration, Restoration, Restoration, Restoration, Restoration, ...</span></code></pre>
+<code class="sourceCode R"><span><span class="co"># convert portfolio into a stack of rasters</span></span>
+<span><span class="va">prt_tradeoffs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/rast.html" class="external-link">rast</a></span><span class="op">(</span><span class="va">prt_tradeoffs</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># preview portfolio</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">prt_tradeoffs</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## class       : RestoptSolution </span></span>
+<span><span class="co">## dimensions  : 117, 170, 36  (nrow, ncol, nlyr)</span></span>
+<span><span class="co">## resolution  : 447.1792, 475.8943  (x, y)</span></span>
+<span><span class="co">## extent      : 419768.2, 495788.7, 227390.1, 283069.8  (xmin, xmax, ymin, ymax)</span></span>
+<span><span class="co">## coord. ref. : RGNC91-93 / Lambert New Caledonia (EPSG:3163) </span></span>
+<span><span class="co">## sources     : memory  </span></span>
+<span><span class="co">##               memory  </span></span>
+<span><span class="co">##               memory  </span></span>
+<span><span class="co">##               ... and 33 more source(s)</span></span>
+<span><span class="co">## names       :  Solution 1,  Solution 1,  Solution 1,  Solution 1,  Solution 1,  Solution 1, ... </span></span>
+<span><span class="co">## min values  :  Locked out,  Locked out,  Locked out,  Locked out,  Locked out,  Locked out, ... </span></span>
+<span><span class="co">## max values  : Restoration, Restoration, Restoration, Restoration, Restoration, Restoration, ...</span></span></code></pre>
 <div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># visualize some of the prioritizations in portfolio</span>
-<span class="co">## here, titles indicate maximum area and values indicate:</span>
-<span class="co">## 0 : places that were locked out.</span>
-<span class="co">## 1 : places that were potential candidates for restoration</span>
-<span class="co">## 2 : places that already contain existing habitat.</span>
-<span class="co">## 3 : places selected for restoration actions.</span>
-<span class="va">plot_idx</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/math-generics.html" class="external-link">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/pkg/terra/man/dimensions.html" class="external-link">length</a></span><span class="op">(</span><span class="va">max_restore_values</span><span class="op">)</span>, length.out <span class="op">=</span> <span class="fl">9</span><span class="op">)</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html" class="external-link">plot</a></span><span class="op">(</span>
-  <span class="va">prt_tradeoffs</span><span class="op">[[</span><span class="va">plot_idx</span><span class="op">]</span><span class="op">]</span>,
-  main <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"max_restore = "</span>, <span class="va">max_restore_values</span><span class="op">[</span><span class="va">plot_idx</span><span class="op">]</span><span class="op">)</span>,
-  col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#E5E5E5"</span>, <span class="st">"#fff1d6"</span>, <span class="st">"#b2df8a"</span>, <span class="st">"#1f78b4"</span><span class="op">)</span>,
-  plg <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"topright"</span><span class="op">)</span>
-<span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># visualize some of the prioritizations in portfolio</span></span>
+<span><span class="co">## here, titles indicate maximum area and values indicate:</span></span>
+<span><span class="co">## 0 : places that were locked out.</span></span>
+<span><span class="co">## 1 : places that were potential candidates for restoration</span></span>
+<span><span class="co">## 2 : places that already contain existing habitat.</span></span>
+<span><span class="co">## 3 : places selected for restoration actions.</span></span>
+<span><span class="va">plot_idx</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">max_restore_values</span><span class="op">)</span>, length.out <span class="op">=</span> <span class="fl">9</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html" class="external-link">plot</a></span><span class="op">(</span></span>
+<span>  <span class="va">prt_tradeoffs</span><span class="op">[[</span><span class="va">plot_idx</span><span class="op">]</span><span class="op">]</span>,</span>
+<span>  main <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"max_restore = "</span>, <span class="va">max_restore_values</span><span class="op">[</span><span class="va">plot_idx</span><span class="op">]</span><span class="op">)</span>,</span>
+<span>  col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#E5E5E5"</span>, <span class="st">"#fff1d6"</span>, <span class="st">"#b2df8a"</span>, <span class="st">"#1f78b4"</span><span class="op">)</span>,</span>
+<span>  plg <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"topright"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <p><img src="restoptr_files/figure-html/unnamed-chunk-16-1.png" width="90%" style="display: block; margin: auto;"></p>
 <p>We can see that all of the prioritizations within this portfolio are
 similar to the first optimal prioritization that we generated at the
@@ -744,17 +744,17 @@ with a higher maximum amount of land (e.g.,
 land between the two patches of existing habitat. To help understand
 this relationship better, let’s create a plot.</p>
 <div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># create plot showing relationship between restorable area and connectivity</span>
-<span class="co">## N.B. the prioritization corresponding to a maximum restorable area of 220</span>
-<span class="co">## is shown in red, which is the same value used for previous prioritizations</span>
-<span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html" class="external-link">plot</a></span><span class="op">(</span>
-  <span class="va">mesh_best</span> <span class="op">~</span> <span class="va">max_restore_values</span>,
-  data <span class="op">=</span> <span class="va">prt_tradeoffs_metedata</span>,
-  xlab <span class="op">=</span> <span class="st">"Area restored (ha)"</span>,
-  ylab <span class="op">=</span> <span class="st">"Connectivity (mesh statistic)"</span>,
-  pch <span class="op">=</span> <span class="fl">16</span>,
-  col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">prt_tradeoffs_metedata</span><span class="op">$</span><span class="va">max_restore</span> <span class="op">==</span> <span class="fl">200</span>, <span class="st">"red"</span>, <span class="st">"black"</span><span class="op">)</span>
-<span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># create plot showing relationship between restorable area and connectivity</span></span>
+<span><span class="co">## N.B. the prioritization corresponding to a maximum restorable area of 220</span></span>
+<span><span class="co">## is shown in red, which is the same value used for previous prioritizations</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html" class="external-link">plot</a></span><span class="op">(</span></span>
+<span>  <span class="va">mesh_best</span> <span class="op">~</span> <span class="va">max_restore_values</span>,</span>
+<span>  data <span class="op">=</span> <span class="va">prt_tradeoffs_metedata</span>,</span>
+<span>  xlab <span class="op">=</span> <span class="st">"Area restored (ha)"</span>,</span>
+<span>  ylab <span class="op">=</span> <span class="st">"Connectivity (mesh statistic)"</span>,</span>
+<span>  pch <span class="op">=</span> <span class="fl">16</span>,</span>
+<span>  col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">prt_tradeoffs_metedata</span><span class="op">$</span><span class="va">max_restore</span> <span class="op">==</span> <span class="fl">200</span>, <span class="st">"red"</span>, <span class="st">"black"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <p><img src="restoptr_files/figure-html/unnamed-chunk-17-1.png" width="576" style="display: block; margin: auto;"></p>
 <p>We can see that there is a steady increase in connectivity (as
 measured by the effective mesh size metric) and the maximum amount of
@@ -874,7 +874,7 @@ for ecosystem restoration. <em>Nature</em>, <em>586</em>, 724–729.
 
 <div class="pkgdown-footer-right">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
     </footer>
