@@ -47,8 +47,8 @@ Imports:
     methods
 Depends:
     R (>= 4.1.0),
-    terra (>= 1.5-12),
-    rJava (>= 1.0.5),
+    terra (>= 1.6-17),
+    rJava (>= 1.0.6),
     units (>= 0.8-0)
 Suggests:
     testthat (>= 2.0.1),
