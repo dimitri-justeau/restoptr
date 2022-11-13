@@ -107,7 +107,7 @@ test_that("number of solutions found is less than desired", {
   ))
   # build and solve problem
   problem <-
-    restopt_problem(habitat_data, 0.7, 16) %>%
+    restopt_problem(habitat_data, 0.7, 18) %>%
     add_restorable_constraint(
       min_restore = 90, max_restore = 110, unit = "ha", min_proportion = 1
     ) %>%
