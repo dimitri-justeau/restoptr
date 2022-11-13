@@ -55,7 +55,6 @@ examples.log
 .directory
 .build.timestamp
 
-java
 *.log
 check
 /doc/
