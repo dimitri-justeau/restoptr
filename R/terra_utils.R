@@ -78,7 +78,7 @@ invert_vector <- function(vector_layer, extent=NULL, filter=NULL) {
 #' cell_area(habitat_data, "ha")
 #' }
 #'
-#' @noRd
+#' @export
 cell_area <- function(raster_layer, unit = "ha") {
   # Check arguments
   assertthat::assert_that(
@@ -120,7 +120,7 @@ cell_area <- function(raster_layer, unit = "ha") {
 #' cell_width(habitat_data, "m")
 #' }
 #'
-#' @noRd
+#' @export
 cell_width <- function(raster_layer, unit = "m") {
   # Check arguments
   assertthat::assert_that(
@@ -164,7 +164,7 @@ cell_width <- function(raster_layer, unit = "m") {
 #' area_to_nb_cells(habitat_data, 20, unit = "ha")
 #' }
 #'
-#' @noRd
+#' @export
 area_to_nb_cells <- function(raster_layer, area, unit = "ha") {
   assertthat::assert_that(
     assertthat::is.number(area)
@@ -199,7 +199,7 @@ area_to_nb_cells <- function(raster_layer, area, unit = "ha") {
 #' nb_cell_to_area(habitat_data, 20, unit = "ha")
 #' }
 #'
-#' @noRd
+#' @export
 nb_cell_to_area <- function(raster_layer, nb_cells, unit = "ha") {
   assertthat::assert_that(
     assertthat::is.number(nb_cells)

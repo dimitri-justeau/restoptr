@@ -38,7 +38,7 @@ URL: https://dimitri-justeau.github.io/restoptr/
 BugReports: https://github.com/dimitri-justeau/restoptr/issues
 SystemRequirements: Java (>= 11.0.12)
 VignetteBuilder: knitr
-RoxygenNote: 7.2.1
+RoxygenNote: 7.2.2
 Imports:
     utils,
     assertthat (>= 0.2.1),
@@ -56,8 +56,6 @@ Suggests:
     roxygen2 (>= 6.1.1),
     rmarkdown (>= 1.10),
     landscapemetrics (>= 1.5.4),
-    raster (>= 3.5),
-    rgdal,
     vegan (>= 2.5.7),
     cluster (>= 2.1.2),
     ggthemes,
