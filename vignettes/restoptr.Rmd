@@ -45,6 +45,7 @@ library(restoptr)
 library(terra)
 library(vegan)
 library(cluster)
+library(ggthemes)
 
 # set seed for reproducibility
 set.seed(500)

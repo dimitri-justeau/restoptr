@@ -1,3 +1,8 @@
+# restoptr 1.0.4
+
+- Remove dependency to rgdal (see https://r-spatial.org/r/2022/04/12/evolution.html)
+- Increase time limit in tests, as sometimes CRAN test servers cannot complete some tests due to insufficient time.
+
 # restoptr 1.0.3
 
 - Fix unexpected behaviour of `add_available_areas_constraint` when data is vector data.

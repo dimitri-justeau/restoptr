@@ -24,7 +24,7 @@ test_that("cell units", {
       min_restore = 90, max_restore = 110, unit = "ha", min_proportion = 0.7
     ) %>%
     set_max_iic_objective(distance_threshold = 3, unit = "cells") %>%
-    add_settings(time_limit = 10)
+    add_settings(time_limit = 20)
   result <- solve(problem, verbose = TRUE)
   md <- get_metadata(result, area_unit = "ha")
   # tests
@@ -59,7 +59,7 @@ test_that("ha units", {
       min_restore = 90, max_restore = 110, unit = "ha", min_proportion = 0.7
     ) %>%
     set_max_iic_objective(distance_threshold = 800, unit = "m") %>%
-    add_settings(time_limit = 10)
+    add_settings(time_limit = 20)
   result <- solve(problem, verbose = TRUE)
   md <- get_metadata(result, area_unit = "ha")
   # tests

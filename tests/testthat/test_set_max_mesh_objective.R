@@ -24,12 +24,12 @@ test_that("expected_result", {
       min_restore = 90, max_restore = 110, unit = "ha", min_proportion = 0.7
     ) %>%
     set_max_mesh_objective() %>%
-    add_settings(time_limit = 10)
+    add_settings(time_limit = 20)
   result <- solve(problem, verbose = TRUE)
   md <- get_metadata(result, area_unit = "ha")
   # tests
   expect_is(result, "RestoptSolution")
-  expect_lte(md$solving_time, 10 * 1.1)
+  expect_lte(md$solving_time, 20 * 1.1)
   expect_gte(md$min_restore, set_units(90, "ha"))
   expect_lte(md$min_restore, set_units(110, "ha"))
   expect_true(md$mesh_initial <= md$mesh_best)
