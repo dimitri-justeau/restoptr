@@ -49,7 +49,8 @@ Depends:
     R (>= 4.1.0),
     terra (>= 1.6-17),
     rJava (>= 1.0.6),
-    units (>= 0.8-0)
+    units (>= 0.8-0),
+    sf (>= 1.0-9)
 Suggests:
     testthat (>= 2.0.1),
     knitr (>= 1.2.0),
@@ -75,6 +76,7 @@ Collate:
     'is_java_available.R'
     'package.R'
     'preprocessing.R'
+    'preprocessing_vectorize.R'
     'restopt_component.R'
     'restopt_problem.R'
     'restopt_solution.R'

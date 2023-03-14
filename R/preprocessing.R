@@ -124,3 +124,56 @@ preprocess_input <- function(habitat, habitat_threshold = 1, aggregation_factor 
     )
   )
 }
+
+#' Preprocess the input data using restopt (Java) aggregated grid method,
+#' which produces aggregated planning units (PUs) that are cropped according
+#' to the input habitat raster. The advantage of this method is that there
+#' is no loss of information during the preprocessing.
+#'
+#' @param habitat [terra::rast()] Raster object containing binary
+#' values that indicate if each planning unit contains habitat or not. Cells
+#' with the value `1` must correspond to existing habitat. Cells with the value
+#' `0` must correspond to degraded (or simply non-habitat) areas. Finally,
+#' `NA` (or `NO_DATA`) cells are considered to be outside of the landscape.
+#'
+#' @param aggregation_factor `integer` positive integer corresponding to the
+#' level of downsampling that will be applied to the habitat. This parameter is
+#' important to ensure the tractability of a problem.
+#'
+#' @return a [terra::vect()] object containing the planning units and the
+#' existing habitat patches.
+#'
+#' @examples
+#' \donttest{
+#' # load data
+#' habitat_data <- rast(
+#'   system.file("extdata", "habitat_hi_res.tif", package = "restoptr"))
+#' data <- get_aggregated_pus_from_java(
+#'     habitat = habitat_data,
+#'     aggregation_factor = 16
+#' )
+#' }
+#'
+#' @export
+get_aggregated_pus_from_java <- function(habitat, aggregation_factor) {
+  restorable_habitat <- habitat_data == 0 * 1
+  cell_area <- habitat_data >= 0
+  locked_out = round(restorable_habitat <= 0)
+  jdata <- rJava::.jnew(
+    "org.restopt.DataLoader",
+    .jarray(as.integer(as.vector(habitat_data))),
+    .jarray(as.integer(as.vector(locked_out))),
+    .jarray(as.vector(restorable_habitat)),
+    .jarray(as.integer(as.vector(cell_area))),
+    as.integer(ncol(habitat_data)),
+    as.integer(nrow(habitat_data)),
+    NaN
+  )
+  c <- rJava::.jnew("org.restopt.Utils")
+  r <- c$getAggregatedPUs(jdata, as.integer(0), as.integer(aggregation_factor))
+  a <- habitat_data * 0
+  values(a) <- r
+  a[a == -1] <- NaN
+  b <- as.polygons(a)
+  return(b)
+}

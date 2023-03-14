@@ -94,10 +94,16 @@ solve.RestoptProblem <- function(a, b, ...) {
     NaN
   )
 
+  if (a$data$aggregation_method == "lossless") {
+    agg_factor <- as.integer(a$data$aggregation_factor)
+  } else {
+    agg_factor <- 1L
+  }
+
   # initialize problem
   jproblem <-rJava::.jnew(
     "org.restopt.RestoptProblem", jdata,
-    0L
+    0L, agg_factor
   )
 
   # add constraints
