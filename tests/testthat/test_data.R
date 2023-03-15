@@ -25,7 +25,7 @@ test_that("spatial properties", {
   x1 <- terra::rast(f1)
   x2 <- terra::rast(f2)
   x3 <- terra::vect(f3)
-  expect_true(terra::compareGeom(x1, x2, res = TRUE, stopiffalse = FALSE))
+  expect_true(terra::compareGeom(x1, x2, res = TRUE, stopOnError = FALSE))
   expect_false(terra::is.lonlat(x1))
   expect_false(terra::is.lonlat(x2))
   expect_false(terra::is.lonlat(x3))

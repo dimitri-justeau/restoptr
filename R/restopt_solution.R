@@ -36,7 +36,7 @@ restopt_solution <- function(restopt_problem, solution_raster, metadata, id_solu
     terra::hasValues(solution_raster),
     terra::nlyr(solution_raster) == 1,
     terra::compareGeom(
-      solution_raster, restopt_problem$data$existing_habitat, stopiffalse = FALSE
+      solution_raster, restopt_problem$data$existing_habitat, stopOnError = FALSE
     )
   )
   # convert object to RestoptSolution

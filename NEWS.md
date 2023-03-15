@@ -1,3 +1,7 @@
+# restoptr 1.0.5
+
+- Fix issue related to a wrong argument name in terra::compareGeom (https://github.com/dimitri-justeau/restoptr/issues/55)
+
 # restoptr 1.0.4
 
 - Remove dependency to rgdal (see https://r-spatial.org/r/2022/04/12/evolution.html)

@@ -6,12 +6,13 @@
 ## Ecological Restoration Planning
 
 [![lifecycle](https://img.shields.io/badge/Lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html)
-[![R-CMD-check-Ubuntu](https://github.com/dimitri-justeau/rflsgen/actions/workflows/R-CMD-check-ubuntu.yaml/badge.svg)](https://github.com/dimitri-justeau/restoptr/actions)
-[![R-CMD-check-Windows](https://github.com/dimitri-justeau/rflsgen/actions/workflows/R-CMD-check-windows.yaml/badge.svg)](https://github.com/dimitri-justeau/restoptr/actions)
-[![R-CMD-check-MacOS](https://github.com/dimitri-justeau/rflsgen/actions/workflows/R-CMD-check-macos.yaml/badge.svg)](https://github.com/dimitri-justeau/restoptr/actions)
+[![R-CMD-check-Ubuntu](https://github.com/dimitri-justeau/restoptr/actions/workflows/R-CMD-check-ubuntu.yaml/badge.svg)](https://github.com/dimitri-justeau/restoptr/actions)
+[![R-CMD-check-Windows](https://github.com/dimitri-justeau/restoptr/actions/workflows/R-CMD-check-windows.yaml/badge.svg)](https://github.com/dimitri-justeau/restoptr/actions)
+[![R-CMD-check-MacOS](https://github.com/dimitri-justeau/restoptr/actions/workflows/R-CMD-check-macos.yaml/badge.svg)](https://github.com/dimitri-justeau/restoptr/actions)
 [![Coverage
 Status](https://codecov.io/github/dimitri-justeau/restoptr/coverage.svg?branch=master)](https://app.codecov.io/gh/dimitri-justeau/restoptr)
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/restoptr)](https://github.com/dimitri-justeau/restoptr)
+[![Downloads](https://cranlogs.r-pkg.org/badges/restoptr)](https://CRAN.R-project.org/package=restoptr)
 
 <p id="logo-credit" align="right">
 Logo by Camille Salmon
@@ -318,7 +319,7 @@ existing habitat, or (`3`) selected as a priority area for restoration.
 solution <- solve(problem)
 ```
 
-    ## Good news: the solver found 1 solution statisfying the constraints that was proven optimal ! (solving time = 0.19 s)
+    ## Good news: the solver found 1 solution statisfying the constraints that was proven optimal ! (solving time = 1.04 s)
 
 ``` r
 # preview solution
@@ -330,7 +331,7 @@ print(solution)
     ## resolution  : 447.1792, 475.8943  (x, y)
     ## extent      : 419768.2, 495788.7, 227390.1, 283069.8  (xmin, xmax, ymin, ymax)
     ## coord. ref. : RGNC91-93 / Lambert New Caledonia (EPSG:3163) 
-    ## source      : memory 
+    ## source(s)   : memory
     ## categories  : label 
     ## name        :  Solution 1 
     ## min value   :  Locked out 
@@ -360,7 +361,7 @@ get_metadata(solution, area_unit = "ha")
     ##     min_restore total_restorable nb_planning_units nb_components     diameter
     ## 1 219.3772 [ha]    219.3772 [ha]                15             3 2280.175 [m]
     ##   optimality_proven search_state solving_time  mesh_initial          mesh
-    ## 1              TRUE   TERMINATED        0.187 13667.84 [ha] 14232.66 [ha]
+    ## 1              TRUE   TERMINATED        1.024 13667.84 [ha] 14232.66 [ha]
     ##       mesh_best
     ## 1 14232.66 [ha]
 
