@@ -36,7 +36,7 @@
     
     <a class="navbar-brand me-2" href="index.html">restoptr</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.5</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -81,7 +81,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="section level1">
 <div class="page-header">
-<img src="logo.png" class="logo" alt=""><h1 id="restoptr-">restoptr <a class="anchor" aria-label="anchor" href="#restoptr-"></a>
+<img src="logo.png" class="logo" alt=""><h1 id="restopr-">restopr <a class="anchor" aria-label="anchor" href="#restopr-"></a>
 </h1>
 </div>
 <div class="section level2">
@@ -254,13 +254,14 @@ Logo by Camille Salmon
 <span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a><span class="do">##   - precision = 4</span></span>
 <span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a><span class="do">##   - time_limit = 0</span></span>
 <span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a><span class="do">##   - nb_solutions = 1</span></span>
-<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a><span class="do">##   - optimality_gap = 0 </span></span>
-<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a><span class="do">## -----------------------------------------------------------------</span></span></code></pre></div>
+<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a><span class="do">##   - optimality_gap = 0</span></span>
+<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a><span class="do">##   - solution_name_prefix = Solution  </span></span>
+<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a><span class="do">## -----------------------------------------------------------------</span></span></code></pre></div>
 <p>After building the problem, we can solve it to identify priority areas for restoration (with the <code><a href="https://rdrr.io/r/base/solve.html" class="external-link">solve()</a></code> function). The solution is a raster layer containing values that indicate if planning units: (<code>0</code>) were locked out, (<code>1</code>) do not contain existing habitat, (<code>2</code>) contain existing habitat, or (<code>3</code>) selected as a priority area for restoration.</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># solve problem to identify priority areas</span></span>
 <span><span class="va">solution</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/solve.html" class="external-link">solve</a></span><span class="op">(</span><span class="va">problem</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb19"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Good news: the solver found 1 solution statisfying the constraints that was proven optimal ! (solving time = 1.12 s)</span></span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Good news: the solver found 1 solution statisfying the constraints that was proven optimal ! (solving time = 1.04 s)</span></span></code></pre></div>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># preview solution</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">solution</span><span class="op">)</span></span></code></pre></div>
@@ -269,10 +270,11 @@ Logo by Camille Salmon
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="do">## resolution  : 447.1792, 475.8943  (x, y)</span></span>
 <span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="do">## extent      : 419768.2, 495788.7, 227390.1, 283069.8  (xmin, xmax, ymin, ymax)</span></span>
 <span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="do">## coord. ref. : RGNC91-93 / Lambert New Caledonia (EPSG:3163) </span></span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="do">## source      : memory </span></span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="do">## name        :  Solution 1 </span></span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="do">## min value   :  Locked out </span></span>
-<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a><span class="do">## max value   : Restoration</span></span></code></pre></div>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="do">## source(s)   : memory</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="do">## categories  : label </span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="do">## name        :  Solution 1 </span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a><span class="do">## min value   :  Locked out </span></span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a><span class="do">## max value   : Restoration</span></span></code></pre></div>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># visualize solution</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html" class="external-link">plot</a></span><span class="op">(</span></span>
@@ -290,7 +292,7 @@ Logo by Camille Salmon
 <div class="sourceCode" id="cb24"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="do">##     min_restore total_restorable nb_planning_units nb_components     diameter</span></span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="do">## 1 219.3772 [ha]    219.3772 [ha]                15             3 2280.175 [m]</span></span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="do">##   optimality_proven search_state solving_time  mesh_initial          mesh</span></span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="do">## 1              TRUE   TERMINATED        1.091 13667.84 [ha] 14232.66 [ha]</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="do">## 1              TRUE   TERMINATED        1.024 13667.84 [ha] 14232.66 [ha]</span></span>
 <span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="do">##       mesh_best</span></span>
 <span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="do">## 1 14232.66 [ha]</span></span></code></pre></div>
 <p>This has just been a short taster of the package. For an extended tutorial on using the package, please refer to the vignette.</p>
@@ -364,11 +366,12 @@ Logo by Camille Salmon
 <h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="https://lifecycle.r-lib.org/articles/stages.html" class="external-link"><img src="https://img.shields.io/badge/Lifecycle-stable-brightgreen.svg" alt="lifecycle"></a></li>
-<li><a href="https://github.com/dimitri-justeau/restoptr/actions" class="external-link"><img src="https://img.shields.io/github/workflow/status/dimitri-justeau/restoptr/Ubuntu/master.svg?label=Ubuntu" alt="R-CMD-check-Ubuntu"></a></li>
-<li><a href="https://github.com/dimitri-justeau/restoptr/actions" class="external-link"><img src="https://img.shields.io/github/workflow/status/dimitri-justeau/restoptr/Windows/master.svg?label=Windows" alt="R-CMD-check-Windows"></a></li>
-<li><a href="https://github.com/dimitri-justeau/restoptr/actions" class="external-link"><img src="https://img.shields.io/github/workflow/status/dimitri-justeau/restoptr/macOS/master.svg?label=macOS" alt="R-CMD-check-MacOS"></a></li>
+<li><a href="https://github.com/dimitri-justeau/restoptr/actions" class="external-link"><img src="https://github.com/dimitri-justeau/restoptr/actions/workflows/R-CMD-check-ubuntu.yaml/badge.svg" alt="R-CMD-check-Ubuntu"></a></li>
+<li><a href="https://github.com/dimitri-justeau/restoptr/actions" class="external-link"><img src="https://github.com/dimitri-justeau/restoptr/actions/workflows/R-CMD-check-windows.yaml/badge.svg" alt="R-CMD-check-Windows"></a></li>
+<li><a href="https://github.com/dimitri-justeau/restoptr/actions" class="external-link"><img src="https://github.com/dimitri-justeau/restoptr/actions/workflows/R-CMD-check-macos.yaml/badge.svg" alt="R-CMD-check-MacOS"></a></li>
 <li><a href="https://app.codecov.io/gh/dimitri-justeau/restoptr" class="external-link"><img src="https://codecov.io/github/dimitri-justeau/restoptr/coverage.svg?branch=master" alt="Coverage Status"></a></li>
 <li><a href="https://github.com/dimitri-justeau/restoptr" class="external-link"><img src="http://www.r-pkg.org/badges/version/restoptr" alt="CRAN_Status_Badge"></a></li>
+<li><a href="https://CRAN.R-project.org/package=restoptr" class="external-link"><img src="https://cranlogs.r-pkg.org/badges/restoptr" alt="Downloads"></a></li>
 </ul>
 </div>
 

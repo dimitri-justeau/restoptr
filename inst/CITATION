@@ -1,13 +1,13 @@
 citHeader("To cite the restoptr package in publications, use:")
 
-citEntry(
-  entry = "Article",
-  author = personList(person(c("D"), "Justeau-Allaire"),
-                      person(c("G"), "Vieilledent"),
-                      person(c("N"), "Rinck"),
-                      person(c("P"), "Vismara"),
-                      person(c("X"), "Lorca"),
-                      person(c("P"), "Birnbaum")),
+bibentry(
+  bibtype = "Article",
+  author = c(person(c("D"), "Justeau-Allaire"),
+             person(c("G"), "Vieilledent"),
+             person(c("N"), "Rinck"),
+             person(c("P"), "Vismara"),
+             person(c("X"), "Lorca"),
+             person(c("P"), "Birnbaum")),
   title = "Constrained optimization of landscape indices in conservation planning to support ecological restoration in New Caledonia",
   journal = "Journal of Applied Ecology",
   year = 2021,

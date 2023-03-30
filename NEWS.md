@@ -1,6 +1,7 @@
 # restoptr 1.0.5
 
 - Fix issue related to a wrong argument name in terra::compareGeom (https://github.com/dimitri-justeau/restoptr/issues/55)
+- Fix CITATION file according to CRAN comments
 
 # restoptr 1.0.4
 
