@@ -49,6 +49,10 @@ reference:
       - is_java_available
       - invert_vector
       - preprocess_input
+      - area_to_nb_cells
+      - cell_area
+      - cell_width
+      - nb_cell_to_area
 
   - title: Class definitions and methods
     desc: >

@@ -207,9 +207,9 @@ This has just been a short taster of the package. For an extended tutorial on us
 
 ## Citation
 
-Please cite the _restoptr R_ package when using it in publications. Although a new publication describing the package is in preparation; in the meantime, please use the following citation which outlines the methodology.
+Please cite the _restoptr R_ package when using it in publications.
 
-> Justeau-Allaire, D., Vieilledent, G., Rinck, N., Vismara, P., Lorca, X., & Birnbaum, P. (2021). Constrained optimization of landscape indices in conservation planning to support ecological restoration in New Caledonia. Journal of Applied Ecology, 58(4), 744‑754.
+> Justeau‐Allaire, D., Hanson, J. O., Lannuzel, G., Vismara, P., Lorca, X., & Birnbaum, P. (2023). restoptr: an R package for ecological restoration planning. Restoration Ecology, e13910. https://doi.org/10.1111/rec.13910
 
 ## Getting help
 

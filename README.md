@@ -319,7 +319,7 @@ existing habitat, or (`3`) selected as a priority area for restoration.
 solution <- solve(problem)
 ```
 
-    ## Good news: the solver found 1 solution statisfying the constraints that was proven optimal ! (solving time = 1.04 s)
+    ## Good news: the solver found 1 solution statisfying the constraints that was proven optimal ! (solving time = 0.97 s)
 
 ``` r
 # preview solution
@@ -361,7 +361,7 @@ get_metadata(solution, area_unit = "ha")
     ##     min_restore total_restorable nb_planning_units nb_components     diameter
     ## 1 219.3772 [ha]    219.3772 [ha]                15             3 2280.175 [m]
     ##   optimality_proven search_state solving_time  mesh_initial          mesh
-    ## 1              TRUE   TERMINATED        1.024 13667.84 [ha] 14232.66 [ha]
+    ## 1              TRUE   TERMINATED        0.944 13667.84 [ha] 14232.66 [ha]
     ##       mesh_best
     ## 1 14232.66 [ha]
 
@@ -371,14 +371,11 @@ tutorial on using the package, please refer to the vignette.
 ## Citation
 
 Please cite the *restoptr R* package when using it in publications.
-Although a new publication describing the package is in preparation; in
-the meantime, please use the following citation which outlines the
-methodology.
 
-> Justeau-Allaire, D., Vieilledent, G., Rinck, N., Vismara, P., Lorca,
-> X., & Birnbaum, P. (2021). Constrained optimization of landscape
-> indices in conservation planning to support ecological restoration in
-> New Caledonia. Journal of Applied Ecology, 58(4), 744‑754.
+> Justeau‐Allaire, D., Hanson, J. O., Lannuzel, G., Vismara, P., Lorca,
+> X., & Birnbaum, P. (2023). restoptr: an R package for ecological
+> restoration planning. Restoration Ecology, e13910.
+> <https://doi.org/10.1111/rec.13910>
 
 ## Getting help
 

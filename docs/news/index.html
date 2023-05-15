@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">restoptr</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.5</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -54,7 +54,17 @@
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.0.3" id="restoptr-103">restoptr 1.0.3<a class="anchor" aria-label="anchor" href="#restoptr-103"></a></h2>
+<h2 class="pkg-version" data-toc-text="1.0.5" id="restoptr-105">restoptr 1.0.5<a class="anchor" aria-label="anchor" href="#restoptr-105"></a></h2><p class="text-muted">CRAN release: 2023-03-16</p>
+<ul><li>Fix issue related to a wrong argument name in terra::compareGeom (<a href="https://github.com/dimitri-justeau/restoptr/issues/55" class="external-link uri">https://github.com/dimitri-justeau/restoptr/issues/55</a>)</li>
+<li>Fix CITATION file according to CRAN comments</li>
+</ul></div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.0.4" id="restoptr-104">restoptr 1.0.4<a class="anchor" aria-label="anchor" href="#restoptr-104"></a></h2><p class="text-muted">CRAN release: 2023-01-30</p>
+<ul><li>Remove dependency to rgdal (see <a href="https://r-spatial.org/r/2022/04/12/evolution.html" class="external-link uri">https://r-spatial.org/r/2022/04/12/evolution.html</a>)</li>
+<li>Increase time limit in tests, as sometimes CRAN test servers cannot complete some tests due to insufficient time.</li>
+</ul></div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.0.3" id="restoptr-103">restoptr 1.0.3<a class="anchor" aria-label="anchor" href="#restoptr-103"></a></h2><p class="text-muted">CRAN release: 2022-11-12</p>
 <ul><li>Fix unexpected behaviour of <code>add_available_areas_constraint</code> when data is vector data.</li>
 <li>Add <code>touches</code> option in <code>add_available_areas_constraint</code> and <code>add_locked_out_constraint</code>, useful when data is vector data.</li>
 <li>Fix Warning due to <code>terra</code> update when using <code>levels</code>.</li>

@@ -55,6 +55,15 @@
     <loc>https://dimitri-justeau.github.io/restoptr/reference/add_settings.html</loc>
   </url>
   <url>
+    <loc>https://dimitri-justeau.github.io/restoptr/reference/area_to_nb_cells.html</loc>
+  </url>
+  <url>
+    <loc>https://dimitri-justeau.github.io/restoptr/reference/cell_area.html</loc>
+  </url>
+  <url>
+    <loc>https://dimitri-justeau.github.io/restoptr/reference/cell_width.html</loc>
+  </url>
+  <url>
     <loc>https://dimitri-justeau.github.io/restoptr/reference/get_aggregation_factor.html</loc>
   </url>
   <url>
@@ -95,6 +104,9 @@
   </url>
   <url>
     <loc>https://dimitri-justeau.github.io/restoptr/reference/is_java_available.html</loc>
+  </url>
+  <url>
+    <loc>https://dimitri-justeau.github.io/restoptr/reference/nb_cell_to_area.html</loc>
   </url>
   <url>
     <loc>https://dimitri-justeau.github.io/restoptr/reference/pipe.html</loc>

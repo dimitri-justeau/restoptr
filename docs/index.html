@@ -261,7 +261,7 @@ Logo by Camille Salmon
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># solve problem to identify priority areas</span></span>
 <span><span class="va">solution</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/solve.html" class="external-link">solve</a></span><span class="op">(</span><span class="va">problem</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb19"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Good news: the solver found 1 solution statisfying the constraints that was proven optimal ! (solving time = 1.04 s)</span></span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Good news: the solver found 1 solution statisfying the constraints that was proven optimal ! (solving time = 0.97 s)</span></span></code></pre></div>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># preview solution</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">solution</span><span class="op">)</span></span></code></pre></div>
@@ -292,7 +292,7 @@ Logo by Camille Salmon
 <div class="sourceCode" id="cb24"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="do">##     min_restore total_restorable nb_planning_units nb_components     diameter</span></span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="do">## 1 219.3772 [ha]    219.3772 [ha]                15             3 2280.175 [m]</span></span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="do">##   optimality_proven search_state solving_time  mesh_initial          mesh</span></span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="do">## 1              TRUE   TERMINATED        1.024 13667.84 [ha] 14232.66 [ha]</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="do">## 1              TRUE   TERMINATED        0.944 13667.84 [ha] 14232.66 [ha]</span></span>
 <span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="do">##       mesh_best</span></span>
 <span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="do">## 1 14232.66 [ha]</span></span></code></pre></div>
 <p>This has just been a short taster of the package. For an extended tutorial on using the package, please refer to the vignette.</p>
@@ -300,9 +300,9 @@ Logo by Camille Salmon
 <div class="section level2">
 <h2 id="citation">Citation<a class="anchor" aria-label="anchor" href="#citation"></a>
 </h2>
-<p>Please cite the <em>restoptr R</em> package when using it in publications. Although a new publication describing the package is in preparation; in the meantime, please use the following citation which outlines the methodology.</p>
+<p>Please cite the <em>restoptr R</em> package when using it in publications.</p>
 <blockquote>
-<p>Justeau-Allaire, D., Vieilledent, G., Rinck, N., Vismara, P., Lorca, X., &amp; Birnbaum, P. (2021). Constrained optimization of landscape indices in conservation planning to support ecological restoration in New Caledonia. Journal of Applied Ecology, 58(4), 744‑754.</p>
+<p>Justeau‐Allaire, D., Hanson, J. O., Lannuzel, G., Vismara, P., Lorca, X., &amp; Birnbaum, P. (2023). restoptr: an R package for ecological restoration planning. Restoration Ecology, e13910. <a href="https://doi.org/10.1111/rec.13910" class="external-link uri">https://doi.org/10.1111/rec.13910</a></p>
 </blockquote>
 </div>
 <div class="section level2">
