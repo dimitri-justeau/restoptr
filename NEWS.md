@@ -1,3 +1,7 @@
+# restoptr 1.0.6
+
+- Increase time limit in test_solve.R to avoid errors in CRAN auto checks.
+
 # restoptr 1.0.5
 
 - Fix issue related to a wrong argument name in terra::compareGeom (https://github.com/dimitri-justeau/restoptr/issues/55)
