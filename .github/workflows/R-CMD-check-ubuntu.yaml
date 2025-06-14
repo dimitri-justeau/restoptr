@@ -24,11 +24,11 @@ jobs:
       fail-fast: false
       matrix:
         config:
-          - {os: ubuntu-20.04, r: 'release', pkgs: 'all', java: 8}
-          - {os: ubuntu-20.04, r: 'release', pkgs: 'all', java: 11}
-          - {os: ubuntu-20.04, r: 'devel', pkgs: 'all', java: 8}
-          - {os: ubuntu-20.04, r: 'devel', pkgs: 'all', java: 11}
-          - {os: ubuntu-20.04, r: 'devel', pkgs: 'depends only', java: 11}
+          - {os: ubuntu-latest, r: 'release', pkgs: 'all', java: 8}
+          - {os: ubuntu-latest, r: 'release', pkgs: 'all', java: 11}
+          - {os: ubuntu-latest, r: 'devel', pkgs: 'all', java: 8}
+          - {os: ubuntu-latest, r: 'devel', pkgs: 'all', java: 11}
+          - {os: ubuntu-latest, r: 'devel', pkgs: 'depends only', java: 11}
 
     env:
       _R_REMOTES_NO_ERRORS_FROM_WARNINGS_: true
@@ -60,7 +60,7 @@ jobs:
 
       - name: Cache R packages
         if: runner.os != 'Windows'
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: ${{ env.R_LIBS_USER }}
           key: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-${{ hashFiles('.github/depends.Rds') }}

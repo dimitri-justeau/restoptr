@@ -2,6 +2,7 @@
 
 - Add lossless aggregation method.
 - Add `set_min_nb_patches` optimization objective.
+- Add `add_nb_patches` constraint.
 
 # restoptr 1.0.6
 
