@@ -92,6 +92,7 @@ Other constraints:
 \code{\link{add_connected_constraint}()},
 \code{\link{add_min_iic_constraint}()},
 \code{\link{add_min_mesh_constraint}()},
+\code{\link{add_nb_patches_constraint}()},
 \code{\link{add_restorable_constraint}()}
 }
 \concept{constraints}

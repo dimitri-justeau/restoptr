@@ -1,3 +1,8 @@
+# restoptr 1.1.0
+
+- Add lossless aggregation method.
+- Add `set_min_nb_patches` optimization objective.
+
 # restoptr 1.0.6
 
 - Increase time limit in test_solve.R to avoid errors in CRAN auto checks.

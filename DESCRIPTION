@@ -70,6 +70,7 @@ Collate:
     'add_locked_out_constraint.R'
     'add_min_iic_constraint.R'
     'add_min_mesh_constraint.R'
+    'add_nb_patches_constraint.R'
     'add_restorable_constraint.R'
     'add_settings.R'
     'is_java_available.R'

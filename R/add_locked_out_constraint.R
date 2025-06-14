@@ -94,7 +94,7 @@ add_locked_out_constraint <- function(problem, data, touches = FALSE) {
     original_res <- terra::compareGeom(
       problem$data$original_habitat, data, stopOnError = FALSE
     )
-    if (original_res) {
+    if (original_res && problem$data$aggregation_method == "lossy") {
       down_sum <- terra::aggregate(
         data,
         fact = problem$data$aggregation_factor,
