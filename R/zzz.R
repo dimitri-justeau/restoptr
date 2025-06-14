@@ -1,3 +1,6 @@
+.onAttach <- function(libname, pkgname) {
+}
+
 .onLoad <- function(libname, pkgname) {
 
   # initialize java
@@ -22,4 +25,4 @@
   rJava::J("java.lang.System")$setProperty("EPSG-HSQL.directory", tempdir())
 }
 
-restopt_jar_name <- "restopt-2.0.1.jar"
+restopt_jar_name <- "restopt-2.1.0.jar"

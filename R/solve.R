@@ -83,11 +83,17 @@ solve.RestoptProblem <- function(a, b, ...) {
     search_strategy <- ""
   }
 
+  if (a$data$aggregation_method == "lossless") {
+    agg_factor <- as.integer(a$data$aggregation_factor)
+  } else {
+    agg_factor <- 1L
+  }
+
   jdata <- rJava::.jnew(
     "org.restopt.DataLoader",
     .jarray(as.integer(as.vector(a$data$existing_habitat))),
     .jarray(as.integer(as.vector(a$data$locked_out))),
-    .jarray(as.vector(a$data$restorable_habitat)),
+    .jarray(as.vector(as.double(a$data$restorable_habitat))),
     .jarray(as.integer(as.vector(a$data$cell_area))),
     as.integer(ncol(a$data$existing_habitat)),
     as.integer(nrow(a$data$existing_habitat)),
@@ -97,7 +103,7 @@ solve.RestoptProblem <- function(a, b, ...) {
   # initialize problem
   jproblem <-rJava::.jnew(
     "org.restopt.RestoptProblem", jdata,
-    0L
+    0L, agg_factor
   )
 
   # add constraints

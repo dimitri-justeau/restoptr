@@ -31,6 +31,7 @@ test_that("expect results", {
   expect_equal(length(get_constraints(problem)), 4)
   expect_true(inherits(get_objective(problem), "MaxMeshObjective"))
   expect_equal(get_settings(problem)$time_limit, 30)
+  expect_equal(get_aggregation_method(problem), "lossy")
   expect_equal(get_aggregation_factor(problem), 16)
   expect_equal(get_habitat_threshold(problem), 0.7)
   expect_true(inherits(get_original_habitat(problem), "SpatRaster"))

@@ -211,3 +211,27 @@ test_that("multiple solutions found with IIC optimization and optimality gap", {
     expect_true(a$iic >= iic_best * 0.95)
   }
 })
+
+test_that("lossless aggregation", {
+  # import data
+  habitat_data <- rast(system.file(
+    "extdata", "case_study", "forest_2021.tif",
+    package = "restoptr"
+  ))
+  # build and solve problem
+  problem <-
+    restopt_problem(habitat_data, 1, 10, lossless_aggregation = TRUE) %>%
+    add_restorable_constraint(
+      min_restore = 90, max_restore = 110, unit = "ha", min_proportion = 1
+    ) %>%
+    add_compactness_constraint(1000, unit = "m") %>%
+    add_components_constraint(1, 3) %>%
+    add_settings(precision = 1, time_limit = 30) %>%
+    set_max_mesh_objective()
+  result <- solve(problem)
+  md <- get_metadata(result)
+  # tests
+  expect_is(result, "RestoptSolution")
+  expect_equal(get_aggregation_method(problem), "lossless")
+  expect_true(md$optimality_proven)
+})
