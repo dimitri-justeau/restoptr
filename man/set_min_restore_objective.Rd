@@ -67,6 +67,7 @@ Other objectives:
 \code{\link{set_max_mesh_objective}()},
 \code{\link{set_max_nb_pus_objective}()},
 \code{\link{set_max_restore_objective}()},
+\code{\link{set_min_nb_patches_objective}()},
 \code{\link{set_min_nb_pus_objective}()},
 \code{\link{set_no_objective}()}
 }

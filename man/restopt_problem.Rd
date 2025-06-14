@@ -7,7 +7,8 @@
 restopt_problem(
   existing_habitat,
   habitat_threshold = 1,
-  aggregation_factor = 1
+  aggregation_factor = 1,
+  lossless_aggregation = FALSE
 )
 }
 \arguments{
@@ -29,6 +30,14 @@ to consider it as an habitat pixel.}
 aggregation factor for down sampling the data. For example, if
 \code{aggregation_factor = 2}, aggregated pixel will contain 4 original pixel.
 See \code{terra::aggregate()} for more details.}
+
+\item{lossless_aggregation}{\code{logical} If TRUE, uses restopt Java aggregation
+method, which is lossless, as it creates a two levels hierarchical square
+grid, in which planning units are packs of aggregated pixel that follow the
+geometry of the habitat raster. In this case, the habitat_threshold parameter
+is not needed anymore. If FALSE, uses restoptr original aggregation method,
+which is lossy because it creates a single aggregated grid, where a planning
+unit can contain both habitat and non-habitat pixels.}
 }
 \value{
 A new restoration problem (\code{RestoptProblem}) object.

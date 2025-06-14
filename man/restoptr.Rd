@@ -2,6 +2,7 @@
 % Please edit documentation in R/package.R
 \docType{package}
 \name{restoptr}
+\alias{restoptr-package}
 \alias{restoptr}
 \title{\code{restoptr}: Ecological Restoration Planning}
 \description{
@@ -55,4 +56,25 @@ Towards the priorization of habitat patches and corridors for conservation.
 Landscape Ecology, 21(7), 959‑967.
 
 Prud'homme, C., Fages, J.-G., & Lorca, X. (2017). Choco documentation.
+}
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://dimitri-justeau.github.io/restoptr/}
+  \item Report bugs at \url{https://github.com/dimitri-justeau/restoptr/issues}
+}
+
+}
+\author{
+\strong{Maintainer}: Dimitri Justeau-Allaire \email{dimitri.justeau@gmail.com} (\href{https://orcid.org/0000-0003-4129-0764}{ORCID})
+
+Authors:
+\itemize{
+  \item Jeffrey O Hanson \email{jeffrey.hanson@uqconnect.edu.au} (\href{https://orcid.org/0000-0002-4716-6134}{ORCID})
+  \item Ghislain Vieilledent (\href{https://orcid.org/0000-0002-1685-4997}{ORCID})
+  \item Philippe Vismara
+  \item Xavier Lorca
+  \item Philippe Birnbaum
+}
+
 }

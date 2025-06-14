@@ -38,7 +38,7 @@ URL: https://dimitri-justeau.github.io/restoptr/
 BugReports: https://github.com/dimitri-justeau/restoptr/issues
 SystemRequirements: Java (>= 11.0.12)
 VignetteBuilder: knitr
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.2
 Imports:
     utils,
     assertthat (>= 0.2.1),
@@ -82,6 +82,7 @@ Collate:
     'set_max_mesh_objective.R'
     'set_max_nb_pus_objective.R'
     'set_max_restore_objective.R'
+    'set_min_nb_patches_objective.R'
     'set_min_nb_pus_objective.R'
     'set_min_restore_objective.R'
     'set_no_objective.R'

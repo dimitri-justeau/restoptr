@@ -56,7 +56,7 @@ NULL
 #' @name restoptr
 #'
 #' @docType package
-NULL
+"_PACKAGE"
 
 #' @import terra
 #' @import rJava
