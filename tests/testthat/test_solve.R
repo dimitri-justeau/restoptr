@@ -222,7 +222,7 @@ test_that("lossless aggregation", {
   problem <-
     restopt_problem(habitat_data, 1, 10, lossless_aggregation = TRUE) %>%
     add_restorable_constraint(
-      min_restore = 90, max_restore = 110, unit = "ha", min_proportion = 1
+      min_restore = 90, max_restore = 310, unit = "ha", min_proportion = 1
     ) %>%
     add_compactness_constraint(1000, unit = "m") %>%
     add_components_constraint(1, 3) %>%

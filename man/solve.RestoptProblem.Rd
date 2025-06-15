@@ -12,7 +12,18 @@
 \item{b}{Argument not used.}
 
 \item{...}{Additional arguments:
-\code{verbose}: if TRUE, output solver logs. (FALSE by default)}
+\code{verbose}: if TRUE, output solver logs. (FALSE by default)
+\code{search_strategy}: specify the solver's search strategy, among:
+"" -> default
+"RANDOM",
+"DOM_OVER_W_DEG",
+"DOM_OVER_W_DEG_REF",
+"MIN_DOM_LB",
+"MIN_DOM_UB",
+"ACTIVITY_BASED",
+"CONFLICT_HISTORY",
+"FAILURE_RATE",
+"FAILURE_LENGTH"}
 }
 \value{
 A \code{\link[=restopt_solution]{restopt_solution()}} object.

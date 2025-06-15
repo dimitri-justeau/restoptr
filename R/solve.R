@@ -26,6 +26,17 @@ NULL
 #'
 #' @param ... Additional arguments:
 #' `verbose`: if TRUE, output solver logs. (FALSE by default)
+#' `search_strategy`: specify the solver's search strategy, among:
+#'                            "" -> default
+#'                            "RANDOM",
+#'                            "DOM_OVER_W_DEG",
+#'                            "DOM_OVER_W_DEG_REF",
+#'                            "MIN_DOM_LB",
+#'                            "MIN_DOM_UB",
+#'                            "ACTIVITY_BASED",
+#'                            "CONFLICT_HISTORY",
+#'                            "FAILURE_RATE",
+#'                            "FAILURE_LENGTH"
 #'
 #' @return A [restopt_solution()] object.
 #'
