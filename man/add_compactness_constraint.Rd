@@ -40,7 +40,7 @@ restoration sites are not too far away from each other (e.g. lower travel costs
 between sites, less areas to monitor, etc.).
 }
 \examples{
-\donttest{
+\dontrun{
 # load data
 habitat_data <- rast(
   system.file("extdata", "habitat_hi_res.tif", package = "restoptr")

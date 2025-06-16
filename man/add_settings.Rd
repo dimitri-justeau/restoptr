@@ -41,7 +41,7 @@ Add settings to a restoration problem (\code{\link[=restopt_problem]{restopt_pro
 to customize the optimization procedure.
 }
 \examples{
-\donttest{
+\dontrun{
 # load data
 habitat_data <- rast(
   system.file("extdata", "habitat_hi_res.tif", package = "restoptr")

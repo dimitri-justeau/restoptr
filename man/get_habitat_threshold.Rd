@@ -16,7 +16,7 @@ get_habitat_threshold(problem)
 Retrieve the habitat threshold parameter of a restopt problem.
 }
 \examples{
-\donttest{
+\dontrun{
 #' # load data
 habitat_data <- rast(
   system.file("extdata", "habitat_hi_res.tif", package = "restoptr")

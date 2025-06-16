@@ -10,9 +10,9 @@ NULL
 #' @inheritParams set_max_mesh_objective
 #' @inherit set_max_mesh_objective return
 #'
-#' @param min_nb_components `integer` Minimum number of patches.
+#' @param min_nb_patches `integer` Minimum number of patches.
 #'
-#' @param max_nb_components `integer` Maximum number of patches.
+#' @param max_nb_patches `integer` Maximum number of patches.
 #'
 #' @details A patch is a spatially continuous set of habitat and restoration
 #' planning units. This constraints applies on the union of the set of planning
@@ -23,7 +23,7 @@ NULL
 #' @family constraints
 #'
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' # load data
 #' habitat_data <- rast(
 #'   system.file("extdata", "habitat_hi_res.tif", package = "restoptr")

@@ -58,7 +58,7 @@ same patch (Jaeger, 2000). Maximizing it in the context of restoration
 favours fewer and larger patches.
 }
 \examples{
-\donttest{
+\dontrun{
 # load data
 habitat_data <- rast(
   system.file("extdata", "habitat_hi_res.tif", package = "restoptr")

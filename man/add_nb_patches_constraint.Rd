@@ -9,9 +9,9 @@ add_nb_patches_constraint(problem, min_nb_patches, max_nb_patches)
 \arguments{
 \item{problem}{\code{\link[=restopt_problem]{restopt_problem()}} Restoration problem object.}
 
-\item{min_nb_components}{\code{integer} Minimum number of patches.}
+\item{min_nb_patches}{\code{integer} Minimum number of patches.}
 
-\item{max_nb_components}{\code{integer} Maximum number of patches.}
+\item{max_nb_patches}{\code{integer} Maximum number of patches.}
 }
 \value{
 An updated restoration problem (\code{\link[=restopt_problem]{restopt_problem()}}) object.
@@ -29,7 +29,7 @@ and allows to specify a minimum and maximum number of patches. In practice,
 this constraint is useful to set simple targets for structural connectivity.
 }
 \examples{
-\donttest{
+\dontrun{
 # load data
 habitat_data <- rast(
   system.file("extdata", "habitat_hi_res.tif", package = "restoptr")

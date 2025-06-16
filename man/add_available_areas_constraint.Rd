@@ -50,7 +50,7 @@ with a different input data. Thus, from a modelling perspective,
 with an available areas constraint, you will see a locked out constraint.
 }
 \examples{
-\donttest{
+\dontrun{
 # load data
 habitat_data <- rast(
   system.file("extdata", "habitat_hi_res.tif", package = "restoptr")

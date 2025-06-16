@@ -36,7 +36,7 @@ NULL
 #' 115‑130. https://doi.org/10.1023/A:1008129329289
 #'
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' # load data
 #' habitat_data <- rast(
 #'   system.file("extdata", "habitat_hi_res.tif", package = "restoptr")

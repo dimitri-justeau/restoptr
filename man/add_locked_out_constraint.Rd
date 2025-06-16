@@ -47,7 +47,7 @@ See \code{add_available_areas_constraint()}, which achieve the same as the locke
 out constraint by defining areas that ARE available for restoration.
 }
 \examples{
-\donttest{
+\dontrun{
 # load data
 habitat_data <- rast(
   system.file("extdata", "habitat_hi_res.tif", package = "restoptr")

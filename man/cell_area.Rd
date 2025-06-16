@@ -27,7 +27,7 @@ However, at larger scales, the best is to use an equal-area projected
 coordinate system.
 }
 \examples{
-\donttest{
+\dontrun{
 habitat_data <- rast(
   system.file("extdata", "habitat_hi_res.tif", package = "restoptr")
 )

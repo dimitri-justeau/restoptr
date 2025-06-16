@@ -15,7 +15,7 @@
 Display information about a restoration optimization problem.
 }
 \examples{
-\donttest{
+\dontrun{
 #' # load data
 habitat_data <- rast(
   system.file("extdata", "habitat_hi_res.tif", package = "restoptr")

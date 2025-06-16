@@ -18,7 +18,7 @@ NULL
 #' @return A [terra::vect()] Vector object.
 #'
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' habitat_data <- rast(
 #'   system.file("extdata", "habitat_hi_res.tif", package = "restoptr")
 #' )
@@ -71,7 +71,7 @@ invert_vector <- function(vector_layer, extent=NULL, filter=NULL) {
 #' @return `numeric` The area of a cell in the desired unit.
 #'
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' habitat_data <- rast(
 #'   system.file("extdata", "habitat_hi_res.tif", package = "restoptr")
 #' )
@@ -113,7 +113,7 @@ cell_area <- function(raster_layer, unit = "ha") {
 #' @return `numeric` The width of a cell in the desired unit.
 #'
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' habitat_data <- rast(
 #'   system.file("extdata", "habitat_hi_res.tif", package = "restoptr")
 #' )
@@ -157,7 +157,7 @@ cell_width <- function(raster_layer, unit = "m") {
 #' @return `numeric` The number of raster cell correspond to the given area.
 #'
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' habitat_data <- rast(
 #'   system.file("extdata", "habitat_hi_res.tif", package = "restoptr")
 #' )
@@ -192,7 +192,7 @@ area_to_nb_cells <- function(raster_layer, area, unit = "ha") {
 #' @return `numeric` The area corresponding to `nb_cells` in the desired unit.
 #'
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' habitat_data <- rast(
 #'   system.file("extdata", "habitat_hi_res.tif", package = "restoptr")
 #' )

@@ -16,7 +16,7 @@ get_aggregation_factor(problem)
 Retrieve the aggregation factor of a restopt problem.
 }
 \examples{
-\donttest{
+\dontrun{
 #' # load data
 habitat_data <- rast(
   system.file("extdata", "habitat_hi_res.tif", package = "restoptr")

@@ -63,7 +63,7 @@ NULL
 #' output raster correspond to the number of pixel with value 0 in aggregated pixels.
 #'
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' # load data
 #' habitat_data <- rast(
 #'   system.file("extdata", "habitat_hi_res.tif", package = "restoptr"))

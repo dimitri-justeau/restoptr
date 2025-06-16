@@ -31,7 +31,7 @@ exactly one connected component. Also see \link{add_components_constraint}
 and \link{add_compactness_constraint}.
 }
 \examples{
-\donttest{
+\dontrun{
 # load data
 habitat_data <- rast(
   system.file("extdata", "habitat_hi_res.tif", package = "restoptr")

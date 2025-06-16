@@ -16,7 +16,7 @@ get_original_habitat(problem)
 Retrieve the original (i.e. not aggregated) habitat data.
 }
 \examples{
-\donttest{
+\dontrun{
 #' # load data
 habitat_data <- rast(
   system.file("extdata", "habitat_hi_res.tif", package = "restoptr")

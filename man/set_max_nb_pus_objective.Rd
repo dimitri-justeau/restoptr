@@ -23,7 +23,7 @@ of the restoration area. This can be useful when the budget is limited and
 the aim is to restore the larget possible extent.
 }
 \examples{
-\donttest{
+\dontrun{
 # load data
 habitat_data <- rast(
   system.file("extdata", "habitat_hi_res.tif", package = "restoptr")

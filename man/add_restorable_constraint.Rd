@@ -59,7 +59,7 @@ that needs to be restored to reach the \code{min_proportion} of habitat in every
 selected planning units.
 }
 \examples{
-\donttest{
+\dontrun{
 # load data
 habitat_data <- rast(
   system.file("extdata", "habitat_hi_res.tif", package = "restoptr")

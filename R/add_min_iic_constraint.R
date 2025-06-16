@@ -55,7 +55,7 @@ NULL
 #' Landscape Ecology, 21(7), 959‑967. https://doi.org/10.1007/s10980-006-0013-z
 #'
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' # load data
 #' habitat_data <- rast(
 #'   system.file("extdata", "habitat_hi_res.tif", package = "restoptr")

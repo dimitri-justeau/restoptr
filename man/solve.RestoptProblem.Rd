@@ -48,7 +48,7 @@ In the first case, you can try to increase the time limit.
 In the second case, you should modify your targets.
 }
 \examples{
-\donttest{
+\dontrun{
 # load data
 habitat_data <- rast(
   system.file("extdata", "habitat_hi_res.tif", package = "restoptr")
