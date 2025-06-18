@@ -52,10 +52,10 @@ set_no_objective <- function(problem) {
       name = "No optimization objective",
       class = c("NoObjective", "RestoptObjectve"),
       post = function(jproblem, nb_solutions, precision, time_limit, optimality_gap,
-                      verbose=FALSE, search_strategy="") {
+                      verbose=FALSE, search_strategy="", lns=FALSE) {
         rJava::.jcall(
           jproblem, "Ljava/util/List;", "findSolutions", nb_solutions, time_limit,
-          verbose, search_strategy
+          verbose, search_strategy, lns
         )
       }
     )

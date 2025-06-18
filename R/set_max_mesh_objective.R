@@ -72,10 +72,10 @@ set_max_mesh_objective <- function(problem) {
       name = "Maximize effective mesh size",
       class = c("MaxMeshObjective", "RestoptObjectve"),
       post = function(jproblem, nb_solutions, precision, time_limit, optimality_gap,
-                      verbose=FALSE, search_strategy="") {
+                      verbose=FALSE, search_strategy="", lns=FALSE) {
         rJava::.jcall(
           jproblem, "Ljava/util/List;", "maximizeMESH", nb_solutions, precision,
-          time_limit, optimality_gap, verbose, search_strategy
+          time_limit, optimality_gap, verbose, search_strategy, lns
         )
       }
     )

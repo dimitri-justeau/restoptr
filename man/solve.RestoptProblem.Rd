@@ -12,8 +12,8 @@
 \item{b}{Argument not used.}
 
 \item{...}{Additional arguments:
-\code{verbose}: if TRUE, output solver logs. (FALSE by default)
-\code{search_strategy}: specify the solver's search strategy, among:
+\code{verbose} (logical) if TRUE, output solver logs. (FALSE by default)
+\code{search_strategy} (character) specify the solver's search strategy, among:
 "" -> default
 "RANDOM",
 "DOM_OVER_W_DEG",
@@ -23,7 +23,16 @@
 "ACTIVITY_BASED",
 "CONFLICT_HISTORY",
 "FAILURE_RATE",
-"FAILURE_LENGTH"}
+"FAILURE_LENGTH"
+\code{lns} (logical) if TRUE, activate Large Neighborhood Search (LNS). LNS
+can boost the optimization efficiency for large problems, with the
+price of less guarantees. Warning: it is highly recommended to set a
+time limit when using LNS because optimality proof may become unreachable
+(it depends on the characteristics of the problem), causing the solver to
+run forever without a time limit. Also, while LNS may boost the solver,
+it is very dependent on the problem's setting and size. It is recommended
+to first try solving a problem without LNS, and then try it if the
+results are not satisfactory.}
 }
 \value{
 A \code{\link[=restopt_solution]{restopt_solution()}} object.

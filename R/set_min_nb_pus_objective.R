@@ -66,10 +66,10 @@ set_min_nb_pus_objective <- function(problem) {
       name = "Minimize number of planning units",
       class = c("MinNbPusObjective", "RestoptObjectve"),
       post = function(jproblem, nb_solutions, precision, time_limit, optimality_gap,
-                      verbose=FALSE, search_strategy="") {
+                      verbose=FALSE, search_strategy="", lns=FALSE) {
         rJava::.jcall(
           jproblem, "Ljava/util/List;", "minimizeNbPUS", nb_solutions, time_limit,
-          optimality_gap, verbose, search_strategy
+          optimality_gap, verbose, search_strategy, lns
         )
       }
     )

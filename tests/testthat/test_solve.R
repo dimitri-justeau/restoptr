@@ -235,3 +235,45 @@ test_that("lossless aggregation", {
   expect_equal(get_aggregation_method(problem), "lossless")
   expect_true(md$optimality_proven)
 })
+
+test_that("set search strategy", {
+  # import data
+  habitat_data <- terra::rast(
+    system.file("extdata", "habitat_hi_res.tif", package = "restoptr"
+    ))
+  # build and solve problem
+  problem <-
+    restopt_problem(habitat_data, 0.7, 16) %>%
+    add_restorable_constraint(
+      min_restore = 90, max_restore = 110, unit = "ha", min_proportion = 1
+    ) %>%
+    add_compactness_constraint(4, unit = "cells") %>%
+    add_components_constraint(1, 1) %>%
+    set_max_mesh_objective()
+  result <- solve(problem, search_strategy="DOM_OVER_W_DEG")
+  md <- get_metadata(result)
+  # tests
+  expect_is(result, "RestoptSolution")
+  expect_true(md$optimality_proven)
+})
+
+test_that("set lns", {
+  # import data
+  habitat_data <- terra::rast(
+    system.file("extdata", "habitat_hi_res.tif", package = "restoptr"
+    ))
+  # build and solve problem
+  problem <-
+    restopt_problem(habitat_data, 0.7, 16) %>%
+    add_restorable_constraint(
+      min_restore = 90, max_restore = 110, unit = "ha", min_proportion = 1
+    ) %>%
+    add_compactness_constraint(4, unit = "cells") %>%
+    add_components_constraint(1, 1) %>%
+    add_settings(time_limit = 10) %>%
+    set_max_mesh_objective()
+  result <- solve(problem, search_strategy="CONFLICT_HISTORY", lns=TRUE)
+  md <- get_metadata(result)
+  # tests
+  expect_is(result, "RestoptSolution")
+})

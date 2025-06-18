@@ -66,10 +66,10 @@ set_min_nb_patches_objective <- function(problem) {
       name = "Minimize number of habitat pacthes",
       class = c("MinNbPatchesObjective", "RestoptObjectve"),
       post = function(jproblem, nb_solutions, precision, time_limit, optimality_gap,
-                      verbose=FALSE, search_strategy="") {
+                      verbose=FALSE, search_strategy="", lns=FALSE) {
         rJava::.jcall(
           jproblem, "Ljava/util/List;", "minimizeNbPatches", nb_solutions, time_limit,
-          optimality_gap, verbose, search_strategy
+          optimality_gap, verbose, search_strategy, lns
         )
       }
     )
