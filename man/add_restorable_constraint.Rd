@@ -102,6 +102,7 @@ Other constraints:
 \code{\link{add_locked_out_constraint}()},
 \code{\link{add_min_iic_constraint}()},
 \code{\link{add_min_mesh_constraint}()},
-\code{\link{add_nb_patches_constraint}()}
+\code{\link{add_nb_patches_constraint}()},
+\code{\link{add_no_new_patch_constraint}()}
 }
 \concept{constraints}
