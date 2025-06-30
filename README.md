@@ -15,6 +15,7 @@ Status](https://codecov.io/github/dimitri-justeau/restoptr/coverage.svg?branch=m
 [![Downloads](https://cranlogs.r-pkg.org/badges/restoptr)](https://CRAN.R-project.org/package=restoptr)
 
 <p id="logo-credit" align="right">
+
 Logo by Camille Salmon
 </p>
 
@@ -289,6 +290,7 @@ print(problem)
     ## ----------------------------------------------------------------- 
     ## original habitat:     habitat_hi_res.tif 
     ## aggregation factor:   16 
+    ## aggregation method:   lossy 
     ## habitat threshold:    0.7 
     ## existing habitat:     in memory 
     ## restorable habitat:   in memory 
@@ -319,7 +321,7 @@ existing habitat, or (`3`) selected as a priority area for restoration.
 solution <- solve(problem)
 ```
 
-    ## Good news: the solver found 1 solution statisfying the constraints that was proven optimal ! (solving time = 0.97 s)
+    ## Good news: the solver found 1 solution statisfying the constraints that was proven optimal ! (solving time = 0.16 s)
 
 ``` r
 # preview solution
@@ -358,12 +360,12 @@ Finally, we can access additional information on the solution (with the
 get_metadata(solution, area_unit = "ha")
 ```
 
-    ##     min_restore total_restorable nb_planning_units nb_components     diameter
-    ## 1 219.3772 [ha]    219.3772 [ha]                15             3 2280.175 [m]
-    ##   optimality_proven search_state solving_time  mesh_initial          mesh
-    ## 1              TRUE   TERMINATED        0.944 13667.84 [ha] 14232.66 [ha]
-    ##       mesh_best
-    ## 1 14232.66 [ha]
+    ##     min_restore total_restorable nb_planning_units nb_components nb_patches
+    ## 1 219.3772 [ha]    219.3772 [ha]                15             3         85
+    ##       diameter optimality_proven search_state solving_time  mesh_initial
+    ## 1 2280.175 [m]              TRUE   TERMINATED        0.157 13667.84 [ha]
+    ##            mesh     mesh_best
+    ## 1 14232.66 [ha] 14232.66 [ha]
 
 This has just been a short taster of the package. For an extended
 tutorial on using the package, please refer to the vignette.
