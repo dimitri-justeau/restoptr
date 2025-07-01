@@ -2,6 +2,28 @@ citHeader("To cite the restoptr package in publications, use:")
 
 bibentry(
   bibtype = "Article",
+  title = "Restoptr: An R Package for Ecological Restoration Planning",
+  author = c(person(c("D"), "Justeau-Allaire"),
+             person(c("JO"), "Hanson"),
+             person(c("G"), "Lannuzel"),
+             person(c("P"), "Vismara"),
+             person(c("X"), "Lorca"),
+             person(c("P"), "Birnbaum")
+  ),
+  year = 2023,
+  journal = "Restoration Ecology",
+  pages = "e13910",
+  doi = "10.1111/rec.13910",
+  textVersion = paste(
+      "Justeau‐Allaire D, Hanson JO, Lannuzel G, Vismara P, Lorca X,",
+      "Birnbaum P (2023). restoptr: an R package for ecological restoration",
+      "planning. Restoration Ecology. e13910.",
+      "https://doi.org/10.1111/rec.13910"
+  )
+)
+
+bibentry(
+  bibtype = "Article",
   author = c(person(c("D"), "Justeau-Allaire"),
              person(c("G"), "Vieilledent"),
              person(c("N"), "Rinck"),

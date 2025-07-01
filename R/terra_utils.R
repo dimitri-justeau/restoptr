@@ -5,7 +5,7 @@ NULL
 #'
 #' @param vector_layer [terra::vect()] Vector layer.
 #'
-#' @param extent [`SpatExtent`] Optional: you can specify another extent as the
+#' @param extent [`terra::SpatExtent`] Optional: you can specify another extent as the
 #' input vector layer extent for the inversion.
 #'
 #' @param filter Optional: filter to apply to `x`. Leave NULL for no filtering.

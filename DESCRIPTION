@@ -21,6 +21,9 @@ Authors@R:
         comment = c(ORCID = '0000-0002-1685-4997')
       ),
       person(
+        'Guillaume', 'Lannuzel', role = c('aut')
+      ),
+      person(
         'Philippe', 'Vismara', role = c('aut')
       ),
       person(

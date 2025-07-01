@@ -9,7 +9,7 @@ invert_vector(vector_layer, extent = NULL, filter = NULL)
 \arguments{
 \item{vector_layer}{\code{\link[terra:vect]{terra::vect()}} Vector layer.}
 
-\item{extent}{\code{\link{SpatExtent}} Optional: you can specify another extent as the
+\item{extent}{\code{\link[terra:SpatExtent-class]{terra::SpatExtent}} Optional: you can specify another extent as the
 input vector layer extent for the inversion.}
 
 \item{filter}{Optional: filter to apply to \code{x}. Leave NULL for no filtering.}
