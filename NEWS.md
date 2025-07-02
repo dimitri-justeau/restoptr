@@ -1,3 +1,7 @@
+# restoptr 1.1.1
+
+- Increase time limit and set MIN_DOM_LB search in test_solve lns to avoid errors in CRAN auto checks.
+
 # restoptr 1.1.0
 
 - Add lossless aggregation method.

@@ -26,7 +26,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">restoptr</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -288,7 +288,7 @@ object (i.e., <code>rp</code>).</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># solve problem to generate prioritization</span></span>
 <span><span class="va">rs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/solve.html" class="external-link">solve</a></span><span class="op">(</span><span class="va">rp</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## <span style="color: #00BB00;">Good news: the solver found 1 solution statisfying the constraints that was proven optimal ! (solving time = 0.36 s)</span></span></span></code></pre>
+<pre><code><span><span class="co">## <span style="color: #00BB00;">Good news: the solver found 1 solution statisfying the constraints that was proven optimal ! (solving time = 0.35 s)</span></span></span></code></pre>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># preview prioritization</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">rs</span><span class="op">)</span></span></code></pre></div>
@@ -308,7 +308,7 @@ object (i.e., <code>rp</code>).</p>
 <pre><code><span><span class="co">##     min_restore total_restorable nb_planning_units nb_components nb_patches</span></span>
 <span><span class="co">## 1 216.8002 [ha]    216.8002 [ha]                16             3         85</span></span>
 <span><span class="co">##       diameter optimality_proven search_state solving_time  mesh_initial</span></span>
-<span><span class="co">## 1 2499.808 [m]              TRUE   TERMINATED        0.356 13667.84 [ha]</span></span>
+<span><span class="co">## 1 2499.808 [m]              TRUE   TERMINATED        0.343 13667.84 [ha]</span></span>
 <span><span class="co">##            mesh     mesh_best</span></span>
 <span><span class="co">## 1 14248.14 [ha] 14248.14 [ha]</span></span></code></pre>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
@@ -341,7 +341,7 @@ various metrics.</p>
 <pre><code><span><span class="co">##     min_restore total_restorable nb_planning_units nb_components nb_patches</span></span>
 <span><span class="co">## 1 216.8002 [ha]    216.8002 [ha]                16             3         85</span></span>
 <span><span class="co">##       diameter optimality_proven search_state solving_time  mesh_initial</span></span>
-<span><span class="co">## 1 2499.808 [m]              TRUE   TERMINATED        0.356 13667.84 [ha]</span></span>
+<span><span class="co">## 1 2499.808 [m]              TRUE   TERMINATED        0.343 13667.84 [ha]</span></span>
 <span><span class="co">##            mesh     mesh_best</span></span>
 <span><span class="co">## 1 14248.14 [ha] 14248.14 [ha]</span></span></code></pre>
 <p>Although this prioritization identifies a set of places that – in
@@ -603,41 +603,41 @@ optimality gap of 0%.</p>
 <span><span class="co">## 35 336.67209 [ha]   336.67209 [ha]                22             2         85</span></span>
 <span><span class="co">## 36 336.67209 [ha]   336.67209 [ha]                22             2         85</span></span>
 <span><span class="co">##        diameter optimality_proven search_state solving_time  mesh_initial</span></span>
-<span><span class="co">## 1  2466.877 [m]              TRUE   TERMINATED        0.717 13667.84 [ha]</span></span>
-<span><span class="co">## 2  2466.877 [m]              TRUE   TERMINATED        0.739 13667.84 [ha]</span></span>
-<span><span class="co">## 3  2466.877 [m]              TRUE   TERMINATED        0.618 13667.84 [ha]</span></span>
-<span><span class="co">## 4  2466.877 [m]              TRUE   TERMINATED        0.559 13667.84 [ha]</span></span>
-<span><span class="co">## 5  2466.877 [m]              TRUE   TERMINATED        0.528 13667.84 [ha]</span></span>
-<span><span class="co">## 6  2466.877 [m]              TRUE   TERMINATED        0.399 13667.84 [ha]</span></span>
-<span><span class="co">## 7  2474.054 [m]              TRUE   TERMINATED        0.385 13667.84 [ha]</span></span>
-<span><span class="co">## 8  2499.808 [m]              TRUE   TERMINATED        0.324 13667.84 [ha]</span></span>
-<span><span class="co">## 9  2432.582 [m]              TRUE   TERMINATED        0.358 13667.84 [ha]</span></span>
-<span><span class="co">## 10 2499.808 [m]              TRUE   TERMINATED        0.294 13667.84 [ha]</span></span>
-<span><span class="co">## 11 2499.808 [m]              TRUE   TERMINATED        0.311 13667.84 [ha]</span></span>
+<span><span class="co">## 1  2466.877 [m]              TRUE   TERMINATED        0.691 13667.84 [ha]</span></span>
+<span><span class="co">## 2  2466.877 [m]              TRUE   TERMINATED        0.728 13667.84 [ha]</span></span>
+<span><span class="co">## 3  2466.877 [m]              TRUE   TERMINATED        0.608 13667.84 [ha]</span></span>
+<span><span class="co">## 4  2466.877 [m]              TRUE   TERMINATED        0.565 13667.84 [ha]</span></span>
+<span><span class="co">## 5  2466.877 [m]              TRUE   TERMINATED        0.519 13667.84 [ha]</span></span>
+<span><span class="co">## 6  2466.877 [m]              TRUE   TERMINATED        0.406 13667.84 [ha]</span></span>
+<span><span class="co">## 7  2474.054 [m]              TRUE   TERMINATED        0.393 13667.84 [ha]</span></span>
+<span><span class="co">## 8  2499.808 [m]              TRUE   TERMINATED        0.328 13667.84 [ha]</span></span>
+<span><span class="co">## 9  2432.582 [m]              TRUE   TERMINATED        0.346 13667.84 [ha]</span></span>
+<span><span class="co">## 10 2499.808 [m]              TRUE   TERMINATED        0.297 13667.84 [ha]</span></span>
+<span><span class="co">## 11 2499.808 [m]              TRUE   TERMINATED        0.309 13667.84 [ha]</span></span>
 <span><span class="co">## 12 2474.054 [m]              TRUE   TERMINATED        0.210 13667.84 [ha]</span></span>
-<span><span class="co">## 13 2499.808 [m]              TRUE   TERMINATED        0.131 13667.84 [ha]</span></span>
-<span><span class="co">## 14 2499.808 [m]              TRUE   TERMINATED        0.152 13667.84 [ha]</span></span>
-<span><span class="co">## 15 2474.054 [m]              TRUE   TERMINATED        0.077 13667.84 [ha]</span></span>
+<span><span class="co">## 13 2499.808 [m]              TRUE   TERMINATED        0.129 13667.84 [ha]</span></span>
+<span><span class="co">## 14 2499.808 [m]              TRUE   TERMINATED        0.150 13667.84 [ha]</span></span>
+<span><span class="co">## 15 2474.054 [m]              TRUE   TERMINATED        0.078 13667.84 [ha]</span></span>
 <span><span class="co">## 16 2474.054 [m]              TRUE   TERMINATED        0.081 13667.84 [ha]</span></span>
-<span><span class="co">## 17 2474.054 [m]              TRUE   TERMINATED        0.055 13667.84 [ha]</span></span>
-<span><span class="co">## 18 2474.054 [m]              TRUE   TERMINATED        0.058 13667.84 [ha]</span></span>
-<span><span class="co">## 19 2499.808 [m]              TRUE   TERMINATED        0.048 13667.84 [ha]</span></span>
+<span><span class="co">## 17 2474.054 [m]              TRUE   TERMINATED        0.056 13667.84 [ha]</span></span>
+<span><span class="co">## 18 2474.054 [m]              TRUE   TERMINATED        0.059 13667.84 [ha]</span></span>
+<span><span class="co">## 19 2499.808 [m]              TRUE   TERMINATED        0.051 13667.84 [ha]</span></span>
 <span><span class="co">## 20 2432.582 [m]              TRUE   TERMINATED        0.047 13667.84 [ha]</span></span>
 <span><span class="co">## 21 2474.054 [m]              TRUE   TERMINATED        0.047 13667.84 [ha]</span></span>
-<span><span class="co">## 22 2432.582 [m]              TRUE   TERMINATED        0.050 13667.84 [ha]</span></span>
-<span><span class="co">## 23 2474.054 [m]              TRUE   TERMINATED        0.046 13667.84 [ha]</span></span>
+<span><span class="co">## 22 2432.582 [m]              TRUE   TERMINATED        0.049 13667.84 [ha]</span></span>
+<span><span class="co">## 23 2474.054 [m]              TRUE   TERMINATED        0.044 13667.84 [ha]</span></span>
 <span><span class="co">## 24 2474.054 [m]              TRUE   TERMINATED        0.045 13667.84 [ha]</span></span>
-<span><span class="co">## 25 2499.808 [m]              TRUE   TERMINATED        0.045 13667.84 [ha]</span></span>
-<span><span class="co">## 26 2499.808 [m]              TRUE   TERMINATED        0.048 13667.84 [ha]</span></span>
-<span><span class="co">## 27 2499.808 [m]              TRUE   TERMINATED        0.045 13667.84 [ha]</span></span>
-<span><span class="co">## 28 2499.808 [m]              TRUE   TERMINATED        0.044 13667.84 [ha]</span></span>
-<span><span class="co">## 29 2499.808 [m]              TRUE   TERMINATED        0.044 13667.84 [ha]</span></span>
+<span><span class="co">## 25 2499.808 [m]              TRUE   TERMINATED        0.046 13667.84 [ha]</span></span>
+<span><span class="co">## 26 2499.808 [m]              TRUE   TERMINATED        0.047 13667.84 [ha]</span></span>
+<span><span class="co">## 27 2499.808 [m]              TRUE   TERMINATED        0.044 13667.84 [ha]</span></span>
+<span><span class="co">## 28 2499.808 [m]              TRUE   TERMINATED        0.045 13667.84 [ha]</span></span>
+<span><span class="co">## 29 2499.808 [m]              TRUE   TERMINATED        0.045 13667.84 [ha]</span></span>
 <span><span class="co">## 30 2499.808 [m]              TRUE   TERMINATED        0.047 13667.84 [ha]</span></span>
 <span><span class="co">## 31 2499.808 [m]              TRUE   TERMINATED        0.044 13667.84 [ha]</span></span>
-<span><span class="co">## 32 2499.808 [m]              TRUE   TERMINATED        0.045 13667.84 [ha]</span></span>
-<span><span class="co">## 33 2499.808 [m]              TRUE   TERMINATED        0.044 13667.84 [ha]</span></span>
+<span><span class="co">## 32 2499.808 [m]              TRUE   TERMINATED        0.046 13667.84 [ha]</span></span>
+<span><span class="co">## 33 2499.808 [m]              TRUE   TERMINATED        0.046 13667.84 [ha]</span></span>
 <span><span class="co">## 34 2499.808 [m]              TRUE   TERMINATED        0.047 13667.84 [ha]</span></span>
-<span><span class="co">## 35 2499.808 [m]              TRUE   TERMINATED        0.049 13667.84 [ha]</span></span>
+<span><span class="co">## 35 2499.808 [m]              TRUE   TERMINATED        0.046 13667.84 [ha]</span></span>
 <span><span class="co">## 36 2499.808 [m]              TRUE   TERMINATED        0.045 13667.84 [ha]</span></span>
 <span><span class="co">##             mesh     mesh_best max_restore</span></span>
 <span><span class="co">## 1  14124.59 [ha] 14124.59 [ha]         100</span></span>

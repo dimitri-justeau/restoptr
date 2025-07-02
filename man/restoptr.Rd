@@ -72,7 +72,7 @@ Authors:
 \itemize{
   \item Jeffrey O Hanson \email{jeffrey.hanson@uqconnect.edu.au} (\href{https://orcid.org/0000-0002-4716-6134}{ORCID})
   \item Ghislain Vieilledent (\href{https://orcid.org/0000-0002-1685-4997}{ORCID})
-  \item Lannuzel Guillaume
+  \item Guillaume Lannuzel
   \item Philippe Vismara
   \item Xavier Lorca
   \item Philippe Birnbaum

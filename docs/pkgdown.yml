@@ -4,7 +4,7 @@ pkgdown_sha: ~
 articles:
   case_study: case_study.html
   restoptr: restoptr.html
-last_built: 2025-07-01T13:04Z
+last_built: 2025-07-02T09:01Z
 urls:
   reference: https://dimitri-justeau.github.io/restoptr/reference
   article: https://dimitri-justeau.github.io/restoptr/articles
