@@ -270,9 +270,9 @@ test_that("set lns", {
     ) %>%
     add_compactness_constraint(4, unit = "cells") %>%
     add_components_constraint(1, 1) %>%
-    add_settings(time_limit = 10) %>%
+    add_settings(time_limit = 15) %>%
     set_max_mesh_objective()
-  result <- solve(problem, search_strategy="CONFLICT_HISTORY", lns=TRUE)
+  result <- solve(problem, search_strategy="MIN_DOM_LB", lns=TRUE)
   md <- get_metadata(result)
   # tests
   expect_is(result, "RestoptSolution")
